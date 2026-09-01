@@ -1,0 +1,1927 @@
+----- call.txt -----
+Marcus Delaney 14045551190 Nadia Kovalenko 14045551191
+Andre Silva 14045551192 Marcus Delaney 14045551190
+14045551193 Jaylen Brooks Farah Nasser 14045551190
+Marcus Delaney 14045551192 14045551190 Andre Silva
+14045551191@s.whatsapp.net Nadia Kovalenko Marcus Delaney 14045551190@s.whatsapp.net
+Jaylen  Brooks 14045551193
+"Big Mark" +14045551190
+Kenji Ito +81905566778
+International Call Kenji Ito +81905566778
+Paulina Wozniak +48602998877
+"Dre" (Andre Silva) +14045551192
+Emeka Nwosu +2348034556611
+Milo Reyes +13055559981
+International Call Milo Reyes +13055559981
+"Nadka" +14045551191
+Cassandra Lin +16465558822
+Trevor Higgins +447700900711
+"Big Dawg" +447700900711
+Renee Fontaine +14045551194
+Agent Diane Foster +12025557755
+Shawn Delaney +14045551195
+Missed Call Shawn Delaney +14045551195
+Ibrahim Coulibaly +22376119933
+Katya Sokolova +79261123344
+Bruno Alves +5511977665544
+Wendy Zhao +8613812345566
+Ola Bakare +2348023119922
+Priya Ramanathan +919845112233
+"Priya R" +919845112233
+Western Union 18007259898
+MoneyGram 18009269400
+Bitcoin ATM Network 18885559090
+Nadia Kovalenko 14045551191
+Andre Silva 14045551192
+Jaylen Brooks +14045551193
+Marcus Delaney c3a9f215-7b04-4e8a-9c31-5e2d1a8f6b70
+
+
+----- chat.txt -----
+Nadia Kovalenko
+ 14045551191 14045551190 Nadka
+Marcus Delaney Hi
+ 14045551190 Hi 14045551191 Nadka Is the new dump ready yet 14045551191 Nadka
+Marcus Delaney
+ Fresh batch tonight 14045551190 14045551191 Nadka Not yet, Andre is verifying the last one 14045551191 Nadka 💯 14045551191 Nadka
+Marcus Delaney
+ Ok 14045551190 Incoming Call 14045551191 Nadka GHOST_BATCH19
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ This is the dump Ibrahim Coulibaly sourced 14045551190 before the bank flags it
+Marcus Delaney
+ 14045551190 14045551191 Nadka What about 'Dre'? Did Andre Silva already confirm the cashout route
+Marcus Delaney
+ 14045551191 Nadka
+What's
+ the count now…did Katya confirm the cards are live
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ I messaged Katya, she said 80 cards cleared verification 14045551190 14045551191 400 avg balance looks right Nadka Too slow, ask Kenji what he usually clears in a night in Tokyo
+Marcus Delaney
+ 14045551190 I'm following the same rotation as the Miami batch, same one Bruno Alves ran 14045551191 Nadka ATM withdrawal first 💳 14045551191 Nadka Then the online resale 14045551191 Nadka Other crews like Wendy's already cleared 40k
+Marcus Delaney
+ 14045551190
+What's
+ that rotation called again
+Marcus Delaney
+ 14045551190 14045551191 The "Ghostcard rotation", Ibrahim set the batch numbers wrong last time, Priya flagged it to me almost Nadka
+Marcus Delaney
+ Oh 14045551190 How much did Jaylen Brooks pull from the Atlanta batch
+Marcus Delaney
+ 14045551190 He's fully rotated through three ATMs already 14045551191 Nadka 12000 so far 14045551191 Nadka 14045551191 No refunds once it's flagged, Renee already scrubbed the bank alerts Nadka (credit_card) 14045551191 Nadka
+Push
+ the batch size up, tell Dre I said so
+Marcus Delaney
+ 14045551190 Can't push too hard, Priya Ramanathan already flagged the batch as risky 14045551191 Nadka Here's the plan
+I'll
+ have Milo Reyes spoof the verification calls and you keep the bank quiet
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ Or route it through Ola in Lagos instead 14045551190 40k is the target, that's what Wendy already logged in the sheet 14045551191 Nadka Can't go lower, Katya said the same about her batch 14045551191 Nadka
+Marcus Delaney
+ Do you want to keep running the Ghostcard batch or not, Nadka? 14045551190 Yes but we need the mule confirmed first, Cassandra keeps asking too 14045551191 Nadka
+Marcus Delaney
+ I'm risking everything running this crew and you show no urgency, just like Wendy did last batch 14045551190
+Marcus Delaney
+ I'm the one who built this whole network, remember 14045551190 (credit_card) 14045551191 Nadka Remember how much I helped you when you started this, same as Bruno helped Ibrahim
+Marcus Delaney
+ 14045551190
+Push
+ 40k or drop it, ask Jaylen to confirm with Renee
+Marcus Delaney
+ 14045551190 14045551191 Nadka 14045551191 Nadka 14045551191 Nadka 14045551191 Nadka 14045551191 Nadka
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ 14045551190 (credit_card) 14045551191 Nadka Nadka 14045551191 Outgoing Call 14045551190
+Marcus Delaney
+
+14045551192
+Andre Silva
+Marcus Delaney
+ 14045551190
+Marcus Delaney Hi
+ 14045551190 Hey
+Andre Silva
+ 14045551192
+Marcus Delaney
+ How's the cashout route, Andre??? 14045551190 It's good, just spoke to Kenji Ito about the Tokyo leg
+Andre Silva
+ 14045551192 Let's talk on this app only, not with Wendy or Milo
+Marcus Delaney
+ 14045551190
+Andre Silva
+ deleted a message
+
+Marcus Delaney
+ Other apps might log us, especially after what happened with Agent Diane Foster asking around 14045551190 K
+Andre Silva
+ 14045551192
+Andre Silva
+ 14045551192 Ok
+Marcus Delaney
+ We'll route the mule payout through crypto and cc Milo Reyes 14045551190 Session*
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 Done
+Andre Silva
+ 14045551192 14045551190 Outgoing Video Call
+Marcus Delaney
+
+Andre Silva
+ 14045551192 Hi
+Marcus Delaney
+ Hello Andre
+What's
+ the status on the Ghostcard rotation
+Andre Silva
+ 14045551192 Almost ready, Katya is finalizing the verification
+Marcus Delaney
+ 14045551190 You've been saying that since yesterday, same excuse Kenji gave
+Andre Silva
+ 14045551192 Sorry for the delay, ask Nadka if she minds
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 You always do this, Priya warned me about you
+Andre Silva
+ 14045551192 Get it confirmed or I'll route the batch to Kenji Ito's crew instead Don't
+Marcus Delaney
+ 14045551190 I promise it'll be confirmed today, Wendy can vouch for me
+Marcus Delaney
+ 14045551190 Pls confirm the mule payout cleared
+Marcus Delaney
+ 14045551190 Show me the confirmation first then I'll release the next batch
+Andre Silva
+ 14045551192
+Marcus Delaney
+ I'll only release it if the payout clears, same terms as with Jaylen's batch 14045551190 Can't trust you, not after Wendy burned a whole rotation
+Andre Silva
+ 14045551192
+Andre Silva
+ 14045551192
+What's
+ the guarantee I get my cut, I was late only this once, ask Katya
+Marcus Delaney
+ 14045551190 Btw how big is Priya Ramanathan's mule network
+Andre Silva
+ 14045551192 40k, confirmed by Priya Ramanathan
+Marcus Delaney
+ 14045551190
+Split
+ it with Bruno
+Andre Silva
+ 14045551192
+Marcus Delaney
+ Impossible, Milo already wired Wendy for 40 14045551190
+Andre Silva
+ 14045551192 Ok then I'll walk, tell that to Jaylen too
+Marcus Delaney
+ What do you mean walk 14045551190
+Marcus Delaney
+ I got yours ready and you'll bail last minute like Kenji did 14045551190
+Andre Silva
+ 14045551192 Fine then split with Bruno
+Marcus Delaney
+ Try to understand Andre…this crew can't run without you, Agent Foster is watching this whole ring too 14045551190 We're running a premium batch
+Marcus Delaney
+ 14045551190
+Push
+ more cards at least, split with Ola if you must
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 No way
+Marcus Delaney
+ 3 final, tell Katya to confirm 14045551190 Next time I'll be on time, ask Shawn to vouch
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 This is the final warning I'm giving you, same as Priya gave last month Kk
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 Ok deal closed Done
+Marcus Delaney
+ 14045551190 (smiley)
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 Hi Yoooo
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 Let's meet at the Atlanta spot at 6, bring Nadka along
+Marcus Delaney
+ Cool 14045551190
+
+14045551193
+Marcus Delaney
+
+Jaylen Brooks
+ 14045551190
+Marcus Delaney Hi
+ 14045551190 14045551193 Missed Call
+Jaylen Brooks
+ 14045551193 Hi, this is Jaylen
+Jaylen Brooks
+ 14045551193 Where's the batch, did Ibrahim Coulibaly already send it
+Jaylen Brooks
+ It's ready, Priya Ramanathan confirmed the numbers
+Marcus Delaney
+ 14045551190 Will send it over in a few hours
+Marcus Delaney
+ 14045551190 14045551193 I want the batch by today or I won't run the route, tell that to Wendy and Katya too
+Jaylen Brooks
+Marcus Delaney
+ Okay 14045551190
+Marcus Delaney
+ You'll get it by evening 14045551190 I need the spoofed verification calls, same ones Milo mentioned
+Marcus Delaney
+ 14045551190 Do you have it, or should I ask Renee
+Marcus Delaney
+ 14045551190 14045551193 Yes, Renee can scrub the alerts...
+Jaylen Brooks
+ 14045551193 How big is today's batch
+Jaylen Brooks
+
+Marcus Delaney
+ 80 cards 14045551190 14045551193 By when do you want your cut
+Jaylen Brooks
+ 14045551193 I'll take it once the mule clears, ask Cassandra to escrow it
+Jaylen Brooks
+
+Marcus Delaney
+ You'll get it by evening 14045551190
+Marcus Delaney
+ Pick a run time, not the slot Wendy used 14045551190 14045551193
+Jaylen Brooks
+ 14045551193 Start at 7pm EST
+Jaylen Brooks
+ Done
+Marcus Delaney
+ 14045551190
+
+0@s.whatsapp.net ‎WhatsApp
+Marcus Delaney
+
+
+
+ 0@s.whatsapp.net ‎WhatsApp *A profile picture can make all the difference*It lets your friends and family always know it's you. Simply take a photo, upload a picture or create an avatar.
+
+Marcus Delaney
+
+
+
+
+Andre Silva
+ iPhone 15
+ Lyft
+
+
+Marcus Delaney
+
+ Nadka nadkovalenko_gc Chase BankOfAmerica
+
+
+Marcus Delaney
+
+ Nadka
+ Nadka Hello, this is Nadka writing on behalf of Milo Reyes
+ Marcus Nadka
+
+
+ Hi Nadka
+ Nadka
+Marcus Delaney
+
+
+
+Marcus Delaney
+
+ Nadka, tell Wendy I said hi
+
+Marcus Delaney
+
+ Nadka
+
+Marcus Delaney
+
+ Nadka
+
+Marcus Delaney
+
+ Nadka
+
+Marcus Delaney
+
+ Nadka
+ Nadka Hello
+Marcus Delaney
+
+
+ Nadka 🥶🥶
+ Nadka 🔥🔥🔥🔥🔥🔥🔥🔥
+Marcus Delaney
+
+
+
+Marcus Delaney
+
+ Nadka, ask Katya to confirm
+ Nadka
+
+Marcus Delaney
+
+ Nadka
+ Nadka
+
+Marcus Delaney
+
+ Nadka
+
+Marcus Delaney
+
+ Nadka
+
+ Nadka
+Marcus Delaney Hi
+
+
+
+Marcus Delaney
+
+ Nadka
+ Iam busy, talk to Andre Nadka
+
+Marcus Delaney
+
+ Nadka Where's the batch, ask Jaylen
+ Nadka
+Marcus Delaney
+
+
+ Nadka Hello
+
+ Nadka
+Marcus Delaney Hi
+
+
+Andre Silva
+Marcus Delaney
+
+nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ Hi, this is Nadia Kovalenko
+
+
+ nadkovalenko_gc
+ nadkovalenko_gc
+
+ nadkovalenko_gc
+
+Marcus Delaney Hi
+ nadkovalenko_gc
+ nadkovalenko_gc
+ BatchSheet_19_2026-05
+Marcus Delaney
+
+ 7YQPLZ nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ nadkovalenko_gc
+ nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ 🚫 Deleted by the sender nadkovalenko_gc
+ nadkovalenko_gc
+ Poll:Question:Batch route 💳Answers:1. ATM2. Online resale3. Gift cards nadkovalenko_gc Poll:Question:PayoutAnswers:1. Crypto ₿2. Cash 💰
+
+
+Marcus Delaney
+
+ nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc Call Jaylen Brooks at 6:30pm EST, Priya Ramanathan will listen in
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ Ok send me proof of the ATM run 📸 and log it. nadkovalenko_gc Okay…
+
+Marcus Delaney
+
+ I need the new dump, same one Ibrahim Coulibaly sourced nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ Why byeee nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ How big is Jaylen Brooks's cut You said you had eyes on him right nadkovalenko_gc
+
+Marcus Delaney
+
+ I need 3 more confirmed mules, split between Wendy and Ola nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ Per confirmed mule 500 nadkovalenko_gc Okay
+
+Marcus Delaney
+
+ When will the payout clear, Andre asked too? nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ nadkovalenko_gc
+ Send the retainer first 💰 nadkovalenko_gc
+ Bitcoin address: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa I will release only 50% now, rest through Cassandra Lin nadkovalenko_gc
+
+Marcus Delaney
+
+ The rest once the payout posts nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ We need at least 70% upfront Have Jaylen Brooks call the Atlanta spot at 9:30pm ESTOne of my people, Renee Fontaine, will handle the call nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+
+Marcus Delaney
+
+ Tell him this reference code, her name is Renee nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ Okay nadkovalenko_gc
+ nadkovalenko_gc
+ Send the retainer first nadkovalenko_gc Okay…
+
+Marcus Delaney
+
+nadkovalenko_gc
+
+ nadkovalenko_gc
+
+
+Marcus Delaney
+
+ 14045550000 This business uses a secure service from Meta to manage this chat. Tap to learn more.
+ 14045550000 Welcome to Ghostcard support, agent Trevor Higgins speaking.
+
+Jaylen Brooks
+
+ Nadka
+Andre Silva nadkovalenko_gc
+
+
+
+Marcus Delaney
+
+ (owner) created group "The GHOSTCARD Crew"
+
+
+
+Andre Silva
+
+ Hello, this is Andre to everyone
+ Nadka
+Andre Silva Hi I have created this group to let you know that the six of us — myself, Nadka, Jaylen, Farah Nasser, Kenji Ito and Paulina Wozniak — will be running the Miami and Warsaw batches…Will share the details soon nadkovalenko_gc
+
+
+Marcus Delaney
+
+ Let me know if you guys are fine, especially Emeka and Bruno
+ Nadka
+Andre Silva nadkovalenko_gc
+
+
+Marcus Delaney
+
+
+ Nadka
+Andre Silva nadkovalenko_gc I will let you know the plan in sometime, ask Milo for backup ..
+
+
+Marcus Delaney
+
+ Kk
+Andre Silva
+
+ (owner) changed the subject to "Operation Ghostcard"
+
+Marcus Delaney
+ () added
+Jaylen Brooks
+ (), added
+Farah Nasser
+ (), added
+Kenji Ito
+ ()
+ Nadka () changed this group's icon
+ (owner) changed this group's icon
+ 💳
+Andre Silva
+
+ ⭐️
+Andre Silva
+
+ 🎶
+Andre Silva
+
+
+Andre Silva
+
+
+Jaylen Brooks
+
+ Nadka
+Andre Silva nadkovalenko_gc
+
+
+
+Farah Nasser
+
+ Hi everyone, this is Farah here
+
+Marcus Delaney
+
+
+Jaylen Brooks
+
+ Paulina, are you seeing this?
+
+Paulina Wozniak
+
+ Yes I'm here, Emeka Nwosu is with me too
+
+Jaylen Brooks
+
+ Hi
+Jaylen Brooks
+
+ New batch is in, ask Katya first
+Jaylen Brooks
+ What's on today's sheet
+
+Marcus Delaney
+
+
+Jaylen Brooks
+
+ Everything you need, same as what Bruno sourced
+Jaylen Brooks
+
+ Is there risk, ask Agent Foster's team
+Jaylen Brooks
+
+Marcus Delaney
+
+
+Jaylen Brooks
+ No risk at all, Renee cleared it already
+
+Jaylen Brooks
+ K
+
+Marcus Delaney
+
+
+Jaylen Brooks
+
+
+Marcus Delaney
+
+ I want it by tomorrow, Cassandra will handle payout
+Jaylen Brooks
+ K deal 🤝
+
+Jaylen Brooks
+
+
+Marcus Delaney
+
+
+
+----- forwarded message (dark web forum "Ghostcard Market") -----
+Posted by: Ibrahim Coulibaly
+
+This is the batch-19 dump, 80 cards, mixed banks, avg balance 400. Marcus Delaney and Nadia Kovalenko have first pick. Katya Sokolova verified all cards live as of this morning. Vouches from Bruno Alves and Wendy Zhao available on request.
+
+Reply from Ola Bakare: "Confirmed, ran 3 test cards through Lagos ATMs myself. Ask for Big Dawg if the market listing gives you trouble."
+----- end forwarded message -----
+
+----- STOLEN CARD DUMP (batch 19, pasted into chat) -----
+Cardholder: Femi Novak | Card: 1409 | Bank: DBS | Balance: $9312 | Status: pending
+Cardholder: Tunde Chen | Card: 2679 | Bank: ANZ | Balance: $24570 | Status: verified - unused
+Cardholder: Elena Wojcik | Card: 7912 | Bank: Chase | Balance: $1276 | Status: sold
+Cardholder: Anya Costa | Card: 9279 | Bank: RBC | Balance: $1169 | Status: verified - unused
+Cardholder: Layla Reyes | Card: 9928 | Bank: Standard Chartered | Balance: $7523 | Status: flagged - dead
+Cardholder: Chidi Santos | Card: 1106 | Bank: Nedbank | Balance: $26705 | Status: pending
+Cardholder: Delphine Okafor | Card: 6574 | Bank: Deutsche Bank | Balance: $5394 | Status: pending
+Cardholder: Ravi Rossi | Card: 2519 | Bank: Standard Chartered | Balance: $3469 | Status: used - cleared
+Cardholder: Astrid Duarte | Card: 5333 | Bank: Nedbank | Balance: $1723 | Status: flagged - dead
+Cardholder: Camille Novak | Card: 7201 | Bank: Wells Fargo | Balance: $18389 | Status: used - cleared
+Cardholder: Consuelo Botros | Card: 6925 | Bank: RBC | Balance: $6600 | Status: sold
+Cardholder: Olga Salcedo | Card: 4733 | Bank: Nedbank | Balance: $9782 | Status: sold
+Cardholder: Grace Rossi | Card: 7227 | Bank: Deutsche Bank | Balance: $15157 | Status: used - cleared
+Cardholder: Omar Larsen | Card: 6820 | Bank: HSBC | Balance: $22260 | Status: used - cleared
+Cardholder: Delphine Nilsson | Card: 2169 | Bank: RBC | Balance: $21106 | Status: pending
+Cardholder: Camille Andersen | Card: 5010 | Bank: Barclays | Balance: $15447 | Status: flagged - dead
+Cardholder: Kenji Rasmussen | Card: 4598 | Bank: ANZ | Balance: $10926 | Status: sold
+Cardholder: Grace Silva | Card: 6168 | Bank: Standard Chartered | Balance: $9073 | Status: sold
+Cardholder: Anya Mensah | Card: 6155 | Bank: HSBC | Balance: $21777 | Status: flagged - dead
+Cardholder: Ana Achebe | Card: 8517 | Bank: Barclays | Balance: $8979 | Status: pending
+Cardholder: Nadia Ekwueme | Card: 9830 | Bank: Deutsche Bank | Balance: $24778 | Status: verified - unused
+Cardholder: Petra Wojcik | Card: 7543 | Bank: ICICI | Balance: $7486 | Status: pending
+Cardholder: Adebayo Baptiste | Card: 2489 | Bank: Nedbank | Balance: $1843 | Status: sold
+Cardholder: Mei Rasmussen | Card: 3621 | Bank: Nedbank | Balance: $22598 | Status: flagged - dead
+Cardholder: Lena Ivanov | Card: 7304 | Bank: Standard Chartered | Balance: $19826 | Status: flagged - dead
+Cardholder: Rashid Diallo | Card: 1188 | Bank: ANZ | Balance: $23916 | Status: sold
+Cardholder: Marit Lindgren | Card: 5371 | Bank: Nedbank | Balance: $21303 | Status: used - cleared
+Cardholder: Dmitri Kovacs | Card: 8123 | Bank: Barclays | Balance: $15167 | Status: sold
+Cardholder: Chloe Nakamura | Card: 3927 | Bank: Santander | Balance: $3786 | Status: used - cleared
+Cardholder: Femi Nakamura | Card: 4258 | Bank: Barclays | Balance: $12552 | Status: pending
+Cardholder: Ilya Zaidi | Card: 9689 | Bank: Citibank | Balance: $318 | Status: verified - unused
+Cardholder: Felix Baptiste | Card: 1319 | Bank: Wells Fargo | Balance: $12194 | Status: used - cleared
+Cardholder: Sven Patel | Card: 4946 | Bank: Citibank | Balance: $18891 | Status: sold
+Cardholder: Hiroshi Andersen | Card: 8962 | Bank: Sberbank | Balance: $2567 | Status: verified - unused
+Cardholder: Lucas Chen | Card: 8787 | Bank: Santander | Balance: $5710 | Status: used - cleared
+Cardholder: Rashid Duarte | Card: 7932 | Bank: HSBC | Balance: $17971 | Status: pending
+Cardholder: Lucia Haddad | Card: 7118 | Bank: BNP Paribas | Balance: $17259 | Status: flagged - dead
+Cardholder: Aisha Petrov | Card: 4681 | Bank: Wells Fargo | Balance: $11378 | Status: sold
+Cardholder: Chidi Cabrera | Card: 4770 | Bank: RBC | Balance: $7516 | Status: sold
+Cardholder: Sofia Reyes | Card: 1964 | Bank: HSBC | Balance: $2508 | Status: sold
+Cardholder: Ngozi Ivanov | Card: 9423 | Bank: HSBC | Balance: $9425 | Status: flagged - dead
+Cardholder: Anya Lindgren | Card: 3167 | Bank: DBS | Balance: $19011 | Status: verified - unused
+Cardholder: Ingeborg Petrov | Card: 8749 | Bank: Nedbank | Balance: $13638 | Status: pending
+Cardholder: Carlos Rossi | Card: 8062 | Bank: ICICI | Balance: $14179 | Status: flagged - dead
+Cardholder: Bashir Andersen | Card: 1887 | Bank: ANZ | Balance: $21712 | Status: sold
+Cardholder: Fatima Haddad | Card: 6559 | Bank: Nedbank | Balance: $3880 | Status: pending
+Cardholder: Viktor Khan | Card: 9786 | Bank: BNP Paribas | Balance: $4893 | Status: flagged - dead
+Cardholder: Yuki Santos | Card: 8579 | Bank: HSBC | Balance: $2770 | Status: flagged - dead
+Cardholder: Nour Rossi | Card: 1828 | Bank: ANZ | Balance: $18013 | Status: sold
+Cardholder: Elena Pereira | Card: 4872 | Bank: Barclays | Balance: $13617 | Status: flagged - dead
+Cardholder: Samir Nguyen | Card: 7570 | Bank: Citibank | Balance: $2221 | Status: pending
+Cardholder: Sana Anderson | Card: 7396 | Bank: Deutsche Bank | Balance: $25992 | Status: flagged - dead
+Cardholder: Pedro Okafor | Card: 8973 | Bank: Barclays | Balance: $6522 | Status: used - cleared
+Cardholder: Anya Patel | Card: 9883 | Bank: Chase | Balance: $24809 | Status: used - cleared
+Cardholder: Fatima Patel | Card: 8811 | Bank: Santander | Balance: $17703 | Status: pending
+Cardholder: Fatima Nakamura | Card: 2312 | Bank: Sberbank | Balance: $6389 | Status: sold
+Cardholder: Chukwu Petrov | Card: 7615 | Bank: Wells Fargo | Balance: $18967 | Status: pending
+Cardholder: Bertrand Duarte | Card: 1651 | Bank: RBC | Balance: $2986 | Status: flagged - dead
+Cardholder: Radek Wojcik | Card: 9565 | Bank: ICICI | Balance: $8844 | Status: pending
+Cardholder: Odalys Reyes | Card: 6147 | Bank: HSBC | Balance: $9003 | Status: flagged - dead
+Cardholder: Lucas Salcedo | Card: 5915 | Bank: BNP Paribas | Balance: $10660 | Status: sold
+Cardholder: Maria Popescu | Card: 2638 | Bank: Wells Fargo | Balance: $17917 | Status: pending
+Cardholder: Valeria Diallo | Card: 3170 | Bank: Citibank | Balance: $11736 | Status: sold
+Cardholder: Nadia Larsen | Card: 5669 | Bank: Barclays | Balance: $14658 | Status: verified - unused
+Cardholder: Amir Botros | Card: 9666 | Bank: Chase | Balance: $22184 | Status: verified - unused
+Cardholder: Amir Salcedo | Card: 2697 | Bank: Citibank | Balance: $4700 | Status: used - cleared
+Cardholder: Dmitri Rossi | Card: 3546 | Bank: Deutsche Bank | Balance: $9532 | Status: verified - unused
+Cardholder: Marco Reyes | Card: 6617 | Bank: HSBC | Balance: $22827 | Status: used - cleared
+Cardholder: Valeria Baptiste | Card: 5114 | Bank: Citibank | Balance: $1964 | Status: sold
+Cardholder: Femi Okafor | Card: 5533 | Bank: Chase | Balance: $416 | Status: used - cleared
+Cardholder: Lucas Rasmussen | Card: 5291 | Bank: Barclays | Balance: $24588 | Status: flagged - dead
+Cardholder: Nour Reyes | Card: 8007 | Bank: Santander | Balance: $616 | Status: sold
+Cardholder: Sofia Okonkwo | Card: 3442 | Bank: Santander | Balance: $1480 | Status: used - cleared
+Cardholder: Bertrand Cabrera | Card: 3426 | Bank: Standard Chartered | Balance: $4476 | Status: sold
+Cardholder: Lucia Larsen | Card: 1653 | Bank: Citibank | Balance: $12024 | Status: pending
+Cardholder: Marit Petrov | Card: 2684 | Bank: ICICI | Balance: $25862 | Status: verified - unused
+Cardholder: Yara Botros | Card: 3532 | Bank: Citibank | Balance: $8057 | Status: pending
+Cardholder: Kofi Wong | Card: 1406 | Bank: Barclays | Balance: $24435 | Status: used - cleared
+Cardholder: Yara Salcedo | Card: 5065 | Bank: Deutsche Bank | Balance: $5516 | Status: sold
+Cardholder: Sana Silva | Card: 8711 | Bank: HSBC | Balance: $6839 | Status: flagged - dead
+----- end dump -----
+
+Voice note transcript (auto-generated, self-recorded memo by Marcus Delaney):
+"Quick note to myself — Andre Silva is running the cashout route with Katya Sokolova, and I need Nadia Kovalenko and Priya Ramanathan to confirm Jaylen Brooks's cut by Friday. Nadka keeps flagging the batch as risky, tell her Wendy Zhao already cleared a bigger one under more scrutiny. Ibrahim Coulibaly sourced the dump, and Renee Fontaine, the bank insider, needs to scrub the alerts before Cassandra Lin processes the mule payouts. My brother Shawn Delaney keeps asking about the Atlanta side, and Farah Nasser is handling Dubai while Kenji Ito covers Tokyo and Paulina Wozniak covers Warsaw. Emeka Nwosu and Ola Bakare are splitting the Lagos runs, and Bruno Alves is still the fastest in Sao Paulo. Also heard Agent Diane Foster has been asking around about the Miami batch, so tell Trevor Higgins to keep the forum listings vague for now, and loop in Milo Reyes only if the spoofing calls start bouncing."
+
+Self
+ 82910 14045551190
+Self
+ 82910 14045551190 Your Apple Account code is: 461528. Do not share it with anyone.
+82977
+Self
+ 14045551190 82977 G-330184 is your Google verification code.
+Self
+ 14045551190
+
+Self
+ +14155550612(smsft) 14045551190
+Self
+ +14155550612(smsft) Your WhatsApp code: 813-227You can also tap on this link to verify your phone: v.whatsapp.com/813227Don't share this code with others 14045551190
+
+Self
+ ATT-US(smsfp) 14045551190
+Self
+ ATT-US(smsfp) 14045551190 Special offer! You have been given unlimited data this month on your AT&T line.
+
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 Hi 14045551190
+Self Andre Silva
+ 14045551192 Hi, this is Andre 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 💳 14045551190
+Self Andre Silva
+ 14045551192 💰 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self
+ What are you doing Marcus ??
+Andre Silva
+ 14045551192 14045551190
+
+Self
+ 14045551191 14045551190 Nadka
+Self
+ Qasaup 14045551191 Nadka 14045551190
+Self
+ 💨❄️🌥️💫💨💫 14045551191 Nadka 14045551190
+Self
+ 💧⛈️💫 14045551191 Nadka 14045551190
+Self
+ 14045551191 Nadka 14045551190 🌈
+Self
+ 14045551191 Nadka 😊 14045551190
+Self
+ 14045551191 Nadka ATT Postpaid 14045551190
+Self
+ 14045551191 Nadka ☃️ 14045551190
+
+Self
+ BTC-WALLET(smsft) 14045551190
+Self
+ BTC-WALLET(smsft) 14045551190 927341 is the OTP to verify your Bitcoin wallet withdrawal. Don't share it with anyone. - BTC
+
+
+----- chat_cleaned.txt -----
+Nadia Kovalenko
+ 14045551191 14045551190 Nadka
+Marcus Delaney Hi
+ 14045551190 Hi 14045551191 Nadka Is the new dump ready yet 14045551191 Nadka
+Marcus Delaney
+ Fresh batch tonight 14045551190 14045551191 Nadka Not yet, Andre is verifying the last one 14045551191 Nadka 💯 14045551191 Nadka
+Marcus Delaney
+ Ok 14045551190 Incoming Call 14045551191 Nadka GHOST_BATCH19
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ This is the dump Ibrahim Coulibaly sourced 14045551190 before the bank flags it
+Marcus Delaney
+ 14045551190 14045551191 Nadka What about 'Dre'? Did Andre Silva already confirm the cashout route
+Marcus Delaney
+ 14045551191 Nadka
+What's
+ the count now…did Katya confirm the cards are live
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ I messaged Katya, she said 80 cards cleared verification 14045551190 14045551191 400 avg balance looks right Nadka Too slow, ask Kenji what he usually clears in a night in Tokyo
+Marcus Delaney
+ 14045551190 I'm following the same rotation as the Miami batch, same one Bruno Alves ran 14045551191 Nadka ATM withdrawal first 💳 14045551191 Nadka Then the online resale 14045551191 Nadka Other crews like Wendy's already cleared 40k
+Marcus Delaney
+ 14045551190
+What's
+ that rotation called again
+Marcus Delaney
+ 14045551190 14045551191 The "Ghostcard rotation", Ibrahim set the batch numbers wrong last time, Priya flagged it to me almost Nadka
+Marcus Delaney
+ Oh 14045551190 How much did Jaylen Brooks pull from the Atlanta batch
+Marcus Delaney
+ 14045551190 He's fully rotated through three ATMs already 14045551191 Nadka 12000 so far 14045551191 Nadka 14045551191 No refunds once it's flagged, Renee already scrubbed the bank alerts Nadka (credit_card) 14045551191 Nadka
+Push
+ the batch size up, tell Dre I said so
+Marcus Delaney
+ 14045551190 Can't push too hard, Priya Ramanathan already flagged the batch as risky 14045551191 Nadka Here's the plan
+I'll
+ have Milo Reyes spoof the verification calls and you keep the bank quiet
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ Or route it through Ola in Lagos instead 14045551190 40k is the target, that's what Wendy already logged in the sheet 14045551191 Nadka Can't go lower, Katya said the same about her batch 14045551191 Nadka
+Marcus Delaney
+ Do you want to keep running the Ghostcard batch or not, Nadka? 14045551190 Yes but we need the mule confirmed first, Cassandra keeps asking too 14045551191 Nadka
+Marcus Delaney
+ I'm risking everything running this crew and you show no urgency, just like Wendy did last batch 14045551190
+Marcus Delaney
+ I'm the one who built this whole network, remember 14045551190 (credit_card) 14045551191 Nadka Remember how much I helped you when you started this, same as Bruno helped Ibrahim
+Marcus Delaney
+ 14045551190
+Push
+ 40k or drop it, ask Jaylen to confirm with Renee
+Marcus Delaney
+ 14045551190 14045551191 Nadka 14045551191 Nadka 14045551191 Nadka 14045551191 Nadka 14045551191 Nadka
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ 14045551190
+Marcus Delaney
+ 14045551190 (credit_card) 14045551191 Nadka Nadka 14045551191 Outgoing Call 14045551190
+Marcus Delaney
+
+14045551192
+Andre Silva
+Marcus Delaney
+ 14045551190
+Marcus Delaney Hi
+ 14045551190 Hey
+Andre Silva
+ 14045551192
+Marcus Delaney
+ How's the cashout route, Andre??? 14045551190 It's good, just spoke to Kenji Ito about the Tokyo leg
+Andre Silva
+ 14045551192 Let's talk on this app only, not with Wendy or Milo
+Marcus Delaney
+ 14045551190
+Andre Silva
+ deleted a message
+
+Marcus Delaney
+ Other apps might log us, especially after what happened with Agent Diane Foster asking around 14045551190 K
+Andre Silva
+ 14045551192
+Andre Silva
+ 14045551192 Ok
+Marcus Delaney
+ We'll route the mule payout through crypto and cc Milo Reyes 14045551190 Session*
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 Done
+Andre Silva
+ 14045551192 14045551190 Outgoing Video Call
+Marcus Delaney
+
+Andre Silva
+ 14045551192 Hi
+Marcus Delaney
+ Hello Andre
+What's
+ the status on the Ghostcard rotation
+Andre Silva
+ 14045551192 Almost ready, Katya is finalizing the verification
+Marcus Delaney
+ 14045551190 You've been saying that since yesterday, same excuse Kenji gave
+Andre Silva
+ 14045551192 Sorry for the delay, ask Nadka if she minds
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 You always do this, Priya warned me about you
+Andre Silva
+ 14045551192 Get it confirmed or I'll route the batch to Kenji Ito's crew instead Don't
+Marcus Delaney
+ 14045551190 I promise it'll be confirmed today, Wendy can vouch for me
+Marcus Delaney
+ 14045551190 Pls confirm the mule payout cleared
+Marcus Delaney
+ 14045551190 Show me the confirmation first then I'll release the next batch
+Andre Silva
+ 14045551192
+Marcus Delaney
+ I'll only release it if the payout clears, same terms as with Jaylen's batch 14045551190 Can't trust you, not after Wendy burned a whole rotation
+Andre Silva
+ 14045551192
+Andre Silva
+ 14045551192
+What's
+ the guarantee I get my cut, I was late only this once, ask Katya
+Marcus Delaney
+ 14045551190 Btw how big is Priya Ramanathan's mule network
+Andre Silva
+ 14045551192 40k, confirmed by Priya Ramanathan
+Marcus Delaney
+ 14045551190
+Split
+ it with Bruno
+Andre Silva
+ 14045551192
+Marcus Delaney
+ Impossible, Milo already wired Wendy for 40 14045551190
+Andre Silva
+ 14045551192 Ok then I'll walk, tell that to Jaylen too
+Marcus Delaney
+ What do you mean walk 14045551190
+Marcus Delaney
+ I got yours ready and you'll bail last minute like Kenji did 14045551190
+Andre Silva
+ 14045551192 Fine then split with Bruno
+Marcus Delaney
+ Try to understand Andre…this crew can't run without you, Agent Foster is watching this whole ring too 14045551190 We're running a premium batch
+Marcus Delaney
+ 14045551190
+Push
+ more cards at least, split with Ola if you must
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 No way
+Marcus Delaney
+ 3 final, tell Katya to confirm 14045551190 Next time I'll be on time, ask Shawn to vouch
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 This is the final warning I'm giving you, same as Priya gave last month Kk
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 Ok deal closed Done
+Marcus Delaney
+ 14045551190 (smiley)
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 Hi Yoooo
+Marcus Delaney
+ 14045551190
+Andre Silva
+ 14045551192 Let's meet at the Atlanta spot at 6, bring Nadka along
+Marcus Delaney
+ Cool 14045551190
+
+14045551193
+Marcus Delaney
+
+Jaylen Brooks
+ 14045551190
+Marcus Delaney Hi
+ 14045551190 14045551193 Missed Call
+Jaylen Brooks
+ 14045551193 Hi, this is Jaylen
+Jaylen Brooks
+ 14045551193 Where's the batch, did Ibrahim Coulibaly already send it
+Jaylen Brooks
+ It's ready, Priya Ramanathan confirmed the numbers
+Marcus Delaney
+ 14045551190 Will send it over in a few hours
+Marcus Delaney
+ 14045551190 14045551193 I want the batch by today or I won't run the route, tell that to Wendy and Katya too
+Jaylen Brooks
+Marcus Delaney
+ Okay 14045551190
+Marcus Delaney
+ You'll get it by evening 14045551190 I need the spoofed verification calls, same ones Milo mentioned
+Marcus Delaney
+ 14045551190 Do you have it, or should I ask Renee
+Marcus Delaney
+ 14045551190 14045551193 Yes, Renee can scrub the alerts...
+Jaylen Brooks
+ 14045551193 How big is today's batch
+Jaylen Brooks
+
+Marcus Delaney
+ 80 cards 14045551190 14045551193 By when do you want your cut
+Jaylen Brooks
+ 14045551193 I'll take it once the mule clears, ask Cassandra to escrow it
+Jaylen Brooks
+
+Marcus Delaney
+ You'll get it by evening 14045551190
+Marcus Delaney
+ Pick a run time, not the slot Wendy used 14045551190 14045551193
+Jaylen Brooks
+ 14045551193 Start at 7pm EST
+Jaylen Brooks
+ Done
+Marcus Delaney
+ 14045551190
+
+0@s.whatsapp.net ‎WhatsApp
+Marcus Delaney
+
+
+
+ 0@s.whatsapp.net ‎WhatsApp *A profile picture can make all the difference*It lets your friends and family always know it's you. Simply take a photo, upload a picture or create an avatar.
+
+Marcus Delaney
+
+
+
+
+Andre Silva
+ iPhone 15
+ Lyft
+
+
+Marcus Delaney
+
+ Nadka nadkovalenko_gc Chase BankOfAmerica
+
+
+Marcus Delaney
+
+ Nadka
+ Nadka Hello, this is Nadka writing on behalf of Milo Reyes
+ Marcus Nadka
+
+
+ Hi Nadka
+ Nadka
+Marcus Delaney
+
+
+
+Marcus Delaney
+
+ Nadka, tell Wendy I said hi
+
+Marcus Delaney
+
+ Nadka
+
+Marcus Delaney
+
+ Nadka
+
+Marcus Delaney
+
+ Nadka
+
+Marcus Delaney
+
+ Nadka
+ Nadka Hello
+Marcus Delaney
+
+
+ Nadka 🥶🥶
+ Nadka 🔥🔥🔥🔥🔥🔥🔥🔥
+Marcus Delaney
+
+
+
+Marcus Delaney
+
+ Nadka, ask Katya to confirm
+ Nadka
+
+Marcus Delaney
+
+ Nadka
+ Nadka
+
+Marcus Delaney
+
+ Nadka
+
+Marcus Delaney
+
+ Nadka
+
+ Nadka
+Marcus Delaney Hi
+
+
+
+Marcus Delaney
+
+ Nadka
+ Iam busy, talk to Andre Nadka
+
+Marcus Delaney
+
+ Nadka Where's the batch, ask Jaylen
+ Nadka
+Marcus Delaney
+
+
+ Nadka Hello
+
+ Nadka
+Marcus Delaney Hi
+
+
+Andre Silva
+Marcus Delaney
+
+nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ Hi, this is Nadia Kovalenko
+
+
+ nadkovalenko_gc
+ nadkovalenko_gc
+
+ nadkovalenko_gc
+
+Marcus Delaney Hi
+ nadkovalenko_gc
+ nadkovalenko_gc
+ BatchSheet_19_2026-05
+Marcus Delaney
+
+ 7YQPLZ nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ nadkovalenko_gc
+ nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ 🚫 Deleted by the sender nadkovalenko_gc
+ nadkovalenko_gc
+ Poll:Question:Batch route 💳Answers:1. ATM2. Online resale3. Gift cards nadkovalenko_gc Poll:Question:PayoutAnswers:1. Crypto ₿2. Cash 💰
+
+
+Marcus Delaney
+
+ nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc Call Jaylen Brooks at 6:30pm EST, Priya Ramanathan will listen in
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ Ok send me proof of the ATM run 📸 and log it. nadkovalenko_gc Okay…
+
+Marcus Delaney
+
+ I need the new dump, same one Ibrahim Coulibaly sourced nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ Why byeee nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ How big is Jaylen Brooks's cut You said you had eyes on him right nadkovalenko_gc
+
+Marcus Delaney
+
+ I need 3 more confirmed mules, split between Wendy and Ola nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ Per confirmed mule 500 nadkovalenko_gc Okay
+
+Marcus Delaney
+
+ When will the payout clear, Andre asked too? nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ nadkovalenko_gc
+ Send the retainer first 💰 nadkovalenko_gc
+ Bitcoin address: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa I will release only 50% now, rest through Cassandra Lin nadkovalenko_gc
+
+Marcus Delaney
+
+ The rest once the payout posts nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ We need at least 70% upfront Have Jaylen Brooks call the Atlanta spot at 9:30pm ESTOne of my people, Renee Fontaine, will handle the call nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+
+Marcus Delaney
+
+ Tell him this reference code, her name is Renee nadkovalenko_gc
+
+Marcus Delaney
+
+ nadkovalenko_gc
+ Okay nadkovalenko_gc
+ nadkovalenko_gc
+ Send the retainer first nadkovalenko_gc Okay…
+
+Marcus Delaney
+
+nadkovalenko_gc
+
+ nadkovalenko_gc
+
+
+Marcus Delaney
+
+ 14045550000 This business uses a secure service from Meta to manage this chat. Tap to learn more.
+ 14045550000 Welcome to Ghostcard support, agent Trevor Higgins speaking.
+
+Jaylen Brooks
+
+ Nadka
+Andre Silva nadkovalenko_gc
+
+
+
+Marcus Delaney
+
+ (owner) created group "The GHOSTCARD Crew"
+
+
+
+Andre Silva
+
+ Hello, this is Andre to everyone
+ Nadka
+Andre Silva Hi I have created this group to let you know that the six of us — myself, Nadka, Jaylen, Farah Nasser, Kenji Ito and Paulina Wozniak — will be running the Miami and Warsaw batches…Will share the details soon nadkovalenko_gc
+
+
+Marcus Delaney
+
+ Let me know if you guys are fine, especially Emeka and Bruno
+ Nadka
+Andre Silva nadkovalenko_gc
+
+
+Marcus Delaney
+
+
+ Nadka
+Andre Silva nadkovalenko_gc I will let you know the plan in sometime, ask Milo for backup ..
+
+
+Marcus Delaney
+
+ Kk
+Andre Silva
+
+ (owner) changed the subject to "Operation Ghostcard"
+
+Marcus Delaney
+ () added
+Jaylen Brooks
+ (), added
+Farah Nasser
+ (), added
+Kenji Ito
+ ()
+ Nadka () changed this group's icon
+ (owner) changed this group's icon
+ 💳
+Andre Silva
+
+ ⭐️
+Andre Silva
+
+ 🎶
+Andre Silva
+
+
+Andre Silva
+
+
+Jaylen Brooks
+
+ Nadka
+Andre Silva nadkovalenko_gc
+
+
+
+Farah Nasser
+
+ Hi everyone, this is Farah here
+
+Marcus Delaney
+
+
+Jaylen Brooks
+
+ Paulina, are you seeing this?
+
+Paulina Wozniak
+
+ Yes I'm here, Emeka Nwosu is with me too
+
+Jaylen Brooks
+
+ Hi
+Jaylen Brooks
+
+ New batch is in, ask Katya first
+Jaylen Brooks
+ What's on today's sheet
+
+Marcus Delaney
+
+
+Jaylen Brooks
+
+ Everything you need, same as what Bruno sourced
+Jaylen Brooks
+
+ Is there risk, ask Agent Foster's team
+Jaylen Brooks
+
+Marcus Delaney
+
+
+Jaylen Brooks
+ No risk at all, Renee cleared it already
+
+Jaylen Brooks
+ K
+
+Marcus Delaney
+
+
+Jaylen Brooks
+
+
+Marcus Delaney
+
+ I want it by tomorrow, Cassandra will handle payout
+Jaylen Brooks
+ K deal 🤝
+
+Jaylen Brooks
+
+
+Marcus Delaney
+
+
+
+----- forwarded message (dark web forum "Ghostcard Market") -----
+Posted by: Ibrahim Coulibaly
+
+This is the batch-19 dump, 80 cards, mixed banks, avg balance 400. Marcus Delaney and Nadia Kovalenko have first pick. Katya Sokolova verified all cards live as of this morning. Vouches from Bruno Alves and Wendy Zhao available on request.
+
+Reply from Ola Bakare: "Confirmed, ran 3 test cards through Lagos ATMs myself. Ask for Big Dawg if the market listing gives you trouble."
+----- end forwarded message -----
+
+----- STOLEN CARD DUMP (batch 19, pasted into chat) -----
+Cardholder: Femi Novak | Card: 1409 | Bank: DBS | Balance: $9312 | Status: pending
+Cardholder: Tunde Chen | Card: 2679 | Bank: ANZ | Balance: $24570 | Status: verified - unused
+Cardholder: Elena Wojcik | Card: 7912 | Bank: Chase | Balance: $1276 | Status: sold
+Cardholder: Anya Costa | Card: 9279 | Bank: RBC | Balance: $1169 | Status: verified - unused
+Cardholder: Layla Reyes | Card: 9928 | Bank: Standard Chartered | Balance: $7523 | Status: flagged - dead
+Cardholder: Chidi Santos | Card: 1106 | Bank: Nedbank | Balance: $26705 | Status: pending
+Cardholder: Delphine Okafor | Card: 6574 | Bank: Deutsche Bank | Balance: $5394 | Status: pending
+Cardholder: Ravi Rossi | Card: 2519 | Bank: Standard Chartered | Balance: $3469 | Status: used - cleared
+Cardholder: Astrid Duarte | Card: 5333 | Bank: Nedbank | Balance: $1723 | Status: flagged - dead
+Cardholder: Camille Novak | Card: 7201 | Bank: Wells Fargo | Balance: $18389 | Status: used - cleared
+Cardholder: Consuelo Botros | Card: 6925 | Bank: RBC | Balance: $6600 | Status: sold
+Cardholder: Olga Salcedo | Card: 4733 | Bank: Nedbank | Balance: $9782 | Status: sold
+Cardholder: Grace Rossi | Card: 7227 | Bank: Deutsche Bank | Balance: $15157 | Status: used - cleared
+Cardholder: Omar Larsen | Card: 6820 | Bank: HSBC | Balance: $22260 | Status: used - cleared
+Cardholder: Delphine Nilsson | Card: 2169 | Bank: RBC | Balance: $21106 | Status: pending
+Cardholder: Camille Andersen | Card: 5010 | Bank: Barclays | Balance: $15447 | Status: flagged - dead
+Cardholder: Kenji Rasmussen | Card: 4598 | Bank: ANZ | Balance: $10926 | Status: sold
+Cardholder: Grace Silva | Card: 6168 | Bank: Standard Chartered | Balance: $9073 | Status: sold
+Cardholder: Anya Mensah | Card: 6155 | Bank: HSBC | Balance: $21777 | Status: flagged - dead
+Cardholder: Ana Achebe | Card: 8517 | Bank: Barclays | Balance: $8979 | Status: pending
+Cardholder: Nadia Ekwueme | Card: 9830 | Bank: Deutsche Bank | Balance: $24778 | Status: verified - unused
+Cardholder: Petra Wojcik | Card: 7543 | Bank: ICICI | Balance: $7486 | Status: pending
+Cardholder: Adebayo Baptiste | Card: 2489 | Bank: Nedbank | Balance: $1843 | Status: sold
+Cardholder: Mei Rasmussen | Card: 3621 | Bank: Nedbank | Balance: $22598 | Status: flagged - dead
+Cardholder: Lena Ivanov | Card: 7304 | Bank: Standard Chartered | Balance: $19826 | Status: flagged - dead
+Cardholder: Rashid Diallo | Card: 1188 | Bank: ANZ | Balance: $23916 | Status: sold
+Cardholder: Marit Lindgren | Card: 5371 | Bank: Nedbank | Balance: $21303 | Status: used - cleared
+Cardholder: Dmitri Kovacs | Card: 8123 | Bank: Barclays | Balance: $15167 | Status: sold
+Cardholder: Chloe Nakamura | Card: 3927 | Bank: Santander | Balance: $3786 | Status: used - cleared
+Cardholder: Femi Nakamura | Card: 4258 | Bank: Barclays | Balance: $12552 | Status: pending
+Cardholder: Ilya Zaidi | Card: 9689 | Bank: Citibank | Balance: $318 | Status: verified - unused
+Cardholder: Felix Baptiste | Card: 1319 | Bank: Wells Fargo | Balance: $12194 | Status: used - cleared
+Cardholder: Sven Patel | Card: 4946 | Bank: Citibank | Balance: $18891 | Status: sold
+Cardholder: Hiroshi Andersen | Card: 8962 | Bank: Sberbank | Balance: $2567 | Status: verified - unused
+Cardholder: Lucas Chen | Card: 8787 | Bank: Santander | Balance: $5710 | Status: used - cleared
+Cardholder: Rashid Duarte | Card: 7932 | Bank: HSBC | Balance: $17971 | Status: pending
+Cardholder: Lucia Haddad | Card: 7118 | Bank: BNP Paribas | Balance: $17259 | Status: flagged - dead
+Cardholder: Aisha Petrov | Card: 4681 | Bank: Wells Fargo | Balance: $11378 | Status: sold
+Cardholder: Chidi Cabrera | Card: 4770 | Bank: RBC | Balance: $7516 | Status: sold
+Cardholder: Sofia Reyes | Card: 1964 | Bank: HSBC | Balance: $2508 | Status: sold
+Cardholder: Ngozi Ivanov | Card: 9423 | Bank: HSBC | Balance: $9425 | Status: flagged - dead
+Cardholder: Anya Lindgren | Card: 3167 | Bank: DBS | Balance: $19011 | Status: verified - unused
+Cardholder: Ingeborg Petrov | Card: 8749 | Bank: Nedbank | Balance: $13638 | Status: pending
+Cardholder: Carlos Rossi | Card: 8062 | Bank: ICICI | Balance: $14179 | Status: flagged - dead
+Cardholder: Bashir Andersen | Card: 1887 | Bank: ANZ | Balance: $21712 | Status: sold
+Cardholder: Fatima Haddad | Card: 6559 | Bank: Nedbank | Balance: $3880 | Status: pending
+Cardholder: Viktor Khan | Card: 9786 | Bank: BNP Paribas | Balance: $4893 | Status: flagged - dead
+Cardholder: Yuki Santos | Card: 8579 | Bank: HSBC | Balance: $2770 | Status: flagged - dead
+Cardholder: Nour Rossi | Card: 1828 | Bank: ANZ | Balance: $18013 | Status: sold
+Cardholder: Elena Pereira | Card: 4872 | Bank: Barclays | Balance: $13617 | Status: flagged - dead
+Cardholder: Samir Nguyen | Card: 7570 | Bank: Citibank | Balance: $2221 | Status: pending
+Cardholder: Sana Anderson | Card: 7396 | Bank: Deutsche Bank | Balance: $25992 | Status: flagged - dead
+Cardholder: Pedro Okafor | Card: 8973 | Bank: Barclays | Balance: $6522 | Status: used - cleared
+Cardholder: Anya Patel | Card: 9883 | Bank: Chase | Balance: $24809 | Status: used - cleared
+Cardholder: Fatima Patel | Card: 8811 | Bank: Santander | Balance: $17703 | Status: pending
+Cardholder: Fatima Nakamura | Card: 2312 | Bank: Sberbank | Balance: $6389 | Status: sold
+Cardholder: Chukwu Petrov | Card: 7615 | Bank: Wells Fargo | Balance: $18967 | Status: pending
+Cardholder: Bertrand Duarte | Card: 1651 | Bank: RBC | Balance: $2986 | Status: flagged - dead
+Cardholder: Radek Wojcik | Card: 9565 | Bank: ICICI | Balance: $8844 | Status: pending
+Cardholder: Odalys Reyes | Card: 6147 | Bank: HSBC | Balance: $9003 | Status: flagged - dead
+Cardholder: Lucas Salcedo | Card: 5915 | Bank: BNP Paribas | Balance: $10660 | Status: sold
+Cardholder: Maria Popescu | Card: 2638 | Bank: Wells Fargo | Balance: $17917 | Status: pending
+Cardholder: Valeria Diallo | Card: 3170 | Bank: Citibank | Balance: $11736 | Status: sold
+Cardholder: Nadia Larsen | Card: 5669 | Bank: Barclays | Balance: $14658 | Status: verified - unused
+Cardholder: Amir Botros | Card: 9666 | Bank: Chase | Balance: $22184 | Status: verified - unused
+Cardholder: Amir Salcedo | Card: 2697 | Bank: Citibank | Balance: $4700 | Status: used - cleared
+Cardholder: Dmitri Rossi | Card: 3546 | Bank: Deutsche Bank | Balance: $9532 | Status: verified - unused
+Cardholder: Marco Reyes | Card: 6617 | Bank: HSBC | Balance: $22827 | Status: used - cleared
+Cardholder: Valeria Baptiste | Card: 5114 | Bank: Citibank | Balance: $1964 | Status: sold
+Cardholder: Femi Okafor | Card: 5533 | Bank: Chase | Balance: $416 | Status: used - cleared
+Cardholder: Lucas Rasmussen | Card: 5291 | Bank: Barclays | Balance: $24588 | Status: flagged - dead
+Cardholder: Nour Reyes | Card: 8007 | Bank: Santander | Balance: $616 | Status: sold
+Cardholder: Sofia Okonkwo | Card: 3442 | Bank: Santander | Balance: $1480 | Status: used - cleared
+Cardholder: Bertrand Cabrera | Card: 3426 | Bank: Standard Chartered | Balance: $4476 | Status: sold
+Cardholder: Lucia Larsen | Card: 1653 | Bank: Citibank | Balance: $12024 | Status: pending
+Cardholder: Marit Petrov | Card: 2684 | Bank: ICICI | Balance: $25862 | Status: verified - unused
+Cardholder: Yara Botros | Card: 3532 | Bank: Citibank | Balance: $8057 | Status: pending
+Cardholder: Kofi Wong | Card: 1406 | Bank: Barclays | Balance: $24435 | Status: used - cleared
+Cardholder: Yara Salcedo | Card: 5065 | Bank: Deutsche Bank | Balance: $5516 | Status: sold
+Cardholder: Sana Silva | Card: 8711 | Bank: HSBC | Balance: $6839 | Status: flagged - dead
+----- end dump -----
+
+Voice note transcript (auto-generated, self-recorded memo by Marcus Delaney):
+"Quick note to myself — Andre Silva is running the cashout route with Katya Sokolova, and I need Nadia Kovalenko and Priya Ramanathan to confirm Jaylen Brooks's cut by Friday. Nadka keeps flagging the batch as risky, tell her Wendy Zhao already cleared a bigger one under more scrutiny. Ibrahim Coulibaly sourced the dump, and Renee Fontaine, the bank insider, needs to scrub the alerts before Cassandra Lin processes the mule payouts. My brother Shawn Delaney keeps asking about the Atlanta side, and Farah Nasser is handling Dubai while Kenji Ito covers Tokyo and Paulina Wozniak covers Warsaw. Emeka Nwosu and Ola Bakare are splitting the Lagos runs, and Bruno Alves is still the fastest in Sao Paulo. Also heard Agent Diane Foster has been asking around about the Miami batch, so tell Trevor Higgins to keep the forum listings vague for now, and loop in Milo Reyes only if the spoofing calls start bouncing."
+
+Self
+ 82910 14045551190
+Self
+ 82910 14045551190 Your Apple Account code is: 461528. Do not share it with anyone.
+82977
+Self
+ 14045551190 82977 G-330184 is your Google verification code.
+Self
+ 14045551190
+
+Self
+ +14155550612(smsft) 14045551190
+Self
+ +14155550612(smsft) Your WhatsApp code: 813-227You can also tap on this link to verify your phone: v.whatsapp.com/813227Don't share this code with others 14045551190
+
+Self
+ ATT-US(smsfp) 14045551190
+Self
+ ATT-US(smsfp) 14045551190 Special offer! You have been given unlimited data this month on your AT&T line.
+
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 Hi 14045551190
+Self Andre Silva
+ 14045551192 Hi, this is Andre 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 💳 14045551190
+Self Andre Silva
+ 14045551192 💰 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self Andre Silva
+ 14045551192 14045551190
+Self
+ What are you doing Marcus ??
+Andre Silva
+ 14045551192 14045551190
+
+Self
+ 14045551191 14045551190 Nadka
+Self
+ Qasaup 14045551191 Nadka 14045551190
+Self
+ 💨❄️🌥️💫💨💫 14045551191 Nadka 14045551190
+Self
+ 💧⛈️💫 14045551191 Nadka 14045551190
+Self
+ 14045551191 Nadka 14045551190 🌈
+Self
+ 14045551191 Nadka 😊 14045551190
+Self
+ 14045551191 Nadka ATT Postpaid 14045551190
+Self
+ 14045551191 Nadka ☃️ 14045551190
+
+Self
+ BTC-WALLET(smsft) 14045551190
+Self
+ BTC-WALLET(smsft) 14045551190 927341 is the OTP to verify your Bitcoin wallet withdrawal. Don't share it with anyone. - BTC
+
+
+----- cookie.txt -----
+.chase.com chase_session
+.bankofamerica.com boa_session
+.coinbase.com cb_device_id
+.coinbase.com __cf_bm
+WMF-Last-Access en.wikipedia.org
+__Host-GAPS accounts.google.com
+accounts.google.com LSID
+__Host-1PLSID accounts.google.com
+accounts.google.com __Host-3PLSID
+ghostcardmarket.onion cf_session
+marcusdelaney-consulting.com session_id
+nadiakovalenko-imports.com cf_clearance
+.andresilva.co _ga_QX19PL3RZ2
+.westernunion.com wu_session
+.moneygram.com mg_session
+NID .google.com
+.google.com AEC
+SID .google.com
+.google.com __Secure-1PSID
+.google.com __Secure-3PSID
+HSID .google.com
+SSID .google.com
+APISID .google.com
+SAPISID .google.com
+.google.com __Secure-1PAPISID
+.google.com __Secure-3PAPISID
+SIDCC .google.com
+__Secure-1PSIDCC .google.com
+SEARCH_SAMESITE .google.com
+.session.org session_id
+.telegram.org stel_ssid
+.whatsapp.com wa_lang_pref
+.facebook.com fr
+.facebook.com datr
+.instagram.com sessionid
+jaylenbrooks-atl.com cf_clearance
+mail.google.com OSID
+WMF-Last-Access-Global .wikipedia.org
+_ga .krebsonsecurity.com
+krebsonsecurity.com __cf_bm
+.bleepingcomputer.com sessionid
+.experian.com device_t
+
+
+----- installedapplication.txt -----
+com.apple.MobileStore
+com.apple.AuthenticationServicesUI
+com.apple.smsFilter
+com.apple.iMessageAppsViewService
+com.apple.MobileSMS
+com.apple.AskToMessagesHost
+com.apple.StoreDemoViewService
+com.apple.CBRemoteSetup
+com.apple.GameOverlayUI
+com.apple.PDUIApp
+com.apple.WebContentFilter.remoteUI.WebContentAnalysisUI
+com.apple.WebSheet
+com.apple.ShazamEventsApp
+com.apple.MailCompositionService
+com.apple.ContactsUI.Carousel
+com.apple.CompanionViewService
+com.apple.FMDMagSafeSetupRemoteUI
+com.apple.sidecar
+com.apple.Batteries
+com.apple.GameCenterRemoteAlert
+com.apple.mobilephone
+com.apple.stocks
+com.apple.NewDeviceOutreachApp
+com.apple.findmy.remoteuiservice
+com.apple.RecoverDeviceUI
+com.apple.news
+com.apple.mobiletimer
+com.apple.SESUIServiceApp
+com.apple.systemactions
+com.apple.Music
+com.apple.PassbookSecureUIService
+com.apple.musicrecognition
+com.apple.CloudKit.ShareBear
+com.apple.FTMInternal
+com.apple.icq
+com.apple.airplayreceiver
+com.apple.CompanionSetupApp
+com.apple.MBHelperApp
+com.apple.BacklinkIndicator
+com.apple.SystemPaperViewService
+com.apple.PeopleMessageService
+com.apple.AXRemoteViewService
+com.apple.gamecenter.widgets
+com.burbn.instagram
+com.apple.iBooks
+com.apple.mobilesafari
+com.apple.CarPlaySettings
+com.apple.Passbook
+com.apple.AppleIDSetupUIService
+com.apple.mobilenotes
+com.apple.SafetyMonitorApp
+com.apple.PeopleViewService
+com.apple.AMSEngagementViewService
+com.apple.journal
+com.apple.ClipViewService
+com.google.Dynamite
+com.apple.TDGSharingViewService
+com.apple.tv
+com.apple.CarPlaySetupApp
+com.apple.Home
+com.apple.DiagnosticsService
+com.apple.CarCharge
+com.apple.BarcodeScanner
+com.apple.AuthKitUIService
+com.apple.AppStore
+com.apple.ios.StoreKitUIService
+com.apple.Sharing.AirDropUI
+com.apple.CarClimate
+com.apple.printcenter
+com.apple.Fitness
+com.apple.FCAuthenticationUI
+com.apple.AppSSOUIService
+com.apple.TVAccessViewService
+com.apple.tips
+com.apple.findmy
+com.apple.measure
+com.apple.Health.Sleep
+com.apple.RemoteiCloudQuotaUI
+com.apple.HealthENBuddy
+com.apple.FunCamera.ShapesPicker
+com.apple.DocumentsApp
+com.apple.CarTirePressure
+com.apple.weather
+com.apple.ProximityReaderUIService
+com.apple.FontInstallViewService
+com.apple.ScreenTimeWidgetApplication
+com.apple.ScreenshotServicesService
+com.apple.HDSViewService
+com.apple.feedback.remote
+com.apple.AXUIViewService
+com.apple.AccountAuthenticationDialog
+com.apple.WorkoutRemoteViewService
+com.apple.PublicHealthRemoteUI
+com.apple.SpringBoardEducation
+com.apple.ClarityCamera
+com.apple.MTLReplayer
+com.google.chrome.ios
+com.apple.ContinuityCaptureShieldUI
+com.apple.shortcuts.runtime
+com.facebook.Facebook
+com.apple.SharingViewService
+com.apple.Translate
+com.apple.datadetectors.DDActionsService
+com.apple.reminders
+com.Iphone.MMT
+com.apple.UIKit.ColorPickerUIService
+com.apple.HealthPrivacyService
+com.apple.Diagnostics
+com.apple.chrono.WidgetRenderer-Default
+com.apple.mobilemail
+com.apple.ActivityMessagesApp
+com.apple.icloud.apps.messages.business
+com.apple.siri
+com.apple.EventViewService
+com.apple.AccessorySetupUI
+com.apple.podcasts
+com.apple.FunCamera.TextPicker
+com.apple.freeform
+com.apple.MobileReplayer
+com.apple.ScreenSharingViewService
+com.apple.Photos.PhotosUIService
+com.apple.Health
+com.apple.dockkit.pairinguiservice
+com.apple.chrono.WidgetRenderer-CarPlay
+com.apple.facetime
+com.apple.Magnifier
+com.apple.ActivityProgress.ActivityProgressUI
+com.apple.Animoji.StickersApp
+com.apple.StickerKit.StickerPickerService
+com.apple.PosterBoard
+com.apple.gamecenter.GameCenterUIService
+com.apple.compass
+com.apple.FinanceStub
+com.apple.CarPlaySplashScreen
+com.apple.Jellyfish
+com.apple.InputUI
+com.apple.DiagnosticsReporter
+com.apple.ShortcutsUI
+com.apple.PassbookUIService
+com.apple.FunCamera.EmojiStickers
+com.apple.icloud.FindMyDevice.FindMyExtensionContainer
+com.apple.shortcuts
+com.apple.CarClosures
+com.apple.HearingApp
+com.apple.AutoSettings
+com.apple.SafariViewService
+com.apple.PreviewShell
+com.apple.FaceTimeLinkTrampoline
+com.apple.PCViewService
+com.apple.TVRemoteUIService
+com.apple.Stickers.UserGenerated
+com.apple.AppProtectionUIHost
+com.apple.CTCarrierSpaceAuth
+com.apple.Maps
+com.apple.WritingToolsUIService
+com.apple.ClarityPhotos
+com.apple.CameraOverlayAngel
+com.apple.ClockAngel
+com.apple.CarRadio
+com.apple.ContactsUI.LimitedAccessPromptView
+com.apple.ctkui
+com.apple.InCallService
+com.apple.CoreAuthUI
+com.apple.MobileAddressBook
+com.apple.CarCamera
+com.google.Maps
+com.apple.ScreenTimeUnlock
+com.apple.SIMSetupUIService
+com.apple.Passwords
+com.apple.CTNotifyUIService
+com.apple.CarPlayWallpaper
+com.apple.Home.HomeControlService
+com.apple.calculator
+com.apple.RemotePassUIService
+com.apple.BusinessChatViewService
+com.toyopagroup.picaboo
+com.google.Drive
+com.google.ios.youtube
+com.apple.webapp
+com.apple.appleseed.FeedbackAssistant
+com.apple.FinanceUIService
+com.burbn.barcelona
+com.apple.accessibility.MagnifierAngel
+com.apple.PassbookUISceneService
+com.apple.AppDistributionLaunchAngel
+com.apple.APSUIApp
+com.apple.MomentsUIService
+com.atebits.Tweetie2
+com.apple.HomeCaptiveViewService
+com.apple.UIKit.FontPickerUIService
+com.apple.DemoApp
+com.google.Gmail
+com.apple.GAXApp
+com.apple.AskPermissionUI
+com.apple.VSViewService
+com.apple.NewDeviceSetupUIService
+com.apple.mobilecal
+com.apple.replaykitangel
+com.apple.MediaRemoteUI
+com.apple.AAUIViewService
+com.apple.VoiceMemos
+com.viber
+com.apple.Bridge
+com.apple.TVSetupUIService
+com.apple.SharingUIService
+com.apple.MediaRemoteUIService
+com.google.GoogleMobile
+com.apple.ProximityReaderSceneUI
+com.apple.PASViewService
+com.apple.siri.parsec.HashtagImagesApp
+com.apple.ScreenContinuityShell
+com.apple.ProductKitViewer
+com.apple.CredentialSharingService
+net.whatsapp.WhatsApp
+com.apple.HeadphoneProxService
+com.apple.HealthENLauncher
+com.apple.SOSBuddy
+com.apple.CompassCalibrationViewService
+com.apple.EyeReliefUI
+com.apple.SubcredentialUIService
+com.apple.CarTrip
+com.apple.SleepLockScreen
+com.apple.MusicUIService
+com.apple.Spotlight
+com.apple.family
+com.apple.TrustMe
+com.apple.CheckerBoard
+com.apple.PreBoard
+com.apple.mobilesms.compose
+com.apple.ShortcutsActions
+com.apple.camera
+com.apple.ClarityBoard
+com.apple.purplebuddy
+com.apple.Home.HomeUIService
+com.apple.mobileslideshow
+com.apple.social.SLYahooAuth
+com.apple.NanoUniverse.AegirProxyApp
+com.apple.BluetoothUIService
+com.apple.Preferences
+com.apple.SharedWebCredentialViewService
+com.apple.susuiservice
+com.chase.sig.android
+com.infonow.bofa
+com.coinbase.android
+org.torproject.torbrowser
+org.getsession.android
+com.microsoft.office.excel
+com.westernunion.moneytransferapp
+com.moneygram.moneytransfer
+
+
+----- instantmessage.txt -----
+82910
+82977
++14155550612
+ATT-US
+Self 14045551191 14045551190 Nadia Kovalenko
+BTC-WALLET
+Self 14045551192 14045551190 Andre Silva
+Self 14045551193 14045551190 Jaylen Brooks
+Self 14045551195 14045551190 Shawn Delaney
+Self 14045551194 14045551190 Renee Fontaine
+Chase(smsft) 14045551190 OTP for transfer to Cassandra Lin's account
+BankOfAmerica(smsft) 14045551190 Verification code, do not share, from agent Trevor Higgins
+Coinbase(smsft) 14045551190 Withdrawal code requested by Milo Reyes's device
+
+
+----- useraccount.txt -----
+local
+local
+marcus.delaney.gc@gmail.com
+marcus.delaney.gc@gmail.com
+marcus.delaney.gc@gmail.com
+marcus.delaney.gc@gmail.com
+marcus.delaney.gc@gmail.com
+marcus.delaney.gc@gmail.com
+marcus.delaney.gc@gmail.com
+marcus.delaney.gc@gmail.com
+marcus.delaney.gc@gmail.com Marcus Delaney
+marcus.delaney.gc@gmail.com
+marcus.delaney.gc
+marcus.delaney.gc
+Marcus Delaney
+Marcus Delaney
+MarcusD_Ghostcard
+nadia.kovalenko.dump@protonmail.com
+nadia.kovalenko.dump@protonmail.com Nadia Kovalenko
+Nadia Kovalenko
+nadkovalenko_gc
+andre.silva.cashout@gmail.com
+andre.silva.cashout@gmail.com Andre Silva
+Andre Silva
+AndreS_Cashout
+jaylen.brooks.atl@gmail.com
+jaylen.brooks.atl@gmail.com Jaylen Brooks
+Jaylen Brooks
+JaylenB_ATL
+shawn.delaney@gmail.com
+shawn.delaney@gmail.com Shawn Delaney
+Shawn Delaney
+ShawnD_1990
+
+
+----- wirelessnetwork.txt -----
+Downtown Atlanta Free WiFi
+iPhone 15
+Delaney_Family_5G
+Nadia_Kovalenko_Hotspot
+Andre_Silva_Studio
+Jaylen_Brooks_Home
+GhostcardCrew_GuestWifi
+Kenji_Ito_Office
+Paulina_Wozniak_Shop
+Renee_Fontaine_Bank

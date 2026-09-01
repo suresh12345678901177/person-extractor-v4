@@ -1,0 +1,19 @@
+# Occupation terms - used by ContextValidator as a corroborating (not
+# rejecting) signal: a candidate immediately preceded by an occupation
+# word is weak positive evidence of personhood.
+engineer
+doctor
+lawyer
+teacher
+professor
+manager
+director
+consultant
+officer
+constable
+inspector
+nurse
+clerk
+accountant
+architect
+scientist

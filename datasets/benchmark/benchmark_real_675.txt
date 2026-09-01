@@ -1,0 +1,938 @@
+----- call.txt -----
+Marcus Delaney 14045551190 Branko Osvalt 14045552210
+Talvin Meskara 14045552211 Marcus Delaney 14045551190
+Yurdana Kesslin 14045552212 Marcus Delaney 14045551190
+Petrin Vashko 14045552213 Marcus Delaney 14045551190
+Doran Vestring 14045552214 Marcus Delaney 14045551190
+Sanvira Oduya 14045552215 Marcus Delaney 14045551190
+Elric Bannerworth 14045552216 Marcus Delaney 14045551190
+Miralda Chessworth 14045552217 Marcus Delaney 14045551190
+Marcus Delaney bf82e410-9c31-4a75-8e04-6d1f3b7a9c52
+
+
+----- chat.txt -----
+Marcus Delaney
+14045551190
+This is the low-frequency contact sync log — new referral leads and inventory ledger entries from this week. Most of these only came up a handful of times before I moved on to someone else.
+
+14045552331
+Branko Osvalt
+ Will do
+Branko Osvalt
+ On it
+Branko Osvalt
+ Ok noted
+14045552074
+Talvin Meskara
+ Received
+Talvin Meskara
+ Confirmed
+Talvin Meskara
+ Sounds good
+Talvin Meskara
+ Noted, thanks
+Talvin Meskara
+ Ok noted
+14045552931
+Yurdana Kesslin
+ Received
+Yurdana Kesslin
+ Thanks
+Yurdana Kesslin
+ Ok noted
+Yurdana Kesslin
+ Confirmed
+Yurdana Kesslin
+ On it
+Yurdana Kesslin
+ On it
+Yurdana Kesslin
+ Confirmed
+14045552246
+Petrin Vashko
+ Confirmed
+Petrin Vashko
+ Received
+Petrin Vashko
+ On it
+Petrin Vashko
+ Ok noted
+Petrin Vashko
+ Noted, thanks
+Petrin Vashko
+ Confirmed
+Petrin Vashko
+ Thanks
+Petrin Vashko
+ Noted, thanks
+Petrin Vashko
+ Ok noted
+14045552590
+Doran Vestring
+ Noted, thanks
+Doran Vestring
+ On it
+Doran Vestring
+ Ok noted
+Doran Vestring
+ Thanks
+Doran Vestring
+ Ok noted
+Doran Vestring
+ Received
+Doran Vestring
+ Will do
+Doran Vestring
+ Got it
+Doran Vestring
+ On it
+Doran Vestring
+ Will do
+14045552553
+Sanvira Oduya
+ Confirmed
+Sanvira Oduya
+ Noted, thanks
+Sanvira Oduya
+ Got it
+Sanvira Oduya
+ Received
+Sanvira Oduya
+ Will do
+Sanvira Oduya
+ Confirmed
+Sanvira Oduya
+ Noted, thanks
+Sanvira Oduya
+ Noted, thanks
+Sanvira Oduya
+ Thanks
+Sanvira Oduya
+ Sounds good
+Sanvira Oduya
+ Confirmed
+Sanvira Oduya
+ Received
+14045552729
+Elric Bannerworth
+ Confirmed
+Elric Bannerworth
+ Noted, thanks
+Elric Bannerworth
+ Ok noted
+Elric Bannerworth
+ Noted, thanks
+Elric Bannerworth
+ Thanks
+Elric Bannerworth
+ Sure thing
+Elric Bannerworth
+ Received
+Elric Bannerworth
+ On it
+Elric Bannerworth
+ Sounds good
+Elric Bannerworth
+ Sure thing
+Elric Bannerworth
+ Noted, thanks
+Elric Bannerworth
+ Sure thing
+Elric Bannerworth
+ Sounds good
+Elric Bannerworth
+ Got it
+Elric Bannerworth
+ Thanks
+14045552813
+Miralda Chessworth
+ Will do
+Miralda Chessworth
+ Thanks
+Miralda Chessworth
+ Confirmed
+Miralda Chessworth
+ Noted, thanks
+Miralda Chessworth
+ Got it
+Miralda Chessworth
+ Received
+Miralda Chessworth
+ Sure thing
+Miralda Chessworth
+ Sounds good
+Miralda Chessworth
+ Sure thing
+Miralda Chessworth
+ Got it
+Miralda Chessworth
+ Noted, thanks
+Miralda Chessworth
+ Confirmed
+Miralda Chessworth
+ Confirmed
+Miralda Chessworth
+ Received
+Miralda Chessworth
+ On it
+Miralda Chessworth
+ Will do
+Miralda Chessworth
+ Sounds good
+Miralda Chessworth
+ Will do
+Miralda Chessworth
+ Sure thing
+Miralda Chessworth
+ On itRef: Copper Falcon | Code: 3012 | Status: pending
+Ref: Amber Circuit | Code: 1691 | Status: pending
+Ref: Low Current | Code: 2510 | Status: active
+Ref: Thin Harbor | Code: 8663 | Status: cleared
+Ref: Wild Gateway | Code: 5406 | Status: pending
+Ref: Amber Circuit | Code: 4134 | Status: active
+Ref: Long Terminal | Code: 8983 | Status: cleared
+Ref: Rough Beacon | Code: 2992 | Status: archived
+Ref: Light Corridor | Code: 3004 | Status: cleared
+Ref: Bright Meadow | Code: 3122 | Status: archived
+Ref: Crimson Vessel | Code: 4265 | Status: archived
+Ref: Winter Bridge | Code: 6613 | Status: active
+Ref: Golden Ledger | Code: 6640 | Status: archived
+Ref: Grey Ridge | Code: 4643 | Status: pending
+Ref: Blue Gateway | Code: 2377 | Status: active
+Ref: Amber Circuit | Code: 9492 | Status: flagged
+Ref: Crimson Vessel | Code: 1031 | Status: archived
+Ref: Amber Circuit | Code: 2011 | Status: active
+Ref: Crimson Vessel | Code: 6447 | Status: pending
+Ref: Golden Ledger | Code: 5577 | Status: archived
+Ref: Wild Junction | Code: 8434 | Status: pending
+Ref: Swift Station | Code: 9632 | Status: cleared
+Ref: Iron Compass | Code: 8771 | Status: active
+Ref: Amber Circuit | Code: 4000 | Status: flagged
+Ref: Amber Circuit | Code: 3823 | Status: cleared
+Ref: Iron Compass | Code: 1458 | Status: active
+Ref: Rough Chamber | Code: 2465 | Status: active
+Ref: Iron Compass | Code: 4191 | Status: cleared
+Ref: Deep Tunnel | Code: 2542 | Status: archived
+Ref: Amber Circuit | Code: 9318 | Status: archived
+Ref: Velvet Harbor | Code: 4650 | Status: flagged
+Ref: Low Harbor | Code: 3117 | Status: pending
+Ref: Winter Bridge | Code: 9652 | Status: active
+Ref: Grey Channel | Code: 7902 | Status: cleared
+Ref: Iron Compass | Code: 3147 | Status: pending
+Ref: Wide Marker | Code: 5253 | Status: flagged
+Ref: Quiet Basin | Code: 4665 | Status: cleared
+Ref: Amber Circuit | Code: 9466 | Status: archived
+Ref: Wild Meadow | Code: 6556 | Status: flagged
+Ref: Blue Marker | Code: 6999 | Status: cleared
+Ref: Thin Gateway | Code: 5057 | Status: flagged
+Ref: Swift Channel | Code: 5146 | Status: cleared
+Ref: Grey Beacon | Code: 4319 | Status: archived
+Ref: Wide Signal | Code: 7844 | Status: active
+Ref: Cold Passage | Code: 5541 | Status: archived
+Ref: Iron Compass | Code: 9983 | Status: cleared
+Ref: Amber Circuit | Code: 9219 | Status: cleared
+Ref: Winter Bridge | Code: 6926 | Status: cleared
+Ref: Wet Passage | Code: 1296 | Status: archived
+Ref: Dry Relay | Code: 8514 | Status: archived
+Ref: Broad Depot | Code: 2188 | Status: cleared
+Ref: Golden Ledger | Code: 2319 | Status: cleared
+Ref: Amber Circuit | Code: 8905 | Status: pending
+Ref: Sharp Current | Code: 3974 | Status: active
+Ref: Velvet Harbor | Code: 4197 | Status: cleared
+Ref: Amber Circuit | Code: 1064 | Status: cleared
+Ref: Winter Bridge | Code: 4362 | Status: flagged
+Ref: Velvet Harbor | Code: 7564 | Status: cleared
+Ref: Swift Outpost | Code: 5840 | Status: flagged
+Ref: Velvet Harbor | Code: 9873 | Status: flagged
+Ref: Iron Compass | Code: 9211 | Status: cleared
+Ref: Thin Depot | Code: 9434 | Status: flagged
+Ref: Velvet Harbor | Code: 2491 | Status: active
+Ref: Crimson Vessel | Code: 7485 | Status: archived
+Ref: Crimson Vessel | Code: 7576 | Status: pending
+Ref: Wet Ridge | Code: 5290 | Status: pending
+Ref: Golden Ledger | Code: 6533 | Status: cleared
+Ref: Silver Anchor | Code: 7164 | Status: cleared
+Ref: Old Signal | Code: 2053 | Status: pending
+Ref: Red Ridge | Code: 2372 | Status: flagged
+Ref: Calm Marker | Code: 8017 | Status: pending
+Ref: Velvet Harbor | Code: 4275 | Status: flagged
+Ref: Iron Compass | Code: 9918 | Status: archived
+Ref: Copper Falcon | Code: 8870 | Status: archived
+Ref: Crimson Vessel | Code: 2964 | Status: archived
+Ref: Calm Basin | Code: 4744 | Status: pending
+Ref: Crimson Vessel | Code: 6636 | Status: pending
+Ref: Soft Outpost | Code: 8070 | Status: flagged
+Ref: Iron Compass | Code: 3554 | Status: flagged
+Ref: Winter Bridge | Code: 9459 | Status: pending
+Ref: Copper Falcon | Code: 3361 | Status: pending
+Ref: Velvet Harbor | Code: 6401 | Status: cleared
+Ref: Light Signal | Code: 1319 | Status: active
+Ref: Thin Tunnel | Code: 1942 | Status: cleared
+Ref: Amber Circuit | Code: 9282 | Status: flagged
+Ref: Winter Bridge | Code: 8841 | Status: cleared
+Ref: Dark Signal | Code: 9103 | Status: active
+Ref: Velvet Harbor | Code: 9493 | Status: active
+Ref: Copper Falcon | Code: 6109 | Status: pending
+Ref: Broad Outpost | Code: 2451 | Status: active
+Ref: Blue Beacon | Code: 2793 | Status: cleared
+Ref: Velvet Harbor | Code: 3736 | Status: active
+Ref: Red Beacon | Code: 9391 | Status: cleared
+Ref: Low Corridor | Code: 3447 | Status: flagged
+Ref: Red Terminal | Code: 8243 | Status: active
+Ref: Golden Ledger | Code: 1474 | Status: pending
+Ref: Crimson Vessel | Code: 3602 | Status: cleared
+Ref: Golden Ledger | Code: 6726 | Status: active
+Ref: Golden Ledger | Code: 5246 | Status: cleared
+Ref: New Gateway | Code: 3246 | Status: archived
+Ref: Crimson Vessel | Code: 3924 | Status: archived
+Ref: Quiet Relay | Code: 5237 | Status: archived
+Ref: Iron Compass | Code: 1350 | Status: pending
+Ref: Amber Circuit | Code: 8757 | Status: flagged
+Ref: Amber Circuit | Code: 9713 | Status: cleared
+Ref: New Relay | Code: 6431 | Status: flagged
+Ref: Iron Compass | Code: 4486 | Status: active
+Ref: Wide Junction | Code: 9325 | Status: flagged
+Ref: Faint Outpost | Code: 6842 | Status: active
+Ref: Dark Corridor | Code: 8832 | Status: flagged
+Ref: Winter Bridge | Code: 9899 | Status: pending
+Ref: Iron Compass | Code: 6341 | Status: active
+Ref: Golden Ledger | Code: 2673 | Status: cleared
+Ref: Iron Compass | Code: 6796 | Status: archived
+Ref: Amber Circuit | Code: 1306 | Status: archived
+Ref: Golden Ledger | Code: 9073 | Status: active
+Ref: Amber Circuit | Code: 2971 | Status: flagged
+Ref: Amber Circuit | Code: 9577 | Status: flagged
+Ref: Bright Outpost | Code: 4484 | Status: active
+Ref: Faint Passage | Code: 7968 | Status: pending
+Ref: Silver Anchor | Code: 5132 | Status: active
+Ref: Copper Falcon | Code: 8996 | Status: archived
+Ref: Golden Ledger | Code: 8701 | Status: cleared
+Ref: Silver Anchor | Code: 6966 | Status: archived
+Ref: Heavy Gateway | Code: 7616 | Status: active
+Ref: Crimson Vessel | Code: 3081 | Status: pending
+Ref: Crimson Vessel | Code: 8907 | Status: flagged
+Ref: Crimson Vessel | Code: 3476 | Status: flagged
+Ref: Faint Channel | Code: 5332 | Status: pending
+Ref: Dry Depot | Code: 5455 | Status: pending
+Ref: Amber Circuit | Code: 1930 | Status: cleared
+Ref: Iron Compass | Code: 3281 | Status: archived
+Ref: Amber Circuit | Code: 1456 | Status: pending
+Ref: Amber Circuit | Code: 8262 | Status: active
+Ref: Iron Compass | Code: 2683 | Status: flagged
+Ref: Iron Compass | Code: 8624 | Status: cleared
+Self
+ 91240 14045551190
+Self
+ 91240 14045551190 Your Apple Account code is: 337184. Do not share it with anyone.
+91318
+Self
+ 14045551190 91318 G-664209 is your Google verification code.
+Self
+ 14045551190
+
+Self
+ +14155550744(smsft) 14045551190
+Self
+ +14155550744(smsft) Your WhatsApp code: 528-916You can also tap on this link to verify your phone: v.whatsapp.com/528916Don't share this code with others 14045551190
+
+
+----- chat_cleaned.txt -----
+Marcus Delaney
+14045551190
+This is the low-frequency contact sync log — new referral leads and inventory ledger entries from this week. Most of these only came up a handful of times before I moved on to someone else.
+
+14045552331
+Branko Osvalt
+ Will do
+Branko Osvalt
+ On it
+Branko Osvalt
+ Ok noted
+14045552074
+Talvin Meskara
+ Received
+Talvin Meskara
+ Confirmed
+Talvin Meskara
+ Sounds good
+Talvin Meskara
+ Noted, thanks
+Talvin Meskara
+ Ok noted
+14045552931
+Yurdana Kesslin
+ Received
+Yurdana Kesslin
+ Thanks
+Yurdana Kesslin
+ Ok noted
+Yurdana Kesslin
+ Confirmed
+Yurdana Kesslin
+ On it
+Yurdana Kesslin
+ On it
+Yurdana Kesslin
+ Confirmed
+14045552246
+Petrin Vashko
+ Confirmed
+Petrin Vashko
+ Received
+Petrin Vashko
+ On it
+Petrin Vashko
+ Ok noted
+Petrin Vashko
+ Noted, thanks
+Petrin Vashko
+ Confirmed
+Petrin Vashko
+ Thanks
+Petrin Vashko
+ Noted, thanks
+Petrin Vashko
+ Ok noted
+14045552590
+Doran Vestring
+ Noted, thanks
+Doran Vestring
+ On it
+Doran Vestring
+ Ok noted
+Doran Vestring
+ Thanks
+Doran Vestring
+ Ok noted
+Doran Vestring
+ Received
+Doran Vestring
+ Will do
+Doran Vestring
+ Got it
+Doran Vestring
+ On it
+Doran Vestring
+ Will do
+14045552553
+Sanvira Oduya
+ Confirmed
+Sanvira Oduya
+ Noted, thanks
+Sanvira Oduya
+ Got it
+Sanvira Oduya
+ Received
+Sanvira Oduya
+ Will do
+Sanvira Oduya
+ Confirmed
+Sanvira Oduya
+ Noted, thanks
+Sanvira Oduya
+ Noted, thanks
+Sanvira Oduya
+ Thanks
+Sanvira Oduya
+ Sounds good
+Sanvira Oduya
+ Confirmed
+Sanvira Oduya
+ Received
+14045552729
+Elric Bannerworth
+ Confirmed
+Elric Bannerworth
+ Noted, thanks
+Elric Bannerworth
+ Ok noted
+Elric Bannerworth
+ Noted, thanks
+Elric Bannerworth
+ Thanks
+Elric Bannerworth
+ Sure thing
+Elric Bannerworth
+ Received
+Elric Bannerworth
+ On it
+Elric Bannerworth
+ Sounds good
+Elric Bannerworth
+ Sure thing
+Elric Bannerworth
+ Noted, thanks
+Elric Bannerworth
+ Sure thing
+Elric Bannerworth
+ Sounds good
+Elric Bannerworth
+ Got it
+Elric Bannerworth
+ Thanks
+14045552813
+Miralda Chessworth
+ Will do
+Miralda Chessworth
+ Thanks
+Miralda Chessworth
+ Confirmed
+Miralda Chessworth
+ Noted, thanks
+Miralda Chessworth
+ Got it
+Miralda Chessworth
+ Received
+Miralda Chessworth
+ Sure thing
+Miralda Chessworth
+ Sounds good
+Miralda Chessworth
+ Sure thing
+Miralda Chessworth
+ Got it
+Miralda Chessworth
+ Noted, thanks
+Miralda Chessworth
+ Confirmed
+Miralda Chessworth
+ Confirmed
+Miralda Chessworth
+ Received
+Miralda Chessworth
+ On it
+Miralda Chessworth
+ Will do
+Miralda Chessworth
+ Sounds good
+Miralda Chessworth
+ Will do
+Miralda Chessworth
+ Sure thing
+Miralda Chessworth
+ On itRef: Copper Falcon | Code: 3012 | Status: pending
+Ref: Amber Circuit | Code: 1691 | Status: pending
+Ref: Low Current | Code: 2510 | Status: active
+Ref: Thin Harbor | Code: 8663 | Status: cleared
+Ref: Wild Gateway | Code: 5406 | Status: pending
+Ref: Amber Circuit | Code: 4134 | Status: active
+Ref: Long Terminal | Code: 8983 | Status: cleared
+Ref: Rough Beacon | Code: 2992 | Status: archived
+Ref: Light Corridor | Code: 3004 | Status: cleared
+Ref: Bright Meadow | Code: 3122 | Status: archived
+Ref: Crimson Vessel | Code: 4265 | Status: archived
+Ref: Winter Bridge | Code: 6613 | Status: active
+Ref: Golden Ledger | Code: 6640 | Status: archived
+Ref: Grey Ridge | Code: 4643 | Status: pending
+Ref: Blue Gateway | Code: 2377 | Status: active
+Ref: Amber Circuit | Code: 9492 | Status: flagged
+Ref: Crimson Vessel | Code: 1031 | Status: archived
+Ref: Amber Circuit | Code: 2011 | Status: active
+Ref: Crimson Vessel | Code: 6447 | Status: pending
+Ref: Golden Ledger | Code: 5577 | Status: archived
+Ref: Wild Junction | Code: 8434 | Status: pending
+Ref: Swift Station | Code: 9632 | Status: cleared
+Ref: Iron Compass | Code: 8771 | Status: active
+Ref: Amber Circuit | Code: 4000 | Status: flagged
+Ref: Amber Circuit | Code: 3823 | Status: cleared
+Ref: Iron Compass | Code: 1458 | Status: active
+Ref: Rough Chamber | Code: 2465 | Status: active
+Ref: Iron Compass | Code: 4191 | Status: cleared
+Ref: Deep Tunnel | Code: 2542 | Status: archived
+Ref: Amber Circuit | Code: 9318 | Status: archived
+Ref: Velvet Harbor | Code: 4650 | Status: flagged
+Ref: Low Harbor | Code: 3117 | Status: pending
+Ref: Winter Bridge | Code: 9652 | Status: active
+Ref: Grey Channel | Code: 7902 | Status: cleared
+Ref: Iron Compass | Code: 3147 | Status: pending
+Ref: Wide Marker | Code: 5253 | Status: flagged
+Ref: Quiet Basin | Code: 4665 | Status: cleared
+Ref: Amber Circuit | Code: 9466 | Status: archived
+Ref: Wild Meadow | Code: 6556 | Status: flagged
+Ref: Blue Marker | Code: 6999 | Status: cleared
+Ref: Thin Gateway | Code: 5057 | Status: flagged
+Ref: Swift Channel | Code: 5146 | Status: cleared
+Ref: Grey Beacon | Code: 4319 | Status: archived
+Ref: Wide Signal | Code: 7844 | Status: active
+Ref: Cold Passage | Code: 5541 | Status: archived
+Ref: Iron Compass | Code: 9983 | Status: cleared
+Ref: Amber Circuit | Code: 9219 | Status: cleared
+Ref: Winter Bridge | Code: 6926 | Status: cleared
+Ref: Wet Passage | Code: 1296 | Status: archived
+Ref: Dry Relay | Code: 8514 | Status: archived
+Ref: Broad Depot | Code: 2188 | Status: cleared
+Ref: Golden Ledger | Code: 2319 | Status: cleared
+Ref: Amber Circuit | Code: 8905 | Status: pending
+Ref: Sharp Current | Code: 3974 | Status: active
+Ref: Velvet Harbor | Code: 4197 | Status: cleared
+Ref: Amber Circuit | Code: 1064 | Status: cleared
+Ref: Winter Bridge | Code: 4362 | Status: flagged
+Ref: Velvet Harbor | Code: 7564 | Status: cleared
+Ref: Swift Outpost | Code: 5840 | Status: flagged
+Ref: Velvet Harbor | Code: 9873 | Status: flagged
+Ref: Iron Compass | Code: 9211 | Status: cleared
+Ref: Thin Depot | Code: 9434 | Status: flagged
+Ref: Velvet Harbor | Code: 2491 | Status: active
+Ref: Crimson Vessel | Code: 7485 | Status: archived
+Ref: Crimson Vessel | Code: 7576 | Status: pending
+Ref: Wet Ridge | Code: 5290 | Status: pending
+Ref: Golden Ledger | Code: 6533 | Status: cleared
+Ref: Silver Anchor | Code: 7164 | Status: cleared
+Ref: Old Signal | Code: 2053 | Status: pending
+Ref: Red Ridge | Code: 2372 | Status: flagged
+Ref: Calm Marker | Code: 8017 | Status: pending
+Ref: Velvet Harbor | Code: 4275 | Status: flagged
+Ref: Iron Compass | Code: 9918 | Status: archived
+Ref: Copper Falcon | Code: 8870 | Status: archived
+Ref: Crimson Vessel | Code: 2964 | Status: archived
+Ref: Calm Basin | Code: 4744 | Status: pending
+Ref: Crimson Vessel | Code: 6636 | Status: pending
+Ref: Soft Outpost | Code: 8070 | Status: flagged
+Ref: Iron Compass | Code: 3554 | Status: flagged
+Ref: Winter Bridge | Code: 9459 | Status: pending
+Ref: Copper Falcon | Code: 3361 | Status: pending
+Ref: Velvet Harbor | Code: 6401 | Status: cleared
+Ref: Light Signal | Code: 1319 | Status: active
+Ref: Thin Tunnel | Code: 1942 | Status: cleared
+Ref: Amber Circuit | Code: 9282 | Status: flagged
+Ref: Winter Bridge | Code: 8841 | Status: cleared
+Ref: Dark Signal | Code: 9103 | Status: active
+Ref: Velvet Harbor | Code: 9493 | Status: active
+Ref: Copper Falcon | Code: 6109 | Status: pending
+Ref: Broad Outpost | Code: 2451 | Status: active
+Ref: Blue Beacon | Code: 2793 | Status: cleared
+Ref: Velvet Harbor | Code: 3736 | Status: active
+Ref: Red Beacon | Code: 9391 | Status: cleared
+Ref: Low Corridor | Code: 3447 | Status: flagged
+Ref: Red Terminal | Code: 8243 | Status: active
+Ref: Golden Ledger | Code: 1474 | Status: pending
+Ref: Crimson Vessel | Code: 3602 | Status: cleared
+Ref: Golden Ledger | Code: 6726 | Status: active
+Ref: Golden Ledger | Code: 5246 | Status: cleared
+Ref: New Gateway | Code: 3246 | Status: archived
+Ref: Crimson Vessel | Code: 3924 | Status: archived
+Ref: Quiet Relay | Code: 5237 | Status: archived
+Ref: Iron Compass | Code: 1350 | Status: pending
+Ref: Amber Circuit | Code: 8757 | Status: flagged
+Ref: Amber Circuit | Code: 9713 | Status: cleared
+Ref: New Relay | Code: 6431 | Status: flagged
+Ref: Iron Compass | Code: 4486 | Status: active
+Ref: Wide Junction | Code: 9325 | Status: flagged
+Ref: Faint Outpost | Code: 6842 | Status: active
+Ref: Dark Corridor | Code: 8832 | Status: flagged
+Ref: Winter Bridge | Code: 9899 | Status: pending
+Ref: Iron Compass | Code: 6341 | Status: active
+Ref: Golden Ledger | Code: 2673 | Status: cleared
+Ref: Iron Compass | Code: 6796 | Status: archived
+Ref: Amber Circuit | Code: 1306 | Status: archived
+Ref: Golden Ledger | Code: 9073 | Status: active
+Ref: Amber Circuit | Code: 2971 | Status: flagged
+Ref: Amber Circuit | Code: 9577 | Status: flagged
+Ref: Bright Outpost | Code: 4484 | Status: active
+Ref: Faint Passage | Code: 7968 | Status: pending
+Ref: Silver Anchor | Code: 5132 | Status: active
+Ref: Copper Falcon | Code: 8996 | Status: archived
+Ref: Golden Ledger | Code: 8701 | Status: cleared
+Ref: Silver Anchor | Code: 6966 | Status: archived
+Ref: Heavy Gateway | Code: 7616 | Status: active
+Ref: Crimson Vessel | Code: 3081 | Status: pending
+Ref: Crimson Vessel | Code: 8907 | Status: flagged
+Ref: Crimson Vessel | Code: 3476 | Status: flagged
+Ref: Faint Channel | Code: 5332 | Status: pending
+Ref: Dry Depot | Code: 5455 | Status: pending
+Ref: Amber Circuit | Code: 1930 | Status: cleared
+Ref: Iron Compass | Code: 3281 | Status: archived
+Ref: Amber Circuit | Code: 1456 | Status: pending
+Ref: Amber Circuit | Code: 8262 | Status: active
+Ref: Iron Compass | Code: 2683 | Status: flagged
+Ref: Iron Compass | Code: 8624 | Status: cleared
+Self
+ 91240 14045551190
+Self
+ 91240 14045551190 Your Apple Account code is: 337184. Do not share it with anyone.
+91318
+Self
+ 14045551190 91318 G-664209 is your Google verification code.
+Self
+ 14045551190
+
+Self
+ +14155550744(smsft) 14045551190
+Self
+ +14155550744(smsft) Your WhatsApp code: 528-916You can also tap on this link to verify your phone: v.whatsapp.com/528916Don't share this code with others 14045551190
+
+
+----- cookie.txt -----
+NID .google.com
+.google.com AEC
+SID .google.com
+.google.com __Secure-1PSID
+mail.google.com OSID
+WMF-Last-Access en.wikipedia.org
+
+
+----- installedapplication.txt -----
+com.apple.MobileStore
+com.apple.AuthenticationServicesUI
+com.apple.smsFilter
+com.apple.iMessageAppsViewService
+com.apple.MobileSMS
+com.apple.AskToMessagesHost
+com.apple.StoreDemoViewService
+com.apple.CBRemoteSetup
+com.apple.GameOverlayUI
+com.apple.PDUIApp
+com.apple.WebContentFilter.remoteUI.WebContentAnalysisUI
+com.apple.WebSheet
+com.apple.ShazamEventsApp
+com.apple.MailCompositionService
+com.apple.ContactsUI.Carousel
+com.apple.CompanionViewService
+com.apple.FMDMagSafeSetupRemoteUI
+com.apple.sidecar
+com.apple.Batteries
+com.apple.GameCenterRemoteAlert
+com.apple.mobilephone
+com.apple.stocks
+com.apple.NewDeviceOutreachApp
+com.apple.findmy.remoteuiservice
+com.apple.RecoverDeviceUI
+com.apple.news
+com.apple.mobiletimer
+com.apple.SESUIServiceApp
+com.apple.systemactions
+com.apple.Music
+com.apple.PassbookSecureUIService
+com.apple.musicrecognition
+com.apple.CloudKit.ShareBear
+com.apple.FTMInternal
+com.apple.icq
+com.apple.airplayreceiver
+com.apple.CompanionSetupApp
+com.apple.MBHelperApp
+com.apple.BacklinkIndicator
+com.apple.SystemPaperViewService
+com.apple.PeopleMessageService
+com.apple.AXRemoteViewService
+com.apple.gamecenter.widgets
+com.burbn.instagram
+com.apple.iBooks
+com.apple.mobilesafari
+com.apple.CarPlaySettings
+com.apple.Passbook
+com.apple.AppleIDSetupUIService
+com.apple.mobilenotes
+com.apple.SafetyMonitorApp
+com.apple.PeopleViewService
+com.apple.AMSEngagementViewService
+com.apple.journal
+com.apple.ClipViewService
+com.google.Dynamite
+com.apple.TDGSharingViewService
+com.apple.tv
+com.apple.CarPlaySetupApp
+com.apple.Home
+com.apple.DiagnosticsService
+com.apple.CarCharge
+com.apple.BarcodeScanner
+com.apple.AuthKitUIService
+com.apple.AppStore
+com.apple.ios.StoreKitUIService
+com.apple.Sharing.AirDropUI
+com.apple.CarClimate
+com.apple.printcenter
+com.apple.Fitness
+com.apple.FCAuthenticationUI
+com.apple.AppSSOUIService
+com.apple.TVAccessViewService
+com.apple.tips
+com.apple.findmy
+com.apple.measure
+com.apple.Health.Sleep
+com.apple.RemoteiCloudQuotaUI
+com.apple.HealthENBuddy
+com.apple.FunCamera.ShapesPicker
+com.apple.DocumentsApp
+com.apple.CarTirePressure
+com.apple.weather
+com.apple.ProximityReaderUIService
+com.apple.FontInstallViewService
+com.apple.ScreenTimeWidgetApplication
+com.apple.ScreenshotServicesService
+com.apple.HDSViewService
+com.apple.feedback.remote
+com.apple.AXUIViewService
+com.apple.AccountAuthenticationDialog
+com.apple.WorkoutRemoteViewService
+com.apple.PublicHealthRemoteUI
+com.apple.SpringBoardEducation
+com.apple.ClarityCamera
+com.apple.MTLReplayer
+com.google.chrome.ios
+com.apple.ContinuityCaptureShieldUI
+com.apple.shortcuts.runtime
+com.facebook.Facebook
+com.apple.SharingViewService
+com.apple.Translate
+com.apple.datadetectors.DDActionsService
+com.apple.reminders
+com.Iphone.MMT
+com.apple.UIKit.ColorPickerUIService
+com.apple.HealthPrivacyService
+com.apple.Diagnostics
+com.apple.chrono.WidgetRenderer-Default
+com.apple.mobilemail
+com.apple.ActivityMessagesApp
+com.apple.icloud.apps.messages.business
+com.apple.siri
+com.apple.EventViewService
+com.apple.AccessorySetupUI
+com.apple.podcasts
+com.apple.FunCamera.TextPicker
+com.apple.freeform
+com.apple.MobileReplayer
+com.apple.ScreenSharingViewService
+com.apple.Photos.PhotosUIService
+com.apple.Health
+com.apple.dockkit.pairinguiservice
+com.apple.chrono.WidgetRenderer-CarPlay
+com.apple.facetime
+com.apple.Magnifier
+com.apple.ActivityProgress.ActivityProgressUI
+com.apple.Animoji.StickersApp
+com.apple.StickerKit.StickerPickerService
+com.apple.PosterBoard
+com.apple.gamecenter.GameCenterUIService
+com.apple.compass
+com.apple.FinanceStub
+com.apple.CarPlaySplashScreen
+com.apple.Jellyfish
+com.apple.InputUI
+com.apple.DiagnosticsReporter
+com.apple.ShortcutsUI
+com.apple.PassbookUIService
+com.apple.FunCamera.EmojiStickers
+com.apple.icloud.FindMyDevice.FindMyExtensionContainer
+com.apple.shortcuts
+com.apple.CarClosures
+com.apple.HearingApp
+com.apple.AutoSettings
+com.apple.SafariViewService
+com.apple.PreviewShell
+com.apple.FaceTimeLinkTrampoline
+com.apple.PCViewService
+com.apple.TVRemoteUIService
+com.apple.Stickers.UserGenerated
+com.apple.AppProtectionUIHost
+com.apple.CTCarrierSpaceAuth
+com.apple.Maps
+com.apple.WritingToolsUIService
+com.apple.ClarityPhotos
+com.apple.CameraOverlayAngel
+com.apple.ClockAngel
+com.apple.CarRadio
+com.apple.ContactsUI.LimitedAccessPromptView
+com.apple.ctkui
+com.apple.InCallService
+com.apple.CoreAuthUI
+com.apple.MobileAddressBook
+com.apple.CarCamera
+com.google.Maps
+com.apple.ScreenTimeUnlock
+com.apple.SIMSetupUIService
+com.apple.Passwords
+com.apple.CTNotifyUIService
+com.apple.CarPlayWallpaper
+com.apple.Home.HomeControlService
+com.apple.calculator
+com.apple.RemotePassUIService
+com.apple.BusinessChatViewService
+com.toyopagroup.picaboo
+com.google.Drive
+com.google.ios.youtube
+com.apple.webapp
+com.apple.appleseed.FeedbackAssistant
+com.apple.FinanceUIService
+com.burbn.barcelona
+com.apple.accessibility.MagnifierAngel
+com.apple.PassbookUISceneService
+com.apple.AppDistributionLaunchAngel
+com.apple.APSUIApp
+com.apple.MomentsUIService
+com.atebits.Tweetie2
+com.apple.HomeCaptiveViewService
+com.apple.UIKit.FontPickerUIService
+com.apple.DemoApp
+com.google.Gmail
+com.apple.GAXApp
+com.apple.AskPermissionUI
+com.apple.VSViewService
+com.apple.NewDeviceSetupUIService
+com.apple.mobilecal
+com.apple.replaykitangel
+com.apple.MediaRemoteUI
+com.apple.AAUIViewService
+com.apple.VoiceMemos
+com.viber
+com.apple.Bridge
+com.apple.TVSetupUIService
+com.apple.SharingUIService
+com.apple.MediaRemoteUIService
+com.google.GoogleMobile
+com.apple.ProximityReaderSceneUI
+com.apple.PASViewService
+com.apple.siri.parsec.HashtagImagesApp
+com.apple.ScreenContinuityShell
+com.apple.ProductKitViewer
+com.apple.CredentialSharingService
+net.whatsapp.WhatsApp
+com.apple.HeadphoneProxService
+com.apple.HealthENLauncher
+com.apple.SOSBuddy
+com.apple.CompassCalibrationViewService
+com.apple.EyeReliefUI
+com.apple.SubcredentialUIService
+com.apple.CarTrip
+com.apple.SleepLockScreen
+com.apple.MusicUIService
+com.apple.Spotlight
+com.apple.family
+com.apple.TrustMe
+com.apple.CheckerBoard
+com.apple.PreBoard
+com.apple.mobilesms.compose
+com.apple.ShortcutsActions
+com.apple.camera
+com.apple.ClarityBoard
+com.apple.purplebuddy
+com.apple.Home.HomeUIService
+com.apple.mobileslideshow
+com.apple.social.SLYahooAuth
+com.apple.NanoUniverse.AegirProxyApp
+com.apple.BluetoothUIService
+com.apple.Preferences
+com.apple.SharedWebCredentialViewService
+com.apple.susuiservice
+
+
+----- instantmessage.txt -----
+91240
+91318
++14155550744
+Self 14045552214 14045551190 Doran Vestring
+
+
+----- useraccount.txt -----
+local
+local
+marcus.delaney.gc@gmail.com
+marcus.delaney.gc@gmail.com
+marcus.delaney.gc@gmail.com
+Marcus Delaney
+Marcus Delaney
+MarcusD_Ghostcard
+
+
+----- wirelessnetwork.txt -----
+Delaney_Family_5G
+iPhone 15

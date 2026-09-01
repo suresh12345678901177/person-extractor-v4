@@ -1,0 +1,50 @@
+# Honorifics recognized alongside titles. Feeds the has_honorific ML
+# feature (see feature_extractor.py).
+mr
+mrs
+ms
+miss
+sir
+madam
+rev
+fr
+capt
+col
+gen
+lt
+sgt
+hon
+
+# --- Bulk addition: courtesy, South Asian, and religious/royal honorifics ---
+# Source: Wikipedia "English honorifics" (en.wikipedia.org/wiki/
+# English_honorifics), CC-BY-SA 4.0, plus common South Asian honorific
+# forms of address. Soft ML-feature signal only (not a hard-reject
+# validator), so overlap with real given/surnames (Shri, Sardar, Pandit,
+# Thakur, Raja, Rani, Sahib all also occur as real names) is an
+# acceptable, low-risk trade-off here - unlike LocationValidator/
+# CampaignValidator's hard rejects, this only nudges the ML classifier.
+mx
+dame
+lord
+lady
+esq
+master
+mistress
+shri
+smt
+kumari
+sardar
+pandit
+maulvi
+swami
+guru
+acharya
+baba
+thakur
+raja
+rani
+nawab
+begum
+sahib
+sahiba
+memsahib

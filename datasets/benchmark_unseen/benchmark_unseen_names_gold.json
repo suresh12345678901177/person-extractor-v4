@@ -1,0 +1,152 @@
+{
+  "source_txt_file": "datasets\\benchmark_unseen\\benchmark_unseen_names.txt",
+  "note": "Every person name in this file is verified absent from assets/first_names.txt, assets/last_names.txt, and every other assets/*.txt list - built specifically to measure detection accuracy without dictionary support.",
+  "mention_count": 29,
+  "mentions": [
+    {
+      "start": 197,
+      "end": 213,
+      "text": "Zeyra Voskuijlen"
+    },
+    {
+      "start": 267,
+      "end": 283,
+      "text": "Baltasar Nkemelu"
+    },
+    {
+      "start": 335,
+      "end": 351,
+      "text": "Zeyra Voskuijlen"
+    },
+    {
+      "start": 377,
+      "end": 393,
+      "text": "Zeyra Voskuijlen"
+    },
+    {
+      "start": 416,
+      "end": 432,
+      "text": "Baltasar Nkemelu"
+    },
+    {
+      "start": 467,
+      "end": 483,
+      "text": "Zeyra Voskuijlen"
+    },
+    {
+      "start": 515,
+      "end": 531,
+      "text": "Zeyra Voskuijlen"
+    },
+    {
+      "start": 571,
+      "end": 587,
+      "text": "Zeyra Voskuijlen"
+    },
+    {
+      "start": 628,
+      "end": 647,
+      "text": "Dr. Ilinca Prodescu"
+    },
+    {
+      "start": 720,
+      "end": 735,
+      "text": "Ilinca Prodescu"
+    },
+    {
+      "start": 798,
+      "end": 813,
+      "text": "Ilinca Prodescu"
+    },
+    {
+      "start": 861,
+      "end": 878,
+      "text": "Casimir Ostrowski"
+    },
+    {
+      "start": 946,
+      "end": 963,
+      "text": "Casimir Ostrowski"
+    },
+    {
+      "start": 991,
+      "end": 1008,
+      "text": "Casimir Ostrowski"
+    },
+    {
+      "start": 1044,
+      "end": 1061,
+      "text": "Casimir Ostrowski"
+    },
+    {
+      "start": 1086,
+      "end": 1101,
+      "text": "Thandeka Mabuza"
+    },
+    {
+      "start": 1165,
+      "end": 1180,
+      "text": "Thandeka Mabuza"
+    },
+    {
+      "start": 1250,
+      "end": 1265,
+      "text": "Thandeka Mabuza"
+    },
+    {
+      "start": 1291,
+      "end": 1309,
+      "text": "Fionnuala Devereux"
+    },
+    {
+      "start": 1374,
+      "end": 1392,
+      "text": "Mr. Ranjodh Aulakh"
+    },
+    {
+      "start": 1432,
+      "end": 1446,
+      "text": "Ranjodh Aulakh"
+    },
+    {
+      "start": 1499,
+      "end": 1518,
+      "text": "Esperanza Quilodran"
+    },
+    {
+      "start": 1569,
+      "end": 1588,
+      "text": "Esperanza Quilodran"
+    },
+    {
+      "start": 1641,
+      "end": 1660,
+      "text": "Esperanza Quilodran"
+    },
+    {
+      "start": 1692,
+      "end": 1711,
+      "text": "Esperanza Quilodran"
+    },
+    {
+      "start": 1752,
+      "end": 1771,
+      "text": "Esperanza Quilodran"
+    },
+    {
+      "start": 1792,
+      "end": 1811,
+      "text": "Bartholomew Fenwick"
+    },
+    {
+      "start": 1879,
+      "end": 1898,
+      "text": "Bartholomew Fenwick"
+    },
+    {
+      "start": 1938,
+      "end": 1952,
+      "text": "Zsofia Lakatos"
+    }
+  ]
+}

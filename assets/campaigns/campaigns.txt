@@ -1,0 +1,57 @@
+# Known slogans, banners, and campaign/political phrases - checked
+# exactly AND as sub-phrases by CampaignValidator, which also has a
+# generic marker-word fallback for slogans not listed here verbatim.
+Jai Telangana
+Jai Hind
+Jai Andhra
+Jai Bheem
+Jai Bharat
+Jai Kisan
+Jai Maharashtra
+Jai Karnataka
+Vande Mataram
+Swachh Bharat
+Save Water
+Save Trees
+Vote For Development
+Keep The City Clean
+Mana Ooru
+Mana Badi
+Digital India
+Make In India
+Beti Bachao
+Skill India
+Clean India
+Green India
+
+# --- Bulk addition: well-known Indian government scheme names ---
+# Source: Wikipedia "List of government schemes in India"
+# (en.wikipedia.org/wiki/List_of_government_schemes_in_India),
+# CC-BY-SA 4.0. Curated to the widely-recognized national schemes
+# (multi-word exact phrases only, safe from the single-token collision
+# risk that ruled out expanding SLOGAN_MARKER_WORDS with words like
+# "Vikas"/"Nidhi" - see campaign_validator.py).
+Swachh Bharat Abhiyan
+Swachh Bharat Mission
+Ayushman Bharat
+Ayushman Bharat Yojana
+PM Jan Dhan Yojana
+Beti Bachao Beti Padhao
+Start-Up India
+Stand-Up India
+PM Awas Yojana
+PM Kisan Samman Nidhi
+PM Ujjwala Yojana
+PM Fasal Bima Yojana
+Smart Cities Mission
+Namami Gange
+Khelo India
+Atal Pension Yojana
+PM Mudra Yojana
+Jal Jeevan Mission
+National Health Mission
+Mahatma Gandhi National Rural Employment Guarantee Act
+PM Gram Sadak Yojana
+Sukanya Samridhi Yojana
+Janani Suraksha Yojana
+PM Kaushal Vikas Yojana

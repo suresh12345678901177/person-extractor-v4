@@ -1,0 +1,282 @@
+{
+  "source_markup_file": "/tmp/labeled_raw.txt",
+  "mention_count": 55,
+  "mentions": [
+    {
+      "start": 32,
+      "end": 38,
+      "text": "Suresh"
+    },
+    {
+      "start": 160,
+      "end": 166,
+      "text": "Ramesh"
+    },
+    {
+      "start": 361,
+      "end": 368,
+      "text": "Lakshmi"
+    },
+    {
+      "start": 435,
+      "end": 439,
+      "text": "Anil"
+    },
+    {
+      "start": 476,
+      "end": 483,
+      "text": "Kavitha"
+    },
+    {
+      "start": 637,
+      "end": 643,
+      "text": "Suresh"
+    },
+    {
+      "start": 654,
+      "end": 660,
+      "text": "Ramesh"
+    },
+    {
+      "start": 686,
+      "end": 694,
+      "text": "Srinivas"
+    },
+    {
+      "start": 791,
+      "end": 797,
+      "text": "Prasad"
+    },
+    {
+      "start": 833,
+      "end": 839,
+      "text": "Prasad"
+    },
+    {
+      "start": 882,
+      "end": 888,
+      "text": "Swapna"
+    },
+    {
+      "start": 930,
+      "end": 936,
+      "text": "Naresh"
+    },
+    {
+      "start": 951,
+      "end": 957,
+      "text": "Geetha"
+    },
+    {
+      "start": 1306,
+      "end": 1312,
+      "text": "Suresh"
+    },
+    {
+      "start": 1520,
+      "end": 1526,
+      "text": "Suresh"
+    },
+    {
+      "start": 1543,
+      "end": 1549,
+      "text": "Ramesh"
+    },
+    {
+      "start": 1566,
+      "end": 1572,
+      "text": "Ramesh"
+    },
+    {
+      "start": 1626,
+      "end": 1633,
+      "text": "Lakshmi"
+    },
+    {
+      "start": 1660,
+      "end": 1664,
+      "text": "Anil"
+    },
+    {
+      "start": 1699,
+      "end": 1706,
+      "text": "Kavitha"
+    },
+    {
+      "start": 1720,
+      "end": 1728,
+      "text": "Srinivas"
+    },
+    {
+      "start": 1758,
+      "end": 1764,
+      "text": "Prasad"
+    },
+    {
+      "start": 1799,
+      "end": 1805,
+      "text": "Naresh"
+    },
+    {
+      "start": 1813,
+      "end": 1819,
+      "text": "Swapna"
+    },
+    {
+      "start": 1861,
+      "end": 1867,
+      "text": "Geetha"
+    },
+    {
+      "start": 2055,
+      "end": 2061,
+      "text": "Suresh"
+    },
+    {
+      "start": 2063,
+      "end": 2069,
+      "text": "Ramesh"
+    },
+    {
+      "start": 2071,
+      "end": 2078,
+      "text": "Lakshmi"
+    },
+    {
+      "start": 2080,
+      "end": 2084,
+      "text": "Anil"
+    },
+    {
+      "start": 2086,
+      "end": 2092,
+      "text": "Prasad"
+    },
+    {
+      "start": 2094,
+      "end": 2100,
+      "text": "Naresh"
+    },
+    {
+      "start": 2212,
+      "end": 2218,
+      "text": "Suresh"
+    },
+    {
+      "start": 2220,
+      "end": 2226,
+      "text": "Ramesh"
+    },
+    {
+      "start": 2228,
+      "end": 2235,
+      "text": "Lakshmi"
+    },
+    {
+      "start": 2684,
+      "end": 2690,
+      "text": "Geetha"
+    },
+    {
+      "start": 2711,
+      "end": 2717,
+      "text": "Prasad"
+    },
+    {
+      "start": 2725,
+      "end": 2731,
+      "text": "Prasad"
+    },
+    {
+      "start": 2751,
+      "end": 2757,
+      "text": "Prasad"
+    },
+    {
+      "start": 2795,
+      "end": 2801,
+      "text": "Swapna"
+    },
+    {
+      "start": 2829,
+      "end": 2835,
+      "text": "Suresh"
+    },
+    {
+      "start": 2844,
+      "end": 2850,
+      "text": "Ramesh"
+    },
+    {
+      "start": 2859,
+      "end": 2866,
+      "text": "Lakshmi"
+    },
+    {
+      "start": 2868,
+      "end": 2875,
+      "text": "Lakshmi"
+    },
+    {
+      "start": 2883,
+      "end": 2887,
+      "text": "Anil"
+    },
+    {
+      "start": 2899,
+      "end": 2906,
+      "text": "Kavitha"
+    },
+    {
+      "start": 3358,
+      "end": 3364,
+      "text": "Suresh"
+    },
+    {
+      "start": 3366,
+      "end": 3372,
+      "text": "Ramesh"
+    },
+    {
+      "start": 3374,
+      "end": 3381,
+      "text": "Lakshmi"
+    },
+    {
+      "start": 3383,
+      "end": 3387,
+      "text": "Anil"
+    },
+    {
+      "start": 3389,
+      "end": 3396,
+      "text": "Kavitha"
+    },
+    {
+      "start": 3398,
+      "end": 3406,
+      "text": "Srinivas"
+    },
+    {
+      "start": 3408,
+      "end": 3414,
+      "text": "Prasad"
+    },
+    {
+      "start": 3416,
+      "end": 3422,
+      "text": "Swapna"
+    },
+    {
+      "start": 3424,
+      "end": 3430,
+      "text": "Naresh"
+    },
+    {
+      "start": 3436,
+      "end": 3442,
+      "text": "Geetha"
+    }
+  ],
+  "note": "Gold labels extended programmatically to include EVERY standalone occurrence of each canonical first name (not just the originally bolded subset). Deliberately ambiguous abbreviated forms (e.g. 'S. Kumar') are excluded - the source text's own narrative makes their true referent genuinely undecidable."
+}

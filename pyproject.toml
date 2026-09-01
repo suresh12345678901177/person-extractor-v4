@@ -1,0 +1,10 @@
+[project]
+name = "person-extractor-v4"
+version = "4.0.0"
+description = "Offline, explainable, TXT-only person name extraction framework with a 15-validator rules engine and a LightGBM corroborating classifier."
+requires-python = ">=3.10"
+readme = "README.md"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,3697 @@
+{
+  "source_case": "930204660",
+  "note": "Offsets rebuilt against the current text on 2026-08-20T07:21:40.901254+00:00 - the previous gold file's offsets had drifted ~94% out of alignment with the current benchmark_real_660.txt content (the underlying case export grew/changed after the original gold labels were written). Rebuilt mechanically by re-finding every occurrence of each name already in the old roster, same principle as scripts/extend_benchmark_gold_labels.py. A name introduced ONLY by whatever content changed since the original labeling would not be caught by this method.",
+  "mention_count": 738,
+  "mentions": [
+    {
+      "start": 21,
+      "end": 35,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 48,
+      "end": 63,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 76,
+      "end": 87,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 100,
+      "end": 114,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 139,
+      "end": 152,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 153,
+      "end": 165,
+      "text": "Farah Nasser"
+    },
+    {
+      "start": 178,
+      "end": 192,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 217,
+      "end": 228,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 256,
+      "end": 271,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 272,
+      "end": 286,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 365,
+      "end": 374,
+      "text": "Kenji Ito"
+    },
+    {
+      "start": 407,
+      "end": 416,
+      "text": "Kenji Ito"
+    },
+    {
+      "start": 430,
+      "end": 445,
+      "text": "Paulina Wozniak"
+    },
+    {
+      "start": 466,
+      "end": 477,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 492,
+      "end": 503,
+      "text": "Emeka Nwosu"
+    },
+    {
+      "start": 519,
+      "end": 529,
+      "text": "Milo Reyes"
+    },
+    {
+      "start": 562,
+      "end": 572,
+      "text": "Milo Reyes"
+    },
+    {
+      "start": 607,
+      "end": 620,
+      "text": "Cassandra Lin"
+    },
+    {
+      "start": 634,
+      "end": 648,
+      "text": "Trevor Higgins"
+    },
+    {
+      "start": 688,
+      "end": 702,
+      "text": "Renee Fontaine"
+    },
+    {
+      "start": 722,
+      "end": 734,
+      "text": "Diane Foster"
+    },
+    {
+      "start": 748,
+      "end": 761,
+      "text": "Shawn Delaney"
+    },
+    {
+      "start": 787,
+      "end": 800,
+      "text": "Shawn Delaney"
+    },
+    {
+      "start": 814,
+      "end": 831,
+      "text": "Ibrahim Coulibaly"
+    },
+    {
+      "start": 845,
+      "end": 859,
+      "text": "Katya Sokolova"
+    },
+    {
+      "start": 873,
+      "end": 884,
+      "text": "Bruno Alves"
+    },
+    {
+      "start": 900,
+      "end": 910,
+      "text": "Wendy Zhao"
+    },
+    {
+      "start": 926,
+      "end": 936,
+      "text": "Ola Bakare"
+    },
+    {
+      "start": 952,
+      "end": 968,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 1087,
+      "end": 1102,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 1115,
+      "end": 1126,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 1139,
+      "end": 1152,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 1166,
+      "end": 1180,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 1241,
+      "end": 1256,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 1288,
+      "end": 1302,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 1384,
+      "end": 1398,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 1529,
+      "end": 1543,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 1606,
+      "end": 1620,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 1634,
+      "end": 1648,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 1667,
+      "end": 1684,
+      "text": "Ibrahim Coulibaly"
+    },
+    {
+      "start": 1730,
+      "end": 1744,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 1798,
+      "end": 1809,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 1844,
+      "end": 1858,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 1939,
+      "end": 1953,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 1967,
+      "end": 1981,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 2161,
+      "end": 2175,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 2250,
+      "end": 2261,
+      "text": "Bruno Alves"
+    },
+    {
+      "start": 2411,
+      "end": 2425,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 2474,
+      "end": 2488,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 2623,
+      "end": 2637,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 2667,
+      "end": 2680,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 2709,
+      "end": 2723,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 2995,
+      "end": 3009,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 3044,
+      "end": 3060,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 3141,
+      "end": 3151,
+      "text": "Milo Reyes"
+    },
+    {
+      "start": 3209,
+      "end": 3223,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 3237,
+      "end": 3251,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 3459,
+      "end": 3473,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 3637,
+      "end": 3651,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 3762,
+      "end": 3776,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 3956,
+      "end": 3970,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4039,
+      "end": 4053,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4157,
+      "end": 4171,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4185,
+      "end": 4199,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4213,
+      "end": 4227,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4241,
+      "end": 4255,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4269,
+      "end": 4283,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4297,
+      "end": 4311,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4401,
+      "end": 4415,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4429,
+      "end": 4440,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 4441,
+      "end": 4455,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4469,
+      "end": 4483,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4504,
+      "end": 4515,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 4529,
+      "end": 4543,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4616,
+      "end": 4625,
+      "text": "Kenji Ito"
+    },
+    {
+      "start": 4646,
+      "end": 4657,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 4723,
+      "end": 4737,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4751,
+      "end": 4762,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 4783,
+      "end": 4797,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 4866,
+      "end": 4878,
+      "text": "Diane Foster"
+    },
+    {
+      "start": 4907,
+      "end": 4918,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 4932,
+      "end": 4943,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 4960,
+      "end": 4974,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 5026,
+      "end": 5036,
+      "text": "Milo Reyes"
+    },
+    {
+      "start": 5058,
+      "end": 5072,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 5086,
+      "end": 5097,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 5116,
+      "end": 5127,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 5173,
+      "end": 5187,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 5189,
+      "end": 5200,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 5217,
+      "end": 5231,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 5290,
+      "end": 5301,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 5366,
+      "end": 5380,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 5458,
+      "end": 5469,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 5527,
+      "end": 5541,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 5555,
+      "end": 5566,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 5626,
+      "end": 5637,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 5695,
+      "end": 5704,
+      "text": "Kenji Ito"
+    },
+    {
+      "start": 5726,
+      "end": 5740,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 5813,
+      "end": 5827,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 5877,
+      "end": 5891,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 5969,
+      "end": 5980,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 5994,
+      "end": 6008,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 6156,
+      "end": 6167,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 6181,
+      "end": 6192,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 6279,
+      "end": 6293,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 6322,
+      "end": 6338,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 6354,
+      "end": 6365,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 6397,
+      "end": 6413,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 6414,
+      "end": 6428,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 6463,
+      "end": 6474,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 6488,
+      "end": 6502,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 6560,
+      "end": 6571,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 6628,
+      "end": 6642,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 6678,
+      "end": 6692,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 6767,
+      "end": 6778,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 6819,
+      "end": 6833,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 6981,
+      "end": 6995,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 7063,
+      "end": 7077,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 7091,
+      "end": 7102,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 7123,
+      "end": 7137,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 7228,
+      "end": 7242,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 7256,
+      "end": 7267,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 7356,
+      "end": 7370,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 7384,
+      "end": 7395,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 7429,
+      "end": 7443,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 7466,
+      "end": 7480,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 7494,
+      "end": 7505,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 7528,
+      "end": 7542,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 7556,
+      "end": 7567,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 7636,
+      "end": 7650,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 7682,
+      "end": 7696,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 7698,
+      "end": 7711,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 7725,
+      "end": 7739,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 7780,
+      "end": 7793,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 7826,
+      "end": 7839,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 7876,
+      "end": 7893,
+      "text": "Ibrahim Coulibaly"
+    },
+    {
+      "start": 7910,
+      "end": 7923,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 7937,
+      "end": 7953,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 7976,
+      "end": 7990,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 8037,
+      "end": 8051,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 8162,
+      "end": 8175,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 8176,
+      "end": 8190,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 8209,
+      "end": 8223,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 8326,
+      "end": 8340,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 8392,
+      "end": 8406,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 8467,
+      "end": 8480,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 8519,
+      "end": 8532,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 8534,
+      "end": 8548,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 8612,
+      "end": 8625,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 8701,
+      "end": 8714,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 8716,
+      "end": 8730,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 8769,
+      "end": 8783,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 8850,
+      "end": 8863,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 8894,
+      "end": 8907,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 8914,
+      "end": 8928,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 8970,
+      "end": 8984,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9177,
+      "end": 9191,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9196,
+      "end": 9207,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 9227,
+      "end": 9241,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9288,
+      "end": 9302,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9360,
+      "end": 9370,
+      "text": "Milo Reyes"
+    },
+    {
+      "start": 9404,
+      "end": 9418,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9422,
+      "end": 9436,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9468,
+      "end": 9482,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9492,
+      "end": 9506,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9516,
+      "end": 9530,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9540,
+      "end": 9554,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9576,
+      "end": 9590,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9619,
+      "end": 9633,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9637,
+      "end": 9651,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9690,
+      "end": 9704,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9721,
+      "end": 9735,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9745,
+      "end": 9759,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9776,
+      "end": 9790,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9797,
+      "end": 9811,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9852,
+      "end": 9866,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9912,
+      "end": 9926,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9950,
+      "end": 9964,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 9970,
+      "end": 9981,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 9982,
+      "end": 9996,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 10015,
+      "end": 10029,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 10061,
+      "end": 10076,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 10132,
+      "end": 10146,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 10207,
+      "end": 10221,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 10248,
+      "end": 10262,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 10316,
+      "end": 10330,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 10546,
+      "end": 10560,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 10580,
+      "end": 10594,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 10618,
+      "end": 10631,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 10647,
+      "end": 10663,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 10680,
+      "end": 10694,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 10785,
+      "end": 10799,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 10832,
+      "end": 10849,
+      "text": "Ibrahim Coulibaly"
+    },
+    {
+      "start": 10875,
+      "end": 10889,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 10936,
+      "end": 10950,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 10981,
+      "end": 10994,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 11053,
+      "end": 11067,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 11146,
+      "end": 11160,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 11225,
+      "end": 11239,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 11304,
+      "end": 11318,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 11492,
+      "end": 11505,
+      "text": "Cassandra Lin"
+    },
+    {
+      "start": 11523,
+      "end": 11537,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 11588,
+      "end": 11602,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 11656,
+      "end": 11669,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 11723,
+      "end": 11737,
+      "text": "Renee Fontaine"
+    },
+    {
+      "start": 11777,
+      "end": 11791,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 11811,
+      "end": 11825,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 11893,
+      "end": 11907,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 12015,
+      "end": 12029,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 12067,
+      "end": 12081,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 12231,
+      "end": 12245,
+      "text": "Trevor Higgins"
+    },
+    {
+      "start": 12257,
+      "end": 12270,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 12279,
+      "end": 12290,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 12310,
+      "end": 12324,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 12373,
+      "end": 12384,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 12427,
+      "end": 12438,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 12528,
+      "end": 12540,
+      "text": "Farah Nasser"
+    },
+    {
+      "start": 12542,
+      "end": 12551,
+      "text": "Kenji Ito"
+    },
+    {
+      "start": 12556,
+      "end": 12571,
+      "text": "Paulina Wozniak"
+    },
+    {
+      "start": 12667,
+      "end": 12681,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 12752,
+      "end": 12763,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 12782,
+      "end": 12796,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 12806,
+      "end": 12817,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 12901,
+      "end": 12915,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 12921,
+      "end": 12932,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 12989,
+      "end": 13003,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 13014,
+      "end": 13027,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13039,
+      "end": 13051,
+      "text": "Farah Nasser"
+    },
+    {
+      "start": 13063,
+      "end": 13072,
+      "text": "Kenji Ito"
+    },
+    {
+      "start": 13151,
+      "end": 13162,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 13168,
+      "end": 13179,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 13184,
+      "end": 13195,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 13198,
+      "end": 13209,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 13212,
+      "end": 13225,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13234,
+      "end": 13245,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 13265,
+      "end": 13277,
+      "text": "Farah Nasser"
+    },
+    {
+      "start": 13313,
+      "end": 13327,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 13330,
+      "end": 13343,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13377,
+      "end": 13392,
+      "text": "Paulina Wozniak"
+    },
+    {
+      "start": 13409,
+      "end": 13420,
+      "text": "Emeka Nwosu"
+    },
+    {
+      "start": 13437,
+      "end": 13450,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13456,
+      "end": 13469,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13505,
+      "end": 13518,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13545,
+      "end": 13559,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 13562,
+      "end": 13575,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13626,
+      "end": 13639,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13681,
+      "end": 13694,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13696,
+      "end": 13710,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 13713,
+      "end": 13726,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13770,
+      "end": 13783,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13788,
+      "end": 13802,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 13805,
+      "end": 13818,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13821,
+      "end": 13835,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 13890,
+      "end": 13903,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13915,
+      "end": 13928,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13931,
+      "end": 13945,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 14026,
+      "end": 14043,
+      "text": "Ibrahim Coulibaly"
+    },
+    {
+      "start": 14112,
+      "end": 14126,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 14131,
+      "end": 14146,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 14164,
+      "end": 14178,
+      "text": "Katya Sokolova"
+    },
+    {
+      "start": 14236,
+      "end": 14247,
+      "text": "Bruno Alves"
+    },
+    {
+      "start": 14252,
+      "end": 14262,
+      "text": "Wendy Zhao"
+    },
+    {
+      "start": 14297,
+      "end": 14307,
+      "text": "Ola Bakare"
+    },
+    {
+      "start": 14529,
+      "end": 14539,
+      "text": "Femi Novak"
+    },
+    {
+      "start": 14612,
+      "end": 14622,
+      "text": "Tunde Chen"
+    },
+    {
+      "start": 14706,
+      "end": 14718,
+      "text": "Elena Wojcik"
+    },
+    {
+      "start": 14790,
+      "end": 14800,
+      "text": "Anya Costa"
+    },
+    {
+      "start": 14883,
+      "end": 14894,
+      "text": "Layla Reyes"
+    },
+    {
+      "start": 14989,
+      "end": 15001,
+      "text": "Chidi Santos"
+    },
+    {
+      "start": 15079,
+      "end": 15094,
+      "text": "Delphine Okafor"
+    },
+    {
+      "start": 15177,
+      "end": 15187,
+      "text": "Ravi Rossi"
+    },
+    {
+      "start": 15282,
+      "end": 15295,
+      "text": "Astrid Duarte"
+    },
+    {
+      "start": 15379,
+      "end": 15392,
+      "text": "Camille Novak"
+    },
+    {
+      "start": 15481,
+      "end": 15496,
+      "text": "Consuelo Botros"
+    },
+    {
+      "start": 15566,
+      "end": 15578,
+      "text": "Olga Salcedo"
+    },
+    {
+      "start": 15652,
+      "end": 15663,
+      "text": "Grace Rossi"
+    },
+    {
+      "start": 15754,
+      "end": 15765,
+      "text": "Omar Larsen"
+    },
+    {
+      "start": 15847,
+      "end": 15863,
+      "text": "Delphine Nilsson"
+    },
+    {
+      "start": 15937,
+      "end": 15953,
+      "text": "Camille Andersen"
+    },
+    {
+      "start": 16039,
+      "end": 16054,
+      "text": "Kenji Rasmussen"
+    },
+    {
+      "start": 16125,
+      "end": 16136,
+      "text": "Grace Silva"
+    },
+    {
+      "start": 16221,
+      "end": 16232,
+      "text": "Anya Mensah"
+    },
+    {
+      "start": 16314,
+      "end": 16324,
+      "text": "Ana Achebe"
+    },
+    {
+      "start": 16402,
+      "end": 16415,
+      "text": "Nadia Ekwueme"
+    },
+    {
+      "start": 16509,
+      "end": 16521,
+      "text": "Petra Wojcik"
+    },
+    {
+      "start": 16596,
+      "end": 16612,
+      "text": "Adebayo Baptiste"
+    },
+    {
+      "start": 16686,
+      "end": 16699,
+      "text": "Mei Rasmussen"
+    },
+    {
+      "start": 16784,
+      "end": 16795,
+      "text": "Lena Ivanov"
+    },
+    {
+      "start": 16891,
+      "end": 16904,
+      "text": "Rashid Diallo"
+    },
+    {
+      "start": 16975,
+      "end": 16989,
+      "text": "Marit Lindgren"
+    },
+    {
+      "start": 17074,
+      "end": 17087,
+      "text": "Dmitri Kovacs"
+    },
+    {
+      "start": 17163,
+      "end": 17177,
+      "text": "Chloe Nakamura"
+    },
+    {
+      "start": 17263,
+      "end": 17276,
+      "text": "Femi Nakamura"
+    },
+    {
+      "start": 17355,
+      "end": 17365,
+      "text": "Ilya Zaidi"
+    },
+    {
+      "start": 17452,
+      "end": 17466,
+      "text": "Felix Baptiste"
+    },
+    {
+      "start": 17555,
+      "end": 17565,
+      "text": "Sven Patel"
+    },
+    {
+      "start": 17641,
+      "end": 17657,
+      "text": "Hiroshi Andersen"
+    },
+    {
+      "start": 17745,
+      "end": 17755,
+      "text": "Lucas Chen"
+    },
+    {
+      "start": 17841,
+      "end": 17854,
+      "text": "Rashid Duarte"
+    },
+    {
+      "start": 17929,
+      "end": 17941,
+      "text": "Lucia Haddad"
+    },
+    {
+      "start": 18030,
+      "end": 18042,
+      "text": "Aisha Petrov"
+    },
+    {
+      "start": 18121,
+      "end": 18134,
+      "text": "Chidi Cabrera"
+    },
+    {
+      "start": 18204,
+      "end": 18215,
+      "text": "Sofia Reyes"
+    },
+    {
+      "start": 18286,
+      "end": 18298,
+      "text": "Ngozi Ivanov"
+    },
+    {
+      "start": 18379,
+      "end": 18392,
+      "text": "Anya Lindgren"
+    },
+    {
+      "start": 18476,
+      "end": 18491,
+      "text": "Ingeborg Petrov"
+    },
+    {
+      "start": 18569,
+      "end": 18581,
+      "text": "Carlos Rossi"
+    },
+    {
+      "start": 18664,
+      "end": 18679,
+      "text": "Bashir Andersen"
+    },
+    {
+      "start": 18750,
+      "end": 18763,
+      "text": "Fatima Haddad"
+    },
+    {
+      "start": 18840,
+      "end": 18851,
+      "text": "Viktor Khan"
+    },
+    {
+      "start": 18939,
+      "end": 18950,
+      "text": "Yuki Santos"
+    },
+    {
+      "start": 19031,
+      "end": 19041,
+      "text": "Nour Rossi"
+    },
+    {
+      "start": 19112,
+      "end": 19125,
+      "text": "Elena Pereira"
+    },
+    {
+      "start": 19211,
+      "end": 19223,
+      "text": "Samir Nguyen"
+    },
+    {
+      "start": 19301,
+      "end": 19314,
+      "text": "Sana Anderson"
+    },
+    {
+      "start": 19405,
+      "end": 19417,
+      "text": "Pedro Okafor"
+    },
+    {
+      "start": 19502,
+      "end": 19512,
+      "text": "Anya Patel"
+    },
+    {
+      "start": 19595,
+      "end": 19607,
+      "text": "Fatima Patel"
+    },
+    {
+      "start": 19687,
+      "end": 19702,
+      "text": "Fatima Nakamura"
+    },
+    {
+      "start": 19777,
+      "end": 19790,
+      "text": "Chukwu Petrov"
+    },
+    {
+      "start": 19872,
+      "end": 19887,
+      "text": "Bertrand Duarte"
+    },
+    {
+      "start": 19967,
+      "end": 19979,
+      "text": "Radek Wojcik"
+    },
+    {
+      "start": 20054,
+      "end": 20066,
+      "text": "Odalys Reyes"
+    },
+    {
+      "start": 20147,
+      "end": 20160,
+      "text": "Lucas Salcedo"
+    },
+    {
+      "start": 20239,
+      "end": 20252,
+      "text": "Maria Popescu"
+    },
+    {
+      "start": 20334,
+      "end": 20348,
+      "text": "Valeria Diallo"
+    },
+    {
+      "start": 20424,
+      "end": 20436,
+      "text": "Nadia Larsen"
+    },
+    {
+      "start": 20525,
+      "end": 20536,
+      "text": "Amir Botros"
+    },
+    {
+      "start": 20622,
+      "end": 20634,
+      "text": "Amir Salcedo"
+    },
+    {
+      "start": 20719,
+      "end": 20731,
+      "text": "Dmitri Rossi"
+    },
+    {
+      "start": 20824,
+      "end": 20835,
+      "text": "Marco Reyes"
+    },
+    {
+      "start": 20917,
+      "end": 20933,
+      "text": "Valeria Baptiste"
+    },
+    {
+      "start": 21008,
+      "end": 21019,
+      "text": "Femi Okafor"
+    },
+    {
+      "start": 21100,
+      "end": 21115,
+      "text": "Lucas Rasmussen"
+    },
+    {
+      "start": 21201,
+      "end": 21211,
+      "text": "Nour Reyes"
+    },
+    {
+      "start": 21286,
+      "end": 21299,
+      "text": "Sofia Okonkwo"
+    },
+    {
+      "start": 21385,
+      "end": 21401,
+      "text": "Bertrand Cabrera"
+    },
+    {
+      "start": 21486,
+      "end": 21498,
+      "text": "Lucia Larsen"
+    },
+    {
+      "start": 21577,
+      "end": 21589,
+      "text": "Marit Petrov"
+    },
+    {
+      "start": 21675,
+      "end": 21686,
+      "text": "Yara Botros"
+    },
+    {
+      "start": 21764,
+      "end": 21773,
+      "text": "Kofi Wong"
+    },
+    {
+      "start": 21859,
+      "end": 21871,
+      "text": "Yara Salcedo"
+    },
+    {
+      "start": 21951,
+      "end": 21961,
+      "text": "Sana Silva"
+    },
+    {
+      "start": 22113,
+      "end": 22127,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 22154,
+      "end": 22165,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 22200,
+      "end": 22214,
+      "text": "Katya Sokolova"
+    },
+    {
+      "start": 22227,
+      "end": 22242,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 22247,
+      "end": 22263,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 22275,
+      "end": 22288,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 22356,
+      "end": 22366,
+      "text": "Wendy Zhao"
+    },
+    {
+      "start": 22417,
+      "end": 22434,
+      "text": "Ibrahim Coulibaly"
+    },
+    {
+      "start": 22457,
+      "end": 22471,
+      "text": "Renee Fontaine"
+    },
+    {
+      "start": 22524,
+      "end": 22537,
+      "text": "Cassandra Lin"
+    },
+    {
+      "start": 22577,
+      "end": 22590,
+      "text": "Shawn Delaney"
+    },
+    {
+      "start": 22632,
+      "end": 22644,
+      "text": "Farah Nasser"
+    },
+    {
+      "start": 22669,
+      "end": 22678,
+      "text": "Kenji Ito"
+    },
+    {
+      "start": 22696,
+      "end": 22711,
+      "text": "Paulina Wozniak"
+    },
+    {
+      "start": 22727,
+      "end": 22738,
+      "text": "Emeka Nwosu"
+    },
+    {
+      "start": 22743,
+      "end": 22753,
+      "text": "Ola Bakare"
+    },
+    {
+      "start": 22788,
+      "end": 22799,
+      "text": "Bruno Alves"
+    },
+    {
+      "start": 22852,
+      "end": 22864,
+      "text": "Diane Foster"
+    },
+    {
+      "start": 22919,
+      "end": 22933,
+      "text": "Trevor Higgins"
+    },
+    {
+      "start": 22988,
+      "end": 22998,
+      "text": "Milo Reyes"
+    },
+    {
+      "start": 23610,
+      "end": 23621,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 23652,
+      "end": 23663,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 23697,
+      "end": 23708,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 23757,
+      "end": 23768,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 23799,
+      "end": 23810,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 23841,
+      "end": 23852,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 23883,
+      "end": 23894,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 23925,
+      "end": 23936,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 23969,
+      "end": 23980,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 24013,
+      "end": 24024,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 24055,
+      "end": 24066,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 24097,
+      "end": 24108,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 24169,
+      "end": 24180,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 24734,
+      "end": 24749,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 24781,
+      "end": 24795,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 24877,
+      "end": 24891,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 25022,
+      "end": 25036,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 25099,
+      "end": 25113,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 25127,
+      "end": 25141,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 25160,
+      "end": 25177,
+      "text": "Ibrahim Coulibaly"
+    },
+    {
+      "start": 25223,
+      "end": 25237,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 25291,
+      "end": 25302,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 25337,
+      "end": 25351,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 25432,
+      "end": 25446,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 25460,
+      "end": 25474,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 25654,
+      "end": 25668,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 25743,
+      "end": 25754,
+      "text": "Bruno Alves"
+    },
+    {
+      "start": 25904,
+      "end": 25918,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 25967,
+      "end": 25981,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 26116,
+      "end": 26130,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 26160,
+      "end": 26173,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 26202,
+      "end": 26216,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 26488,
+      "end": 26502,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 26537,
+      "end": 26553,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 26634,
+      "end": 26644,
+      "text": "Milo Reyes"
+    },
+    {
+      "start": 26702,
+      "end": 26716,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 26730,
+      "end": 26744,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 26952,
+      "end": 26966,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27130,
+      "end": 27144,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27255,
+      "end": 27269,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27449,
+      "end": 27463,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27532,
+      "end": 27546,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27650,
+      "end": 27664,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27678,
+      "end": 27692,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27706,
+      "end": 27720,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27734,
+      "end": 27748,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27762,
+      "end": 27776,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27790,
+      "end": 27804,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27894,
+      "end": 27908,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27922,
+      "end": 27933,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 27934,
+      "end": 27948,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27962,
+      "end": 27976,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 27997,
+      "end": 28008,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 28022,
+      "end": 28036,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 28109,
+      "end": 28118,
+      "text": "Kenji Ito"
+    },
+    {
+      "start": 28139,
+      "end": 28150,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 28216,
+      "end": 28230,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 28244,
+      "end": 28255,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 28276,
+      "end": 28290,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 28359,
+      "end": 28371,
+      "text": "Diane Foster"
+    },
+    {
+      "start": 28400,
+      "end": 28411,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 28425,
+      "end": 28436,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 28453,
+      "end": 28467,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 28519,
+      "end": 28529,
+      "text": "Milo Reyes"
+    },
+    {
+      "start": 28551,
+      "end": 28565,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 28579,
+      "end": 28590,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 28609,
+      "end": 28620,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 28666,
+      "end": 28680,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 28682,
+      "end": 28693,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 28710,
+      "end": 28724,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 28783,
+      "end": 28794,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 28859,
+      "end": 28873,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 28951,
+      "end": 28962,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 29020,
+      "end": 29034,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 29048,
+      "end": 29059,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 29119,
+      "end": 29130,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 29188,
+      "end": 29197,
+      "text": "Kenji Ito"
+    },
+    {
+      "start": 29219,
+      "end": 29233,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 29306,
+      "end": 29320,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 29370,
+      "end": 29384,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 29462,
+      "end": 29473,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 29487,
+      "end": 29501,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 29649,
+      "end": 29660,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 29674,
+      "end": 29685,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 29772,
+      "end": 29786,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 29815,
+      "end": 29831,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 29847,
+      "end": 29858,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 29890,
+      "end": 29906,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 29907,
+      "end": 29921,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 29956,
+      "end": 29967,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 29981,
+      "end": 29995,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 30053,
+      "end": 30064,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 30121,
+      "end": 30135,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 30171,
+      "end": 30185,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 30260,
+      "end": 30271,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 30312,
+      "end": 30326,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 30474,
+      "end": 30488,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 30556,
+      "end": 30570,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 30584,
+      "end": 30595,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 30616,
+      "end": 30630,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 30721,
+      "end": 30735,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 30749,
+      "end": 30760,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 30849,
+      "end": 30863,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 30877,
+      "end": 30888,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 30922,
+      "end": 30936,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 30959,
+      "end": 30973,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 30987,
+      "end": 30998,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 31021,
+      "end": 31035,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 31049,
+      "end": 31060,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 31129,
+      "end": 31143,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 31175,
+      "end": 31189,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 31191,
+      "end": 31204,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 31218,
+      "end": 31232,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 31273,
+      "end": 31286,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 31319,
+      "end": 31332,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 31369,
+      "end": 31386,
+      "text": "Ibrahim Coulibaly"
+    },
+    {
+      "start": 31403,
+      "end": 31416,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 31430,
+      "end": 31446,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 31469,
+      "end": 31483,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 31530,
+      "end": 31544,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 31655,
+      "end": 31668,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 31669,
+      "end": 31683,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 31702,
+      "end": 31716,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 31819,
+      "end": 31833,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 31885,
+      "end": 31899,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 31960,
+      "end": 31973,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 32012,
+      "end": 32025,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 32027,
+      "end": 32041,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 32105,
+      "end": 32118,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 32194,
+      "end": 32207,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 32209,
+      "end": 32223,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 32262,
+      "end": 32276,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 32343,
+      "end": 32356,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 32387,
+      "end": 32400,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 32407,
+      "end": 32421,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 32463,
+      "end": 32477,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 32670,
+      "end": 32684,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 32689,
+      "end": 32700,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 32720,
+      "end": 32734,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 32781,
+      "end": 32795,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 32853,
+      "end": 32863,
+      "text": "Milo Reyes"
+    },
+    {
+      "start": 32897,
+      "end": 32911,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 32915,
+      "end": 32929,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 32961,
+      "end": 32975,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 32985,
+      "end": 32999,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33009,
+      "end": 33023,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33033,
+      "end": 33047,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33069,
+      "end": 33083,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33112,
+      "end": 33126,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33130,
+      "end": 33144,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33183,
+      "end": 33197,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33214,
+      "end": 33228,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33238,
+      "end": 33252,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33269,
+      "end": 33283,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33290,
+      "end": 33304,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33345,
+      "end": 33359,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33405,
+      "end": 33419,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33443,
+      "end": 33457,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33463,
+      "end": 33474,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 33475,
+      "end": 33489,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33508,
+      "end": 33522,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33554,
+      "end": 33569,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 33625,
+      "end": 33639,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33700,
+      "end": 33714,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33741,
+      "end": 33755,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 33809,
+      "end": 33823,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 34039,
+      "end": 34053,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 34073,
+      "end": 34087,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 34111,
+      "end": 34124,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 34140,
+      "end": 34156,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 34173,
+      "end": 34187,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 34278,
+      "end": 34292,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 34325,
+      "end": 34342,
+      "text": "Ibrahim Coulibaly"
+    },
+    {
+      "start": 34368,
+      "end": 34382,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 34429,
+      "end": 34443,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 34474,
+      "end": 34487,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 34546,
+      "end": 34560,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 34639,
+      "end": 34653,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 34718,
+      "end": 34732,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 34797,
+      "end": 34811,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 34985,
+      "end": 34998,
+      "text": "Cassandra Lin"
+    },
+    {
+      "start": 35016,
+      "end": 35030,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 35081,
+      "end": 35095,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 35149,
+      "end": 35162,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 35216,
+      "end": 35230,
+      "text": "Renee Fontaine"
+    },
+    {
+      "start": 35270,
+      "end": 35284,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 35304,
+      "end": 35318,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 35386,
+      "end": 35400,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 35508,
+      "end": 35522,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 35560,
+      "end": 35574,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 35724,
+      "end": 35738,
+      "text": "Trevor Higgins"
+    },
+    {
+      "start": 35750,
+      "end": 35763,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 35772,
+      "end": 35783,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 35803,
+      "end": 35817,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 35866,
+      "end": 35877,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 35920,
+      "end": 35931,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 36021,
+      "end": 36033,
+      "text": "Farah Nasser"
+    },
+    {
+      "start": 36035,
+      "end": 36044,
+      "text": "Kenji Ito"
+    },
+    {
+      "start": 36049,
+      "end": 36064,
+      "text": "Paulina Wozniak"
+    },
+    {
+      "start": 36160,
+      "end": 36174,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 36245,
+      "end": 36256,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 36275,
+      "end": 36289,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 36299,
+      "end": 36310,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 36394,
+      "end": 36408,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 36414,
+      "end": 36425,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 36482,
+      "end": 36496,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 36507,
+      "end": 36520,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 36532,
+      "end": 36544,
+      "text": "Farah Nasser"
+    },
+    {
+      "start": 36556,
+      "end": 36565,
+      "text": "Kenji Ito"
+    },
+    {
+      "start": 36644,
+      "end": 36655,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 36661,
+      "end": 36672,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 36677,
+      "end": 36688,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 36691,
+      "end": 36702,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 36705,
+      "end": 36718,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 36727,
+      "end": 36738,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 36758,
+      "end": 36770,
+      "text": "Farah Nasser"
+    },
+    {
+      "start": 36806,
+      "end": 36820,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 36823,
+      "end": 36836,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 36870,
+      "end": 36885,
+      "text": "Paulina Wozniak"
+    },
+    {
+      "start": 36902,
+      "end": 36913,
+      "text": "Emeka Nwosu"
+    },
+    {
+      "start": 36930,
+      "end": 36943,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 36949,
+      "end": 36962,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 36998,
+      "end": 37011,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 37038,
+      "end": 37052,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 37055,
+      "end": 37068,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 37119,
+      "end": 37132,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 37174,
+      "end": 37187,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 37189,
+      "end": 37203,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 37206,
+      "end": 37219,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 37263,
+      "end": 37276,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 37281,
+      "end": 37295,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 37298,
+      "end": 37311,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 37314,
+      "end": 37328,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 37383,
+      "end": 37396,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 37408,
+      "end": 37421,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 37424,
+      "end": 37438,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 37519,
+      "end": 37536,
+      "text": "Ibrahim Coulibaly"
+    },
+    {
+      "start": 37605,
+      "end": 37619,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 37624,
+      "end": 37639,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 37657,
+      "end": 37671,
+      "text": "Katya Sokolova"
+    },
+    {
+      "start": 37729,
+      "end": 37740,
+      "text": "Bruno Alves"
+    },
+    {
+      "start": 37745,
+      "end": 37755,
+      "text": "Wendy Zhao"
+    },
+    {
+      "start": 37790,
+      "end": 37800,
+      "text": "Ola Bakare"
+    },
+    {
+      "start": 38022,
+      "end": 38032,
+      "text": "Femi Novak"
+    },
+    {
+      "start": 38105,
+      "end": 38115,
+      "text": "Tunde Chen"
+    },
+    {
+      "start": 38199,
+      "end": 38211,
+      "text": "Elena Wojcik"
+    },
+    {
+      "start": 38283,
+      "end": 38293,
+      "text": "Anya Costa"
+    },
+    {
+      "start": 38376,
+      "end": 38387,
+      "text": "Layla Reyes"
+    },
+    {
+      "start": 38482,
+      "end": 38494,
+      "text": "Chidi Santos"
+    },
+    {
+      "start": 38572,
+      "end": 38587,
+      "text": "Delphine Okafor"
+    },
+    {
+      "start": 38670,
+      "end": 38680,
+      "text": "Ravi Rossi"
+    },
+    {
+      "start": 38775,
+      "end": 38788,
+      "text": "Astrid Duarte"
+    },
+    {
+      "start": 38872,
+      "end": 38885,
+      "text": "Camille Novak"
+    },
+    {
+      "start": 38974,
+      "end": 38989,
+      "text": "Consuelo Botros"
+    },
+    {
+      "start": 39059,
+      "end": 39071,
+      "text": "Olga Salcedo"
+    },
+    {
+      "start": 39145,
+      "end": 39156,
+      "text": "Grace Rossi"
+    },
+    {
+      "start": 39247,
+      "end": 39258,
+      "text": "Omar Larsen"
+    },
+    {
+      "start": 39340,
+      "end": 39356,
+      "text": "Delphine Nilsson"
+    },
+    {
+      "start": 39430,
+      "end": 39446,
+      "text": "Camille Andersen"
+    },
+    {
+      "start": 39532,
+      "end": 39547,
+      "text": "Kenji Rasmussen"
+    },
+    {
+      "start": 39618,
+      "end": 39629,
+      "text": "Grace Silva"
+    },
+    {
+      "start": 39714,
+      "end": 39725,
+      "text": "Anya Mensah"
+    },
+    {
+      "start": 39807,
+      "end": 39817,
+      "text": "Ana Achebe"
+    },
+    {
+      "start": 39895,
+      "end": 39908,
+      "text": "Nadia Ekwueme"
+    },
+    {
+      "start": 40002,
+      "end": 40014,
+      "text": "Petra Wojcik"
+    },
+    {
+      "start": 40089,
+      "end": 40105,
+      "text": "Adebayo Baptiste"
+    },
+    {
+      "start": 40179,
+      "end": 40192,
+      "text": "Mei Rasmussen"
+    },
+    {
+      "start": 40277,
+      "end": 40288,
+      "text": "Lena Ivanov"
+    },
+    {
+      "start": 40384,
+      "end": 40397,
+      "text": "Rashid Diallo"
+    },
+    {
+      "start": 40468,
+      "end": 40482,
+      "text": "Marit Lindgren"
+    },
+    {
+      "start": 40567,
+      "end": 40580,
+      "text": "Dmitri Kovacs"
+    },
+    {
+      "start": 40656,
+      "end": 40670,
+      "text": "Chloe Nakamura"
+    },
+    {
+      "start": 40756,
+      "end": 40769,
+      "text": "Femi Nakamura"
+    },
+    {
+      "start": 40848,
+      "end": 40858,
+      "text": "Ilya Zaidi"
+    },
+    {
+      "start": 40945,
+      "end": 40959,
+      "text": "Felix Baptiste"
+    },
+    {
+      "start": 41048,
+      "end": 41058,
+      "text": "Sven Patel"
+    },
+    {
+      "start": 41134,
+      "end": 41150,
+      "text": "Hiroshi Andersen"
+    },
+    {
+      "start": 41238,
+      "end": 41248,
+      "text": "Lucas Chen"
+    },
+    {
+      "start": 41334,
+      "end": 41347,
+      "text": "Rashid Duarte"
+    },
+    {
+      "start": 41422,
+      "end": 41434,
+      "text": "Lucia Haddad"
+    },
+    {
+      "start": 41523,
+      "end": 41535,
+      "text": "Aisha Petrov"
+    },
+    {
+      "start": 41614,
+      "end": 41627,
+      "text": "Chidi Cabrera"
+    },
+    {
+      "start": 41697,
+      "end": 41708,
+      "text": "Sofia Reyes"
+    },
+    {
+      "start": 41779,
+      "end": 41791,
+      "text": "Ngozi Ivanov"
+    },
+    {
+      "start": 41872,
+      "end": 41885,
+      "text": "Anya Lindgren"
+    },
+    {
+      "start": 41969,
+      "end": 41984,
+      "text": "Ingeborg Petrov"
+    },
+    {
+      "start": 42062,
+      "end": 42074,
+      "text": "Carlos Rossi"
+    },
+    {
+      "start": 42157,
+      "end": 42172,
+      "text": "Bashir Andersen"
+    },
+    {
+      "start": 42243,
+      "end": 42256,
+      "text": "Fatima Haddad"
+    },
+    {
+      "start": 42333,
+      "end": 42344,
+      "text": "Viktor Khan"
+    },
+    {
+      "start": 42432,
+      "end": 42443,
+      "text": "Yuki Santos"
+    },
+    {
+      "start": 42524,
+      "end": 42534,
+      "text": "Nour Rossi"
+    },
+    {
+      "start": 42605,
+      "end": 42618,
+      "text": "Elena Pereira"
+    },
+    {
+      "start": 42704,
+      "end": 42716,
+      "text": "Samir Nguyen"
+    },
+    {
+      "start": 42794,
+      "end": 42807,
+      "text": "Sana Anderson"
+    },
+    {
+      "start": 42898,
+      "end": 42910,
+      "text": "Pedro Okafor"
+    },
+    {
+      "start": 42995,
+      "end": 43005,
+      "text": "Anya Patel"
+    },
+    {
+      "start": 43088,
+      "end": 43100,
+      "text": "Fatima Patel"
+    },
+    {
+      "start": 43180,
+      "end": 43195,
+      "text": "Fatima Nakamura"
+    },
+    {
+      "start": 43270,
+      "end": 43283,
+      "text": "Chukwu Petrov"
+    },
+    {
+      "start": 43365,
+      "end": 43380,
+      "text": "Bertrand Duarte"
+    },
+    {
+      "start": 43460,
+      "end": 43472,
+      "text": "Radek Wojcik"
+    },
+    {
+      "start": 43547,
+      "end": 43559,
+      "text": "Odalys Reyes"
+    },
+    {
+      "start": 43640,
+      "end": 43653,
+      "text": "Lucas Salcedo"
+    },
+    {
+      "start": 43732,
+      "end": 43745,
+      "text": "Maria Popescu"
+    },
+    {
+      "start": 43827,
+      "end": 43841,
+      "text": "Valeria Diallo"
+    },
+    {
+      "start": 43917,
+      "end": 43929,
+      "text": "Nadia Larsen"
+    },
+    {
+      "start": 44018,
+      "end": 44029,
+      "text": "Amir Botros"
+    },
+    {
+      "start": 44115,
+      "end": 44127,
+      "text": "Amir Salcedo"
+    },
+    {
+      "start": 44212,
+      "end": 44224,
+      "text": "Dmitri Rossi"
+    },
+    {
+      "start": 44317,
+      "end": 44328,
+      "text": "Marco Reyes"
+    },
+    {
+      "start": 44410,
+      "end": 44426,
+      "text": "Valeria Baptiste"
+    },
+    {
+      "start": 44501,
+      "end": 44512,
+      "text": "Femi Okafor"
+    },
+    {
+      "start": 44593,
+      "end": 44608,
+      "text": "Lucas Rasmussen"
+    },
+    {
+      "start": 44694,
+      "end": 44704,
+      "text": "Nour Reyes"
+    },
+    {
+      "start": 44779,
+      "end": 44792,
+      "text": "Sofia Okonkwo"
+    },
+    {
+      "start": 44878,
+      "end": 44894,
+      "text": "Bertrand Cabrera"
+    },
+    {
+      "start": 44979,
+      "end": 44991,
+      "text": "Lucia Larsen"
+    },
+    {
+      "start": 45070,
+      "end": 45082,
+      "text": "Marit Petrov"
+    },
+    {
+      "start": 45168,
+      "end": 45179,
+      "text": "Yara Botros"
+    },
+    {
+      "start": 45257,
+      "end": 45266,
+      "text": "Kofi Wong"
+    },
+    {
+      "start": 45352,
+      "end": 45364,
+      "text": "Yara Salcedo"
+    },
+    {
+      "start": 45444,
+      "end": 45454,
+      "text": "Sana Silva"
+    },
+    {
+      "start": 45606,
+      "end": 45620,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 45647,
+      "end": 45658,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 45693,
+      "end": 45707,
+      "text": "Katya Sokolova"
+    },
+    {
+      "start": 45720,
+      "end": 45735,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 45740,
+      "end": 45756,
+      "text": "Priya Ramanathan"
+    },
+    {
+      "start": 45768,
+      "end": 45781,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 45849,
+      "end": 45859,
+      "text": "Wendy Zhao"
+    },
+    {
+      "start": 45910,
+      "end": 45927,
+      "text": "Ibrahim Coulibaly"
+    },
+    {
+      "start": 45950,
+      "end": 45964,
+      "text": "Renee Fontaine"
+    },
+    {
+      "start": 46017,
+      "end": 46030,
+      "text": "Cassandra Lin"
+    },
+    {
+      "start": 46070,
+      "end": 46083,
+      "text": "Shawn Delaney"
+    },
+    {
+      "start": 46125,
+      "end": 46137,
+      "text": "Farah Nasser"
+    },
+    {
+      "start": 46162,
+      "end": 46171,
+      "text": "Kenji Ito"
+    },
+    {
+      "start": 46189,
+      "end": 46204,
+      "text": "Paulina Wozniak"
+    },
+    {
+      "start": 46220,
+      "end": 46231,
+      "text": "Emeka Nwosu"
+    },
+    {
+      "start": 46236,
+      "end": 46246,
+      "text": "Ola Bakare"
+    },
+    {
+      "start": 46281,
+      "end": 46292,
+      "text": "Bruno Alves"
+    },
+    {
+      "start": 46345,
+      "end": 46357,
+      "text": "Diane Foster"
+    },
+    {
+      "start": 46412,
+      "end": 46426,
+      "text": "Trevor Higgins"
+    },
+    {
+      "start": 46481,
+      "end": 46491,
+      "text": "Milo Reyes"
+    },
+    {
+      "start": 47103,
+      "end": 47114,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 47145,
+      "end": 47156,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 47190,
+      "end": 47201,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 47250,
+      "end": 47261,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 47292,
+      "end": 47303,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 47334,
+      "end": 47345,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 47376,
+      "end": 47387,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 47418,
+      "end": 47429,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 47462,
+      "end": 47473,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 47506,
+      "end": 47517,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 47548,
+      "end": 47559,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 47590,
+      "end": 47601,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 47662,
+      "end": 47673,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 56003,
+      "end": 56018,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 56059,
+      "end": 56070,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 56100,
+      "end": 56113,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 56143,
+      "end": 56156,
+      "text": "Shawn Delaney"
+    },
+    {
+      "start": 56186,
+      "end": 56200,
+      "text": "Renee Fontaine"
+    },
+    {
+      "start": 56246,
+      "end": 56259,
+      "text": "Cassandra Lin"
+    },
+    {
+      "start": 56347,
+      "end": 56361,
+      "text": "Trevor Higgins"
+    },
+    {
+      "start": 56419,
+      "end": 56429,
+      "text": "Milo Reyes"
+    },
+    {
+      "start": 56733,
+      "end": 56747,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 56812,
+      "end": 56826,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 56827,
+      "end": 56841,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 56932,
+      "end": 56947,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 56948,
+      "end": 56963,
+      "text": "Nadia Kovalenko"
+    },
+    {
+      "start": 57040,
+      "end": 57051,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 57052,
+      "end": 57063,
+      "text": "Andre Silva"
+    },
+    {
+      "start": 57135,
+      "end": 57148,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 57149,
+      "end": 57162,
+      "text": "Jaylen Brooks"
+    },
+    {
+      "start": 57223,
+      "end": 57236,
+      "text": "Shawn Delaney"
+    },
+    {
+      "start": 57237,
+      "end": 57250,
+      "text": "Shawn Delaney"
+    }
+  ]
+}

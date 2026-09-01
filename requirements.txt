@@ -1,0 +1,15 @@
+# PERSON_EXTRACTOR_V4 requirements
+# TXT-only scope keeps this lean - no PDF/DOCX/Excel/image dependencies.
+
+# NLP detection
+spacy>=3.7.0
+# After installing, download the English model once with:
+#   python -m spacy download en_core_web_sm
+
+# ML classification
+lightgbm>=4.0.0
+scikit-learn>=1.3.0
+numpy>=1.24.0
+
+# Testing
+pytest>=8.0.0

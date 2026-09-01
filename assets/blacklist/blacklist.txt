@@ -1,0 +1,10 @@
+# Exact normalized strings that must never be accepted as a person name.
+United States
+United Kingdom
+New York
+Los Angeles
+San Francisco
+World Health Organization
+United Nations
+Supreme Court
+White House

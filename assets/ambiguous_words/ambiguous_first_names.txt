@@ -1,0 +1,54 @@
+# Curated list, NOT sourced from an external dataset - hand-built for one
+# specific failure mode found via real testing (case 930204645 threshold-
+# tuning stress test, 2026-08-19): spaCy's small en_core_web_sm model can
+# mistake a common English noun for a surname when it directly follows one
+# of these words, because these words are themselves common first names in
+# spaCy's training data ("Ruby Chamber" - a fake storage-ledger label, not
+# a person - got tagged PERSON purely because "Ruby" primes spaCy to expect
+# a name to follow). See src/validation/validators/corroboration_validator.py
+# for how this list is used: a candidate whose ONLY evidence is spaCy AND
+# whose first token is in this list needs additional corroboration (dictionary,
+# title, or high in-document repetition) before being trusted - spaCy alone
+# is not enough for these specific words, unlike ordinary bare tokens.
+#
+# Deliberately NOT used to reject anything outright - a real person actually
+# named "Ruby Chamber" would still be caught by dictionary/repetition
+# corroboration like any other name. This only removes spaCy's ability to
+# corroborate ON ITS OWN when the span starts with one of these words.
+Amber
+Autumn
+Blake
+Brook
+Crystal
+Daisy
+Dawn
+Drew
+Faith
+Grace
+Grant
+Heather
+Holly
+Hope
+Hunter
+Iris
+Ivy
+Jade
+Jasmine
+Journey
+Lily
+Olive
+Pearl
+Piper
+River
+Robin
+Rose
+Rosemary
+Ruby
+Sage
+Savannah
+Sierra
+Skye
+Star
+Summer
+Violet
+Wren

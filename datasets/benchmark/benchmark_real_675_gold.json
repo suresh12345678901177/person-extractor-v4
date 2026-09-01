@@ -1,0 +1,1671 @@
+{
+  "source_case": "930204675",
+  "mention_count": 333,
+  "mentions": [
+    {
+      "start": 48,
+      "end": 61,
+      "text": "Branko Osvalt"
+    },
+    {
+      "start": 74,
+      "end": 88,
+      "text": "Talvin Meskara"
+    },
+    {
+      "start": 128,
+      "end": 143,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 183,
+      "end": 196,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 236,
+      "end": 250,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 290,
+      "end": 303,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 343,
+      "end": 360,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 400,
+      "end": 418,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 763,
+      "end": 776,
+      "text": "Branko Osvalt"
+    },
+    {
+      "start": 786,
+      "end": 799,
+      "text": "Branko Osvalt"
+    },
+    {
+      "start": 807,
+      "end": 820,
+      "text": "Branko Osvalt"
+    },
+    {
+      "start": 843,
+      "end": 857,
+      "text": "Talvin Meskara"
+    },
+    {
+      "start": 868,
+      "end": 882,
+      "text": "Talvin Meskara"
+    },
+    {
+      "start": 894,
+      "end": 908,
+      "text": "Talvin Meskara"
+    },
+    {
+      "start": 922,
+      "end": 936,
+      "text": "Talvin Meskara"
+    },
+    {
+      "start": 952,
+      "end": 966,
+      "text": "Talvin Meskara"
+    },
+    {
+      "start": 989,
+      "end": 1004,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 1015,
+      "end": 1030,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 1039,
+      "end": 1054,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 1065,
+      "end": 1080,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 1092,
+      "end": 1107,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 1115,
+      "end": 1130,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 1138,
+      "end": 1153,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 1177,
+      "end": 1190,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 1202,
+      "end": 1215,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 1226,
+      "end": 1239,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 1247,
+      "end": 1260,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 1271,
+      "end": 1284,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 1300,
+      "end": 1313,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 1325,
+      "end": 1338,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 1347,
+      "end": 1360,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 1376,
+      "end": 1389,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 1412,
+      "end": 1426,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 1442,
+      "end": 1456,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 1464,
+      "end": 1478,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 1489,
+      "end": 1503,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 1512,
+      "end": 1526,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 1537,
+      "end": 1551,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 1562,
+      "end": 1576,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 1586,
+      "end": 1600,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 1609,
+      "end": 1623,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 1631,
+      "end": 1645,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 1667,
+      "end": 1680,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 1692,
+      "end": 1705,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 1721,
+      "end": 1734,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 1743,
+      "end": 1756,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 1767,
+      "end": 1780,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 1790,
+      "end": 1803,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 1815,
+      "end": 1828,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 1844,
+      "end": 1857,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 1873,
+      "end": 1886,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 1895,
+      "end": 1908,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 1922,
+      "end": 1935,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 1947,
+      "end": 1960,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 1983,
+      "end": 2000,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2012,
+      "end": 2029,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2045,
+      "end": 2062,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2073,
+      "end": 2090,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2106,
+      "end": 2123,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2132,
+      "end": 2149,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2162,
+      "end": 2179,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2190,
+      "end": 2207,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2215,
+      "end": 2232,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2246,
+      "end": 2263,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2276,
+      "end": 2293,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2309,
+      "end": 2326,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2339,
+      "end": 2356,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2370,
+      "end": 2387,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2396,
+      "end": 2413,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 2434,
+      "end": 2452,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2462,
+      "end": 2480,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2489,
+      "end": 2507,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2519,
+      "end": 2537,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2553,
+      "end": 2571,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2580,
+      "end": 2598,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2609,
+      "end": 2627,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2640,
+      "end": 2658,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2672,
+      "end": 2690,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2703,
+      "end": 2721,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2730,
+      "end": 2748,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2764,
+      "end": 2782,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2794,
+      "end": 2812,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2824,
+      "end": 2842,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2853,
+      "end": 2871,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2879,
+      "end": 2897,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2907,
+      "end": 2925,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2939,
+      "end": 2957,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2967,
+      "end": 2985,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 2998,
+      "end": 3016,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 3028,
+      "end": 3041,
+      "text": "Copper Falcon"
+    },
+    {
+      "start": 3078,
+      "end": 3091,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 3272,
+      "end": 3285,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 3523,
+      "end": 3537,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 3575,
+      "end": 3588,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 3624,
+      "end": 3637,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 3770,
+      "end": 3783,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 3820,
+      "end": 3834,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 3872,
+      "end": 3885,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 3921,
+      "end": 3935,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 3972,
+      "end": 3985,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 4123,
+      "end": 4135,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 4171,
+      "end": 4184,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 4221,
+      "end": 4234,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 4271,
+      "end": 4283,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 4368,
+      "end": 4380,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 4466,
+      "end": 4479,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 4517,
+      "end": 4530,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 4614,
+      "end": 4627,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 4712,
+      "end": 4724,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 4857,
+      "end": 4870,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 5249,
+      "end": 5261,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 5298,
+      "end": 5311,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 5348,
+      "end": 5361,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 5542,
+      "end": 5555,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 5592,
+      "end": 5605,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 5691,
+      "end": 5704,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 5741,
+      "end": 5754,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 5791,
+      "end": 5804,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 5841,
+      "end": 5854,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 5941,
+      "end": 5954,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 5991,
+      "end": 6003,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 6087,
+      "end": 6100,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 6136,
+      "end": 6150,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 6188,
+      "end": 6202,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 6285,
+      "end": 6298,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 6335,
+      "end": 6348,
+      "text": "Silver Anchor"
+    },
+    {
+      "start": 6526,
+      "end": 6539,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 6576,
+      "end": 6588,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 6626,
+      "end": 6639,
+      "text": "Copper Falcon"
+    },
+    {
+      "start": 6677,
+      "end": 6691,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 6776,
+      "end": 6790,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 6876,
+      "end": 6888,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 6925,
+      "end": 6938,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 6975,
+      "end": 6988,
+      "text": "Copper Falcon"
+    },
+    {
+      "start": 7025,
+      "end": 7038,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 7171,
+      "end": 7184,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 7221,
+      "end": 7234,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 7318,
+      "end": 7331,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 7367,
+      "end": 7380,
+      "text": "Copper Falcon"
+    },
+    {
+      "start": 7514,
+      "end": 7527,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 7707,
+      "end": 7720,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 7757,
+      "end": 7771,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 7808,
+      "end": 7821,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 7857,
+      "end": 7870,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 7956,
+      "end": 7970,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 8057,
+      "end": 8069,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 8106,
+      "end": 8119,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 8156,
+      "end": 8169,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 8252,
+      "end": 8264,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 8449,
+      "end": 8462,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 8499,
+      "end": 8511,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 8547,
+      "end": 8560,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 8597,
+      "end": 8609,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 8647,
+      "end": 8660,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 8698,
+      "end": 8711,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 8747,
+      "end": 8760,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 8797,
+      "end": 8810,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 8947,
+      "end": 8960,
+      "text": "Silver Anchor"
+    },
+    {
+      "start": 8996,
+      "end": 9009,
+      "text": "Copper Falcon"
+    },
+    {
+      "start": 9047,
+      "end": 9060,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 9097,
+      "end": 9110,
+      "text": "Silver Anchor"
+    },
+    {
+      "start": 9197,
+      "end": 9211,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 9248,
+      "end": 9262,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 9299,
+      "end": 9313,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 9446,
+      "end": 9459,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 9496,
+      "end": 9508,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 9546,
+      "end": 9559,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 9596,
+      "end": 9609,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 9645,
+      "end": 9657,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 9694,
+      "end": 9706,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 10414,
+      "end": 10427,
+      "text": "Branko Osvalt"
+    },
+    {
+      "start": 10437,
+      "end": 10450,
+      "text": "Branko Osvalt"
+    },
+    {
+      "start": 10458,
+      "end": 10471,
+      "text": "Branko Osvalt"
+    },
+    {
+      "start": 10494,
+      "end": 10508,
+      "text": "Talvin Meskara"
+    },
+    {
+      "start": 10519,
+      "end": 10533,
+      "text": "Talvin Meskara"
+    },
+    {
+      "start": 10545,
+      "end": 10559,
+      "text": "Talvin Meskara"
+    },
+    {
+      "start": 10573,
+      "end": 10587,
+      "text": "Talvin Meskara"
+    },
+    {
+      "start": 10603,
+      "end": 10617,
+      "text": "Talvin Meskara"
+    },
+    {
+      "start": 10640,
+      "end": 10655,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 10666,
+      "end": 10681,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 10690,
+      "end": 10705,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 10716,
+      "end": 10731,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 10743,
+      "end": 10758,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 10766,
+      "end": 10781,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 10789,
+      "end": 10804,
+      "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 10828,
+      "end": 10841,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 10853,
+      "end": 10866,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 10877,
+      "end": 10890,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 10898,
+      "end": 10911,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 10922,
+      "end": 10935,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 10951,
+      "end": 10964,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 10976,
+      "end": 10989,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 10998,
+      "end": 11011,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 11027,
+      "end": 11040,
+      "text": "Petrin Vashko"
+    },
+    {
+      "start": 11063,
+      "end": 11077,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 11093,
+      "end": 11107,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 11115,
+      "end": 11129,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 11140,
+      "end": 11154,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 11163,
+      "end": 11177,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 11188,
+      "end": 11202,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 11213,
+      "end": 11227,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 11237,
+      "end": 11251,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 11260,
+      "end": 11274,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 11282,
+      "end": 11296,
+      "text": "Doran Vestring"
+    },
+    {
+      "start": 11318,
+      "end": 11331,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 11343,
+      "end": 11356,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 11372,
+      "end": 11385,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 11394,
+      "end": 11407,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 11418,
+      "end": 11431,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 11441,
+      "end": 11454,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 11466,
+      "end": 11479,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 11495,
+      "end": 11508,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 11524,
+      "end": 11537,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 11546,
+      "end": 11559,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 11573,
+      "end": 11586,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 11598,
+      "end": 11611,
+      "text": "Sanvira Oduya"
+    },
+    {
+      "start": 11634,
+      "end": 11651,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 11663,
+      "end": 11680,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 11696,
+      "end": 11713,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 11724,
+      "end": 11741,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 11757,
+      "end": 11774,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 11783,
+      "end": 11800,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 11813,
+      "end": 11830,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 11841,
+      "end": 11858,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 11866,
+      "end": 11883,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 11897,
+      "end": 11914,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 11927,
+      "end": 11944,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 11960,
+      "end": 11977,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 11990,
+      "end": 12007,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 12021,
+      "end": 12038,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 12047,
+      "end": 12064,
+      "text": "Elric Bannerworth"
+    },
+    {
+      "start": 12085,
+      "end": 12103,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12113,
+      "end": 12131,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12140,
+      "end": 12158,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12170,
+      "end": 12188,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12204,
+      "end": 12222,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12231,
+      "end": 12249,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12260,
+      "end": 12278,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12291,
+      "end": 12309,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12323,
+      "end": 12341,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12354,
+      "end": 12372,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12381,
+      "end": 12399,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12415,
+      "end": 12433,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12445,
+      "end": 12463,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12475,
+      "end": 12493,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12504,
+      "end": 12522,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12530,
+      "end": 12548,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12558,
+      "end": 12576,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12590,
+      "end": 12608,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12618,
+      "end": 12636,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12649,
+      "end": 12667,
+      "text": "Miralda Chessworth"
+    },
+    {
+      "start": 12679,
+      "end": 12692,
+      "text": "Copper Falcon"
+    },
+    {
+      "start": 12729,
+      "end": 12742,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 12923,
+      "end": 12936,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 13174,
+      "end": 13188,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 13226,
+      "end": 13239,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 13275,
+      "end": 13288,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 13421,
+      "end": 13434,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 13471,
+      "end": 13485,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 13523,
+      "end": 13536,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 13572,
+      "end": 13586,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 13623,
+      "end": 13636,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 13774,
+      "end": 13786,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 13822,
+      "end": 13835,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 13872,
+      "end": 13885,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 13922,
+      "end": 13934,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 14019,
+      "end": 14031,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 14117,
+      "end": 14130,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 14168,
+      "end": 14181,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 14265,
+      "end": 14278,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 14363,
+      "end": 14375,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 14508,
+      "end": 14521,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 14900,
+      "end": 14912,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 14949,
+      "end": 14962,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 14999,
+      "end": 15012,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 15193,
+      "end": 15206,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 15243,
+      "end": 15256,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 15342,
+      "end": 15355,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 15392,
+      "end": 15405,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 15442,
+      "end": 15455,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 15492,
+      "end": 15505,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 15592,
+      "end": 15605,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 15642,
+      "end": 15654,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 15738,
+      "end": 15751,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 15787,
+      "end": 15801,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 15839,
+      "end": 15853,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 15936,
+      "end": 15949,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 15986,
+      "end": 15999,
+      "text": "Silver Anchor"
+    },
+    {
+      "start": 16177,
+      "end": 16190,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 16227,
+      "end": 16239,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 16277,
+      "end": 16290,
+      "text": "Copper Falcon"
+    },
+    {
+      "start": 16328,
+      "end": 16342,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 16427,
+      "end": 16441,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 16527,
+      "end": 16539,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 16576,
+      "end": 16589,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 16626,
+      "end": 16639,
+      "text": "Copper Falcon"
+    },
+    {
+      "start": 16676,
+      "end": 16689,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 16822,
+      "end": 16835,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 16872,
+      "end": 16885,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 16969,
+      "end": 16982,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 17018,
+      "end": 17031,
+      "text": "Copper Falcon"
+    },
+    {
+      "start": 17165,
+      "end": 17178,
+      "text": "Velvet Harbor"
+    },
+    {
+      "start": 17358,
+      "end": 17371,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 17408,
+      "end": 17422,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 17459,
+      "end": 17472,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 17508,
+      "end": 17521,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 17607,
+      "end": 17621,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 17708,
+      "end": 17720,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 17757,
+      "end": 17770,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 17807,
+      "end": 17820,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 17903,
+      "end": 17915,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 18100,
+      "end": 18113,
+      "text": "Winter Bridge"
+    },
+    {
+      "start": 18150,
+      "end": 18162,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 18198,
+      "end": 18211,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 18248,
+      "end": 18260,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 18298,
+      "end": 18311,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 18349,
+      "end": 18362,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 18398,
+      "end": 18411,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 18448,
+      "end": 18461,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 18598,
+      "end": 18611,
+      "text": "Silver Anchor"
+    },
+    {
+      "start": 18647,
+      "end": 18660,
+      "text": "Copper Falcon"
+    },
+    {
+      "start": 18698,
+      "end": 18711,
+      "text": "Golden Ledger"
+    },
+    {
+      "start": 18748,
+      "end": 18761,
+      "text": "Silver Anchor"
+    },
+    {
+      "start": 18848,
+      "end": 18862,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 18899,
+      "end": 18913,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 18950,
+      "end": 18964,
+      "text": "Crimson Vessel"
+    },
+    {
+      "start": 19097,
+      "end": 19110,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 19147,
+      "end": 19159,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 19197,
+      "end": 19210,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 19247,
+      "end": 19260,
+      "text": "Amber Circuit"
+    },
+    {
+      "start": 19296,
+      "end": 19308,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 19345,
+      "end": 19357,
+      "text": "Iron Compass"
+    },
+    {
+      "start": 26427,
+      "end": 26441,
+      "text": "Doran Vestring"
+    }
+  ]
+}

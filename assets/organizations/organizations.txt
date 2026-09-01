@@ -1,0 +1,65 @@
+# Known organization names (exact-match list; OrganizationValidator also
+# does keyword-based generalized matching - see that validator's code).
+Microsoft
+Google
+Amazon
+Apple
+United Nations
+World Bank
+Red Cross
+
+# --- Bulk addition: NIFTY 50 constituent companies (major Indian firms) ---
+# Source: Wikipedia "NIFTY 50" (en.wikipedia.org/wiki/NIFTY_50),
+# CC-BY-SA 4.0. Cross-checked against first_names.txt/last_names.txt -
+# no collisions found (this validator does exact-full-candidate-text
+# matching only, not substring, so this is safe even for single-word
+# entries like Wipro/Infosys/Cipla).
+Adani Enterprises
+Adani Ports
+Apollo Hospitals
+Asian Paints
+Axis Bank
+Bajaj Auto
+Bajaj Finance
+Bajaj Finserv
+Bharat Electronics
+Bharti Airtel
+Cipla
+Coal India
+Dr. Reddy's Laboratories
+Eicher Motors
+Grasim Industries
+HCLTech
+HDFC Bank
+HDFC Life
+Hindalco Industries
+Hindustan Unilever
+ICICI Bank
+IndiGo
+Infosys
+ITC
+Jio Financial Services
+JSW Steel
+Kotak Mahindra Bank
+Larsen & Toubro
+Mahindra & Mahindra
+Maruti Suzuki
+Max Healthcare
+Nestle India
+NTPC
+Oil and Natural Gas Corporation
+Power Grid
+Reliance Industries
+SBI Life Insurance
+Shriram Finance
+State Bank of India
+Sun Pharma
+Tata Consultancy Services
+Tata Consumer Products
+Tata Motors
+Tata Steel
+Tech Mahindra
+Titan Company
+Trent
+UltraTech Cement
+Wipro

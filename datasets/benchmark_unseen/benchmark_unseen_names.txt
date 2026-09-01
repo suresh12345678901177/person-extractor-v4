@@ -1,0 +1,33 @@
+Investigation notes - fictional test case, generated to evaluate detection quality on names that do not appear anywhere in assets/first_names.txt or assets/last_names.txt.
+
+Chat log excerpt:
+09:12 Zeyra Voskuijlen: are we still meeting at the warehouse tonight
+09:13 Baltasar Nkemelu: yes but the containers are stuck at customs
+09:14 Zeyra Voskuijlen: ok keep me posted
+09:41 Zeyra Voskuijlen: any update yet
+10:02 Baltasar Nkemelu: nothing new, still waiting
+10:15 Zeyra Voskuijlen: this is taking too long
+11:03 Zeyra Voskuijlen: finally cleared, moving forward
+11:04 Zeyra Voskuijlen: thanks everyone
+
+Later that afternoon, Dr. Ilinca Prodescu reviewed the shipment paperwork and forwarded it to the logistics desk. Ilinca Prodescu flagged a discrepancy in the manifest total. A second look by Ilinca Prodescu confirmed the numbers were correct after all.
+
+Casimir Ostrowski signed off on the revised schedule. The warehouse supervisor asked Casimir Ostrowski to double check the seals. Casimir Ostrowski confirmed everything was in order. Casimir Ostrowski then left for the day.
+
+Thandeka Mabuza raised a concern about the insurance coverage during the call. Thandeka Mabuza was told to follow up with the broker directly. No further word from Thandeka Mabuza was recorded that week.
+
+Fionnuala Devereux dropped off a single package at the front desk before leaving.
+
+Mr. Ranjodh Aulakh called to confirm the delivery window. Ranjodh Aulakh did not answer when the office tried to call back.
+
+Esperanza Quilodran organized the vendor list for the coming quarter. Esperanza Quilodran flagged two vendors as unresponsive. The team asked Esperanza Quilodran to send a reminder. By Friday, Esperanza Quilodran reported that both vendors had replied. Esperanza Quilodran closed the ticket.
+
+Bartholomew Fenwick reviewed the contract briefly and passed it along without comment. Bartholomew Fenwick did not attend the follow-up meeting.
+
+Zsofia Lakatos left a short voicemail asking about the delayed invoice.
+
+A banner near the entrance read "Silver Harbor" in faded lettering. The same banner, "Silver Harbor", was mentioned twice more during the walkthrough - once by the receptionist and once in the visitor log marked "Silver Harbor entrance pass issued."
+
+Northgate Traders was listed as the registered owner of the storage unit. The lease paperwork for Northgate Traders had not been updated since last year.
+
+A folder on the shelf was labeled "Crimson Ledger" and appeared to be an old accounting binder, not connected to anyone at the scene.

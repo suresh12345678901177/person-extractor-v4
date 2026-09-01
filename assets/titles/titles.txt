@@ -1,0 +1,54 @@
+# Professional/academic titles. Feeds the has_title ML feature (see
+# feature_extractor.py) - previously unused dead data before this list
+# was wired up to also check candidate tokens directly, not just the
+# regex detector's separate hardcoded title pattern.
+dr
+prof
+professor
+judge
+sen
+rep
+amb
+
+# --- Bulk addition: academic/professional/political/religious titles ---
+# Source: Wikipedia "English honorifics" (en.wikipedia.org/wiki/
+# English_honorifics), CC-BY-SA 4.0.
+chancellor
+vice-chancellor
+principal
+president
+warden
+dean
+rector
+provost
+director
+rabbi
+imam
+sheikh
+mufti
+qari
+maulana
+haji
+sayyid
+ayatollah
+roshi
+sensei
+venerable
+elder
+cardinal
+bishop
+archbishop
+pastor
+chaplain
+magistrate
+justice
+governor
+mayor
+commissioner
+superintendent
+commandant
+admiral
+marshal
+brigadier
+major
+colonel
