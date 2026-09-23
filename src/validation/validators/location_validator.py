@@ -75,6 +75,17 @@ from src.validation.validators.corroboration_validator import CorroborationValid
 class LocationValidator(BaseValidator):
     name = "location"
 
+    def __init__(self) -> None:
+        # Memo cache for the --loose-gate fallback count_occurrences call
+        # below - see CorroborationValidator's cache for why this matters
+        # (same O(document_length)-per-call cost, same fix). Must be
+        # cleared per document; ValidationPipeline.reset_document_cache()
+        # does this automatically for any validator exposing the method.
+        self._repetition_cache: dict[str, int] = {}
+
+    def reset_document_cache(self) -> None:
+        self._repetition_cache.clear()
+
     def validate(self, candidate: CandidateResult, knowledge_base: KnowledgeBase, document_text: str) -> ValidationResult:
         text = candidate.candidate.normalized_text
         tokens = text.split()
@@ -140,5 +151,10 @@ class LocationValidator(BaseValidator):
         # validator order); recomputed directly only as a fallback for
         # --loose-gate mode, where that validator is skipped entirely.
         full_text = candidate.candidate.normalized_text
-        repeat_count = candidate.state.repetition_count or count_occurrences(full_text, document_text)
+        if candidate.state.repetition_count:
+            repeat_count = candidate.state.repetition_count
+        else:
+            if full_text not in self._repetition_cache:
+                self._repetition_cache[full_text] = count_occurrences(full_text, document_text)
+            repeat_count = self._repetition_cache[full_text]
         return repeat_count >= CorroborationValidator.MIN_REPETITION_FOR_CORROBORATION

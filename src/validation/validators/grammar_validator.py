@@ -33,6 +33,20 @@ from src.validation.base_validator import BaseValidator
 
 _SENTENCE_END_RE = re.compile(r'[.!?]["\'\u2019\u201d]?\s*$')
 
+# _is_sentence_initial only needs to see the last real (non-whitespace/
+# quote) character before `start` - this bounds the lookback slice
+# instead of copying document_text[:start] in full. That full-prefix
+# slice is O(start) per candidate; on a large document with many
+# single-token candidates scattered throughout, that is O(candidates x
+# document_length) overall - confirmed directly on a real 13.7MB case
+# file (53,587 candidates) where this line alone made validation hang
+# for over an hour. 200 chars is far more than any real run of
+# whitespace/opening-quote characters before real content; the rare
+# pathological case (a 200+ char run of only whitespace/quotes) falls
+# back to the full slice, which is correct, just no longer the common
+# path's cost.
+_LOOKBACK_WINDOW = 200
+
 
 def _is_sentence_initial(document_text: str, start: int) -> bool:
     """True if `start` begins a new sentence/paragraph: nothing but
@@ -57,12 +71,26 @@ def _is_sentence_initial(document_text: str, start: int) -> bool:
     if line_prefix.strip(' \t"\'\u2018\u201c(') == "":
         return True  # nothing but leading whitespace/quotes on this line so far
 
-    before = document_text[:start]
+    # Bounded lookback (not document_text[:start] in full - see
+    # _LOOKBACK_WINDOW's docstring): only the last real character before
+    # `start` matters, so a small fixed window is enough almost always.
+    window_start = max(0, start - _LOOKBACK_WINDOW)
+    before = document_text[window_start:start]
     # Walk back past whitespace and opening quote/bracket characters to
     # find the last "real" character before this candidate.
     stripped = before.rstrip(' \t\n"\'\u2018\u201c(')
     if not stripped:
-        return True  # only whitespace/quotes before it -> start of text
+        if window_start == 0:
+            return True  # only whitespace/quotes before it -> start of text
+        # Rare pathological case: 200+ consecutive whitespace/quote
+        # characters right before this candidate - fall back to the
+        # full prefix to stay correct (this branch is never the common
+        # case that made the bounded window worth adding).
+        before_full = document_text[:start]
+        stripped_full = before_full.rstrip(' \t\n"\'\u2018\u201c(')
+        if not stripped_full:
+            return True
+        return bool(_SENTENCE_END_RE.search(stripped_full + " "))
 
     return bool(_SENTENCE_END_RE.search(stripped + " "))
 

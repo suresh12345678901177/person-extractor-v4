@@ -17,3 +17,73 @@ clerk
 accountant
 architect
 scientist
+#
+# Extended 2026-09-16: soft-boost only (no hard-reject risk, unlike
+# assets/organizations/organizations.txt's keyword list), so it's safe
+# to grow liberally. Added general corporate/legal/financial-investigation
+# roles relevant to case documents like this project's real casework
+# (corporate fraud investigations, executive correspondence, court
+# filings) - occupations.txt was previously thin (19 entries) relative
+# to how much weight the "preceded by an occupation word" signal could
+# usefully carry.
+executive
+chairman
+chairwoman
+chairperson
+ceo
+cfo
+coo
+cto
+president
+chancellor
+dean
+principal
+founder
+partner
+associate
+administrator
+coordinator
+supervisor
+technician
+developer
+designer
+analyst
+auditor
+investigator
+detective
+attorney
+counsel
+paralegal
+judge
+magistrate
+prosecutor
+secretary
+treasurer
+controller
+trustee
+executor
+broker
+banker
+trader
+agent
+representative
+spokesperson
+witness
+plaintiff
+defendant
+journalist
+reporter
+editor
+author
+researcher
+sergeant
+lieutenant
+captain
+colonel
+general
+commissioner
+governor
+mayor
+senator
+minister
+ambassador

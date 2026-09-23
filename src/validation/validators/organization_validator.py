@@ -27,6 +27,22 @@ ORG_KEYWORDS = frozenset({
     # slipped through into REVIEW as a 3-word "person" - "alliance" is
     # exactly the same class of generic institutional word already
     # covered here (society/union/association/foundation/trust).
+    "division",  # found via real casework (2026-09-16, real case
+    # case scan): "Windows Division" cleared into REVIEW with no keyword
+    # here to catch it (only the decision engine's separate common-word-
+    # phrase guard stopped it from reaching ACCEPTED) - "division" is the
+    # same class of generic business-unit word as "department"/"board"
+    # already covered here, so it generalizes the same way for any other
+    # "<Product/Brand> Division" naming pattern, not just this one case.
+    "licensing", "marketplace", "warranty", "software",  # found via real
+    # casework (2026-09-17, real case scan, a EULA/license
+    # document): "Select Licensing", "Provider Licensing", "Zune
+    # Marketplace", "Product Warranty", "MontaVista Software" all cleared
+    # into REVIEW with no keyword here to catch any of them - same class
+    # of generic product/business-suffix word as "company"/"solutions"
+    # already covered above, so this generalizes to any other
+    # "<Product/Brand> Licensing/Marketplace/Warranty/Software" pattern
+    # in similar EULA/license-style documents, not just these 5 cases.
 })
 
 

@@ -26,6 +26,8 @@ README.md and reported honestly in the CLI's "Model Accuracy" section.
 from __future__ import annotations
 
 import json
+import shutil
+from datetime import datetime, timezone
 from pathlib import Path
 
 from src.core.models import ClassifierResult, FeatureVector
@@ -150,9 +152,28 @@ class LightGBMClassifier(BaseClassifier):
     def save(self, path: str | Path) -> None:
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
-        self._booster.save_model(str(path))
-
         metrics_path = path.with_suffix(".metrics.json")
+
+        # Retraining has no git history behind it (models/ is binary,
+        # regenerated data) - without this, an overwrite is permanent and
+        # unrecoverable. Found the hard way: a real retrain_from_feedback.py
+        # run (2026-09-16, 133 real labels) improved synthetic validation
+        # accuracy (0.9324 -> 0.9737) but REGRESSED real accepted-only
+        # recall on the --evaluate benchmark (0.3062 -> 0.1849) - the
+        # previous model was gone before that real-world drop was even
+        # measured. Every save now snapshots whatever it's about to
+        # overwrite, so a regression like that is always one copy away
+        # from being undone instead of gone for good.
+        if path.exists():
+            backup_dir = path.parent / "backups"
+            backup_dir.mkdir(parents=True, exist_ok=True)
+            stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+            shutil.copy2(path, backup_dir / f"{path.stem}_{stamp}{path.suffix}")
+            if metrics_path.exists():
+                shutil.copy2(metrics_path, backup_dir / f"{metrics_path.stem}_{stamp}.metrics.json")
+            logger.info("Backed up previous model to %s (stamp %s)", backup_dir, stamp)
+
+        self._booster.save_model(str(path))
         metrics_path.write_text(json.dumps({
             "model_name": self.model_name,
             "model_version": self.model_version,

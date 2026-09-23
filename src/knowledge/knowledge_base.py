@@ -53,6 +53,8 @@ class KnowledgeBase:
     campaigns: frozenset[str] = field(default_factory=frozenset)
     non_english_markers: frozenset[str] = field(default_factory=frozenset)
     ambiguous_first_names: frozenset[str] = field(default_factory=frozenset)
+    common_words: frozenset[str] = field(default_factory=frozenset)
+    calendar_words: frozenset[str] = field(default_factory=frozenset)
 
     @classmethod
     def load(cls, assets_dir: str | Path) -> "KnowledgeBase":
@@ -71,6 +73,8 @@ class KnowledgeBase:
             campaigns=_load_set(assets_dir / "campaigns" / "campaigns.txt"),
             non_english_markers=_load_set(assets_dir / "languages" / "non_english_markers.txt"),
             ambiguous_first_names=_load_set(assets_dir / "ambiguous_words" / "ambiguous_first_names.txt"),
+            common_words=_load_set(assets_dir / "common_words" / "common_english_words.txt"),
+            calendar_words=_load_set(assets_dir / "common_words" / "multilingual_calendar_words.txt"),
         )
         logger.info(
             "KnowledgeBase loaded: %d first names, %d last names, %d organizations, "
@@ -109,3 +113,9 @@ class KnowledgeBase:
 
     def is_ambiguous_first_name(self, token: str) -> bool:
         return token.lower() in self.ambiguous_first_names
+
+    def is_common_word(self, token: str) -> bool:
+        return token.lower() in self.common_words
+
+    def is_calendar_word(self, token: str) -> bool:
+        return token.lower() in self.calendar_words
