@@ -19,6 +19,7 @@ from src.validation.validators.punctuation_validator import PunctuationValidator
 from src.validation.validators.repetition_validator import RepetitionValidator
 from src.validation.validators.stopword_validator import StopwordValidator
 from src.validation.validators.structure_validator import StructureValidator
+from src.validation.validators.system_log_validator import SystemLogValidator
 from src.validation.validators.title_validator import TitleValidator
 
 KB = KnowledgeBase.load(BASE_DIR / "assets")
@@ -172,3 +173,105 @@ def test_context_validator_boosts_occupation_precedence():
     cand.candidate = replace(cand.candidate, start=start, end=start + len("Suresh"))
     result = ContextValidator().validate(cand, KB, doc)
     assert result.passed is True and result.score > 0
+
+
+def test_system_log_validator_rejects_dumpsys_package_identifier_line():
+    # Regression test for a real production false positive (2026-09-17):
+    # after the global name-dictionary expansion, "READ" (also a genuine
+    # entry in last_names.txt in some locale) got auto-ACCEPTED 1,068
+    # times from a real dumpsys export because its line
+    # ("requiredPermission=com.samsung.cmh.data.READ") has no logcat
+    # timestamp prefix to key off, but does contain a reverse-DNS-style
+    # Android package identifier.
+    doc = "      requiredPermission=com.samsung.cmh.data.READ\n"
+    start = doc.index("READ")
+    from dataclasses import replace
+    cand = _candidate("READ")
+    cand.candidate = replace(cand.candidate, start=start, end=start + len("READ"))
+    result = SystemLogValidator().validate(cand, KB, doc)
+    assert result.passed is False
+
+
+def test_system_log_validator_rejects_android_permission_constant_line():
+    # The 4-segment package-identifier check alone missed this: standard
+    # Android permission constants ("android.permission.READ_CALENDAR")
+    # are only 3 segments, and were the single largest real contributor
+    # to the "READ" false positive (1,068 raw occurrences in one real
+    # dumpsys export) - caught here via the ALL-CAPS-WITH-UNDERSCORES
+    # last-segment convention instead of segment count.
+    doc = "      requiredPermission=android.permission.READ_CALENDAR\n"
+    start = doc.index("READ_CALENDAR")
+    from dataclasses import replace
+    cand = _candidate("READ")
+    cand.candidate = replace(cand.candidate, start=start, end=start + len("READ"))
+    result = SystemLogValidator().validate(cand, KB, doc)
+    assert result.passed is False
+
+
+def test_system_log_validator_rejects_uid_pkg_table_row():
+    # A dumpsys UID/package/policy table row can have a package name as
+    # short as 2 segments ("com.truecaller"), structurally identical to
+    # a plain domain, so the package-identifier regex alone can't safely
+    # catch it. The "-Uid <n>-Pkg " line prefix is the safe signal.
+    doc = "-Uid    10294-Pkg com.truecaller-POL (8)\n"
+    start = doc.index("POL")
+    from dataclasses import replace
+    cand = _candidate("POL")
+    cand.candidate = replace(cand.candidate, start=start, end=start + len("POL"))
+    result = SystemLogValidator().validate(cand, KB, doc)
+    assert result.passed is False
+
+
+def test_system_log_validator_rejects_package_identifier_deep_in_long_line():
+    # Regression test for a real production false positive (2026-09-17):
+    # a dumpsys ANR report concatenates an entire call stack onto one very
+    # long line. "Handler" (also a genuine last-name entry after the
+    # dictionary expansion) sat ~350 chars into its line, past the
+    # original line-START-anchored 300-char scan window, even though it's
+    # literally part of "android.os.Handler.handleCallback" right next to
+    # it. Measured: 83 real accepted occurrences before this fix. The
+    # window must be centered on the candidate's own position, not the
+    # line start, to catch this.
+    padding = "x" * 340
+    doc = f"{padding} android.os.Handler.handleCallback:958\n"
+    start = doc.index("Handler")
+    from dataclasses import replace
+    cand = _candidate("Handler")
+    cand.candidate = replace(cand.candidate, start=start, end=start + len("Handler"))
+    result = SystemLogValidator().validate(cand, KB, doc)
+    assert result.passed is False
+
+
+def test_system_log_validator_accepts_url_on_same_line_as_real_name():
+    # Control case: a genuine name sharing a line with an ordinary
+    # 2-3-segment URL/domain (realistic in chat/email content) must NOT
+    # be rejected - only 4+-segment reverse-DNS-style identifiers should
+    # trip this, not everyday domains.
+    doc = "Contact Suresh at www.example.com for details.\n"
+    start = doc.index("Suresh")
+    from dataclasses import replace
+    cand = _candidate("Suresh")
+    cand.candidate = replace(cand.candidate, start=start, end=start + len("Suresh"))
+    result = SystemLogValidator().validate(cand, KB, doc)
+    assert result.passed is True
+
+
+def test_system_log_validator_accepts_name_after_missing_space_domain_sentence():
+    # Regression test for a real production false NEGATIVE (2026-09-23,
+    # manual audit of real case's CASEID_chat.txt): a
+    # WhatsApp message reading "...founder of Giftly.co.in. At GFT, we
+    # create..." lost the space after the sentence-ending period during
+    # export, producing "Giftly.co.in.At". The package-identifier regex
+    # restarted its match at "co.in.At" - structurally identical to a
+    # genuine "android.os.Handler" identifier - and hard-rejected "Rehan"
+    # (a real self-identified sender name earlier on the same line) as
+    # system-log noise. A genuine Android/Java identifier never starts
+    # immediately after another dotted chain's "." - only after
+    # whitespace/"="/line-start - so this must NOT trip the validator.
+    doc = "Hi Team,I am Rehan , founder of Giftly.co.in.At GFT, we create corporate gifting experience.\n"
+    start = doc.index("Rehan")
+    from dataclasses import replace
+    cand = _candidate("Rehan")
+    cand.candidate = replace(cand.candidate, start=start, end=start + len("Rehan"))
+    result = SystemLogValidator().validate(cand, KB, doc)
+    assert result.passed is True

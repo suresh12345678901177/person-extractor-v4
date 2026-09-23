@@ -96,6 +96,82 @@ def test_pipeline_rejects_fabricated_name_with_zero_dictionary_support(tmp_path)
     )
 
 
+def test_pipeline_rejects_ambiguous_single_token_dictionary_word_without_repetition(tmp_path):
+    # Regression test for a real production false positive (2026-09-16,
+    # real case scan): "Major" is a genuine (if rare) entry
+    # in assets/first_names/first_names.txt, but it is also an ordinary
+    # English rank/role word. A bare, low-occurrence "Major" with no
+    # other corroborating evidence (title, spaCy support beyond the
+    # collision, or a full first+last dictionary window match) was
+    # wrongly ACCEPTED 63 times across unrelated real files purely on the
+    # strength of a single-token dictionary hit. It must now require the
+    # same repetition-or-title corroboration any other ambiguous word
+    # needs (see assets/ambiguous_words/ambiguous_first_names.txt and
+    # CorroborationValidator's fourth refinement).
+    text = (
+        "The Major update was delayed until Friday.\n"
+        "According to the report, the Major issue was resolved quickly.\n"
+    )
+    sample = tmp_path / "ambiguous_word.txt"
+    sample.write_text(text, encoding="utf-8")
+
+    pipeline = Pipeline(config=_test_config(), base_dir=BASE_DIR)
+    result = pipeline.run(sample)
+
+    accepted_names = {p.display_text for p in result.persons}
+    assert "Major" not in accepted_names, (
+        "A low-occurrence ambiguous word ('Major') with only a single-token "
+        "dictionary hit must never be ACCEPTED without repetition/title corroboration"
+    )
+
+
+def test_pipeline_rejects_repeated_calendar_word_even_with_high_repetition(tmp_path):
+    # Regression test for a real production false positive (2026-09-17,
+    # real case scan): a single Android locale/calendar-
+    # picker resource-dump file got "Jan"/"Sep" (and similar day/month
+    # names in other languages) ACCEPTED 10x/8x each - they are genuine
+    # dictionary first names in some locale, and unlike an ordinary
+    # ambiguous word, heavy repetition in a resource file reflects the
+    # file's fixed vocabulary, not a real recurring person. Calendar
+    # words must be rejected even when repeated well past
+    # CorroborationValidator.MIN_REPETITION_FOR_CORROBORATION (4).
+    text = "Jan\n" * 10
+    sample = tmp_path / "calendar_dump.txt"
+    sample.write_text(text, encoding="utf-8")
+
+    pipeline = Pipeline(config=_test_config(), base_dir=BASE_DIR)
+    result = pipeline.run(sample)
+
+    accepted_names = {p.display_text for p in result.persons}
+    assert "Jan" not in accepted_names, (
+        "A repeated calendar word ('Jan') must never be ACCEPTED on repetition alone"
+    )
+
+
+def test_pipeline_rejects_allcaps_acronym_matching_a_last_name(tmp_path):
+    # Regression test for a real production false positive (2026-09-17,
+    # real case scan, eula_12.txt): "LAW" is ALL-CAPS and
+    # acronym-shaped, but "Law" is also a genuine (rare) entry in
+    # last_names.txt, so StructureValidator's acronym-rejection escape
+    # hatch let it through, and it was wrongly ACCEPTED from repeated
+    # "GOVERNING LAW" EULA section headers (5 occurrences in one file
+    # alone - the same class as "READ"/"HANDLER"/"KNOX"/"POL"/"FOA"/
+    # "UUS"/"SHA"/"WILD" found earlier this session in dumpsys/log text).
+    text = "GOVERNING LAW\n" * 5 + "This agreement is governed by LAW in this jurisdiction.\n"
+    sample = tmp_path / "eula_style.txt"
+    sample.write_text(text, encoding="utf-8")
+
+    pipeline = Pipeline(config=_test_config(), base_dir=BASE_DIR)
+    result = pipeline.run(sample)
+
+    accepted_names = {p.display_text for p in result.persons}
+    assert "LAW" not in accepted_names, (
+        "An ALL-CAPS acronym-shaped word ('LAW') that only passes structure "
+        "validation via a coincidental last-name match must never be ACCEPTED "
+        "on repetition alone"
+    )
+
+
 def test_pipeline_missing_file_returns_structured_failure():
     pipeline = Pipeline(config=_test_config(), base_dir=BASE_DIR)
     result = pipeline.run("/nonexistent/path/does_not_exist.txt")

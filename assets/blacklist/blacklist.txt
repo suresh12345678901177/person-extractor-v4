@@ -8,3 +8,207 @@ World Health Organization
 United Nations
 Supreme Court
 White House
+
+# Android/system diagnostic dump terms - confirmed via case 930204XXX-style
+# investigation to repeat hundreds/thousands of times in Android
+# logcat/dumpsys/authenticator-app logs, satisfying the repetition-based
+# corroboration signal exactly like a real recurring name would. Checked
+# bidirectionally as sub-phrases (see blacklist_validator.py), so a short
+# distinctive term here also catches longer candidates containing it.
+Historical Broadcast
+Appop Denial
+Received Experimentation
+Historical Process Exit
+Region TransparentRegion
+Region VisibleRegion
+Region SurfaceDamageRegion
+Permission Denial
+AppBindRecord
+Per-process Connections
+Bg Check Violation
+Connected Providers
+Published Providers
+CpEventLog
+OneDS
+BrokerAuthWithPasskeys
+Fetch Interval
+ForceUpdatePrivilegedApps
+NwUpdate
+ConfigDefaultBrowser
+SleepPolicy
+SmartAlert
+PhoneFactorApplication
+CryptoFactoryBuilder
+Crypto Factory
+Crypto Library
+Data Collection Manager
+Broker Initialized
+React Native
+Previous App Kill
+Gesture Monitor
+Built-in Screen
+Running Selfhost
+Splash Screen
+Diagnostic Data
+Device Lock
+Biometric
+Fingerprint
+Iris
+Setting
+Settings
+Voicemail
+Chrome
+Connections
+Tasks
+
+# Telecom carrier / network names from Android connectivity logs.
+Aircel
+Reliance RTel
+Vodafone
+
+# Samsung phone system/software terms.
+Samsung Software
+Samsung Mobile Device
+Samsung Electronics
+Samsung Helpline
+Galaxy Shop
+
+# WhatsApp/chat export format metadata (constant field values, not names).
+Source App
+Business
+
+# Legal/EULA/business-document boilerplate terms - repeated Title-Case
+# phrases in legitimate long-form documents (10-K filings, brochures,
+# help pages) that satisfy repetition-based corroboration the same way
+# OneDS Library etc. do above, just from a prose genre instead of a log
+# genre.
+Privacy Policy
+Third-Party Materials
+Creative Commons
+Publicly Perform
+License
+Accounting Review
+Plan Administrator
+Windows Live
+Amazon Bazaar
+Appendix B
+Retirement Age
+Machine Learning
+
+# Academic/template placeholder labels (e.g. a BAA-style research paper
+# using "Firm A"/"Firm B" as generic case-study stand-ins).
+Firm A
+Firm B
+Panel A
+Panel B
+Hunter Ed
+
+# Common single words that are never plausible standalone person names,
+# but are frequent enough as capitalized regex matches to appear
+# repeatedly in review.
+Java
+
+# More common single words + one document-specific artifact, found via
+# real casework (2026-09-18, real case scan, the same
+# EULA/license document as the ORG_KEYWORDS "licensing"/"marketplace"/
+# "warranty"/"software" additions) - all cleared into REVIEW with no
+# corroboration, same class as "Java" above. Checked against
+# first_names.txt/last_names.txt - no collisions. "Bing-powered U" is a
+# truncated OCR/rendering artifact specific to this document (likely a
+# cut-off "Bing-powered University search" or similar), not a
+# generalizable pattern - added as an exact phrase like the Android
+# diagnostic-dump terms above.
+Chief
+Entertainment
+Income
+Months
+Accounts
+Unaudited
+Reflects
+Bing-powered U
+
+# More Android/system diagnostic dump terms, found via the same
+# dumpsys_ANR_WindowManager.txt (10.3MB) during the 2026-09-18 false-
+# positive review. "NoUi" is a camelCase-boundary extraction artifact
+# from the boolean flag "systemNoUi=false" (repeats 96+ times per file -
+# it IS a rare real last name per first_names/last_names.txt, but that
+# collision is judged acceptable given the volume and genre, same
+# precedent as "Ola"/"Safari" in organizations.txt). "Headset Jack" is
+# audio-hardware terminology from a device-list dump, no name collision.
+NoUi
+Headset Jack
+
+# Non-person phrase fragments found via the 2026-09-18 false-positive
+# review, from other real case files (not the dumpsys export above):
+# "Gen Psychiatry" is a fragment of a journal name ("Archives of General
+# Psychiatry"); "Teknologi Mara" is a fragment of a Malaysian university
+# name ("Universiti Teknologi MARA"); "Gulab Jamun" is an Indian dessert
+# name, not a person; "Customer Car" is a truncated "Customer Care"
+# business label. No first/last-name collisions.
+Gen Psychiatry
+Teknologi Mara
+Gulab Jamun
+Customer Car
+
+# "Rev. B" - a hardware/firmware revision label ("Revision B"), not
+# "Reverend B": TitleValidator matched "Rev." against honorifics.txt's
+# "rev" (Reverend) entry. Narrow, exact-phrase fix rather than a general
+# rule - a genuine "Rev. B[rown]" full name is unaffected since this is
+# an exact-candidate match, not a token-level block.
+Rev. B
+
+# Found via a real full-case rescan (2026-09-22) verifying the targeted
+# multi_token/unseen_name decision-engine fixes above against real
+# casework, not just the labeled benchmark suite - the benchmark doesn't
+# contain this exact noise class, so these 3 only surfaced once checked
+# against real data. "Mellon" is a genuine (if rare) last name - the
+# same Priority-1 single-token-dictionary-hit-plus-repetition path that
+# correctly rescues "Femi Novak"/"Nadia Kovalenko" elsewhere also
+# rescued this coincidental company-name fragment ("Bank of New York
+# Mellon Trust Company", repeats 9x in one SEC-filing-style document) -
+# accepted collision-risk tradeoff, same precedent as Dell/Kindle/Ola
+# above. "Keyboard Input Mapper" (an Android dumpsys section label) and
+# "Suicidal Behaviour" (an academic paper section heading) have zero
+# dictionary collision - both are the Priority-2 is_isolated_line
+# structural path correctly identifying the SHAPE (isolated line,
+# repeated, modest ML score) of a genuine unseen name, on text that
+# happens to share that shape without being one.
+Mellon
+Keyboard Input Mapper
+Suicidal Behaviour
+
+# Found via a real manual read-through (2026-09-23) of CASEFILE.txt
+# - Microsoft's actual 2011 SEC Form 10-K filing - cross-checked line-by-line
+# against every accepted candidate for that file. All 16 below are ordinary
+# 10-K/financial-prose vocabulary that coincidentally hit the first/last-name
+# dictionary and got rescued by the single-token-dictionary-hit-plus-repetition
+# path, same failure class as "Mellon" above: "June"/"April"/"August" are
+# calendar-month references ("Fiscal Year Ended June 30"), "Fair"/"Gross"/
+# "Cash"/"Sales"/"Key"/"Loan" are accounting/business terms ("fair value",
+# "gross profit", "cash and cash equivalents", "sales and marketing", "key
+# competitors", "Federal Home Loan Mortgage Corporation"), "Stock"/"Server"
+# are product/security terms ("common stock", "Windows Server"), "Rico" is
+# from "Puerto Rico", "Ingram" is from "Ingram Micro" (a distributor),
+# "Geronimo"/"Rails" are software project names ("Apache Geronimo", "Ruby on
+# Rails"), and "Bona" is from the legal phrase "bona fide dispute". Verified
+# each against its real sentence context, not guessed. Same collision-risk
+# tradeoff as Mellon/Dell/Kindle/Ola above: "June", "April", "August", "Cash",
+# and "Rico" in particular ARE also real, if less common, given names/
+# surnames - accepted deliberately given all 16 occurrences here trace to
+# confirmed formal/financial-prose documents, not personal correspondence.
+June
+Fair
+Stock
+Server
+Cash
+April
+August
+Sales
+Key
+Gross
+Rico
+Ingram
+Geronimo
+Rails
+Loan
+Bona
