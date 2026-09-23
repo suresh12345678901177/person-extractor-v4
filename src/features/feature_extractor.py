@@ -15,9 +15,47 @@ import re
 
 from src.core.models import CandidateResult, DetectorName, FeatureVector
 from src.knowledge.knowledge_base import KnowledgeBase
-from src.preprocessing.segmenter import following_char, is_inside_quotes, preceding_word
+from src.preprocessing.segmenter import (
+    following_char,
+    following_words,
+    is_inside_quotes,
+    preceding_word,
+    preceding_words,
+)
 
 _INITIAL_RE = re.compile(r"^[A-Z]\.?$")
+
+# Local-context cue words for the person/non-person context-window
+# features, added 2026-09-17 after an accuracy review found the model
+# never received any signal about the candidate's surrounding words -
+# only shape/dictionary/confidence numbers, which cannot distinguish
+# "Marcus Webb" from "Convertible Debt" when those properties happen to
+# match. Deliberately small, hand-curated lists (not the full stopword/
+# dictionary assets) - kept narrow and high-precision so these features
+# stay genuinely informative rather than firing on nearly everything.
+_PERSON_CONTEXT_CUES = frozenset({
+    "said", "says", "saying", "told", "tells", "telling",
+    "met", "meets", "meeting", "contacted", "contact",
+    "interviewed", "according", "regards", "sincerely",
+    "spoke", "speaking", "signed", "thanked", "greeted",
+    "asked", "replied", "confirmed", "reported",
+})
+
+# Reuses OrganizationValidator's own keyword list (single source of
+# truth for "this word means organization/institution, not person")
+# plus a small supplement of the specific business/product/UI terms
+# actually found in real false positives this session (Convertible
+# Debt, Windows Division, Windows Embedded, Display Overlays, EventHub
+# Devices, Start LockScreen, Submit Complaint - see decision_engine.py's
+# design principle 3 and generate_training_data.py's
+# CHAT_HEADER_NEGATIVE_PHRASES).
+from src.validation.validators.organization_validator import ORG_KEYWORDS as _ORG_KEYWORDS
+
+_NONPERSON_CONTEXT_CUES = _ORG_KEYWORDS | frozenset({
+    "debt", "embedded", "overlays", "devices", "lockscreen", "complaint",
+    "settings", "version", "policy", "invoice", "agreement", "contract",
+    "account", "capital", "holdings", "insurance",
+})
 
 
 def extract_features(
@@ -61,6 +99,17 @@ def extract_features(
 
     in_quotes = is_inside_quotes(document_text, start, end)
 
+    prev_words = [w.lower() for w in preceding_words(document_text, start, n=3)]
+    preceding_is_person_cue = any(w in _PERSON_CONTEXT_CUES for w in prev_words)
+
+    next_words = [w.lower() for w in following_words(document_text, end, n=3)]
+    following_is_nonperson_cue = any(w.rstrip(".,") in _NONPERSON_CONTEXT_CUES for w in next_words)
+
+    # "Alone on its own line" (the real chat/email sender-header shape,
+    # see following_char()'s docstring): nothing else meaningful before
+    # or after the candidate on the same line.
+    is_isolated = (not prev_words) and (not next_words)
+
     return FeatureVector(
         token_count=len(tokens),
         char_length=len(text),
@@ -78,4 +127,7 @@ def extract_features(
         preceding_word_is_stopword=int(prev_is_stopword),
         following_char_is_punct=int(next_is_punct),
         occurs_in_quotes=int(in_quotes),
+        preceding_context_is_person_cue=int(preceding_is_person_cue),
+        following_context_is_nonperson_cue=int(following_is_nonperson_cue),
+        is_isolated_line=int(is_isolated),
     )

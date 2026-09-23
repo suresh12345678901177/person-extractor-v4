@@ -1,0 +1,62 @@
+WINDOW MANAGER WINDOWS (dumpsys window windows)
+  Window #3 Window{a1b2c3d syncSeqId=0 EventHub Devices}:
+    mDisplayId=0 rootTaskId=1 mSession=Session{f00d1234 5821:u0a112} mClient=android.os.BinderProxy
+    mOwnerUid=10112 showForAllUsers=false package=com.android.systemui appop=NONE
+    mAttrs=WM.LayoutParams{(0,0)(fillxfill) sim=#101 ty=2032 fl=#19810100 pfl=0x20000 format=TRANSLUCENT}
+    Requested w=1080 h=2400 mLayoutSeq=302
+    mViewVisibility=0x0 mHaveFrame=true mObscured=false
+    mCurrentFocus=Window{Start LockScreen}
+    Display Overlays enabled=true count=2
+
+  Window #7 Window{9f8e7d6 syncSeqId=1 Windows Embedded}:
+    mDisplayId=0 rootTaskId=4 mSession=Session{aa11bb22 5821:u0a201}
+    mAttrs=WM.LayoutParams{(0,0)(matchxmatch) ty=2 fl=#820120 pfl=0x0 format=OPAQUE}
+    isOnScreen=true isVisible=true
+
+ACTIVITY MANAGER ANR (dumpsys activity anr)
+  Subject: Input dispatching timed out
+  Process: com.microsoft.windows.embedded, PID: 4821
+  Reason: Windows Division did not respond within 5000ms
+  Load: 2.1 / 1.8 / 1.4
+  CPU usage from 0ms to 5012ms:
+    18% 4821/com.microsoft.windows.embedded: 12% user + 6% kernel
+
+PACKAGE MANAGER SERVICE STATE (dumpsys package)
+  Package [com.corp.customerservice] (a4b8c99):
+    userId=10203
+    pkg=Package{d5e6f77 com.corp.customerservice}
+    codePath=/data/app/com.corp.customerservice-1
+    versionName=4.2.1
+    requested permissions:
+      android.permission.INTERNET
+      android.permission.SUBMIT_COMPLAINT
+
+QUARTERLY OPERATIONS SUMMARY - INTERNAL DRAFT
+This section restates administrative labels exactly as they appear on the
+internal case-management portal, none of which refer to a specific
+individual - all are generic role, product, or ledger labels pulled
+directly from the export.
+
+  Ref: Vice President | Dept: Corporate | Status: Active
+  Ref: Convertible Debt | Type: Instrument | Status: Outstanding
+  Ref: Customer Service | Queue: Tier 2 | Status: Open
+  Ref: Major | Category: Update Severity | Status: Flagged
+  Ref: Pandit | Category: Ledger Tag | Status: Archived
+
+The portal export also lists several bare capitalized labels with no
+further context attached to any of them: Submit Complaint, Start
+LockScreen, Display Overlays, Windows Division, Windows Embedded,
+EventHub Devices, and Customer Service all recur throughout the log
+without ever identifying a person - they are UI element names, product
+names, and internal ledger tags, repeated verbatim across dozens of
+otherwise-unrelated entries in the underlying export.
+
+NETWORK CONNECTIVITY LOG (dumpsys connectivity)
+  NetworkAgentInfo [WIFI () - 108] Score: 60 Validated
+  NetworkAgentInfo [CELLULAR () - 109] Score: 50 Validated
+  Default network: 108 WIFI
+  Current satisfied NetworkRequests:
+    Vice President appears again here purely as a repeated queue label,
+    not a person, confirming the pattern recurs across unrelated log
+    sections rather than referring to one specific individual anywhere
+    in this file.

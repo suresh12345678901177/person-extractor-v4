@@ -1,0 +1,6 @@
+{
+  "source_markup_file": "hand-authored (2026-09-16) - synthetic Android dumpsys/report-style structured text, zero real person mentions by construction",
+  "note": "Regression benchmark for the 2026-09-16 common-word-phrase bug: bare business/tech phrases (Vice President, Convertible Debt, Customer Service, Windows Division, Windows Embedded, Display Overlays, EventHub Devices, Start LockScreen, Submit Complaint, Major, Pandit) repeated across unrelated dumpsys/report sections previously cleared ACCEPTED via ML-confidence + repetition alone with zero dictionary/title/spaCy support. Any of these showing up as accepted-only false positives here is a direct regression of that fix.",
+  "mention_count": 0,
+  "mentions": []
+}

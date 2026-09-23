@@ -30,4 +30,7 @@ FEATURE_NAMES: list[str] = [
     "preceding_word_is_stopword",
     "following_char_is_punct",
     "occurs_in_quotes",
+    "preceding_context_is_person_cue",
+    "following_context_is_nonperson_cue",
+    "is_isolated_line",
 ]
