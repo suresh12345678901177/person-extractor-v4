@@ -1,0 +1,163 @@
+# Day-of-week and month names in European languages, added 2026-09-17
+# after real casework: an Android locale/calendar-picker resource-dump
+# file (one file, "CASEFILE.txt") contributed 32 of 276
+# accepted names in a real case scan, nearly all calendar words in
+# German/French/Spanish/Italian/Polish/Swedish/Portuguese/Dutch (Jan,
+# Sep, Juni, Maj, Lundi, Januar, Juli, Freitag, Ene, Sobota...) that
+# cleared the ML-confidence-only corroboration path on repetition +
+# isolated-line shape alone (see decision_engine.py's
+# _is_common_word_phrase / common_words guard - same mechanism that
+# already stops "Vice President"/"Convertible Debt").
+#
+# Public-domain factual vocabulary (basic calendar terminology, not
+# copyrighted creative content) - same licensing posture as
+# common_english_words.txt. Loaded into the same `common_words`
+# frozenset (see knowledge_base.py), so this only ever blocks the
+# ML-confidence-ALONE corroboration path - a genuine person whose name
+# happens to match a calendar word (e.g. "Domingo", "Julio", "Avril",
+# "Mayo" are all real given names in some cultures) still reaches
+# ACCEPTED normally via dictionary/title support, exactly like any
+# other ambiguous-word case in this project.
+#
+# German
+Montag
+Dienstag
+Mittwoch
+Donnerstag
+Freitag
+Samstag
+Sonntag
+Januar
+Februar
+Marz
+Mai
+Juni
+Juli
+Oktober
+Dezember
+# French
+Lundi
+Mardi
+Mercredi
+Jeudi
+Vendredi
+Samedi
+Dimanche
+Janvier
+Fevrier
+Mars
+Avril
+Juin
+Juillet
+Aout
+Septembre
+Octobre
+Novembre
+Decembre
+# Spanish
+Lunes
+Martes
+Miercoles
+Jueves
+Viernes
+Sabado
+Domingo
+Enero
+Ene
+Febrero
+Marzo
+Abril
+Mayo
+Junio
+Julio
+Agosto
+Septiembre
+Octubre
+Noviembre
+Diciembre
+# Italian
+Lunedi
+Martedi
+Mercoledi
+Giovedi
+Venerdi
+Domenica
+Gennaio
+Febbraio
+Aprile
+Maggio
+Giugno
+Luglio
+Settembre
+Ottobre
+Dicembre
+# Polish
+Poniedzialek
+Wtorek
+Sroda
+Czwartek
+Piatek
+Sobota
+Niedziela
+Styczen
+Luty
+Marzec
+Kwiecien
+Maj
+Czerwiec
+Lipiec
+Sierpien
+Wrzesien
+Pazdziernik
+Listopad
+Grudzien
+# Swedish
+Mandag
+Tisdag
+Onsdag
+Torsdag
+Fredag
+Lordag
+Sondag
+Januari
+Augusti
+# Portuguese
+Segunda-feira
+Terca-feira
+Quarta-feira
+Quinta-feira
+Sexta-feira
+Janeiro
+Fevereiro
+Marco
+Maio
+Junho
+Julho
+Setembro
+# Dutch
+Maandag
+Dinsdag
+Woensdag
+Donderdag
+Vrijdag
+Zaterdag
+Zondag
+Maart
+Mei
+Augustus
+# Common cross-language 3-letter month abbreviations not already
+# covered above by a full form
+Jan
+Feb
+Mar
+Apr
+Jun
+Jul
+Aug
+Sep
+Sept
+Oct
+Okt
+Nov
+Dec
+Dez

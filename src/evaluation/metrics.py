@@ -63,6 +63,27 @@ class EvaluationMetrics:
         }
 
 
+@dataclass(slots=True)
+class RecallBreakdown:
+    """Recall-only metric for a gold-mention SUBSET (e.g. "single-token
+    names", "names not in any dictionary"). Precision deliberately isn't
+    tracked here: a false positive has no gold mention to categorize
+    against, so "precision for the single-token subset" isn't a
+    well-defined question the way "recall for the single-token subset"
+    is (of the gold mentions that are single-token, how many did we
+    find) - see evaluator.py's per-shape breakdown for where this is
+    used."""
+    hits: int
+    total: int
+
+    @property
+    def recall(self) -> float:
+        return round(self.hits / self.total, 4) if self.total else 0.0
+
+    def as_dict(self) -> dict:
+        return {"hits": self.hits, "total": self.total, "recall": self.recall}
+
+
 def _overlaps(a_start: int, a_end: int, b_start: int, b_end: int) -> bool:
     return not (a_end <= b_start or a_start >= b_end)
 

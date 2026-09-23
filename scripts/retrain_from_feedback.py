@@ -21,6 +21,8 @@ Usage:
 
 from __future__ import annotations
 
+import argparse
+import copy
 import json
 import sys
 from pathlib import Path
@@ -28,13 +30,54 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR))
 
+from config import DEFAULT_CONFIG
 from src.classification.lightgbm_classifier import LightGBMClassifier
-from src.feedback.feedback_store import FeedbackStore
+from src.evaluation.evaluator import run_benchmark
+from src.feedback.feedback_store import FeedbackRecord, FeedbackStore
+from src.pipeline.orchestrator import Pipeline
 
 REAL_EXAMPLE_UPWEIGHT = 3
 
+# Regression guardrail (added 2026-09-22, after this exact failure mode
+# happened TWICE in this project's real history: 2026-09-16 (133 real
+# labels, synthetic validation accuracy improved 0.9324->0.9737 but real
+# accepted-only recall on --evaluate REGRESSED 0.3062->0.1849) and again
+# 2026-09-22 (a 27-negative/6-positive batch measurably dropped
+# dictionary_known accepted-only recall 906/930->847/930, caught only by
+# manually running --evaluate after the fact and reverting from backup).
+# `save()` already backs up the file it's about to overwrite - this adds
+# the other half: evaluate the CANDIDATE model against the real
+# --evaluate benchmark BEFORE it ever touches the live model path, and
+# refuse to auto-promote it if any candidate-shape accepted-only recall
+# drops by more than this many percentage points with no offsetting
+# overall improvement.
+MAX_ACCEPTABLE_SHAPE_RECALL_DROP = 0.02
+
+
+def _is_benchmark_source(source_file: str) -> bool:
+    """True if this feedback record was logged from a file under
+    datasets/benchmark/. Those exact files are what `python cli.py
+    --evaluate` scores the pipeline against, so training on them - even
+    more so 3x-upweighted - leaks the evaluation domain into training
+    and inflates/distorts the reported benchmark numbers for those
+    specific files. Found 2026-09-17: 229 of 1,276 confirmed labels
+    (124 from benchmark_real_660.txt, 66 from benchmark_real_675.txt,
+    39 from the four small hand-authored benchmark_0*.txt files) came
+    from exactly this leak. Excluded here so --evaluate measures
+    genuine generalization, not partial memorization."""
+    try:
+        return Path(source_file).parent.name.lower() == "benchmark"
+    except Exception:
+        return False
+
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Retrain the classifier from real feedback")
+    parser.add_argument("--force", action="store_true",
+                         help="Promote the retrained model even if the regression guardrail "
+                              "finds a shape-recall drop with no offsetting overall improvement")
+    args = parser.parse_args()
+
     synthetic_path = BASE_DIR / "datasets" / "training" / "synthetic_training_data.jsonl"
     if not synthetic_path.exists():
         print(f"Synthetic training data not found at {synthetic_path}")
@@ -42,11 +85,27 @@ def main() -> None:
         raise SystemExit(1)
 
     store = FeedbackStore(BASE_DIR / "datasets" / "feedback")
-    confirmed = store.load_confirmed()
+    all_confirmed = store.load_confirmed()
 
-    if not confirmed:
+    if not all_confirmed:
         print("No confirmed feedback yet. Run scripts/label_feedback.py first to")
         print("confirm/correct some REVIEW-bucket candidates from a real run.")
+        raise SystemExit(1)
+
+    confirmed: list[FeedbackRecord] = []
+    excluded_benchmark: list[FeedbackRecord] = []
+    for record in all_confirmed:
+        if _is_benchmark_source(record.source_file):
+            excluded_benchmark.append(record)
+        else:
+            confirmed.append(record)
+
+    if excluded_benchmark:
+        print(f"Excluding {len(excluded_benchmark)} confirmed label(s) sourced from "
+              f"datasets/benchmark/ (see _is_benchmark_source docstring) - these files "
+              f"are also what --evaluate scores against.")
+    if not confirmed:
+        print("No non-benchmark confirmed feedback left after exclusion.")
         raise SystemExit(1)
 
     X: list[list[float]] = []
@@ -98,7 +157,72 @@ def main() -> None:
     classifier.training_metrics = metrics
 
     model_path = BASE_DIR / "models" / "lightgbm" / "person_classifier.txt"
-    classifier.save(model_path)
+    candidate_path = BASE_DIR / "models" / "lightgbm" / "person_classifier_candidate.txt"
+
+    # Regression guardrail (see MAX_ACCEPTABLE_SHAPE_RECALL_DROP's
+    # module-level docstring for why this exists): save to a SCRATCH
+    # path first and evaluate it against the real --evaluate benchmark
+    # before it ever touches the live model path, so a regression is
+    # caught automatically instead of requiring someone to remember to
+    # run --evaluate by hand afterward.
+    classifier.save(candidate_path)  # scratch path - save()'s own backup-on-overwrite is a no-op here
+
+    candidate_config = copy.deepcopy(DEFAULT_CONFIG)
+    candidate_config["classification"]["model_path"] = "models/lightgbm/person_classifier_candidate.txt"
+    candidate_pipeline = Pipeline(config=candidate_config, base_dir=BASE_DIR)
+
+    print("\nEvaluating candidate model against datasets/benchmark/ before promoting it...")
+    candidate_report = run_benchmark(candidate_pipeline)
+
+    promote = True
+    if model_path.exists():
+        baseline_pipeline = Pipeline(config=copy.deepcopy(DEFAULT_CONFIG), base_dir=BASE_DIR)
+        baseline_report = run_benchmark(baseline_pipeline)
+
+        print("\nPer-shape accepted-only recall, live model -> candidate model:")
+        regressions = []
+        all_shapes = sorted(set(baseline_report.shape_recall_accepted) | set(candidate_report.shape_recall_accepted))
+        for shape in all_shapes:
+            before = baseline_report.shape_recall_accepted.get(shape)
+            after = candidate_report.shape_recall_accepted.get(shape)
+            before_r = before.recall if before else 0.0
+            after_r = after.recall if after else 0.0
+            delta = after_r - before_r
+            flag = ""
+            if delta < -MAX_ACCEPTABLE_SHAPE_RECALL_DROP:
+                flag = "  <-- REGRESSION"
+                regressions.append((shape, before_r, after_r, delta))
+            print(f"  {shape:<18} {before_r:.4f} -> {after_r:.4f}  (delta {delta:+.4f}){flag}")
+
+        overall_before = baseline_report.overall_accepted.f1
+        overall_after = candidate_report.overall_accepted.f1
+        print(f"\nOverall accepted-only F1: {overall_before:.4f} -> {overall_after:.4f} "
+              f"(delta {overall_after - overall_before:+.4f})")
+
+        overall_improved = overall_after >= overall_before
+        if regressions and not overall_improved:
+            promote = False
+            print("\n" + "!" * 70)
+            print("REFUSING TO PROMOTE: shape-recall regression(s) above with no offsetting")
+            print("overall F1 improvement.")
+            print(f"Candidate model saved for inspection at: {candidate_path}")
+            print(f"LIVE model at {model_path} was NOT touched.")
+            if args.force:
+                print("--force passed: promoting anyway.")
+                promote = True
+            else:
+                print("Re-run with --force to promote it anyway.")
+            print("!" * 70)
+    else:
+        print("\nNo existing live model to compare against - promoting unconditionally.")
+
+    if not promote:
+        return
+
+    classifier.save(model_path)  # backs up the previous live model automatically
+    candidate_path.unlink(missing_ok=True)
+    candidate_metrics_path = candidate_path.with_suffix(".metrics.json")
+    candidate_metrics_path.unlink(missing_ok=True)
 
     print("\n" + "=" * 60)
     print("RETRAINING COMPLETE")

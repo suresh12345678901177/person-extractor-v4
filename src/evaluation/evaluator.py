@@ -35,11 +35,36 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from src.evaluation.metrics import EvaluationMetrics, compute_span_metrics
+from src.evaluation.metrics import EvaluationMetrics, RecallBreakdown, compute_span_metrics
+from src.knowledge.knowledge_base import KnowledgeBase
 from src.pipeline.orchestrator import Pipeline
 from src.utils.logger import get_logger
 
 logger = get_logger("evaluation.evaluator")
+
+# Which document-type "domain" each benchmark file represents, added
+# 2026-09-17 so --evaluate can report accuracy broken out by the kind of
+# document actually being processed, not just one blended number - a
+# regression concentrated in one domain (as really happened: the
+# 2026-09-17 context-feature retrain's entire real-world recall dip
+# traced to a single call-log-style file) is invisible in an aggregate
+# number and previously took manual per-file digging to even notice.
+# A benchmark file not listed here falls into "uncategorized" rather
+# than silently being dropped from the breakdown or crashing - a
+# deliberate reminder to tag new benchmark files, not a hard requirement.
+FILE_DOMAINS: dict[str, str] = {
+    "benchmark_001.txt": "prose",
+    "benchmark_002.txt": "prose",
+    "benchmark_003.txt": "chat_or_call_log",
+    "benchmark_004.txt": "email",
+    "benchmark_real_660.txt": "chat_or_call_log",
+    "benchmark_real_675.txt": "chat_or_call_log",
+    "benchmark_structured_dump_005.txt": "system_log",
+}
+# Honest, deliberately-not-hidden gap: no OCR-sourced or PDF-extracted
+# benchmark file has hand-labeled gold data yet, so an "ocr" domain
+# cannot be reported here without fabricating one - see README's
+# per-domain metrics section.
 
 
 @dataclass(slots=True)
@@ -56,6 +81,31 @@ class BenchmarkReport:
     file_results: list[BenchmarkFileResult]
     overall_accepted: EvaluationMetrics
     overall_candidate: EvaluationMetrics
+    # Per-document-type breakdown (see FILE_DOMAINS above). Keys are
+    # domain names; a domain with no benchmark file maps to nothing (not
+    # a zero-filled entry), so absence in these dicts means "not
+    # represented in the benchmark suite," never "measured at zero."
+    domain_accepted: dict[str, EvaluationMetrics] = field(default_factory=dict)
+    domain_candidate: dict[str, EvaluationMetrics] = field(default_factory=dict)
+    # Per-shape recall breakdown, pooled across every benchmark file -
+    # see RecallBreakdown's docstring for why this is recall-only.
+    shape_recall_accepted: dict[str, RecallBreakdown] = field(default_factory=dict)
+    shape_recall_candidate: dict[str, RecallBreakdown] = field(default_factory=dict)
+
+
+def _gold_mention_shapes(text: str, kb: KnowledgeBase) -> tuple[str, str]:
+    """Returns (token-count category, dictionary category) for one gold
+    mention's text - the two shape dimensions --evaluate breaks recall
+    out by. A mention contributes to one bucket in EACH dimension (e.g.
+    a single-token unseen name counts once under "single_token" and once
+    under "unseen_name", not as a combined 4th bucket - keeps each
+    dimension's total meaningful on its own rather than fragmenting into
+    many small combined buckets)."""
+    tokens = text.split()
+    token_shape = "single_token" if len(tokens) == 1 else "multi_token"
+    is_known = any(kb.is_known_first_name(t) or kb.is_known_last_name(t) for t in tokens)
+    dict_shape = "dictionary_known" if is_known else "unseen_name"
+    return token_shape, dict_shape
 
 
 def _find_benchmark_pairs(benchmark_dir: Path) -> list[tuple[Path, Path]]:
@@ -76,10 +126,21 @@ def run_benchmark(pipeline: Pipeline, benchmark_dir: str | Path = "datasets/benc
         empty = compute_span_metrics([], [])
         return BenchmarkReport(file_results=[], overall_accepted=empty, overall_candidate=empty)
 
+    knowledge_base = pipeline.extractor.knowledge_base
+
     file_results: list[BenchmarkFileResult] = []
     all_accepted: list[tuple[int, int]] = []
     all_candidates: list[tuple[int, int]] = []
     all_gold: list[tuple[int, int]] = []
+
+    domain_accepted_spans: dict[str, list[tuple[int, int]]] = {}
+    domain_candidate_spans: dict[str, list[tuple[int, int]]] = {}
+    domain_gold_spans: dict[str, list[tuple[int, int]]] = {}
+
+    shape_accepted_hits: dict[str, int] = {}
+    shape_accepted_total: dict[str, int] = {}
+    shape_candidate_hits: dict[str, int] = {}
+    shape_candidate_total: dict[str, int] = {}
 
     for txt_path, gold_path in pairs:
         gold_data = json.loads(gold_path.read_text(encoding="utf-8"))
@@ -117,6 +178,23 @@ def run_benchmark(pipeline: Pipeline, benchmark_dir: str | Path = "datasets/benc
         all_candidates.extend(candidate_spans)
         all_gold.extend(gold_spans)
 
+        domain = FILE_DOMAINS.get(txt_path.name, "uncategorized")
+        domain_accepted_spans.setdefault(domain, []).extend(accepted_spans)
+        domain_candidate_spans.setdefault(domain, []).extend(candidate_spans)
+        domain_gold_spans.setdefault(domain, []).extend(gold_spans)
+
+        for mention in gold_data["mentions"]:
+            ms, me = mention["start"], mention["end"]
+            found_accepted = any(not (me <= ps or ms >= pe) for ps, pe in accepted_spans)
+            found_candidate = any(not (me <= ps or ms >= pe) for ps, pe in candidate_spans)
+            for shape in _gold_mention_shapes(mention["text"], knowledge_base):
+                shape_accepted_total[shape] = shape_accepted_total.get(shape, 0) + 1
+                shape_candidate_total[shape] = shape_candidate_total.get(shape, 0) + 1
+                if found_accepted:
+                    shape_accepted_hits[shape] = shape_accepted_hits.get(shape, 0) + 1
+                if found_candidate:
+                    shape_candidate_hits[shape] = shape_candidate_hits.get(shape, 0) + 1
+
         logger.info(
             "Benchmark %s: accepted precision=%.2f recall=%.2f f1=%.2f | "
             "candidate(+review) precision=%.2f recall=%.2f f1=%.2f",
@@ -127,4 +205,26 @@ def run_benchmark(pipeline: Pipeline, benchmark_dir: str | Path = "datasets/benc
 
     overall_accepted = compute_span_metrics(all_accepted, all_gold)
     overall_candidate = compute_span_metrics(all_candidates, all_gold)
-    return BenchmarkReport(file_results=file_results, overall_accepted=overall_accepted, overall_candidate=overall_candidate)
+
+    domain_accepted = {
+        domain: compute_span_metrics(domain_accepted_spans[domain], domain_gold_spans[domain])
+        for domain in domain_gold_spans
+    }
+    domain_candidate = {
+        domain: compute_span_metrics(domain_candidate_spans[domain], domain_gold_spans[domain])
+        for domain in domain_gold_spans
+    }
+    shape_recall_accepted = {
+        shape: RecallBreakdown(hits=shape_accepted_hits.get(shape, 0), total=total)
+        for shape, total in shape_accepted_total.items()
+    }
+    shape_recall_candidate = {
+        shape: RecallBreakdown(hits=shape_candidate_hits.get(shape, 0), total=total)
+        for shape, total in shape_candidate_total.items()
+    }
+
+    return BenchmarkReport(
+        file_results=file_results, overall_accepted=overall_accepted, overall_candidate=overall_candidate,
+        domain_accepted=domain_accepted, domain_candidate=domain_candidate,
+        shape_recall_accepted=shape_recall_accepted, shape_recall_candidate=shape_recall_candidate,
+    )
