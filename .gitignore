@@ -10,6 +10,14 @@ logs/*.log
 output/*
 !output/.gitkeep
 datasets/training/*.jsonl
+# 2026-09-23 (independent-audit finding #8): real-case feedback content
+# has no business in version control - see README's "Independent-audit
+# findings" section for the incident this closes. The retraining
+# pipeline (label_feedback.py, retrain_from_feedback.py, the migrate_*
+# scripts) all read these files from this exact local path regardless -
+# nothing about the pipeline changes, only git no longer tracks it.
+datasets/feedback/*.jsonl
+datasets/feedback/backups/
 .idea/
 .vscode/
 .claude/

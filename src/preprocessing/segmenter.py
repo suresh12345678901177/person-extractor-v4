@@ -32,13 +32,34 @@ def split_sentences(text: str) -> list[str]:
     return sentences
 
 
-def line_containing(text: str, offset: int) -> str:
-    """Return the full line (not sentence) that contains the character
-    offset - used for context-window feature extraction."""
+def line_containing(text: str, offset: int, max_chars: int = 2000) -> str:
+    """Return the line containing offset, bounded to at most max_chars -
+    used for context-window feature extraction and
+    FeedbackRecord.context_text capture.
+
+    max_chars exists because a "line" is only as bounded as the nearest
+    newline: previously this had no cap at all, so a document (or
+    document region) with no newline anywhere near offset - a minified
+    JS bundle, a single-paragraph book dump, a chat export whose "line"
+    spans the entire conversation - returned the ENTIRE remaining
+    document. Found via a real, git-tracked-file audit (2026-09-23):
+    this produced up to 927,834-char single-record captures in
+    practice, including one real case's full chat conversation (both
+    parties' phone numbers included) for what should have been a short
+    local snippet around 3 unrelated non-person tokens. When the raw
+    line exceeds max_chars, the window is re-centered on offset (not
+    just truncated from window_start) so the candidate itself is never
+    cut out of its own "context"."""
     window_start = text.rfind("\n", 0, offset)
     window_start = 0 if window_start == -1 else window_start + 1
     window_end = text.find("\n", offset)
     window_end = len(text) if window_end == -1 else window_end
+
+    if window_end - window_start > max_chars:
+        half = max_chars // 2
+        window_start = max(window_start, offset - half)
+        window_end = min(window_end, offset + half)
+
     return text[window_start:window_end]
 
 
@@ -56,12 +77,82 @@ def is_inside_quotes(text: str, start: int, end: int, window: int = 200) -> bool
     return quote_count % 2 == 1
 
 
+_PRECEDING_WORD_RE = re.compile(r"([A-Za-z']+)\s*$")
+_LOOKAROUND_INITIAL_WINDOW = 100
+
+
 def preceding_word(text: str, start: int) -> str:
     """Return the word immediately preceding a span's start offset, or
-    empty string if the span starts the line."""
-    before = text[:start].rstrip()
-    match = re.search(r"([A-Za-z']+)\s*$", before)
-    return match.group(1) if match else ""
+    empty string if the span starts the line.
+
+    Uses a bounded lookback window rather than text[:start] in full -
+    called per-candidate from both feature extraction and
+    ContextValidator, so on a large document with many candidates a
+    full-prefix copy PLUS an unanchored regex search over it per call is
+    O(candidates x document_length) overall, and can be far worse than
+    that: re.search with no '^' anchor and no match near the string's
+    end (extremely common in dense structured text - log lines full of
+    brackets/digits/identifiers) must probe many starting positions
+    before concluding "no match," which is its own severe cost
+    independent of the slice copy. Confirmed directly: the dominant cost
+    behind a multi-hour hang on a real 13.7MB, 53,587-candidate case
+    file traced to exactly this call.
+
+    Widens the window only when the match actually touches the window's
+    left edge (the word might continue further left) rather than
+    guessing from a single boundary character - a guess-based version
+    of this fix was tried and rejected: on dense alphanumeric log text,
+    a boundary character is "inside a word" often enough that it fell
+    back to the full, catastrophically slow regex almost every call,
+    barely improving anything."""
+    window = _LOOKAROUND_INITIAL_WINDOW
+    while True:
+        window_start = max(0, start - window)
+        before = text[window_start:start].rstrip()
+        match = _PRECEDING_WORD_RE.search(before)
+        if not match:
+            return ""
+        if match.start(1) > 0 or window_start == 0:
+            return match.group(1)  # word doesn't touch the window edge - complete
+        window *= 4  # word touches the edge - it may continue further left; widen and retry
+
+
+_CUE_WORD_RE = re.compile(r"[A-Za-z']+")
+
+
+def preceding_words(text: str, start: int, n: int = 3) -> list[str]:
+    """Return up to n words immediately before start, nearest-first,
+    bounded to the candidate's own line. Used for the person/non-person
+    context-cue features (see feature_extractor.py) - a separate, wider
+    helper from preceding_word() above (which returns only the single
+    immediate word and is relied on elsewhere for stopword-adjacency
+    checks); kept as its own function rather than generalizing that one
+    so existing callers' exact behavior can't shift under them.
+    Deliberately does not cross into a previous line - a word from an
+    unrelated prior log/chat line is not real context for this candidate."""
+    line_start = text.rfind("\n", 0, start)
+    line_start = 0 if line_start == -1 else line_start + 1
+    before = text[line_start:start]
+    words = _CUE_WORD_RE.findall(before)
+    return list(reversed(words[-n:])) if words else []
+
+
+def following_words(text: str, end: int, n: int = 3) -> list[str]:
+    """Return up to n words immediately after end, nearest-first,
+    bounded to the candidate's own line. Deliberately stops at the line
+    boundary rather than reading into the next line - see
+    following_char()'s docstring above: a name sitting alone on its own
+    chat-export line, with nothing following it on that line, is real,
+    load-bearing signal for this project's actual casework, and a
+    previous attempt at reaching past a newline here for a different
+    feature measurably collapsed accepted-only recall (31.55% -> 8.65%,
+    one benchmark file's recall to 0.00%). This helper simply returns no
+    words in that case rather than ever repeating that mistake."""
+    line_end = text.find("\n", end)
+    line_end = len(text) if line_end == -1 else line_end
+    after = text[end:line_end]
+    words = _CUE_WORD_RE.findall(after)
+    return words[:n]
 
 
 def count_occurrences(text: str, document_text: str) -> int:
@@ -101,5 +192,12 @@ def following_char(text: str, end: int) -> str:
     dedicated "line-final AND zero knowledge-corroboration AND
     low-repetition" check) rather than removing the signal wholesale.
     """
-    rest = text[end:].lstrip(" \t")
-    return rest[0] if rest else ""
+    window = _LOOKAROUND_INITIAL_WINDOW
+    while True:
+        window_end = min(len(text), end + window)
+        rest = text[end:window_end].lstrip(" \t")
+        if rest:
+            return rest[0]
+        if window_end == len(text):
+            return ""
+        window *= 4  # entire window was spaces/tabs - widen and retry
