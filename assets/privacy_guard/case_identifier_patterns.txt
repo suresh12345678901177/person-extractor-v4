@@ -1,0 +1,45 @@
+# Case-identifier patterns for scripts/check_feedback_privacy.py.
+# One Python `re` regex per line (matched case-insensitively), checked
+# against every record's text/context_text field in datasets/feedback/
+# before a commit touching that file is allowed through.
+#
+# Independent-audit finding #8 (2026-09-23): confirmed_labels.jsonl is
+# git-tracked (unlike output/, which is gitignored) and stores
+# context_text - a real snippet of surrounding source text captured at
+# logging time (see FeedbackRecord.context_text). A manual audit found it
+# currently clean of real casework content (source: benchmark/public-book
+# text only, per README's "Known limitations"), but nothing previously
+# stopped a future session from accidentally committing a real case
+# snippet. This file is deliberately NOT a hardcoded list in
+# check_feedback_privacy.py - same "plain-text asset, no list in code"
+# principle as every other assets/*.txt file - so starting a NEW case
+# later just means adding that case's own export-naming fingerprint here,
+# not editing Python.
+#
+# Deliberately specific, not generic: a generic pattern (e.g. "Bank:",
+# "Card:") would false-positive on this project's own legitimate
+# synthetic benchmark data (benchmark_real_660.txt/675.txt use exactly
+# that "Cardholder: X | Card: ... | Bank: ..." shape for constructed
+# unseen-name stress tests) - see the "false_positive_regression" note
+# below for the fixture this is regression-tested against.
+
+# "real case" (2026-09 casework) - ProDiscover's export tool
+# stamps this near-constant substring into essentially every real
+# artifact filename from this case (verified: 91.3% of the 7,246
+# real .txt/.pdf files in this case folder contain it).
+CASEFILE
+
+# "real case" - the case's own numeric export-batch ID prefix,
+# seen in filenames like "CASEID_chat.txt", "CASEID_email.txt".
+# Deliberately NOT \bCASEID\b - a trailing underscore (as in every
+# real filename this is meant to catch) is a WORD character in regex,
+# so a right-side \b never matches there; found via this pattern's own
+# test suite (tests/test_check_feedback_privacy.py) failing on exactly
+# this shape before this fix.
+(?<!\d)CASEID
+
+# The forensic tool name and case folder name itself - would only appear
+# in real context_text pulled from this case's own files/paths, never in
+# public-book or synthetic benchmark text.
+ProDiscover
+real case

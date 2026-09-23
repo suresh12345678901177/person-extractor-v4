@@ -1,0 +1,49 @@
+name: CI
+
+# Independent-audit finding #7 / Tier 3b: the two real accuracy
+# regressions documented in README's "Real measured results"
+# (2026-09-16, 2026-09-22) were both caught only because someone
+# remembered to run `--evaluate` by hand afterward. This workflow
+# applies the same guardrail pattern already proven for
+# retrain_from_feedback.py's model-promotion check, at the CI level, so
+# it no longer depends on a human remembering.
+#
+# Uses the model file already committed at models/lightgbm/ - CI
+# validates what would actually ship, it does not regenerate synthetic
+# training data or retrain (that stays a deliberate, reviewed,
+# manually-run step per README's "Retraining / extending the knowledge
+# base" section, not something a push should trigger silently).
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-and-evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Download spaCy English model
+        run: python -m spacy download en_core_web_sm
+
+      - name: Run test suite
+        run: python -m pytest tests/ -v
+
+      - name: Run --evaluate regression gate
+        run: python scripts/ci_evaluate_gate.py
+
+      - name: Run knowledge-base collision audit (informational)
+        run: python scripts/audit_collisions.py
+
+      - name: Privacy guardrail on datasets/feedback/*.jsonl (independent-audit finding #8)
+        run: python scripts/check_feedback_privacy.py --all
