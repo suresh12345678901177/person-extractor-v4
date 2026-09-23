@@ -63,3 +63,286 @@ Titan Company
 Trent
 UltraTech Cement
 Wipro
+
+# App/software/service names, added 2026-09-18 (user request: real
+# phone-forensics casework surfaces these constantly in chat/call-log
+# exports - checked and none of these were previously covered by any
+# asset file). OrganizationValidator does exact-full-candidate-text
+# matching (not substring), so this is safe even for the 2 entries
+# that also collide with first_names.txt/last_names.txt (Ola, Safari)
+# - a bare candidate matching one of these exactly is correctly
+# rejected as a known app/product regardless of dictionary presence,
+# same precedent as "Apple" above.
+Adobe
+Afterpay
+Airtel
+AndroidAuto
+Asana
+BSNL
+Binance
+Bitbucket
+Box
+Bumble
+Canva
+CarPlay
+CashApp
+Cashapp
+Chrome
+Coinbase
+Discord
+Drive
+Dropbox
+Duo
+Evernote
+Excel
+Facebook
+Figma
+Firefox
+Flipkart
+Foursquare
+GPay
+Github
+Gitlab
+Gmail
+Gojek
+Grab
+Hangouts
+Hike
+Hinge
+IMO
+Illustrator
+Instagram
+Jio
+Klarna
+Koo
+Line
+LinkedIn
+Maps
+Medium
+Meesho
+Meet
+Messenger
+Myntra
+Netflix
+Notion
+OkCupid
+Ola
+OneDrive
+OneNote
+Outlook
+PayPal
+Paysafe
+Paytm
+PhonePe
+Photos
+Photoshop
+Pinterest
+PowerPoint
+Premiere
+Quora
+Razorpay
+Reddit
+Revolut
+Robinhood
+Safari
+ShareChat
+Shopee
+Signal
+Skype
+Slack
+Snapchat
+Snapdeal
+Spotify
+Stripe
+Swiggy
+Teams
+Telegram
+Threads
+TikTok
+Tinder
+Trello
+Truecaller
+Tumblr
+Twitter
+Uber
+Venmo
+Viber
+Vodafone
+Waze
+WeChat
+Wetransfer
+WhatsApp
+Word
+Yelp
+YouTube
+Zelle
+Zomato
+Zoom
+
+# --- Bulk addition: major global companies across sectors (tech,
+# finance, retail/consumer, automotive, airlines, energy/telecom,
+# pharma, media, industrial/logistics) - added 2026-09-18 (user
+# request: "max all company names" - broaden this list well beyond the
+# NIFTY-50/India-app set above to well-known multinational brands).
+# Cross-checked against first_names.txt/last_names.txt the same way as
+# the sections above - this validator does exact-full-candidate-text
+# matching only (not substring), so single-word entries are safe.
+# Deliberately EXCLUDED a few well-known brand names that collided with
+# real first/last names in this dataset (Ericsson, Zara, Ferrari,
+# Roche) to avoid hard-rejecting a genuine person with that name -
+# same conservative call as the file's own design principle elsewhere.
+# "Samsung Electronics" already covered via assets/blacklist/
+# blacklist.txt (Samsung phone-system section), not duplicated here.
+IBM
+Intel
+Oracle
+Cisco
+Dell Technologies
+Hewlett-Packard
+Nvidia
+AMD
+Qualcomm
+Tesla
+SpaceX
+Huawei
+Xiaomi
+Lenovo
+Asus
+Acer
+Nokia
+Panasonic
+Toshiba
+Canon
+Nikon
+Xerox
+Motorola
+Salesforce
+SAP
+VMware
+Square
+Shopify
+Airbnb
+Booking.com
+Expedia
+Yahoo
+Cognizant
+Accenture
+Capgemini
+Deloitte
+McKinsey & Company
+Boston Consulting Group
+JPMorgan Chase
+Goldman Sachs
+Morgan Stanley
+Bank of America
+Wells Fargo
+Citigroup
+HSBC
+Barclays
+Deutsche Bank
+UBS
+Credit Suisse
+American Express
+Visa
+Mastercard
+Standard Chartered
+Walmart
+Costco
+Target Corporation
+Home Depot
+Lowe's
+IKEA
+Nike
+Adidas
+Puma
+Reebok
+Uniqlo
+Starbucks
+McDonald's
+KFC
+Burger King
+Subway
+Domino's Pizza
+Pizza Hut
+Coca-Cola
+PepsiCo
+Nestle
+Unilever
+Procter & Gamble
+Colgate-Palmolive
+Johnson & Johnson
+L'Oreal
+Toyota
+Honda
+Ford Motor Company
+General Motors
+BMW
+Mercedes-Benz
+Volkswagen
+Audi
+Nissan
+Hyundai
+Kia Motors
+Volvo
+Porsche
+Delta Air Lines
+American Airlines
+United Airlines
+Emirates
+Qatar Airways
+Lufthansa
+Air India
+British Airways
+Singapore Airlines
+ExxonMobil
+Chevron
+Shell
+TotalEnergies
+AT&T
+Verizon
+T-Mobile
+Pfizer
+Moderna
+Novartis
+AstraZeneca
+Walt Disney Company
+Warner Bros
+Universal Pictures
+Sony Pictures
+Paramount Pictures
+NBCUniversal
+Comcast
+Boeing
+Airbus
+Siemens
+General Electric
+Caterpillar
+3M
+Honeywell
+Lockheed Martin
+Raytheon
+FedEx
+UPS
+DHL
+Marriott International
+Hilton Worldwide
+Alibaba
+Tencent
+Baidu
+ByteDance
+
+# Found via real casework (2026-09-17, real case scan, a
+# EULA/license document) - product/company names not caught by the
+# exact-match list or ORG_KEYWORDS above. "Dell" checked against
+# first_names.txt/last_names.txt - no collision, same precedent as
+# "Ola"/"Safari" above (this validator does exact-full-candidate-text
+# matching only, never substring). "Bing Maps" is its own multi-word
+# entry since OrganizationValidator's existing bare "Maps" entry only
+# matches a candidate whose ENTIRE text is "Maps", not "Bing Maps".
+Dell
+Bing Maps
+
+# Found via the 2026-09-18 false-positive review. "Kindle" collides with
+# last_names.txt - accepted tradeoff, same precedent as Ola/Safari/Dell
+# above.
+Kindle

@@ -967,3 +967,22 @@ yourself
 yourselves
 youve
 zero
+
+# --- Bulk addition: more casual/greeting/chat-closing words - added
+# 2026-09-18 (user request to broaden the hi/hello/bye/thanks set
+# already above). Same rationale as that original block: closed-class
+# chat interjections a real person name never contains, checked against
+# first_names.txt/last_names.txt/honorifics.txt/titles.txt - no
+# collisions found.
+hiya
+yo
+howdy
+goodbye
+cheers
+congrats
+congratulations
+lol
+omg
+brb
+ttyl
+goodnight

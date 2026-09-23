@@ -24,12 +24,27 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from src.core.models import AggregatedPerson
+from src.preprocessing.segmenter import line_containing
 from src.utils.logger import get_logger
 
 logger = get_logger("feedback.feedback_store")
 
 PENDING_FILENAME = "pending_review.jsonl"
 CONFIRMED_FILENAME = "confirmed_labels.jsonl"
+
+
+def _read_jsonl_lines(path: Path) -> list[str]:
+    """Split a JSONL file into its records on the literal newline BYTE
+    only - deliberately NOT str.splitlines(), which also treats Unicode
+    line-separator-like characters (NEL U+0085, LS U+2028, PS U+2029,
+    etc.) as line breaks. Those can legitimately appear raw inside a JSON
+    string value (context_text is pulled from real, sometimes OCR'd
+    casework documents) without needing escaping per the JSON spec -
+    splitlines() would then fragment one valid JSON record into multiple
+    unparseable pieces, exactly matching how these files are actually
+    written (json.dumps(...) + "\\n" per record, see log_review_persons
+    and append_confirmed below)."""
+    return [line for line in path.read_text(encoding="utf-8").split("\n") if line.strip()]
 
 
 @dataclass(slots=True)
@@ -42,6 +57,10 @@ class FeedbackRecord:
     confidence: float
     features: list[float]
     logged_at_utc: str
+    context_text: str = ""  # full source line containing this candidate at
+    # capture time (src.preprocessing.segmenter.line_containing). "" only
+    # for records logged before this field existed - see
+    # scripts/migrate_feedback_add_context_text.py, never silently guessed.
     status: str = "pending"  # pending | confirmed_person | confirmed_not_person | skipped
     labeled_at_utc: str | None = None
 
@@ -55,6 +74,7 @@ class FeedbackRecord:
             "confidence": self.confidence,
             "features": self.features,
             "logged_at_utc": self.logged_at_utc,
+            "context_text": self.context_text,
             "status": self.status,
             "labeled_at_utc": self.labeled_at_utc,
         }
@@ -70,8 +90,9 @@ class FeedbackStore:
         self.feedback_dir.mkdir(parents=True, exist_ok=True)
         self.pending_path = self.feedback_dir / PENDING_FILENAME
         self.confirmed_path = self.feedback_dir / CONFIRMED_FILENAME
+        self._existing_texts_cache: set[str] | None = None
 
-    def log_review_persons(self, persons: list[AggregatedPerson], source_file: str) -> int:
+    def log_review_persons(self, persons: list[AggregatedPerson], source_file: str, document_text: str) -> int:
         """Append every REVIEW-bucket person's first mention to the
         pending feedback log. Deduplicates against text already pending
         or already confirmed, so re-running on the same file doesn't
@@ -96,6 +117,7 @@ class FeedbackStore:
                 confidence=first_mention.state.final_confidence,
                 features=first_mention.state.feature_vector.as_list(),
                 logged_at_utc=datetime.now(timezone.utc).isoformat(),
+                context_text=line_containing(document_text, first_mention.candidate.start),
             )
             new_records.append(record)
             already_seen.add(key)
@@ -112,9 +134,8 @@ class FeedbackStore:
         if not self.pending_path.exists():
             return []
         records = []
-        for line in self.pending_path.read_text(encoding="utf-8").splitlines():
-            if line.strip():
-                records.append(FeedbackRecord.from_dict(json.loads(line)))
+        for line in _read_jsonl_lines(self.pending_path):
+            records.append(FeedbackRecord.from_dict(json.loads(line)))
         return [r for r in records if r.status == "pending"]
 
     def save_all_pending(self, records: list[FeedbackRecord]) -> None:
@@ -132,15 +153,34 @@ class FeedbackStore:
         if not self.confirmed_path.exists():
             return []
         records = []
-        for line in self.confirmed_path.read_text(encoding="utf-8").splitlines():
-            if line.strip():
-                records.append(FeedbackRecord.from_dict(json.loads(line)))
+        for line in _read_jsonl_lines(self.confirmed_path):
+            records.append(FeedbackRecord.from_dict(json.loads(line)))
         return records
 
     def _existing_texts(self) -> set[str]:
-        seen = set()
-        for r in self.load_pending():
-            seen.add(r.normalized_text.lower())
-        for r in self.load_confirmed():
-            seen.add(r.normalized_text.lower())
-        return seen
+        """Cached after the first call (2026-09-22 profiling finding:
+        this previously re-read AND re-parsed both full JSONL files from
+        disk on every single log_review_persons() call - i.e. once per
+        document in a batch scan. With confirmed_labels.jsonl at 1,300+
+        lines and growing, that was measured at ~1.6-1.8s per file,
+        larger than every other pipeline stage combined - for a stage
+        that should just be appending a few new lines. A FeedbackStore
+        instance lives for the whole batch-scan run (one Pipeline, one
+        PersonExtractor, one FeedbackStore - see person_extractor.py's
+        __init__), and log_review_persons() already mutates the returned
+        set in place as it logs new records, so caching the set itself
+        (not a copy) keeps it correctly up to date across calls within
+        that one run with zero extra bookkeeping. Not safe to assume
+        stale-free across SEPARATE processes sharing the same files
+        (e.g. label_feedback.py confirming records while a scan is
+        mid-run in another process) - not a real scenario for how this
+        project is actually used (batch scans and labeling sessions are
+        run as separate, sequential invocations), so not guarded against."""
+        if self._existing_texts_cache is None:
+            seen = set()
+            for r in self.load_pending():
+                seen.add(r.normalized_text.lower())
+            for r in self.load_confirmed():
+                seen.add(r.normalized_text.lower())
+            self._existing_texts_cache = seen
+        return self._existing_texts_cache
