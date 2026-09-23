@@ -24,7 +24,14 @@ class BaseExporter(ABC):
         rejected: list[CandidateResult],
         output_path: str | Path,
         source_path: str = "",
+        run_info: dict | None = None,
     ) -> Path:
+        """`run_info` is `ExtractionResult.model_info` (or an equivalent
+        dict) - includes the provenance fields from
+        `src.utils.provenance.build_run_provenance` (git commit/dirty
+        state, model file identity, scan timestamp). Optional and
+        defaults to None so existing callers that only care about the
+        person rows are unaffected - see independent-audit finding #3."""
         raise NotImplementedError
 
     @staticmethod

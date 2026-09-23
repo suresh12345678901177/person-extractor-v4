@@ -26,15 +26,23 @@ from src.candidate.boundary_refiner import (
 from src.candidate.candidate_aggregator import aggregate_by_surface_form
 from src.candidate.candidate_factory import CandidateFactory
 from src.classification.model_registry import load_classifier
-from src.core.models import CandidateResult, Decision, ExtractionResult, PipelineStatistics
+from src.core.models import (
+    IDENTITY_RESOLUTION_CAVEAT,
+    CandidateResult,
+    Decision,
+    ExtractionResult,
+    PipelineStatistics,
+)
 from src.decision.decision_engine import DecisionEngine
 from src.detection.detector_manager import DetectorManager
 from src.extraction.base_extractor import Extractor
 from src.features.feature_extractor import extract_features
 from src.feedback.feedback_store import FeedbackStore
 from src.knowledge.knowledge_base import KnowledgeBase
+from src.preprocessing.language_filter import check_english
 from src.preprocessing.line_indexer import LineIndex
 from src.utils.logger import get_logger
+from src.utils.provenance import build_run_provenance
 from src.utils.timing import timed_stage
 from src.validation.validation_pipeline import ValidationPipeline
 
@@ -61,14 +69,21 @@ class PersonExtractor(Extractor):
         )
 
         self.classifier = None
+        model_path = None
         if config.get("classification", {}).get("use_ml_classifier", True):
             model_path = self.base_dir / config.get("classification", {}).get(
                 "model_path", "models/lightgbm/person_classifier.txt"
             )
             self.classifier = load_classifier(model_path)
 
+        # Computed once per process/worker, not per file - see
+        # src/utils/provenance.py's module docstring for why this exists.
+        self.provenance = build_run_provenance(self.base_dir, model_path)
+
         self.feedback_enabled = config.get("feedback", {}).get("enabled", True)
         self.feedback_store = FeedbackStore(self.base_dir / "datasets" / "feedback")
+
+        self.language_filter_enabled = config.get("language_filter", {}).get("enabled", True)
 
     def extract(
         self,
@@ -78,6 +93,29 @@ class PersonExtractor(Extractor):
         stats: PipelineStatistics,
     ) -> ExtractionResult:
         candidate_factory = CandidateFactory(line_index)
+
+        if self.language_filter_enabled:
+            with timed_stage("language_filter", stats.stage_timings):
+                lang_check = check_english(cleaned_text, self.knowledge_base)
+            if not lang_check.is_english:
+                logger.info(
+                    "Skipping %s: not English-language prose (english_word_ratio=%.4f over "
+                    "%d words) - likely non-English legal/UI boilerplate, not evidentiary "
+                    "text. Set config['language_filter']['enabled']=False to disable this gate.",
+                    input_path, lang_check.english_word_ratio, lang_check.word_count,
+                )
+                return ExtractionResult(
+                    success=True,
+                    source_path=input_path,
+                    statistics=stats,
+                    model_info={
+                        "detectors_enabled": [d.name.value for d in self.detector_manager.detectors],
+                        "ml_classifier_loaded": self.classifier is not None,
+                        "skipped_reason": "non_english",
+                        "english_word_ratio": lang_check.english_word_ratio,
+                        **self.provenance,
+                    },
+                )
 
         with timed_stage("detection", stats.stage_timings):
             detections = self.detector_manager.detect_all(cleaned_text, page_index=0)
@@ -94,6 +132,7 @@ class PersonExtractor(Extractor):
             all_candidates = refine_boundaries(all_candidates, line_index)
 
         with timed_stage("validation", stats.stage_timings):
+            self.validation_pipeline.reset_document_cache()
             for candidate in all_candidates:
                 self.validation_pipeline.run(candidate, self.knowledge_base, cleaned_text)
 
@@ -115,7 +154,7 @@ class PersonExtractor(Extractor):
 
         with timed_stage("decision_engine", stats.stage_timings):
             for candidate in all_candidates:
-                self.decision_engine.decide(candidate, cleaned_text)
+                self.decision_engine.decide(candidate, cleaned_text, self.knowledge_base)
 
         with timed_stage("aggregation", stats.stage_timings):
             accepted_candidates = [c for c in all_candidates if c.state.decision == Decision.ACCEPTED]
@@ -133,7 +172,7 @@ class PersonExtractor(Extractor):
 
         if self.feedback_enabled and review_persons:
             with timed_stage("feedback_logging", stats.stage_timings):
-                logged_count = self.feedback_store.log_review_persons(review_persons, input_path)
+                logged_count = self.feedback_store.log_review_persons(review_persons, input_path, cleaned_text)
                 if logged_count:
                     logger.info(
                         "%d new candidate(s) logged for review at %s - run "
@@ -149,6 +188,8 @@ class PersonExtractor(Extractor):
         model_info = {
             "detectors_enabled": [d.name.value for d in self.detector_manager.detectors],
             "ml_classifier_loaded": self.classifier is not None,
+            "identity_resolution_caveat": IDENTITY_RESOLUTION_CAVEAT,
+            **self.provenance,
         }
         if self.classifier is not None and getattr(self.classifier, "training_metrics", None):
             model_info["ml_classifier_validation_accuracy"] = self.classifier.training_metrics.get(

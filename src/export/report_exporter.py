@@ -13,6 +13,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from src.core.models import AggregatedPerson, CandidateResult, ExtractionResult
+from src.utils.provenance import provenance_summary_line
 
 
 class ReportExporter:
@@ -28,6 +29,10 @@ class ReportExporter:
         lines.append("=" * 78)
         lines.append(f"Source file        : {result.source_path}")
         lines.append(f"Status              : {'SUCCESS' if result.success else 'FAILED'}")
+        if result.model_info.get("git_commit"):
+            lines.append(f"Provenance          : {provenance_summary_line(result.model_info)}")
+            lines.append("  (a stale result from before a code/model fix is now self-identifying -")
+            lines.append("   see README's 'Independent-audit findings' section)")
         if not result.success:
             lines.append(f"Error               : {result.error}")
             output_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -48,6 +53,9 @@ class ReportExporter:
         lines.append("-" * 78)
         lines.append(f"  Unique persons found (accepted)   : {len(result.persons)}")
         lines.append(f"  Unique persons flagged for review : {len(result.review_persons)}")
+        caveat = result.model_info.get("identity_resolution_caveat")
+        if caveat:
+            lines.append(f"  NOTE: {caveat}")
         lines.append(f"  Total mentions (accepted+review)  : "
                       f"{sum(p.occurrence_count for p in result.persons) + sum(p.occurrence_count for p in result.review_persons)}")
         lines.append(f"  Rejected candidate spans          : {len(result.rejected)}")

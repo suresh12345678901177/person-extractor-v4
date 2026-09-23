@@ -35,9 +35,9 @@ from typing import Any
 # ------------------------------------------------------------------ #
 
 class SourceFormat(str, Enum):
-    """Supported input formats. V4 scope is TXT-only; the enum keeps the
-    door open for future formats without touching any existing code."""
+    """Supported input formats."""
     TXT = "txt"
+    PDF = "pdf"
 
 
 class DetectorName(str, Enum):
@@ -208,6 +208,23 @@ class FeatureVector:
     preceding_word_is_stopword: int  # 0/1
     following_char_is_punct: int     # 0/1
     occurs_in_quotes: int             # 0/1 - inside a quoted string
+    # Context-window features (2026-09-17) - added after an accuracy
+    # review found the model never received the candidate's local
+    # context, just shape/dictionary/confidence numbers, which cannot
+    # distinguish "Marcus Webb" from "Convertible Debt" when those
+    # properties happen to match. See feature_extractor.py for the cue
+    # word lists and src.preprocessing.segmenter's preceding_words/
+    # following_words for the (line-bounded) windows these read from.
+    # Deliberately NOT included: a "sits on a system-log/dumpsys line"
+    # feature. SystemLogValidator hard-rejects those candidates before
+    # feature_engineering even runs (see person_extractor.py's
+    # `if candidate.state.is_hard_rejected: continue`), so such a
+    # feature could never be nonzero for anything the classifier or the
+    # feedback loop ever actually sees - a structurally dead input,
+    # exactly the "ML can't recover what rules already gated" trap.
+    preceding_context_is_person_cue: int      # 0/1 - "said", "met", "contact"... within 3 words before
+    following_context_is_nonperson_cue: int   # 0/1 - "Ltd", "Division", "Debt"... within 3 words after
+    is_isolated_line: int                     # 0/1 - candidate is alone on its own line (chat-header shape)
 
     def as_list(self) -> list[float]:
         """Fixed-order numeric encoding for the classifier. Order MUST
@@ -229,6 +246,9 @@ class FeatureVector:
             float(self.preceding_word_is_stopword),
             float(self.following_char_is_punct),
             float(self.occurs_in_quotes),
+            float(self.preceding_context_is_person_cue),
+            float(self.following_context_is_nonperson_cue),
+            float(self.is_isolated_line),
         ]
 
 
@@ -312,6 +332,15 @@ class CandidateResult:
 # ------------------------------------------------------------------ #
 # Aggregated (post-pipeline) result: one entry per unique person
 # ------------------------------------------------------------------ #
+
+IDENTITY_RESOLUTION_CAVEAT = (
+    "Occurrence counts are per SURFACE FORM, not per person: alias/"
+    "coreference resolution is intentionally not attempted (a deliberate "
+    "precision-over-recall choice, not a bug - see README's 'Known "
+    "limitations'). 'Suresh', 'Dr. Suresh Kumar', and 'S. Kumar' are "
+    "reported as three separate rows, which may be the same individual."
+)
+
 
 @dataclass(slots=True)
 class AggregatedPerson:

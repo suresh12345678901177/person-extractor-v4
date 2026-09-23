@@ -20,12 +20,14 @@ class JsonExporter(BaseExporter):
         rejected: list[CandidateResult],
         output_path: str | Path,
         source_path: str = "",
+        run_info: dict | None = None,
     ) -> Path:
         output_path = Path(output_path)
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         payload = {
             "source_file": source_path,
+            "provenance": run_info or {},
             "accepted": [self._full_person(p, source_path) for p in persons],
             "review": [self._full_person(p, source_path) for p in review_persons],
             "rejected": [self._rejected_row(c, source_path) for c in rejected],

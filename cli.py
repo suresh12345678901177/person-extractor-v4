@@ -92,6 +92,12 @@ def run_extraction(input_path: str, output_dir: Path, args: argparse.Namespace, 
     _print_header("PERSON_EXTRACTOR_V4 - EXTRACTION RESULT")
     print(f"Source file : {input_path}")
 
+    if result.model_info.get("skipped_reason") == "non_english":
+        print(f"\n*** SKIPPED: not English-language prose "
+              f"(english_word_ratio={result.model_info.get('english_word_ratio')}) - "
+              f"likely non-English legal/UI boilerplate, not evidentiary text. "
+              f"Use --no-language-filter to force extraction anyway. ***\n")
+
     _print_section("TIME TAKEN")
     for st in result.statistics.stage_timings:
         print(f"  {st.stage_name:<28} {st.seconds:>8.4f} sec")
@@ -143,6 +149,9 @@ def run_extraction(input_path: str, output_dir: Path, args: argparse.Namespace, 
     print(f"  Unique persons accepted : {len(result.persons)}")
     print(f"  Unique persons in review: {len(result.review_persons)}")
     print(f"  Rejected candidate spans: {len(result.rejected)}")
+    caveat = result.model_info.get("identity_resolution_caveat")
+    if caveat:
+        print(f"  NOTE: {caveat}")
 
     if result.review_persons:
         from src.feedback.feedback_store import FeedbackStore
@@ -159,6 +168,7 @@ def run_extraction(input_path: str, output_dir: Path, args: argparse.Namespace, 
         path = exporter.export(
             list(result.persons), list(result.review_persons), list(result.rejected),
             output_dir / f"result.{args.format}", input_path,
+            run_info=result.model_info,
         )
         written.append(path)
 
@@ -176,6 +186,8 @@ def _build_config(args: argparse.Namespace) -> dict:
         config["feedback"]["enabled"] = False
     if getattr(args, "loose_gate", False):
         config["decision"]["strict_corroboration"] = False
+    if getattr(args, "no_language_filter", False):
+        config["language_filter"]["enabled"] = False
     return config
 
 
@@ -211,6 +223,13 @@ def run_evaluate(args: argparse.Namespace) -> int:
             print(f"  False positives (accepted)  : {fr.false_positive_texts}")
 
     _print_section("OVERALL (all benchmark files combined)")
+    n_files = len(report.file_results)
+    print(f"  Sample-size caveat: F1/precision/recall below are computed on N={n_files} "
+          f"benchmark files. Treat any swing under ~2 percentage points as noise at this "
+          f"sample size, not a real change - the same 0.02 tolerance "
+          f"retrain_from_feedback.py's own promotion guardrail uses. See README's "
+          f"'Independent-audit findings' section for why the benchmark is this small "
+          f"and what would need to change to shrink this caveat.")
     a, c = report.overall_accepted, report.overall_candidate
     print(f"  ACCEPTED only (automatic extraction quality):")
     print(f"    Precision : {a.precision:.4f}")
@@ -222,6 +241,28 @@ def run_evaluate(args: argparse.Namespace) -> int:
     print(f"    Recall    : {c.recall:.4f}")
     print(f"    F1        : {c.f1:.4f}")
     print(f"    Accuracy  : {c.accuracy:.4f}  (TP / (TP+FP+FN), standard NER convention)")
+
+    if report.domain_accepted:
+        _print_section("BY DOCUMENT-TYPE DOMAIN (see evaluator.py's FILE_DOMAINS)")
+        for domain in sorted(report.domain_accepted):
+            da, dc = report.domain_accepted[domain], report.domain_candidate[domain]
+            print(f"  {domain} (gold: {da.gold_total}):")
+            print(f"    ACCEPTED only      : P {da.precision:.4f} / R {da.recall:.4f} / F1 {da.f1:.4f}")
+            print(f"    ACCEPTED + REVIEW  : P {dc.precision:.4f} / R {dc.recall:.4f} / F1 {dc.f1:.4f}")
+        if "uncategorized" not in report.domain_accepted:
+            known_domains = {"prose", "chat_or_call_log", "email", "system_log"}
+            missing = known_domains - set(report.domain_accepted)
+            if missing:
+                print(f"  (no benchmark file yet for: {', '.join(sorted(missing))} - "
+                      f"not measured, not assumed zero)")
+
+    if report.shape_recall_accepted:
+        _print_section("BY CANDIDATE SHAPE (recall only - see RecallBreakdown docstring)")
+        for shape in sorted(report.shape_recall_accepted):
+            ra = report.shape_recall_accepted[shape]
+            rc = report.shape_recall_candidate[shape]
+            print(f"  {shape:<20} accepted-only recall {ra.recall:.4f} ({ra.hits}/{ra.total})"
+                  f"  |  +review recall {rc.recall:.4f} ({rc.hits}/{rc.total})")
 
     return 0
 
@@ -447,8 +488,8 @@ def run_batch(input_paths: list[str], args: argparse.Namespace, config: dict, ba
             _merge(person, "review", source_filename)
 
     # Batch-level boundary refinement: a noise variant that didn't
-    # dominate within any single file (e.g. "Testing Severus Morris"
-    # appearing twice in one email while "Severus Morris" is common
+    # dominate within any single file (e.g. "Testing Corvin Hale"
+    # appearing twice in one email while "Corvin Hale" is common
     # case-wide across other files) still gets merged here, using
     # combined counts across every file in this batch.
     combined = refine_combined_counts(combined)
@@ -541,6 +582,12 @@ def main() -> int:
                               "dictionary or title match. Trades precision for recall - use "
                               "alongside the default (strict) mode to compare results before "
                               "deciding which one you actually want.")
+    parser.add_argument("--no-language-filter", action="store_true",
+                         help="Disable the English-language gate (on by default) that skips "
+                              "documents which aren't natural-language English prose - "
+                              "non-English text, translated legal/EULA boilerplate, etc. - "
+                              "instead of running detection on them and producing false "
+                              "positives from cross-language word collisions.")
     args = parser.parse_args()
 
     if args.output and Path(args.output).exists() and Path(args.output).is_file():
