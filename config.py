@@ -1,3 +1,4 @@
+
 """
 config.py
 ==========
@@ -34,6 +35,15 @@ DEFAULT_CONFIG = {
     },
     "decision": {
         "strict_corroboration": True,  # False = comparison mode, see cli.py --loose-gate
+    },
+    "language_filter": {
+        # Skips detection entirely on documents that aren't natural-
+        # language English prose (non-English text, legal/EULA
+        # boilerplate, phone-settings screens, ...) - see
+        # src/preprocessing/language_filter.py for why this exists and
+        # how the threshold was calibrated. Off switch kept here in case
+        # a future extraction type needs to run on non-English text.
+        "enabled": True,
     },
     "export": {
         "default_format": "csv",  # csv | json | txt (report)

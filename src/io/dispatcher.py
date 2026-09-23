@@ -2,11 +2,10 @@
 src.io.dispatcher
 ===================
 Detects a file's type by extension and dispatches to the appropriate
-reader. V4 registers only TextReader (TXT-only scope), but the
-open/closed registry pattern means adding a future reader (e.g. a
-DocxReader) is a one-line addition here with zero changes to any other
-file - this is the "Plugin Architecture" design principle applied to
-the IO layer.
+reader. The open/closed registry pattern means adding a future reader
+(e.g. a DocxReader) is a one-line addition here with zero changes to
+any other file - this is the "Plugin Architecture" design principle
+applied to the IO layer.
 """
 
 from __future__ import annotations
@@ -15,6 +14,7 @@ from pathlib import Path
 
 from src.core.models import DocumentResult
 from src.io.base_reader import BaseReader
+from src.io.pdf_reader import PdfReader
 from src.io.text_reader import TextReader
 from src.utils.logger import get_logger
 
@@ -27,8 +27,9 @@ class ReaderDispatcher:
     def __init__(self) -> None:
         self._readers: list[BaseReader] = [
             TextReader(),
+            PdfReader(),
             # Future formats register here, e.g.:
-            #   DocxReader(), PdfReader(), ExcelReader(), ImageReader()
+            #   DocxReader(), ExcelReader(), ImageReader()
             # No other file needs to change when a new reader is added.
         ]
 

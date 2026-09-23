@@ -1,10 +1,15 @@
 # PERSON_EXTRACTOR_V4 requirements
-# TXT-only scope keeps this lean - no PDF/DOCX/Excel/image dependencies.
+# TXT + PDF (text-layer only, no OCR) scope keeps this lean - no
+# DOCX/Excel/image-OCR dependencies.
 
 # NLP detection
 spacy>=3.7.0
 # After installing, download the English model once with:
 #   python -m spacy download en_core_web_sm
+
+# PDF text extraction (text layer only - a scanned/image-only PDF with
+# no embedded text yields nothing; that needs OCR, out of scope)
+pypdf>=6.0.0
 
 # ML classification
 lightgbm>=4.0.0

@@ -36,7 +36,6 @@ from src.feedback.feedback_store import FeedbackStore
 
 LOCATION_CHARS_RE = re.compile(r"chars (\d+)-(\d+)")
 
-
 def _load_gold_spans_by_filename(benchmark_dir: Path) -> dict[str, list[tuple[int, int]]]:
     spans_by_name: dict[str, list[tuple[int, int]]] = {}
     for gold_path in benchmark_dir.glob("*_gold.json"):

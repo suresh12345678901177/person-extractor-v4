@@ -40,6 +40,7 @@ from src.validation.validators.punctuation_validator import PunctuationValidator
 from src.validation.validators.repetition_validator import RepetitionValidator
 from src.validation.validators.stopword_validator import StopwordValidator
 from src.validation.validators.structure_validator import StructureValidator
+from src.validation.validators.system_log_validator import SystemLogValidator
 from src.validation.validators.title_validator import TitleValidator
 
 logger = get_logger("validation.validation_pipeline")
@@ -53,6 +54,7 @@ class ValidationPipeline:
         self.hard_validators: list[BaseValidator] = [
             LengthValidator(),
             StructureValidator(),
+            SystemLogValidator(),
             PunctuationValidator(),
             RepetitionValidator(),
             InitialValidator(),
@@ -84,6 +86,17 @@ class ValidationPipeline:
             DictionaryValidator(),
             TitleValidator(),
         ]
+
+    def reset_document_cache(self) -> None:
+        """Clears any validator's per-document memo cache (e.g.
+        CorroborationValidator's repetition-count cache) before starting
+        a new document - must be called once per document, since
+        ValidationPipeline/its validators are constructed once and reused
+        across every file in a batch run."""
+        for validator in self.hard_validators:
+            reset = getattr(validator, "reset_document_cache", None)
+            if reset is not None:
+                reset()
 
     def run(self, candidate: CandidateResult, knowledge_base: KnowledgeBase, document_text: str) -> CandidateResult:
         for validator in self.hard_validators:

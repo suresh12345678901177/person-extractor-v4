@@ -1,10 +1,10 @@
 """
 src.io.text_reader
 ====================
-Reader for plain-text (.txt) files - the only format in V4's scope.
-Handles common encodings defensively (a raw .txt from Windows Notepad,
-Excel-exported CSV-as-txt, or a Linux tool can each use a different
-encoding) rather than assuming UTF-8 and failing on real-world files.
+Reader for plain-text (.txt) files. Handles common encodings
+defensively (a raw .txt from Windows Notepad, Excel-exported
+CSV-as-txt, or a Linux tool can each use a different encoding) rather
+than assuming UTF-8 and failing on real-world files.
 """
 
 from __future__ import annotations

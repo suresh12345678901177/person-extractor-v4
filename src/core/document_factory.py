@@ -15,7 +15,7 @@ buried inside a specific reader.
 
 from __future__ import annotations
 
-import datetime as _dt
+import datetime as _dt     
 from pathlib import Path
 
 from src.core.models import DocumentResult
@@ -23,8 +23,6 @@ from src.io.dispatcher import ReaderDispatcher
 from src.utils.logger import get_logger
 
 logger = get_logger("core.document_factory")
-
-
 class DocumentFactory:
     def __init__(self, dispatcher: ReaderDispatcher | None = None) -> None:
         self._dispatcher = dispatcher or ReaderDispatcher()

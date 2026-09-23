@@ -57,6 +57,8 @@ def main() -> None:
     for i, record in enumerate(pending, start=1):
         print(f"[{i}/{len(pending)}] \"{record.text}\"")
         print(f"    location: {record.location}   confidence: {record.confidence:.2f}   source: {record.source_file}")
+        if record.context_text:
+            print(f"    context:  {record.context_text}")
 
         answer = input("    Is this a real person name? [y/n/s/q]: ").strip().lower()
 
