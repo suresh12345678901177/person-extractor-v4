@@ -8,7 +8,9 @@ full real-case scan (no case content is recorded here).
 | id | git_commit | acc_P | acc_R | acc_F1 | rev_P | rev_R | shape_unseen | dump005_acc_FP | unseen_acc_P | unseen_acc_R | bench_seconds | server_median_ms | scan_seconds | scan_accepted | scan_review | verdict |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | baseline | 0652a78f35 | 0.9606 | 0.9131 | 0.9362 | 0.9332 | 0.9625 | 0.6655 | 0 | 1.0 | 0.9655 | 1.7162 | 31.32 | 1059.6 | 236 | 334 | baseline |
+| exp01-spacy-lg | 4608805de5 | 0.9589 | 0.9079 | 0.9327 | 0.935 | 0.9596 | 0.662 | 0 | 1.0 | 1.0 | 1.8017 | 32.76 |  |  |  | rolled back |
 
 ## Descriptions
 
 - **baseline** (2026-09-25T04:36:34Z): Baseline before any self-upgrade change: master @ 0652a78 (hostname fix, held-out leak fix, CI floor 0.91). CPU only; GPU present but unused (no torch/cupy installed).
+- **exp01-spacy-lg** (2026-09-25T06:24:16Z): Candidate: en_core_web_lg instead of en_core_web_sm as the spaCy detector (branch exp01-spacy-lg @ 4608805). REJECTED at the benchmark gate, so no case rescan: accepted-only P 0.9606->0.9589, single_token recall 0.9606->0.9310 (-3.0pp, over the 0.02 limit), F1 0.9362->0.9327, 2 tests fail (first-name propagation: lg's different span boundaries leave 'Kenji' of 'Dr. Kenji Ito' unaccepted). Only gain: benchmark_unseen recall 0.9655->1.000 (+1 of 29 mentions, noise). Timing +5% (1.80 vs 1.72 s; an earlier 9.8 s reading was machine-state noise, re-timed alternating with sm).

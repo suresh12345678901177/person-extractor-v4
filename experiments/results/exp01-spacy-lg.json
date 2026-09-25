@@ -1,0 +1,341 @@
+{
+  "id": "exp01-spacy-lg",
+  "description": "Candidate: en_core_web_lg instead of en_core_web_sm as the spaCy detector (branch exp01-spacy-lg @ 4608805). REJECTED at the benchmark gate, so no case rescan: accepted-only P 0.9606->0.9589, single_token recall 0.9606->0.9310 (-3.0pp, over the 0.02 limit), F1 0.9362->0.9327, 2 tests fail (first-name propagation: lg's different span boundaries leave 'Kenji' of 'Dr. Kenji Ito' unaccepted). Only gain: benchmark_unseen recall 0.9655->1.000 (+1 of 29 mentions, noise). Timing +5% (1.80 vs 1.72 s; an earlier 9.8 s reading was machine-state noise, re-timed alternating with sm).",
+  "verdict": "rolled back",
+  "measured_utc": "2026-09-25T06:24:16Z",
+  "provenance": {
+    "scan_timestamp_utc": "2026-09-25T06:24:16Z",
+    "git_commit": "4608805de5312171a9373c9f31ee364e23ce855e",
+    "git_dirty": true,
+    "git_dirty_file_count": 7,
+    "model_file": "person_classifier.txt",
+    "model_mtime_utc": "2026-09-24T08:11:43Z",
+    "model_sha256_short": "cf3ee50e5759"
+  },
+  "hardware": {
+    "cpu_logical_cores": 12,
+    "device_used": "cpu",
+    "gpu": "NVIDIA GeForce RTX 2050, 4096 MiB, 3954 MiB, 610.78",
+    "spacy_gpu_available": false
+  },
+  "tests": {
+    "ok": false,
+    "summary": "2 failed, 179 passed in 26.05s",
+    "seconds": 28.4
+  },
+  "benchmark": {
+    "files": 7,
+    "accepted": {
+      "P": 0.9589,
+      "R": 0.9079,
+      "F1": 0.9327,
+      "TP": 1212,
+      "FP": 52,
+      "FN": 123,
+      "gold": 1335
+    },
+    "accepted_plus_review": {
+      "P": 0.935,
+      "R": 0.9596,
+      "F1": 0.9471,
+      "TP": 1281,
+      "FP": 89,
+      "FN": 54,
+      "gold": 1335
+    },
+    "domains_accepted": {
+      "prose": {
+        "P": 0.8732,
+        "R": 0.9394,
+        "F1": 0.9051,
+        "TP": 62,
+        "FP": 9,
+        "FN": 4,
+        "gold": 66
+      },
+      "chat_or_call_log": {
+        "P": 0.9644,
+        "R": 0.9053,
+        "F1": 0.9339,
+        "TP": 1138,
+        "FP": 42,
+        "FN": 119,
+        "gold": 1257
+      },
+      "email": {
+        "P": 0.9231,
+        "R": 1.0,
+        "F1": 0.96,
+        "TP": 12,
+        "FP": 1,
+        "FN": 0,
+        "gold": 12
+      },
+      "system_log": {
+        "P": 0.0,
+        "R": 0.0,
+        "F1": 0.0,
+        "TP": 0,
+        "FP": 0,
+        "FN": 0,
+        "gold": 0
+      }
+    },
+    "domains_accepted_plus_review": {
+      "prose": {
+        "P": 0.8732,
+        "R": 0.9394,
+        "F1": 0.9051,
+        "TP": 62,
+        "FP": 9,
+        "FN": 4,
+        "gold": 66
+      },
+      "chat_or_call_log": {
+        "P": 0.9386,
+        "R": 0.9602,
+        "F1": 0.9493,
+        "TP": 1207,
+        "FP": 79,
+        "FN": 50,
+        "gold": 1257
+      },
+      "email": {
+        "P": 0.9231,
+        "R": 1.0,
+        "F1": 0.96,
+        "TP": 12,
+        "FP": 1,
+        "FN": 0,
+        "gold": 12
+      },
+      "system_log": {
+        "P": 0.0,
+        "R": 0.0,
+        "F1": 0.0,
+        "TP": 0,
+        "FP": 0,
+        "FN": 0,
+        "gold": 0
+      }
+    },
+    "shape_recall_accepted": {
+      "single_token": {
+        "hits": 189,
+        "total": 203,
+        "recall": 0.931
+      },
+      "dictionary_known": {
+        "hits": 1023,
+        "total": 1048,
+        "recall": 0.9761
+      },
+      "multi_token": {
+        "hits": 1024,
+        "total": 1132,
+        "recall": 0.9046
+      },
+      "unseen_name": {
+        "hits": 190,
+        "total": 287,
+        "recall": 0.662
+      }
+    },
+    "shape_recall_accepted_plus_review": {
+      "single_token": {
+        "hits": 189,
+        "total": 203,
+        "recall": 0.931
+      },
+      "dictionary_known": {
+        "hits": 1030,
+        "total": 1048,
+        "recall": 0.9828
+      },
+      "multi_token": {
+        "hits": 1093,
+        "total": 1132,
+        "recall": 0.9655
+      },
+      "unseen_name": {
+        "hits": 252,
+        "total": 287,
+        "recall": 0.878
+      }
+    },
+    "per_file_accepted": {
+      "benchmark_001.txt": {
+        "P": 0.8793,
+        "R": 0.9273,
+        "F1": 0.9027,
+        "TP": 51,
+        "FP": 7,
+        "FN": 4,
+        "gold": 55
+      },
+      "benchmark_002.txt": {
+        "P": 0.8462,
+        "R": 1.0,
+        "F1": 0.9167,
+        "TP": 11,
+        "FP": 2,
+        "FN": 0,
+        "gold": 11
+      },
+      "benchmark_003.txt": {
+        "P": 0.9412,
+        "R": 0.9697,
+        "F1": 0.9552,
+        "TP": 32,
+        "FP": 2,
+        "FN": 1,
+        "gold": 33
+      },
+      "benchmark_004.txt": {
+        "P": 0.9231,
+        "R": 1.0,
+        "F1": 0.96,
+        "TP": 12,
+        "FP": 1,
+        "FN": 0,
+        "gold": 12
+      },
+      "benchmark_real_660.txt": {
+        "P": 0.9737,
+        "R": 0.9681,
+        "F1": 0.9709,
+        "TP": 850,
+        "FP": 23,
+        "FN": 28,
+        "gold": 878
+      },
+      "benchmark_real_675.txt": {
+        "P": 0.9377,
+        "R": 0.7399,
+        "F1": 0.8271,
+        "TP": 256,
+        "FP": 17,
+        "FN": 90,
+        "gold": 346
+      },
+      "benchmark_structured_dump_005.txt": {
+        "P": 0.0,
+        "R": 0.0,
+        "F1": 0.0,
+        "TP": 0,
+        "FP": 0,
+        "FN": 0,
+        "gold": 0
+      }
+    }
+  },
+  "unseen": {
+    "files": 1,
+    "accepted": {
+      "P": 1.0,
+      "R": 1.0,
+      "F1": 1.0,
+      "TP": 29,
+      "FP": 0,
+      "FN": 0,
+      "gold": 29
+    },
+    "accepted_plus_review": {
+      "P": 1.0,
+      "R": 1.0,
+      "F1": 1.0,
+      "TP": 29,
+      "FP": 0,
+      "FN": 0,
+      "gold": 29
+    },
+    "domains_accepted": {
+      "uncategorized": {
+        "P": 1.0,
+        "R": 1.0,
+        "F1": 1.0,
+        "TP": 29,
+        "FP": 0,
+        "FN": 0,
+        "gold": 29
+      }
+    },
+    "domains_accepted_plus_review": {
+      "uncategorized": {
+        "P": 1.0,
+        "R": 1.0,
+        "F1": 1.0,
+        "TP": 29,
+        "FP": 0,
+        "FN": 0,
+        "gold": 29
+      }
+    },
+    "shape_recall_accepted": {
+      "multi_token": {
+        "hits": 29,
+        "total": 29,
+        "recall": 1.0
+      },
+      "unseen_name": {
+        "hits": 6,
+        "total": 6,
+        "recall": 1.0
+      },
+      "dictionary_known": {
+        "hits": 23,
+        "total": 23,
+        "recall": 1.0
+      }
+    },
+    "shape_recall_accepted_plus_review": {
+      "multi_token": {
+        "hits": 29,
+        "total": 29,
+        "recall": 1.0
+      },
+      "unseen_name": {
+        "hits": 6,
+        "total": 6,
+        "recall": 1.0
+      },
+      "dictionary_known": {
+        "hits": 23,
+        "total": 23,
+        "recall": 1.0
+      }
+    },
+    "per_file_accepted": {
+      "benchmark_unseen_names.txt": {
+        "P": 1.0,
+        "R": 1.0,
+        "F1": 1.0,
+        "TP": 29,
+        "FP": 0,
+        "FN": 0,
+        "gold": 29
+      }
+    }
+  },
+  "stage_timing": {
+    "TOTAL": 1.8017,
+    "aggregation": 0.0015,
+    "boundary_refinement": 0.0046,
+    "candidate_factory": 0.0178,
+    "decision_engine": 0.0791,
+    "detection": 1.3154,
+    "feature_engineering": 0.034,
+    "io_read_document": 0.0093,
+    "language_filter": 0.0047,
+    "ml_classification": 0.0067,
+    "name_propagation": 0.0086,
+    "preprocessing": 0.0068,
+    "validation": 0.3012
+  },
+  "server_latency": {
+    "messages": 1549,
+    "median_ms": 32.76,
+    "p95_ms": 93.81,
+    "max_ms": 134.03
+  }
+}

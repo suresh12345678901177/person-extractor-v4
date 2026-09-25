@@ -517,6 +517,15 @@ Worth testing next, through the full gate: **en_core_web_lg** - same speed,
 no new dependency class, and far fewer junk tags (on the case sample it
 tagged 118 distinct texts the pipeline rejects vs 840 for sm), though it
 also produces 271 distinct texts the pipeline never saw as candidates.
+*Tested the same day (experiments/ledger.md, `exp01-spacy-lg`): rejected
+at the benchmark gate.* As the pipeline's detector (config
+`detection.spacy_model`, now configurable) it lowered accepted-only
+precision 0.9606 -> 0.9589 and single-token recall 0.9606 -> 0.9310, and
+broke first-name propagation (2 tests: its spans leave "Kenji" of "Dr.
+Kenji Ito" unaccepted) - the pipeline's boundary and decision rules are
+tuned around sm's spans, so a cleaner tagger in isolation did not make a
+better pipeline. No case rescan was run: a rescan can confirm a gain, not
+rescue a failed gate.
 
 **2026-09-25 - evaluation hygiene.** `retrain_from_feedback.py` now also
 excludes labels from the held-out `datasets/benchmark_unseen/` and from
