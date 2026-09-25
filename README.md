@@ -68,6 +68,45 @@ from simply memorizing single rows, which is why not every confirmed
 example crosses the acceptance threshold after one small labeling
 round; this improves further with more rounds).
 
+### Real PDF/TXT evaluation and balanced training workflow
+
+For a production PDF/TXT folder, reserve a file-separated holdout before
+labeling training candidates. The manifest contains only local paths and
+hashes; it is excluded from retraining and git. Start with 20-50 files:
+
+```powershell
+python scripts/create_pdf_txt_holdout.py --input-dir "C:\case_files" --count 25
+python scripts/prepare_holdout_snapshots.py
+```
+
+The snapshot command creates pipeline-ready TXT copies of the held-out PDF
+text and TXT input. In a copy of each snapshot, wrap every real person
+mention in `**double asterisks**`, then build its TXT/gold pair and measure
+it. This captures missed people too, so recall is meaningful.
+
+```powershell
+python scripts/build_benchmark_from_markup.py marked_001.md holdout_001 --output-dir datasets/evaluation_holdout/snapshots
+python cli.py --evaluate --benchmark-dir datasets/evaluation_holdout/snapshots
+```
+
+For training data, draw a balanced sample from the complete live pipeline,
+not only the REVIEW queue. It samples ACCEPTED, REVIEW and classifier-ready
+REJECTED candidates without changing any decision rule. `--queue` sends the
+sample to the existing interactive labeler.
+
+```powershell
+python scripts/sample_pipeline_candidates.py --input-dir "C:\case_files" --per-bucket 25 --queue
+python scripts/label_feedback.py
+python scripts/retrain_from_feedback.py
+```
+
+Retraining now refuses a feedback set with fewer than 10 examples in either
+class or a class ratio above 3:1, unless `--allow-imbalanced-feedback` is
+explicitly supplied. The existing benchmark regression guard remains the
+final promotion check. The strict rules-first decision engine remains
+unchanged: LightGBM and spaCy continue to corroborate a candidate and never
+override a hard validator rejection.
+
 ## Why we didn't add a heavier ensemble/transformer model
 
 This was tested, not assumed. The apparent fix for a real false-positive
@@ -485,6 +524,20 @@ still counts. Benchmark unchanged. Real case, before/after on all 108 files
 containing an exempted hostname (of 19,089): no ACCEPTED change, no name
 gained or lost in REVIEW; "Edit" (already in REVIEW) +4 mentions in one
 preferences XML.
+
+**2026-09-25 - dictionary names matched as whole words only (exp03).**
+`DictionaryDetector` had no word-boundary check, so it matched listed names
+INSIDE code identifiers: "Handler" out of `clickHandler`/`errorHandler` was
+ACCEPTED 146 times in the real case scan, none of them a standalone word. A
+token now needs no letter or underscore before it and no letter, digit or
+underscore after it. A digit before is allowed: the first version also
+blocked it and the rescan lost a real cited author written "1Berger, A.".
+Benchmark (N=7) vs the exp02 state: accepted-only P 0.9710 -> 0.9781, recall
+and every shape unchanged. Real case: nothing newly accepted; "Handler" 146
+accepted -> 4 standalone mentions in REVIEW; 4 accepted fragments gone
+(`Bijoy_Keyboard`, `..._Max`, `Olaf2Bg`, a `comDana` fragment - "Dana
+Doe" stays accepted); 45 REVIEW entries gone, 43 of which only ever
+occurred glued inside longer tokens. A strict improvement, promoted.
 
 **2026-09-25 - bare common-word surnames held for review (exp02, owner-
 approved trade).** Tracing the real case scan's accepted single words found
