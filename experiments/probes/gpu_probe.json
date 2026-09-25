@@ -21,11 +21,11 @@
         "gold_tagged": 642,
         "by_pipeline_state (gold, tagged_by_model)": {
           "accepted": [
-            1220,
+            1206,
             627
           ],
           "review_only": [
-            66,
+            80,
             9
           ],
           "missed": [
@@ -97,11 +97,11 @@
         "gold_tagged": 843,
         "by_pipeline_state (gold, tagged_by_model)": {
           "accepted": [
-            1220,
+            1206,
             820
           ],
           "review_only": [
-            66,
+            80,
             11
           ],
           "missed": [
@@ -173,11 +173,11 @@
         "gold_tagged": 1112,
         "by_pipeline_state (gold, tagged_by_model)": {
           "accepted": [
-            1220,
+            1206,
             1075
           ],
           "review_only": [
-            66,
+            80,
             16
           ],
           "missed": [
@@ -229,6 +229,88 @@
         }
       }
     },
+    "trf_gpu": {
+      "speed": {
+        "model": "trf_gpu",
+        "texts": 269,
+        "chars": 6113843,
+        "batch_size": 4,
+        "seconds": 1941.45,
+        "chars_per_second": 3149,
+        "gpu": {
+          "gpu_util_mean_pct": 98.3,
+          "gpu_util_max_pct": 100.0,
+          "gpu_mem_used_max_mib": 3947.0,
+          "samples": 3377
+        },
+        "torch_cuda_max_mem_mib": 4738,
+        "device_name": "NVIDIA GeForce RTX 2050"
+      },
+      "bench": {
+        "person_tags": 1277,
+        "tags_on_a_gold_mention": 1111,
+        "tags_on_no_gold_mention": 166,
+        "tag_precision": 0.87,
+        "gold_mentions": 1335,
+        "gold_tagged": 1112,
+        "by_pipeline_state (gold, tagged_by_model)": {
+          "accepted": [
+            1206,
+            1075
+          ],
+          "review_only": [
+            80,
+            16
+          ],
+          "missed": [
+            49,
+            21
+          ],
+          "unseen_name_review_or_missed": [
+            96,
+            20
+          ]
+        },
+        "dump005_person_tags": 0
+      },
+      "unseen": {
+        "person_tags": 28,
+        "tags_on_a_gold_mention": 28,
+        "tags_on_no_gold_mention": 0,
+        "tag_precision": 1.0,
+        "gold_mentions": 29,
+        "gold_tagged": 28,
+        "by_pipeline_state (gold, tagged_by_model)": {
+          "accepted": [
+            28,
+            27
+          ],
+          "review_only": [
+            1,
+            1
+          ],
+          "missed": [
+            0,
+            0
+          ],
+          "unseen_name_review_or_missed": [
+            1,
+            1
+          ]
+        }
+      },
+      "case_sample": {
+        "files": 261,
+        "person_tags": 2715,
+        "distinct_texts_by_pipeline_state": {
+          "pipeline_accepted": 8,
+          "pipeline_review": 1,
+          "pipeline_rejected": 4,
+          "pipeline_never_saw": 8,
+          "file_skipped_by_language_gate": 1858
+        }
+      }
+    },
     "gliner_small_gpu": {
       "speed": {
         "model": "gliner_small_gpu",
@@ -254,11 +336,11 @@
         "gold_tagged": 1019,
         "by_pipeline_state (gold, tagged_by_model)": {
           "accepted": [
-            1220,
+            1206,
             1000
           ],
           "review_only": [
-            66,
+            80,
             11
           ],
           "missed": [

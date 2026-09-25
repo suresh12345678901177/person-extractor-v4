@@ -588,6 +588,16 @@ Worth testing next, through the full gate: **en_core_web_lg** - same speed,
 no new dependency class, and far fewer junk tags (on the case sample it
 tagged 118 distinct texts the pipeline rejects vs 840 for sm), though it
 also produces 271 distinct texts the pipeline never saw as candidates.
+*en_core_web_trf on the GPU, measured the same day via WSL2 Ubuntu* (Smart
+App Control doesn't apply to Linux binaries there; setup in
+`requirements-gpu.txt`): 3,149 chars/s at batch 4 on the same 6.1M-char
+sample (2,228 at batch 16, which overflowed the 4 GB card into shared
+memory; 11-16k chars/s on the prose-like benchmark files alone), GPU 98%
+busy - 2.5x its CPU speed and output-identical to it (1,305 of 1,305
+benchmark spans), but still 10x slower than en_core_web_sm on ONE CPU core,
+and ~11 h vs ~13 min for full-scan detection. Accuracy as on CPU (37 of the
+115 not-accepted gold mentions tagged). Not adopted; GPU question closed for
+this hardware.
 *Tested the same day (experiments/ledger.md, `exp01-spacy-lg`): rejected
 at the benchmark gate.* As the pipeline's detector (config
 `detection.spacy_model`, now configurable) it lowered accepted-only

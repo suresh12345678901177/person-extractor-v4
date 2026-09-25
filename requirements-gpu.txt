@@ -19,6 +19,16 @@
 # this was measured on, Windows Application Control blocked the compiled
 # binaries of newer spaCy/scipy/scikit-learn releases, and CuPy entirely -
 # so spaCy cannot use the GPU there (en_core_web_trf was measured on CPU).
+#
+# spaCy ON THE GPU (en_core_web_trf) needs WSL2 on such a machine - Linux
+# binaries there aren't subject to Smart App Control. Working recipe
+# (2026-09-25, Ubuntu, Python 3.12 via uv): torch (PyPI, CUDA 13 build),
+# spacy==3.8.14, spacy-curated-transformers==0.3.1, en_core_web_trf 3.8.0,
+# click, AND cupy-cuda12x 13.x (NOT 14: thinc 8.3.x imports cupy.cublas,
+# removed in CuPy 14, and then silently reports "CuPy is not installed") with
+# the CUDA 12 runtime libraries it loads - nvidia-cuda-nvrtc-cu12,
+# nvidia-cuda-runtime-cu12, nvidia-cublas-cu12, nvidia-curand-cu12 - on
+# LD_LIBRARY_PATH. Environment size: ~7.5 GB.
 -r requirements.txt
 torch==2.11.0+cu128
 gliner==0.2.22
