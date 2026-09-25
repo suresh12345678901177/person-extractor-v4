@@ -90,6 +90,8 @@ def test_dictionary_detector_never_matches_inside_code_identifiers():
 
 
 def test_dictionary_detector_still_finds_whole_words_next_to_punctuation():
-    # Control: only letters/digits/underscore block a match - punctuation doesn't.
-    texts = {d.text for d in DictionaryDetector(KB).detect("(Kumar) Dr.Suresh; O'Brien, McDonald met Handler.", 0)}
-    assert {"Kumar", "Suresh", "O'Brien", "McDonald", "Handler"} <= texts, texts
+    # Control: punctuation never blocks a match, and neither does a digit
+    # BEFORE the name - reference lists glue the note number on ("1Berger, A.").
+    texts = {d.text for d in DictionaryDetector(KB).detect(
+        "(Kumar) Dr.Suresh; O'Brien, McDonald met Handler.\n1Berger, A., Instabilities.", 0)}
+    assert {"Kumar", "Suresh", "O'Brien", "McDonald", "Handler", "Berger"} <= texts, texts

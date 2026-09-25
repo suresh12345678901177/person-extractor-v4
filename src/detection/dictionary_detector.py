@@ -34,13 +34,17 @@ from src.preprocessing.latin import LATIN_LETTERS, LATIN_UPPER
 # ASCII-only [A-Z][a-zA-Z]* matched just the ASCII PREFIX of an accented
 # word, so "François" produced a dictionary hit on the fragment "Fran".
 #
-# A token must be a whole word (2026-09-25): no letter, digit or underscore
-# directly before or after it. Without the lookarounds the pattern matched
-# known names INSIDE code identifiers - "Handler" out of "clickHandler" /
-# "errorHandler" in web pages and dumps was ACCEPTED 146 times in the real
-# case scan (every one with zero standalone occurrences in its file).
-# RegexDetector's \b already prevented this there.
-_TOKEN_RE = re.compile(rf"(?<![{LATIN_LETTERS}0-9_])[{LATIN_UPPER}][{LATIN_LETTERS}'\-]*(?![{LATIN_LETTERS}0-9_])")
+# A token must be a whole word (2026-09-25): no letter or underscore directly
+# before it, no letter, digit or underscore directly after it. Without these
+# the pattern matched known names INSIDE code identifiers - "Handler" out of
+# "clickHandler" / "errorHandler" in web pages and dumps was ACCEPTED 146
+# times in the real case scan (every one with zero standalone occurrences
+# in its file). A digit before is allowed on purpose: reference lists glue
+# the note number onto the surname ("1Berger, A., ...") - blocking it lost
+# a real cited author in the case rescan. The capital is matched first and
+# the preceding character checked after (the 2-char lookbehind), so the
+# regex engine only tests boundaries at capitals, not at every character.
+_TOKEN_RE = re.compile(rf"[{LATIN_UPPER}](?<![{LATIN_LETTERS}_].)[{LATIN_LETTERS}'\-]*(?![{LATIN_LETTERS}0-9_])")
 _POSSESSIVE_SUFFIX_RE = re.compile(r"['\u2019]s$")
 
 
