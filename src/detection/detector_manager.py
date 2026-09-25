@@ -35,7 +35,10 @@ class DetectorManager:
         if detection_cfg.get("use_spacy", True):
             try:
                 from src.detection.spacy_detector import SpacyDetector
-                self.detectors.append(SpacyDetector(n_process=detection_cfg.get("spacy_processes", 1)))
+                self.detectors.append(SpacyDetector(
+                    model_name=detection_cfg.get("spacy_model", "en_core_web_sm"),
+                    n_process=detection_cfg.get("spacy_processes", 1),
+                ))
             except RuntimeError as exc:
                 logger.warning(
                     "use_spacy is enabled but SpacyDetector could not be "

@@ -91,29 +91,38 @@ class SpacyDetector(BaseDetector):
     # byte identical entity output (verified).
     MAX_CHUNK_CHARS = 400_000
 
-    _nlp = None  # loaded lazily and shared across instances (model load is slow)
+    # Loaded pipelines by model name, shared across instances (model load is
+    # slow). Keyed by name since 2026-09-25: model_name used to be accepted
+    # and then ignored - "en_core_web_sm" was hard-coded in spacy.load.
+    _nlps: dict = {}
 
     def __init__(self, model_name: str = "en_core_web_sm", n_process: int = 1) -> None:
         self.model_name = model_name
         # See config.py's detection.spacy_processes for when to raise this.
         self.n_process = max(1, int(n_process))
-        self._ensure_loaded()
+        self._nlp = self._load(model_name)
+
+    @property
+    def model_version(self) -> str:
+        """e.g. 'en_core_web_sm-3.8.0' - stamped into run provenance."""
+        meta = self._nlp.meta
+        return f"{meta.get('lang', '')}_{meta.get('name', '')}-{meta.get('version', '')}"
 
     @classmethod
-    def _ensure_loaded(cls) -> None:
-        if cls._nlp is not None:
-            return
+    def _load(cls, model_name: str):
+        if model_name in cls._nlps:
+            return cls._nlps[model_name]
         try:
             import spacy
         except ImportError as exc:
             raise RuntimeError(
                 "spaCy is required for SpacyDetector. Install it with: "
-                "pip install spacy && python -m spacy download en_core_web_sm"
+                f"pip install spacy && python -m spacy download {model_name}"
             ) from exc
 
         try:
-            cls._nlp = spacy.load(
-                "en_core_web_sm",
+            cls._nlps[model_name] = spacy.load(
+                model_name,
                 # lemmatizer/attribute_ruler: never used. tagger/parser:
                 # also never used (grepped the whole codebase - nothing
                 # reads .pos_/.dep_/.tag_/doc.sents) - only doc.ents
@@ -126,9 +135,10 @@ class SpacyDetector(BaseDetector):
             )
         except OSError as exc:
             raise RuntimeError(
-                "spaCy model 'en_core_web_sm' is not installed. Run: "
-                "python -m spacy download en_core_web_sm"
+                f"spaCy model '{model_name}' is not installed. Run: "
+                f"python -m spacy download {model_name}"
             ) from exc
+        return cls._nlps[model_name]
 
     def detect(self, text: str, page_index: int) -> list[Detection]:
         if not text.strip() or self._nlp is None:

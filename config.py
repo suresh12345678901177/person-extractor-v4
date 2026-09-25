@@ -25,6 +25,10 @@ DEFAULT_CONFIG = {
         "use_regex": True,
         "use_dictionary": True,
         "use_spacy": True,
+        # spaCy pipeline SpacyDetector loads (python -m spacy download <name>).
+        # Changing it changes what gets detected - measure it first (see
+        # README, 2026-09-25 NER-model probe).
+        "spacy_model": "en_core_web_sm",
         # Worker processes spaCy may use WITHIN one document (nlp.pipe
         # n_process). Only kicks in when the document spans 2+ of
         # SpacyDetector's 400K-char chunks, i.e. files over ~400KB.

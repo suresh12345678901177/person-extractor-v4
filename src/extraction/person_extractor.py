@@ -39,6 +39,7 @@ from src.core.models import (
     CandidateResult,
     Decision,
     Detection,
+    DetectorName,
     ExtractionResult,
     PipelineStatistics,
     SourceFormat,
@@ -90,6 +91,8 @@ class PersonExtractor(Extractor):
         # Computed once per process/worker, not per file - see
         # src/utils/provenance.py's module docstring for why this exists.
         self.provenance = build_run_provenance(self.base_dir, model_path)
+        spacy_detectors = [d for d in self.detector_manager.detectors if d.name == DetectorName.SPACY]
+        self.provenance["spacy_model"] = spacy_detectors[0].model_version if spacy_detectors else None
 
         self.feedback_enabled = config.get("feedback", {}).get("enabled", True)
         # True in parallel scan workers: build records, return them on the

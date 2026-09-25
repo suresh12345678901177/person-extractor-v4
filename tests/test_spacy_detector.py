@@ -131,3 +131,31 @@ def test_parallel_detection_matches_sequential_exactly():
     key = lambda ds: [(d.text, d.start, d.end, d.confidence) for d in ds]
     assert sequential, "expected at least one PERSON detection"
     assert key(parallel) == key(sequential)
+
+
+def test_configured_spacy_model_is_the_one_loaded():
+    """detection.spacy_model (config.py) must reach spacy.load - the
+    model_name argument used to be accepted and silently ignored. The
+    default stays en_core_web_sm."""
+    import copy
+
+    from config import DEFAULT_CONFIG
+    from src.detection.detector_manager import DetectorManager
+    from src.detection.spacy_detector import SpacyDetector
+    from src.knowledge.knowledge_base import KnowledgeBase
+
+    assert DEFAULT_CONFIG["detection"]["spacy_model"] == "en_core_web_sm"
+    assert SpacyDetector().model_version.startswith("en_core_web_sm-")
+
+    config = copy.deepcopy(DEFAULT_CONFIG)
+    config["detection"]["spacy_model"] = "en_core_web_sm"
+    manager = DetectorManager(config, KnowledgeBase(assets_dir=Path(".")))
+    spacy_detector = next(d for d in manager.detectors if isinstance(d, SpacyDetector))
+    assert spacy_detector.model_name == "en_core_web_sm"
+
+
+def test_missing_spacy_model_names_the_download_command():
+    from src.detection.spacy_detector import SpacyDetector
+
+    with pytest.raises(RuntimeError, match="spacy download en_core_web_nonexistent"):
+        SpacyDetector(model_name="en_core_web_nonexistent")

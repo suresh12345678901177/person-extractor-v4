@@ -186,6 +186,7 @@ def run_scan(input_dir: Path, output_dir: Path, args: argparse.Namespace) -> int
             "model_path", "models/lightgbm/person_classifier.txt"
         )
     provenance = build_run_provenance(BASE_DIR, model_path)
+    provenance["spacy_model"] = config["detection"].get("spacy_model") if config["detection"].get("use_spacy", True) else None
     print(f"  Provenance: {provenance_summary_line(provenance)}")
 
     print(f"Scanning '{input_dir}' recursively for supported files ({', '.join(SUPPORTED_EXTENSIONS)}) ...")
