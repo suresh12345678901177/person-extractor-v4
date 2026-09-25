@@ -203,7 +203,8 @@ def _gliner_spans(model_id: str, texts: dict[str, str], chunk_chars: int, batch_
     return spans, time.perf_counter() - started
 
 
-def detect(model: str, cache_dir: Path, case_dir: Path | None, include_case: bool, weights_dir: Path | None) -> None:
+def detect(model: str, cache_dir: Path, case_dir: Path | None, include_case: bool, weights_dir: Path | None,
+           batch_size: int | None = None) -> None:
     os.environ["HF_HUB_OFFLINE"] = "1"
     os.environ["TRANSFORMERS_OFFLINE"] = "1"
     texts = load_texts(case_dir, include_case)
@@ -219,7 +220,7 @@ def detect(model: str, cache_dir: Path, case_dir: Path | None, include_case: boo
             kept[k] = v
         texts = kept
     chars = sum(len(t) for t in texts.values())
-    info: dict = {"model": model, "texts": len(texts), "chars": chars}
+    info: dict = {"model": model, "texts": len(texts), "chars": chars, "batch_size": batch_size}
 
     with _GpuSampler() as sampler:
         if model == "sm_cpu":
@@ -227,7 +228,7 @@ def detect(model: str, cache_dir: Path, case_dir: Path | None, include_case: boo
         elif model == "lg_cpu":
             spans, seconds = _spacy_spans("en_core_web_lg", texts, False, 400_000, 1)
         elif model in ("trf_gpu", "trf_cpu"):
-            spans, seconds = _spacy_spans("en_core_web_trf", texts, model == "trf_gpu", 5_000, 32)
+            spans, seconds = _spacy_spans("en_core_web_trf", texts, model == "trf_gpu", 5_000, batch_size or 32)
         elif model.startswith("gliner_"):
             if weights_dir is None:
                 raise SystemExit("GLiNER needs --weights-dir (vendored weights; no hub lookups)")
@@ -388,9 +389,10 @@ def main() -> int:
     d.add_argument("--no-case", action="store_true")
     d.add_argument("--weights-dir", type=Path, default=None,
                    help="Folder holding vendored GLiNER weights (e.g. gliner_small-v2.1/)")
+    d.add_argument("--batch-size", type=int, default=None, help="Override the model's batch size (GPU memory)")
     args = parser.parse_args()
     if args.cmd == "detect":
-        detect(args.model, args.cache_dir, args.case_dir, not args.no_case, args.weights_dir)
+        detect(args.model, args.cache_dir, args.case_dir, not args.no_case, args.weights_dir, args.batch_size)
     else:
         analyze(args.cache_dir, args.case_dir)
     return 0
