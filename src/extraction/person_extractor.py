@@ -211,6 +211,7 @@ class PersonExtractor(Extractor):
             all_candidates.extend(new_candidates)
             stats.candidates_generated += len(new_candidates)
 
+        _cap_bare_common_surnames(all_candidates, self.knowledge_base, known_person_names)
         if source_format in STRUCTURED_FORMATS:
             _cap_lone_single_tokens(all_candidates)
 
@@ -326,6 +327,55 @@ class PersonExtractor(Extractor):
         for cr in new_candidates:
             self.decision_engine.decide(cr, document_text, self.knowledge_base)
         return new_candidates
+
+
+def _cap_bare_common_surnames(
+    candidates: list[CandidateResult], knowledge_base: KnowledgeBase, known_person_names: Iterable[str],
+) -> None:
+    """Moves an ACCEPTED single word from ACCEPTED to REVIEW when all hold:
+      - it is an ordinary English word (common_english_words.txt) that the
+        name lists know only as a SURNAME, never a first name;
+      - its only name evidence is that dictionary hit - no spaCy tag, no
+        title, no full dictionary name, no document-name propagation;
+      - no accepted multi-word name in this document (or, in a real-time
+        session, earlier in the conversation) starts or ends with it.
+    Found 2026-09-25 tracing the real case scan's accepted list: "Read",
+    "English", "Block", "Pilot", "Day", "Price" were ACCEPTED from UI/web
+    text on exactly this evidence (a surname-list hit, repeated or backed
+    by an ML score the classifier gives any capitalized word there). A real
+    person named by bare surname usually has a title, a spaCy tag or a full
+    mention nearby (in that scan Smith, Anderson, Harris, Simon and Thomas
+    all had a spaCy tag or are also first names; "Hopkins", from academic
+    citations, had neither and moves to REVIEW unless named in full), and
+    first names are left alone ("Marcus", "Amber" in chat are real people).
+    REVIEW keeps them visible to a human."""
+    edges: set[str] = set()
+    full_names = [c.candidate.normalized_text for c in candidates if c.state.decision == Decision.ACCEPTED]
+    for name in [*full_names, *known_person_names]:
+        body = [t for t in name.split()
+                if not knowledge_base.is_title(t.rstrip(".")) and not knowledge_base.is_honorific(t.rstrip("."))]
+        if len(body) >= 2:
+            edges |= {body[0].rstrip(".,").lower(), body[-1].rstrip(".,").lower()}
+
+    for c in candidates:
+        tokens = c.candidate.normalized_text.split()
+        if c.state.decision != Decision.ACCEPTED or len(tokens) != 1:
+            continue
+        word = tokens[0].rstrip(".'’")
+        if not (knowledge_base.is_common_word(word) and knowledge_base.is_known_last_name(word)
+                and not knowledge_base.is_known_first_name(word)):
+            continue
+        if any(d.detector == DetectorName.SPACY or d.metadata.get("pattern") in ("titled", "dictionary", DOCUMENT_NAME_PATTERN)
+               for d in c.candidate.source_detections):
+            continue
+        if word.lower() in edges:
+            continue
+        c.state.decision = Decision.REVIEW
+        c.state.rejection_reason = (
+            f"'{word}' is an ordinary English word the name lists know only as a surname, supported by "
+            "that dictionary hit alone (no spaCy tag, title, or full name in this document) - held for review"
+        )
+        c.state.add_evidence("person_extractor", "Capped at review: bare common-word surname", 0.0)
 
 
 def _cap_lone_single_tokens(candidates: list[CandidateResult]) -> None:
