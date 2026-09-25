@@ -80,3 +80,16 @@ def test_accent_variant_fallback_applies_only_to_non_ascii_tokens():
     # "Francois" is listed only as "françois" among first names.
     assert KB.is_known_first_name("François")
     assert not KB.is_known_first_name("Francois")
+
+
+def test_dictionary_detector_never_matches_inside_code_identifiers():
+    """Regression (2026-09-25): 'Handler' - a listed surname - was matched
+    inside clickHandler / errorHandler and ACCEPTED 146 times in a real scan."""
+    text = "el.clickHandler(); on_Handler = errorHandler; getKumarData(); Handler2; x.Kumar_id"
+    assert DictionaryDetector(KB).detect(text, 0) == []
+
+
+def test_dictionary_detector_still_finds_whole_words_next_to_punctuation():
+    # Control: only letters/digits/underscore block a match - punctuation doesn't.
+    texts = {d.text for d in DictionaryDetector(KB).detect("(Kumar) Dr.Suresh; O'Brien, McDonald met Handler.", 0)}
+    assert {"Kumar", "Suresh", "O'Brien", "McDonald", "Handler"} <= texts, texts

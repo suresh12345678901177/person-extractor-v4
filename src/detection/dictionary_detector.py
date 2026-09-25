@@ -33,7 +33,14 @@ from src.preprocessing.latin import LATIN_LETTERS, LATIN_UPPER
 # Shared Latin letter classes (src/preprocessing/latin.py). The old
 # ASCII-only [A-Z][a-zA-Z]* matched just the ASCII PREFIX of an accented
 # word, so "François" produced a dictionary hit on the fragment "Fran".
-_TOKEN_RE = re.compile(rf"[{LATIN_UPPER}][{LATIN_LETTERS}'\-]*")
+#
+# A token must be a whole word (2026-09-25): no letter, digit or underscore
+# directly before or after it. Without the lookarounds the pattern matched
+# known names INSIDE code identifiers - "Handler" out of "clickHandler" /
+# "errorHandler" in web pages and dumps was ACCEPTED 146 times in the real
+# case scan (every one with zero standalone occurrences in its file).
+# RegexDetector's \b already prevented this there.
+_TOKEN_RE = re.compile(rf"(?<![{LATIN_LETTERS}0-9_])[{LATIN_UPPER}][{LATIN_LETTERS}'\-]*(?![{LATIN_LETTERS}0-9_])")
 _POSSESSIVE_SUFFIX_RE = re.compile(r"['\u2019]s$")
 
 
