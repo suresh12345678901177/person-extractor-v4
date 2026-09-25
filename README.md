@@ -474,6 +474,18 @@ file - see below):
 | ACCEPTED only (auto-shipped) | 0.9598 | 0.9131 | 0.9359 |
 | ACCEPTED + REVIEW (what a human sees) | 0.9325 | 0.9625 | 0.9473 |
 
+**2026-09-25 - hostnames no longer reject real names.** `SystemLogValidator`
+treated any 4+-segment dotted string as an Android/Java package, so a real
+name on the same line as `www.bvrit.ac.in`, `priya@cse.bvrit.ac.in` or
+`mail.company.co.uk` was hard-rejected - never even REVIEW ("Contact Suresh
+Kumar at www.bvrit.ac.in" rejected; the same sentence with `www.bvrit.com`
+accepted). A hostname ends in its TLD, a package starts with one, so such
+matches are now exempt (`_is_hostname`); every other identifier on the line
+still counts. Benchmark unchanged. Real case, before/after on all 108 files
+containing an exempted hostname (of 19,089): no ACCEPTED change, no name
+gained or lost in REVIEW; "Edit" (already in REVIEW) +4 mentions in one
+preferences XML.
+
 **2026-09-24 - validated on the real "real case" folder, and
 what it caught that the benchmark couldn't.** A scan with the new readers
 (19,090 files vs 7,246) exposed, compared against the 2026-09-23 scan via

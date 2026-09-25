@@ -39,8 +39,9 @@ the same line as the noise token, confirmed directly against this
 case's real dumpsys/pm_debug_info exports. Requiring 4+ dot-separated
 segments (not 2-3) deliberately keeps this from firing on an ordinary
 URL or email domain that might legitimately share a line with a real
-name in chat/email content (e.g. "www.example.com" is only 3 segments).
-This check scans the candidate's own full line (bounded, same
+name in chat/email content (e.g. "www.example.com" is only 3 segments);
+longer hostnames ("www.bvrit.ac.in") are recognized and exempted - see
+_is_hostname. This check scans the candidate's own full line (bounded, same
 performance rationale as the logcat check above), not just a fixed
 prefix, since the identifier can appear anywhere on a `dumpsys`
 attribute line.
@@ -135,6 +136,42 @@ _PACKAGE_IDENTIFIER_RE = re.compile(
     r"|\b(?<!\.)[a-z][a-z0-9_]*(?:\.[a-z0-9_]+){1,}\.[A-Z][a-zA-Z0-9_]*\b"
 )
 _LINE_SCAN_WINDOW = 300
+
+# Hostnames, added 2026-09-25: form (1) above - 4+ segments - also matches
+# an ordinary hostname with a country-code suffix or a subdomain
+# ("www.bvrit.ac.in", "priya@cse.bvrit.ac.in", "mail.company.co.uk"), so a
+# real name sharing a line with one was hard-rejected without ever reaching
+# REVIEW (verified: "Contact Suresh Kumar at www.bvrit.ac.in" -> rejected,
+# the same sentence with "www.bvrit.com" -> accepted). A hostname ENDS in
+# its TLD; a Java/Android package STARTS with one (reverse DNS). So an
+# all-lowercase, underscore-free match is exempt only when it reads as a
+# hostname and doesn't start like a package - every other identifier on the
+# line is still checked.
+_PACKAGE_ROOTS = frozenset({
+    "com", "org", "net", "edu", "gov", "io", "android", "androidx",
+    "java", "javax", "kotlin", "kotlinx", "dalvik", "sun",
+})
+_GENERIC_TLDS = frozenset({"com", "org", "net", "edu", "gov", "mil", "int", "info", "biz"})
+# Second labels of two-level country suffixes: co.in, ac.in, gov.in, co.uk, com.au, ...
+_SECOND_LEVEL_SUFFIX_LABELS = frozenset({
+    "co", "ac", "gov", "org", "net", "edu", "com", "nic", "res", "mil", "ltd", "plc", "sch", "nhs",
+})
+
+
+def _is_hostname(match: re.Match, window: str) -> bool:
+    identifier = match.group()
+    if identifier != identifier.lower() or "_" in identifier:
+        return False
+    labels = identifier.split(".")
+    if labels[0] in _PACKAGE_ROOTS or len(labels[0]) == 2:
+        return False  # reverse-DNS roots, incl. country-code ones ("de.", "ro.")
+    if labels[0] == "www" or window[:match.start()].endswith(("@", "://")):
+        return True
+    return labels[-1] in _GENERIC_TLDS or (
+        len(labels[-1]) == 2 and labels[-1].isalpha() and labels[-2] in _SECOND_LEVEL_SUFFIX_LABELS
+    )
+
+
 # Radius (chars) scanned on EACH SIDE of the candidate itself for the
 # package-identifier check, added 2026-09-17 after a real regression: a
 # `dumpsys` ANR report can concatenate an entire call stack onto one very
@@ -199,7 +236,7 @@ class SystemLogValidator(BaseValidator):
         window_start = max(line_start, start - _LINE_SCAN_RADIUS)
         window_end = min(true_line_end, end + _LINE_SCAN_RADIUS)
         window = document_text[window_start:window_end]
-        if _PACKAGE_IDENTIFIER_RE.search(window):
+        if any(not _is_hostname(m, window) for m in _PACKAGE_IDENTIFIER_RE.finditer(window)):
             return ValidationResult(
                 self.name, passed=False, severity="hard",
                 message="Sits on a line containing an Android/Java reverse-DNS package or "

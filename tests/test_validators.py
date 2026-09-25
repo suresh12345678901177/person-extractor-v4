@@ -277,6 +277,32 @@ def test_system_log_validator_accepts_name_after_missing_space_domain_sentence()
     assert result.passed is True
 
 
+def _validate_on_line(name: str, doc: str):
+    from dataclasses import replace
+    start = doc.index(name)
+    cand = _candidate(name)
+    cand.candidate = replace(cand.candidate, start=start, end=start + len(name))
+    return SystemLogValidator().validate(cand, KB, doc)
+
+
+def test_system_log_validator_accepts_name_beside_four_label_hostname():
+    # Regression test (2026-09-25): a 4+-label hostname - a country-code
+    # suffix ("ac.in", "co.uk") or a subdomain - matched the 4-segment
+    # package-identifier form, so a real name on the same line was
+    # hard-rejected. Hostnames end in their TLD; packages start with one.
+    assert _validate_on_line("Suresh Kumar", "Please contact Suresh Kumar at www.bvrit.ac.in for the forms.\n").passed
+    assert _validate_on_line("Priya Raman", "From: Priya Raman <priya@cse.bvrit.ac.in>\n").passed
+    assert _validate_on_line("Arjun Mehta", "Arjun Mehta (mail.company.co.uk) replied.\n").passed
+
+
+def test_system_log_validator_still_rejects_lowercase_package_identifiers():
+    # Control: all-lowercase 4+-segment identifiers are still packages when
+    # they start with a reverse-DNS root, or don't end in a hostname suffix -
+    # even when the last segment looks like a country code ("io").
+    assert not _validate_on_line("Handler", "at org.apache.commons.io Handler\n").passed
+    assert not _validate_on_line("Handler", "vendor.qti.hardware.radio.ims Handler\n").passed
+
+
 def test_structure_validator_accepts_accented_latin_names():
     """Every accented name used to be hard-rejected here as a malformed
     token, even though RegexDetector found it correctly."""
