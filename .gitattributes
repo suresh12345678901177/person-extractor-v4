@@ -1,0 +1,7 @@
+# LightGBM model files record each tree's byte length (tree_sizes=...), so
+# a line-ending rewrite corrupts them - and LightGBM then aborts the whole
+# process on load (exit 0xC0000409), which model_registry.load_classifier's
+# try/except cannot catch. core.autocrlf=true (the Windows default) rewrites
+# LF -> CRLF on every checkout; found 2026-09-25 when a fresh checkout of
+# this repo crashed the test suite. Always LF, in the repo and on disk.
+models/**/*.txt text eol=lf
