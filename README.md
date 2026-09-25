@@ -486,6 +486,38 @@ containing an exempted hostname (of 19,089): no ACCEPTED change, no name
 gained or lost in REVIEW; "Edit" (already in REVIEW) +4 mentions in one
 preferences XML.
 
+**2026-09-25 - larger NER models and the GPU: measured, not adopted.**
+Observer-only probe (`experiments/gpu_detector_probe.py`; no pipeline code
+changed): each model tagged persons in the same text, compared with the gold
+labels and with what the pipeline already decides. Laptop: RTX 2050 (4 GB),
+i5-12450H. Benchmark = 7 files, 1,335 gold mentions; of those the pipeline
+accepts 1,220 and leaves 115 in REVIEW or missed (96 of them not in any
+dictionary).
+
+| Model | Device | chars/s | Tag precision | `dump_005` tags | Of the 115 not accepted, tagged | Of the 96 unseen, tagged |
+|---|---|---:|---:|---:|---:|---:|
+| en_core_web_sm (current) | CPU | 31,040 | 0.663 | 10 | 15 | 3 |
+| en_core_web_lg | CPU | 29,952 | 0.856 | 1 | 23 | 6 |
+| en_core_web_trf | CPU | 1,265 | 0.870 | 0 | 37 | 20 |
+| GLiNER small v2.1 | GPU | 6,806 | 0.907 | 3 | 19 | 8 |
+
+GPU run: 86% mean utilization, 3.9 of 4 GB VRAM (nvidia-smi, 741 samples).
+Recall ceiling: even if every one of those tags became ACCEPTED with no new
+false positive, overall accepted-only recall would rise at most 1.1pp (sm) to
+2.8pp (trf) - around the ~2pp noise floor of a 7-file benchmark - and
+turning a tag into ACCEPTED means letting NER evidence count toward the
+knowledge-corroboration gate, which it deliberately doesn't today. Speed
+(estimated from the baseline scan's per-file times, ~124M chars through
+detection): trf on 12 CPU workers would take detection from ~13 min to ~5 h;
+GLiNER as an extra detector on the one GPU would add ~5 h. Not adopted.
+`benchmark_unseen`: no model tagged a non-person (sm/lg 24, trf 28, GLiNER
+29 of 29 gold). Could not measure: en_core_web_trf on the GPU - spaCy's GPU
+backend (CuPy) is blocked by Windows Application Control on this machine.
+Worth testing next, through the full gate: **en_core_web_lg** - same speed,
+no new dependency class, and far fewer junk tags (on the case sample it
+tagged 118 distinct texts the pipeline rejects vs 840 for sm), though it
+also produces 271 distinct texts the pipeline never saw as candidates.
+
 **2026-09-25 - evaluation hygiene.** `retrain_from_feedback.py` now also
 excludes labels from the held-out `datasets/benchmark_unseen/` and from
 copies of any benchmark file elsewhere (matched by file name) - before,

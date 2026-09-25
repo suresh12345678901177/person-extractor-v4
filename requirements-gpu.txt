@@ -1,0 +1,30 @@
+# OPTIONAL - only for experiments/gpu_detector_probe.py. The pipeline does not
+# use anything here (measured 2026-09-25, README: no larger NER model earned a
+# place in it yet). Install into a SEPARATE environment so the main CPU install
+# stays small (~3 GB of CUDA libraries come with torch):
+#
+#   python -m venv ..\gpu-experiment\.venv
+#   ..\gpu-experiment\.venv\Scripts\python -m pip install -r requirements-gpu.txt --extra-index-url https://download.pytorch.org/whl/cu128
+#   ..\gpu-experiment\.venv\Scripts\python -m spacy download en_core_web_sm
+#   ..\gpu-experiment\.venv\Scripts\python -m spacy download en_core_web_lg
+#   ..\gpu-experiment\.venv\Scripts\python -m spacy download en_core_web_trf
+#
+# GLiNER weights are vendored by hand (no hub lookups at run time): copy
+# urchade/gliner_small-v2.1's pytorch_model.bin + gliner_config.json into
+# <weights>/gliner_small-v2.1/, microsoft/deberta-v3-small's config.json,
+# spm.model and tokenizer_config.json into <weights>/deberta-v3-small/, and
+# set "model_name" in gliner_config.json to that local folder.
+#
+# Pinned to the versions the main environment already runs: on the machine
+# this was measured on, Windows Application Control blocked the compiled
+# binaries of newer spaCy/scipy/scikit-learn releases, and CuPy entirely -
+# so spaCy cannot use the GPU there (en_core_web_trf was measured on CPU).
+-r requirements.txt
+torch==2.11.0+cu128
+gliner==0.2.22
+transformers==4.49.0
+spacy==3.8.14
+spacy-curated-transformers==0.3.1
+numpy==2.5.1
+scipy==1.18.0
+scikit-learn==1.9.0

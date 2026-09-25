@@ -17,6 +17,10 @@ an extra detector?" before any of that is built:
   4. Speed (chars/s, model load excluded), device, GPU memory and
      utilization (nvidia-smi sampled during inference).
 
+trf_gpu needs spaCy's GPU backend (CuPy). On the machine this was written
+on, Windows Application Control blocks CuPy's DLL, so the transformer
+spaCy model was measured on CPU (trf_cpu) and GLiNER (torch) on the GPU.
+
 Each model runs in its own process (spacy.require_gpu() is process-wide):
     python experiments/gpu_detector_probe.py detect --model trf_gpu
     python experiments/gpu_detector_probe.py analyze
@@ -45,12 +49,13 @@ sys.path.insert(0, str(BASE_DIR))
 BENCHMARK_DIR = BASE_DIR / "datasets" / "benchmark"
 UNSEEN_DIR = BASE_DIR / "datasets" / "benchmark_unseen"
 DUMP_FILE = "benchmark_structured_dump_005.txt"
-RESULT_PATH = BASE_DIR / "experiments" / "results" / "gpu_probe.json"
+RESULT_PATH = BASE_DIR / "experiments" / "probes" / "gpu_probe.json"
 REVIEW_PATH = BASE_DIR / "output" / "self_upgrade" / "gpu_probe_review.csv"
 
 MODELS = ("sm_cpu", "lg_cpu", "trf_cpu", "trf_gpu", "gliner_small_gpu", "gliner_medium_gpu")
 CASE_SAMPLE_MAX_CHARS = 6_000_000
 CASE_FILE_CHARS = (1_000, 600_000)
+TRF_CPU_CASE_CHARS = 600_000
 
 
 # --------------------------------------------------------------------- texts
@@ -157,10 +162,13 @@ def _spacy_spans(model: str, texts: dict[str, str], gpu: bool, chunk_chars: int,
     return spans, time.perf_counter() - started
 
 
-def _gliner_spans(weights: Path, texts: dict[str, str], chunk_chars: int, batch_size: int, threshold: float):
+def _gliner_spans(model_id: str, texts: dict[str, str], chunk_chars: int, batch_size: int, threshold: float):
+    """model_id is a vendored local folder whose gliner_config.json points
+    model_name at a local copy of the backbone's tokenizer/config -
+    HF_HUB_OFFLINE is set in detect(), so nothing is fetched at run time."""
     import torch
     from gliner import GLiNER
-    model = GLiNER.from_pretrained(str(weights), local_files_only=True)
+    model = GLiNER.from_pretrained(model_id, local_files_only=True)
     model = model.to("cuda" if torch.cuda.is_available() else "cpu")
     model.eval()
     spans: dict[str, list[list[int]]] = {}
@@ -199,9 +207,17 @@ def detect(model: str, cache_dir: Path, case_dir: Path | None, include_case: boo
     os.environ["HF_HUB_OFFLINE"] = "1"
     os.environ["TRANSFORMERS_OFFLINE"] = "1"
     texts = load_texts(case_dir, include_case)
-    # CPU transformer is only timed on the benchmark files - the case sample would take hours.
+    # The CPU transformer would take hours on the whole case sample: benchmark
+    # files plus the first TRF_CPU_CASE_CHARS of the sample only.
     if model == "trf_cpu":
-        texts = {k: v for k, v in texts.items() if not k.startswith("case/")}
+        kept, case_chars = {}, 0
+        for k, v in texts.items():
+            if k.startswith("case/"):
+                if case_chars >= TRF_CPU_CASE_CHARS:
+                    continue
+                case_chars += len(v)
+            kept[k] = v
+        texts = kept
     chars = sum(len(t) for t in texts.values())
     info: dict = {"model": model, "texts": len(texts), "chars": chars}
 
@@ -213,8 +229,10 @@ def detect(model: str, cache_dir: Path, case_dir: Path | None, include_case: boo
         elif model in ("trf_gpu", "trf_cpu"):
             spans, seconds = _spacy_spans("en_core_web_trf", texts, model == "trf_gpu", 5_000, 32)
         elif model.startswith("gliner_"):
+            if weights_dir is None:
+                raise SystemExit("GLiNER needs --weights-dir (vendored weights; no hub lookups)")
             name = {"gliner_small_gpu": "gliner_small-v2.1", "gliner_medium_gpu": "gliner_medium-v2.1"}[model]
-            spans, seconds = _gliner_spans(weights_dir / name, texts, 1_000, 16, 0.5)
+            spans, seconds = _gliner_spans(str(weights_dir / name), texts, 1_000, 16, 0.5)
         else:
             raise SystemExit(f"unknown model {model}")
     info["seconds"] = round(seconds, 2)
@@ -368,7 +386,8 @@ def main() -> int:
         p.add_argument("--cache-dir", type=Path, required=True)
         p.add_argument("--case-dir", type=Path, default=None)
     d.add_argument("--no-case", action="store_true")
-    d.add_argument("--weights-dir", type=Path, default=None)
+    d.add_argument("--weights-dir", type=Path, default=None,
+                   help="Folder holding vendored GLiNER weights (e.g. gliner_small-v2.1/)")
     args = parser.parse_args()
     if args.cmd == "detect":
         detect(args.model, args.cache_dir, args.case_dir, not args.no_case, args.weights_dir)

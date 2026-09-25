@@ -1,0 +1,314 @@
+{
+  "note": "Counts only. Benchmark = datasets/benchmark (N=7 files); unseen = held out, measured not tuned; case = hash-random sample of case .txt files, no gold labels.",
+  "models": {
+    "sm_cpu": {
+      "speed": {
+        "model": "sm_cpu",
+        "texts": 269,
+        "chars": 6113843,
+        "seconds": 196.96,
+        "chars_per_second": 31040,
+        "gpu": {},
+        "torch_cuda_max_mem_mib": 0,
+        "device_name": "NVIDIA GeForce RTX 2050"
+      },
+      "bench": {
+        "person_tags": 964,
+        "tags_on_a_gold_mention": 639,
+        "tags_on_no_gold_mention": 325,
+        "tag_precision": 0.6629,
+        "gold_mentions": 1335,
+        "gold_tagged": 642,
+        "by_pipeline_state (gold, tagged_by_model)": {
+          "accepted": [
+            1220,
+            627
+          ],
+          "review_only": [
+            66,
+            9
+          ],
+          "missed": [
+            49,
+            6
+          ],
+          "unseen_name_review_or_missed": [
+            96,
+            3
+          ]
+        },
+        "dump005_person_tags": 10
+      },
+      "unseen": {
+        "person_tags": 24,
+        "tags_on_a_gold_mention": 24,
+        "tags_on_no_gold_mention": 0,
+        "tag_precision": 1.0,
+        "gold_mentions": 29,
+        "gold_tagged": 24,
+        "by_pipeline_state (gold, tagged_by_model)": {
+          "accepted": [
+            28,
+            24
+          ],
+          "review_only": [
+            1,
+            0
+          ],
+          "missed": [
+            0,
+            0
+          ],
+          "unseen_name_review_or_missed": [
+            1,
+            0
+          ]
+        }
+      },
+      "case_sample": {
+        "files": 261,
+        "person_tags": 18222,
+        "distinct_texts_by_pipeline_state": {
+          "pipeline_accepted": 8,
+          "pipeline_review": 3,
+          "pipeline_rejected": 840,
+          "pipeline_never_saw": 0,
+          "file_skipped_by_language_gate": 10717
+        }
+      }
+    },
+    "lg_cpu": {
+      "speed": {
+        "model": "lg_cpu",
+        "texts": 269,
+        "chars": 6113843,
+        "seconds": 204.12,
+        "chars_per_second": 29952,
+        "gpu": {},
+        "torch_cuda_max_mem_mib": 0,
+        "device_name": "NVIDIA GeForce RTX 2050"
+      },
+      "bench": {
+        "person_tags": 984,
+        "tags_on_a_gold_mention": 842,
+        "tags_on_no_gold_mention": 142,
+        "tag_precision": 0.8557,
+        "gold_mentions": 1335,
+        "gold_tagged": 843,
+        "by_pipeline_state (gold, tagged_by_model)": {
+          "accepted": [
+            1220,
+            820
+          ],
+          "review_only": [
+            66,
+            11
+          ],
+          "missed": [
+            49,
+            12
+          ],
+          "unseen_name_review_or_missed": [
+            96,
+            6
+          ]
+        },
+        "dump005_person_tags": 1
+      },
+      "unseen": {
+        "person_tags": 24,
+        "tags_on_a_gold_mention": 24,
+        "tags_on_no_gold_mention": 0,
+        "tag_precision": 1.0,
+        "gold_mentions": 29,
+        "gold_tagged": 24,
+        "by_pipeline_state (gold, tagged_by_model)": {
+          "accepted": [
+            28,
+            23
+          ],
+          "review_only": [
+            1,
+            1
+          ],
+          "missed": [
+            0,
+            0
+          ],
+          "unseen_name_review_or_missed": [
+            1,
+            1
+          ]
+        }
+      },
+      "case_sample": {
+        "files": 261,
+        "person_tags": 15984,
+        "distinct_texts_by_pipeline_state": {
+          "pipeline_accepted": 10,
+          "pipeline_review": 1,
+          "pipeline_rejected": 118,
+          "pipeline_never_saw": 271,
+          "file_skipped_by_language_gate": 10720
+        }
+      }
+    },
+    "trf_cpu": {
+      "speed": {
+        "model": "trf_cpu",
+        "texts": 53,
+        "chars": 972378,
+        "seconds": 768.98,
+        "chars_per_second": 1265,
+        "gpu": {},
+        "torch_cuda_max_mem_mib": 0,
+        "device_name": "NVIDIA GeForce RTX 2050"
+      },
+      "bench": {
+        "person_tags": 1277,
+        "tags_on_a_gold_mention": 1111,
+        "tags_on_no_gold_mention": 166,
+        "tag_precision": 0.87,
+        "gold_mentions": 1335,
+        "gold_tagged": 1112,
+        "by_pipeline_state (gold, tagged_by_model)": {
+          "accepted": [
+            1220,
+            1075
+          ],
+          "review_only": [
+            66,
+            16
+          ],
+          "missed": [
+            49,
+            21
+          ],
+          "unseen_name_review_or_missed": [
+            96,
+            20
+          ]
+        },
+        "dump005_person_tags": 0
+      },
+      "unseen": {
+        "person_tags": 28,
+        "tags_on_a_gold_mention": 28,
+        "tags_on_no_gold_mention": 0,
+        "tag_precision": 1.0,
+        "gold_mentions": 29,
+        "gold_tagged": 28,
+        "by_pipeline_state (gold, tagged_by_model)": {
+          "accepted": [
+            28,
+            27
+          ],
+          "review_only": [
+            1,
+            1
+          ],
+          "missed": [
+            0,
+            0
+          ],
+          "unseen_name_review_or_missed": [
+            1,
+            1
+          ]
+        }
+      },
+      "case_sample": {
+        "files": 45,
+        "person_tags": 401,
+        "distinct_texts_by_pipeline_state": {
+          "pipeline_accepted": 8,
+          "pipeline_review": 1,
+          "pipeline_rejected": 3,
+          "pipeline_never_saw": 5,
+          "file_skipped_by_language_gate": 344
+        }
+      }
+    },
+    "gliner_small_gpu": {
+      "speed": {
+        "model": "gliner_small_gpu",
+        "texts": 269,
+        "chars": 6113843,
+        "seconds": 898.36,
+        "chars_per_second": 6806,
+        "gpu": {
+          "gpu_util_mean_pct": 86.0,
+          "gpu_util_max_pct": 100.0,
+          "gpu_mem_used_max_mib": 3948.0,
+          "samples": 741
+        },
+        "torch_cuda_max_mem_mib": 3778,
+        "device_name": "NVIDIA GeForce RTX 2050"
+      },
+      "bench": {
+        "person_tags": 1123,
+        "tags_on_a_gold_mention": 1019,
+        "tags_on_no_gold_mention": 104,
+        "tag_precision": 0.9074,
+        "gold_mentions": 1335,
+        "gold_tagged": 1019,
+        "by_pipeline_state (gold, tagged_by_model)": {
+          "accepted": [
+            1220,
+            1000
+          ],
+          "review_only": [
+            66,
+            11
+          ],
+          "missed": [
+            49,
+            8
+          ],
+          "unseen_name_review_or_missed": [
+            96,
+            8
+          ]
+        },
+        "dump005_person_tags": 3
+      },
+      "unseen": {
+        "person_tags": 29,
+        "tags_on_a_gold_mention": 29,
+        "tags_on_no_gold_mention": 0,
+        "tag_precision": 1.0,
+        "gold_mentions": 29,
+        "gold_tagged": 29,
+        "by_pipeline_state (gold, tagged_by_model)": {
+          "accepted": [
+            28,
+            28
+          ],
+          "review_only": [
+            1,
+            1
+          ],
+          "missed": [
+            0,
+            0
+          ],
+          "unseen_name_review_or_missed": [
+            1,
+            1
+          ]
+        }
+      },
+      "case_sample": {
+        "files": 261,
+        "person_tags": 4162,
+        "distinct_texts_by_pipeline_state": {
+          "pipeline_accepted": 10,
+          "pipeline_review": 2,
+          "pipeline_rejected": 26,
+          "pipeline_never_saw": 271,
+          "file_skipped_by_language_gate": 708
+        }
+      }
+    }
+  }
+}
