@@ -68,7 +68,8 @@ def _clean(path: Path) -> str:
 
 
 def load_texts(case_dir: Path | None, include_case: bool) -> dict[str, str]:
-    """Keys: 'bench/<name>', 'unseen/<name>', 'case/<n>'. Case files: every
+    """(.txt matched case-insensitively, as Windows globbing does, so a Linux/WSL
+    run samples the same files.) Keys: 'bench/<name>', 'unseen/<name>', 'case/<n>'. Case files: every
     .txt in the case folder ordered by a hash of its relative path (a random
     sample nobody chose), kept while within size bounds, until
     CASE_SAMPLE_MAX_CHARS. Order and membership are deterministic."""
@@ -76,7 +77,7 @@ def load_texts(case_dir: Path | None, include_case: bool) -> dict[str, str]:
     texts.update({f"unseen/{p.name}": _clean(p) for p in sorted(UNSEEN_DIR.glob("*.txt"))})
     if include_case and case_dir is not None:
         files = sorted(
-            (p for p in case_dir.rglob("*.txt") if p.is_file()),
+            (p for p in case_dir.rglob("*") if p.is_file() and p.suffix.lower() == ".txt"),
             key=lambda p: hashlib.sha1(p.relative_to(case_dir).as_posix().encode()).hexdigest(),
         )
         total = 0
@@ -95,7 +96,7 @@ def load_texts(case_dir: Path | None, include_case: bool) -> dict[str, str]:
 
 def case_paths(case_dir: Path, keys: list[str]) -> dict[str, Path]:
     files = sorted(
-        (p for p in case_dir.rglob("*.txt") if p.is_file()),
+        (p for p in case_dir.rglob("*") if p.is_file() and p.suffix.lower() == ".txt"),
         key=lambda p: hashlib.sha1(p.relative_to(case_dir).as_posix().encode()).hexdigest(),
     )
     return {k: files[int(k.split("/")[1])] for k in keys if k.startswith("case/")}
