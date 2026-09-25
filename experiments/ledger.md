@@ -9,8 +9,10 @@ full real-case scan (no case content is recorded here).
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | baseline | 0652a78f35 | 0.9606 | 0.9131 | 0.9362 | 0.9332 | 0.9625 | 0.6655 | 0 | 1.0 | 0.9655 | 1.7162 | 31.32 | 1059.6 | 236 | 334 | baseline |
 | exp01-spacy-lg | 4608805de5 | 0.9589 | 0.9079 | 0.9327 | 0.935 | 0.9596 | 0.662 | 0 | 1.0 | 1.0 | 1.8017 | 32.76 |  |  |  | rolled back |
+| exp02-bare-common-surname | 27f0ced228 | 0.971 | 0.9026 | 0.9356 | 0.9332 | 0.9625 | 0.6655 | 0 | 1.0 | 0.9655 | 1.7244 | 32.97 | 1042.5 | 228 | 342 | needs owner decision |
 
 ## Descriptions
 
 - **baseline** (2026-09-25T04:36:34Z): Baseline before any self-upgrade change: master @ 0652a78 (hostname fix, held-out leak fix, CI floor 0.91). CPU only; GPU present but unused (no torch/cupy installed).
 - **exp01-spacy-lg** (2026-09-25T06:24:16Z): Candidate: en_core_web_lg instead of en_core_web_sm as the spaCy detector (branch exp01-spacy-lg @ 4608805). REJECTED at the benchmark gate, so no case rescan: accepted-only P 0.9606->0.9589, single_token recall 0.9606->0.9310 (-3.0pp, over the 0.02 limit), F1 0.9362->0.9327, 2 tests fail (first-name propagation: lg's different span boundaries leave 'Kenji' of 'Dr. Kenji Ito' unaccepted). Only gain: benchmark_unseen recall 0.9655->1.000 (+1 of 29 mentions, noise). Timing +5% (1.80 vs 1.72 s; an earlier 9.8 s reading was machine-state noise, re-timed alternating with sm).
+- **exp02-bare-common-surname** (2026-09-25T07:11:21Z): Candidate (branch exp02-bare-common-surname @ 27f0ced): an ACCEPTED single word that is an ordinary English word known only as a surname, with a dictionary hit as its only evidence and no accepted full name in the document starting/ending with it, moves to REVIEW. Gate: tests pass, dump005 0 FP, unseen P 1.000, no shape recall drop >0.02, speed flat. TRADE: benchmark accepted-only P 0.9606->0.9710 (+1.04pp), R 0.9131->0.9026 (-1.05pp, all one synthetic code-name alias), F1 flat; accepted+review unchanged. Real case: 8 names ACCEPTED->REVIEW (7 ordinary-word noise, 1 citation surname), nothing newly accepted or lost.
