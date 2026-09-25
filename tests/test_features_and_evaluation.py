@@ -146,3 +146,56 @@ def test_gold_mention_shapes_multi_token_unseen():
     token_shape, dict_shape = _gold_mention_shapes("Xyzlq Vbnmpqr", KB)
     assert token_shape == "multi_token"
     assert dict_shape == "unseen_name"
+
+
+def test_text_only_features_separate_plain_words_from_names():
+    from src.features.feature_extractor import text_only_features
+
+    phrase_ratio, _, _ = text_only_features("Performance Review", KB)
+    name_ratio, _, _ = text_only_features("Nadia Kovalenko", KB)
+    assert phrase_ratio == 1.0
+    assert name_ratio < phrase_ratio
+
+
+def test_text_only_features_ignore_titles():
+    """'Dr.' must not count as an ordinary word diluting the ratio."""
+    from src.features.feature_extractor import text_only_features
+
+    assert text_only_features("Dr. Nadia Kovalenko", KB) == text_only_features("Nadia Kovalenko", KB)
+
+
+def test_extract_features_carries_text_only_features():
+    from src.features.feature_extractor import text_only_features
+
+    text = "The Deep Tunnel was flooded."
+    candidate = CandidateResult(candidate=Candidate.new(
+        "Deep Tunnel", "Deep Tunnel", 4, 15, 0,
+        (Detection("Deep Tunnel", 4, 15, 0, DetectorName.REGEX, 0.55, {"pattern": "bare"}),),
+    ))
+    fv = extract_features(candidate, text, KB)
+    assert (fv.common_word_ratio, fv.first_token_is_ambiguous, fv.place_or_org_token_count) == \
+        text_only_features("Deep Tunnel", KB)
+
+
+def test_pooled_benchmark_metrics_never_match_spans_across_files(tmp_path):
+    """File A has a gold mention at chars 0-5 that the pipeline misses;
+    file B has a false positive at the SAME offsets. Pooling bare offsets
+    used to count that as a true positive. Overall must equal the sum of
+    the per-file results: 0 TP, 1 FP, 1 FN."""
+    import json
+    from types import SimpleNamespace
+
+    from src.evaluation.evaluator import run_benchmark
+
+    for name, gold in (("a_case.txt", [{"start": 0, "end": 5, "text": "Priya"}]), ("b_case.txt", [])):
+        (tmp_path / name).write_text("Priya went home.", encoding="utf-8")
+        (tmp_path / name.replace(".txt", "_gold.json")).write_text(json.dumps({"mentions": gold}), encoding="utf-8")
+
+    def fake_run(path):
+        mentions = [SimpleNamespace(candidate=SimpleNamespace(start=0, end=5))] if "b_case" in str(path) else []
+        persons = (SimpleNamespace(mentions=mentions),) if mentions else ()
+        return SimpleNamespace(persons=persons, review_persons=())
+
+    pipeline = SimpleNamespace(run=fake_run, extractor=SimpleNamespace(knowledge_base=KB))
+    overall = run_benchmark(pipeline, tmp_path).overall_accepted
+    assert (overall.true_positives, overall.false_positives, overall.false_negatives) == (0, 1, 1)

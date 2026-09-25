@@ -43,6 +43,7 @@ import re
 from src.core.models import Detection, DetectorName
 from src.detection.base_detector import BaseDetector
 from src.detection.dictionary_detector import _strip_possessive
+from src.preprocessing.latin import LATIN_LETTERS, LATIN_UPPER
 
 # Token: capitalized word, allows hyphens/apostrophes (O'Brien, Smith-Jones).
 # The accented-letter ranges (Latin-1 Supplement + Latin Extended-A) exist
@@ -56,8 +57,14 @@ from src.detection.dictionary_detector import _strip_possessive
 # character set to Latin-script names specifically, consistent with
 # LanguageValidator's non-Latin-script hard reject elsewhere in this
 # pipeline.
-_LATIN_LETTER = r"A-Za-zÀ-ÖØ-öø-ÿĀ-ſ"
-_NAME_TOKEN = rf"[A-ZÀ-ÖØ-Þ][{_LATIN_LETTER}'\-]*\.?"
+#
+# The letter classes now come from src/preprocessing/latin.py, shared with
+# StructureValidator/DictionaryDetector - which had stayed ASCII-only and
+# were rejecting/fragmenting every accented name this detector found. The
+# old hand-typed first-letter class [A-ZÀ-ÖØ-Þ] also missed Ł/Š/Č/Ž and
+# Romanian/Vietnamese capitals (see latin.py's docstring).
+_LATIN_LETTER = LATIN_LETTERS
+_NAME_TOKEN = rf"[{LATIN_UPPER}][{_LATIN_LETTER}'\-]*\.?"
 
 _TITLES = (
     r"Dr|Mr|Mrs|Ms|Miss|Prof|Professor|Rev|Fr|Sir|Madam|Capt|Col|"
@@ -81,7 +88,7 @@ _TITLES = (
 # 3+ spaces between words is essentially never natural prose spacing;
 # treating it as a hard boundary (same principle as never crossing a
 # newline) stops a name from swallowing adjacent table-column values.
-_SAFE_SEP = r"(?:(?<=\b[A-Z]\.)[ \t]{1,2}|(?<![.!?])[ \t]{1,2})"
+_SAFE_SEP = rf"(?:(?<=\b[{LATIN_UPPER}]\.)[ \t]{{1,2}}|(?<![.!?])[ \t]{{1,2}})"
 
 _TITLED_NAME_RE = re.compile(
     rf"\b(?:{_TITLES})\.?[ \t]{{1,2}}(?:(?:{_TITLES})\.?[ \t]{{1,2}})*"

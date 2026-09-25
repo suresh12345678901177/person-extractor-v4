@@ -119,3 +119,62 @@ def test_pdf_reader_only_supports_pdf_extension():
     assert reader.supports("file.pdf")
     assert reader.supports("FILE.PDF")
     assert not reader.supports("file.txt")
+
+
+def _write_multipage_pdf(path: Path, pages: list[list[str]]) -> None:
+    """Like _write_pdf, but several pages, each with several text lines
+    (T* moves to the next line, which pypdf extracts as a newline)."""
+    writer = PdfWriter()
+    font = DictionaryObject({
+        NameObject("/Type"): NameObject("/Font"), NameObject("/Subtype"): NameObject("/Type1"),
+        NameObject("/BaseFont"): NameObject("/Helvetica"),
+    })
+    font_ref = writer._add_object(font)
+    for lines in pages:
+        page = writer.add_blank_page(width=300, height=300)
+        ops = " T* ".join(f"({line}) Tj" for line in lines)
+        stream = DecodedStreamObject()
+        stream.set_data(f"BT /F1 12 Tf 14 TL 20 250 Td {ops} ET".encode("latin-1"))
+        page[NameObject("/Resources")] = DictionaryObject(
+            {NameObject("/Font"): DictionaryObject({NameObject("/F1"): font_ref})}
+        )
+        page[NameObject("/Contents")] = writer._add_object(stream)
+    with path.open("wb") as f:
+        writer.write(f)
+
+
+def test_line_index_reports_page_and_line_within_page():
+    from src.preprocessing.line_indexer import LineIndex
+
+    text = "page one\n\nfirst\nsecond line\n\nx"
+    index = LineIndex.build(text, page_start_offsets=[0, 10, 29])
+    loc = index.locate(16, 22)  # "second" on page 2
+    assert (loc.page_number, loc.line_number, loc.column_number) == (2, 2, 1)
+    assert str(loc) == "page 2, line 2, col 1 (chars 16-22)"
+    assert index.locate(29, 30).page_number == 3
+    # Without pages: unchanged document-wide lines, no page in the text.
+    plain = LineIndex.build(text).locate(16, 22)
+    assert plain.page_number is None and str(plain) == "line 4, col 1 (chars 16-22)"
+
+
+def test_pdf_mentions_are_located_by_page(tmp_path):
+    """Pages used to be processed as one joined text and reported as a
+    line of that join - a position no PDF viewer shows."""
+    import copy
+
+    from config import BASE_DIR, DEFAULT_CONFIG
+    from src.pipeline.orchestrator import Pipeline
+
+    pdf_path = tmp_path / "report.pdf"
+    _write_multipage_pdf(pdf_path, [
+        ["Quarterly report for the committee."],
+        ["Summary of findings", "Dr. Suresh Kumar signed the report on Monday."],
+        ["Appendix", "Notes", "Priya Raman confirmed the figures.", "Dr. Suresh Kumar agreed."],
+    ])
+    config = copy.deepcopy(DEFAULT_CONFIG)
+    config["feedback"]["enabled"] = False
+    result = Pipeline(config=config, base_dir=BASE_DIR).run(pdf_path)
+
+    found = {(p.display_text, m.candidate.location.page_number, m.candidate.location.line_number)
+             for p in result.persons for m in p.mentions}
+    assert found == {("Dr. Suresh Kumar", 2, 2), ("Dr. Suresh Kumar", 3, 4), ("Priya Raman", 3, 3)}

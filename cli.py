@@ -188,6 +188,7 @@ def _build_config(args: argparse.Namespace) -> dict:
         config["decision"]["strict_corroboration"] = False
     if getattr(args, "no_language_filter", False):
         config["language_filter"]["enabled"] = False
+    config["detection"]["spacy_processes"] = getattr(args, "spacy_processes", 1)
     return config
 
 
@@ -588,7 +589,13 @@ def main() -> int:
                               "non-English text, translated legal/EULA boilerplate, etc. - "
                               "instead of running detection on them and producing false "
                               "positives from cross-language word collisions.")
+    parser.add_argument("--spacy-processes", type=int, default=1,
+                         help="Run spaCy on up to N CPU processes within each document "
+                              "(default 1). Only helps files over ~400KB; results are identical "
+                              "either way. Try 4 for a single very large file.")
     args = parser.parse_args()
+    if args.spacy_processes < 1:
+        parser.error("--spacy-processes must be >= 1")
 
     if args.output and Path(args.output).exists() and Path(args.output).is_file():
         parser.error(

@@ -15,6 +15,7 @@ import re
 
 from src.core.models import CandidateResult, DetectorName, FeatureVector
 from src.knowledge.knowledge_base import KnowledgeBase
+from src.preprocessing.latin import LATIN_UPPER
 from src.preprocessing.segmenter import (
     following_char,
     following_words,
@@ -23,7 +24,7 @@ from src.preprocessing.segmenter import (
     preceding_words,
 )
 
-_INITIAL_RE = re.compile(r"^[A-Z]\.?$")
+_INITIAL_RE = re.compile(rf"^[{LATIN_UPPER}]\.?$")
 
 # Local-context cue words for the person/non-person context-window
 # features, added 2026-09-17 after an accuracy review found the model
@@ -56,6 +57,32 @@ _NONPERSON_CONTEXT_CUES = _ORG_KEYWORDS | frozenset({
     "settings", "version", "policy", "invoice", "agreement", "contract",
     "account", "capital", "holdings", "insurance",
 })
+
+
+def text_only_features(text: str, knowledge_base: KnowledgeBase) -> tuple[float, int, int]:
+    """(common_word_ratio, first_token_is_ambiguous, place_or_org_token_count)
+    for a candidate's normalized text - see FeatureVector for why these
+    exist. Depends on the text alone (no document context), which is
+    what lets scripts/migrate_training_data_add_text_features.py back-fill
+    them exactly for stored training rows; that script calls THIS
+    function, so stored and live values can never drift apart.
+
+    Title/honorific tokens ("Dr.", "Mr.") are excluded first - they're
+    already their own features, and "Mr" would otherwise count as an
+    ordinary word and dilute the ratio for exactly the titled names that
+    are most certainly people."""
+    tokens = [t.rstrip(".'’") for t in text.split()]
+    body = [t for t in tokens if t and not knowledge_base.is_title(t) and not knowledge_base.is_honorific(t)]
+    if not body:
+        body = [t for t in tokens if t]
+    if not body:
+        return 0.0, 0, 0
+    common_ratio = sum(1 for t in body if knowledge_base.is_common_word(t)) / len(body)
+    first_ambiguous = int(knowledge_base.is_ambiguous_first_name(body[0]))
+    place_or_org = sum(
+        1 for t in body if knowledge_base.is_location(t) or knowledge_base.is_organization(t)
+    )
+    return round(common_ratio, 4), first_ambiguous, place_or_org
 
 
 def extract_features(
@@ -110,6 +137,8 @@ def extract_features(
     # or after the candidate on the same line.
     is_isolated = (not prev_words) and (not next_words)
 
+    common_ratio, first_ambiguous, place_or_org = text_only_features(text, knowledge_base)
+
     return FeatureVector(
         token_count=len(tokens),
         char_length=len(text),
@@ -130,4 +159,7 @@ def extract_features(
         preceding_context_is_person_cue=int(preceding_is_person_cue),
         following_context_is_nonperson_cue=int(following_is_nonperson_cue),
         is_isolated_line=int(is_isolated),
+        common_word_ratio=common_ratio,
+        first_token_is_ambiguous=first_ambiguous,
+        place_or_org_token_count=place_or_org,
     )

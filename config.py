@@ -25,6 +25,15 @@ DEFAULT_CONFIG = {
         "use_regex": True,
         "use_dictionary": True,
         "use_spacy": True,
+        # Worker processes spaCy may use WITHIN one document (nlp.pipe
+        # n_process). Only kicks in when the document spans 2+ of
+        # SpacyDetector's 400K-char chunks, i.e. files over ~400KB.
+        # Measured 2026-09-24 on a 5.4MB file: 4 processes = 2.6x faster,
+        # byte-identical entities. Default 1: scan_directory.py already
+        # runs one worker PER FILE across all cores, so also splitting
+        # inside each file there would oversubscribe the CPU. Raise it
+        # (cli.py --spacy-processes) for single very large files.
+        "spacy_processes": 1,
     },
     "classification": {
         "use_ml_classifier": True,

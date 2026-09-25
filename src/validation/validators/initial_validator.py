@@ -8,9 +8,10 @@ import re
 
 from src.core.models import CandidateResult, ValidationResult
 from src.knowledge.knowledge_base import KnowledgeBase
+from src.preprocessing.latin import LATIN_UPPER
 from src.validation.base_validator import BaseValidator
 
-_INITIAL_RE = re.compile(r"^[A-Z]\.?$")
+_INITIAL_RE = re.compile(rf"^[{LATIN_UPPER}]\.?$")
 
 
 class InitialValidator(BaseValidator):

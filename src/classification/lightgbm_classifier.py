@@ -135,7 +135,7 @@ class LightGBMClassifier(BaseClassifier):
             )
         try:
             import numpy as np
-            row = np.array([feature_vector.as_list()], dtype=float)
+            row = self._fit_to_model(np.array([feature_vector.as_list()], dtype=float))
             prob = float(self._booster.predict(row)[0])
             label = 1 if prob >= 0.5 else 0
             return ClassifierResult(
@@ -148,6 +148,45 @@ class LightGBMClassifier(BaseClassifier):
                 label=0, probability=0.0, model_name=self.model_name,
                 model_version=self.model_version, error=str(exc),
             )
+
+    def predict_proba_batch(self, feature_vectors: list[FeatureVector]) -> list[ClassifierResult]:
+        """One booster.predict() call for every candidate in a document,
+        instead of one call per candidate - per-call overhead dominated
+        (profiled 2026-09-24: 1.1s for 12,459 single-row calls on a 600KB
+        file). Per-row probabilities are identical either way; tree
+        traversal is independent per row."""
+        if not feature_vectors:
+            return []
+        if self._booster is None:
+            return [self.predict_proba(fv) for fv in feature_vectors]
+        try:
+            import numpy as np
+            rows = self._fit_to_model(np.array([fv.as_list() for fv in feature_vectors], dtype=float))
+            probs = self._booster.predict(rows)
+        except Exception:  # noqa: BLE001 - fall back to per-row so one bad row can't fail them all
+            logger.exception("LightGBM batch prediction failed - falling back to per-row")
+            return [self.predict_proba(fv) for fv in feature_vectors]
+        return [
+            ClassifierResult(
+                label=1 if float(p) >= 0.5 else 0, probability=round(float(p), 4),
+                model_name=self.model_name, model_version=self.model_version,
+            )
+            for p in probs
+        ]
+
+    def _fit_to_model(self, rows):
+        """Features are only ever APPENDED to FEATURE_NAMES (never
+        reordered or removed), so a model trained on an older, shorter
+        schema reads exactly the leading columns it was trained on. This
+        keeps previously saved models and their backups usable after a
+        feature is added (and lets retrain_from_feedback.py's before/after
+        guardrail run the old live model fairly). A model expecting MORE
+        columns than the pipeline produces is a genuine mismatch - left to
+        fail loudly in predict()."""
+        expected = self._booster.num_feature()
+        if rows.shape[1] > expected:
+            return rows[:, :expected]
+        return rows
 
     def save(self, path: str | Path) -> None:
         path = Path(path)

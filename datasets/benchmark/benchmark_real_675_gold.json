@@ -1,7 +1,12 @@
 {
   "source_case": "930204675",
-  "mention_count": 333,
+  "mention_count": 346,
   "mentions": [
+    {
+      "start": 21,
+      "end": 35,
+      "text": "Marcus Delaney"
+    },
     {
       "start": 48,
       "end": 61,
@@ -13,9 +18,19 @@
       "text": "Talvin Meskara"
     },
     {
+      "start": 101,
+      "end": 115,
+      "text": "Marcus Delaney"
+    },
+    {
       "start": 128,
       "end": 143,
       "text": "Yurdana Kesslin"
+    },
+    {
+      "start": 156,
+      "end": 170,
+      "text": "Marcus Delaney"
     },
     {
       "start": 183,
@@ -23,9 +38,19 @@
       "text": "Petrin Vashko"
     },
     {
+      "start": 209,
+      "end": 223,
+      "text": "Marcus Delaney"
+    },
+    {
       "start": 236,
       "end": 250,
       "text": "Doran Vestring"
+    },
+    {
+      "start": 263,
+      "end": 277,
+      "text": "Marcus Delaney"
     },
     {
       "start": 290,
@@ -33,14 +58,39 @@
       "text": "Sanvira Oduya"
     },
     {
+      "start": 316,
+      "end": 330,
+      "text": "Marcus Delaney"
+    },
+    {
       "start": 343,
       "end": 360,
       "text": "Elric Bannerworth"
     },
     {
+      "start": 373,
+      "end": 387,
+      "text": "Marcus Delaney"
+    },
+    {
       "start": 400,
       "end": 418,
       "text": "Miralda Chessworth"
+    },
+    {
+      "start": 431,
+      "end": 445,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 458,
+      "end": 472,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 533,
+      "end": 547,
+      "text": "Marcus Delaney"
     },
     {
       "start": 763,
@@ -851,6 +901,11 @@
       "start": 9694,
       "end": 9706,
       "text": "Iron Compass"
+    },
+    {
+      "start": 10184,
+      "end": 10198,
+      "text": "Marcus Delaney"
     },
     {
       "start": 10414,
@@ -1666,6 +1721,17 @@
       "start": 26427,
       "end": 26441,
       "text": "Doran Vestring"
+    },
+    {
+      "start": 26568,
+      "end": 26582,
+      "text": "Marcus Delaney"
+    },
+    {
+      "start": 26583,
+      "end": 26597,
+      "text": "Marcus Delaney"
     }
-  ]
+  ],
+  "first_name_convention_note": "2026-09-24: extended by scripts/extend_gold_first_name_mentions.py - every standalone first-name mention of a gold person is a gold mention (the convention benchmark_001 already used). See that script for the reviewed exclusions/roster additions."
 }

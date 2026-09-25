@@ -1,6 +1,7 @@
 # PERSON_EXTRACTOR_V4 requirements
-# TXT + PDF (text-layer only, no OCR) scope keeps this lean - no
-# DOCX/Excel/image-OCR dependencies.
+# TXT, PDF (text layer only, no OCR), CSV, JSON, HTML, XML, DOCX and EML are
+# read with pypdf + the Python standard library only - no Excel/OCR/
+# python-docx dependencies (see README "Supported input formats").
 
 # NLP detection
 spacy>=3.7.0

@@ -33,4 +33,7 @@ FEATURE_NAMES: list[str] = [
     "preceding_context_is_person_cue",
     "following_context_is_nonperson_cue",
     "is_isolated_line",
+    "common_word_ratio",
+    "first_token_is_ambiguous",
+    "place_or_org_token_count",
 ]

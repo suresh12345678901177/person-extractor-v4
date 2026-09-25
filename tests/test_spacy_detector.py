@@ -107,3 +107,27 @@ def test_spacy_detector_finds_person_across_a_forced_chunk_boundary():
 
     for d in detections:
         assert text[d.start:d.end] == d.text
+
+
+def test_parallel_detection_matches_sequential_exactly():
+    """n_process > 1 (config detection.spacy_processes) must return the
+    exact same detections, in the same order, as the sequential path -
+    it only spreads the same chunks over worker processes."""
+    from src.detection.spacy_detector import SpacyDetector
+
+    original_max = SpacyDetector.MAX_CHUNK_CHARS
+    SpacyDetector.MAX_CHUNK_CHARS = 120  # force several chunks
+    try:
+        text = (
+            "According to Marcus Webb, the timeline needs to change.\n"
+            "Sarah Connor replied that Priya Raman would sign off.\n"
+            "The weather today is quite fine and mild for this time of year.\n"
+        ) * 4
+        sequential = SpacyDetector(n_process=1).detect(text, page_index=0)
+        parallel = SpacyDetector(n_process=2).detect(text, page_index=0)
+    finally:
+        SpacyDetector.MAX_CHUNK_CHARS = original_max
+
+    key = lambda ds: [(d.text, d.start, d.end, d.confidence) for d in ds]
+    assert sequential, "expected at least one PERSON detection"
+    assert key(parallel) == key(sequential)

@@ -51,6 +51,7 @@ CORE NO-FALSE-POSITIVE DESIGN PRINCIPLES:
 
 from __future__ import annotations
 
+from src.candidate.name_propagation import DOCUMENT_NAME_PATTERN
 from src.core.models import CandidateResult, Decision, DetectorName
 from src.knowledge.knowledge_base import KnowledgeBase
 from src.preprocessing.segmenter import count_occurrences
@@ -115,6 +116,26 @@ class DecisionEngine:
         # silent default.
         self.allow_spacy_only_corroboration = allow_spacy_only_corroboration
 
+        # Per-document memo cache for count_occurrences() - same fix, same
+        # rationale as CorroborationValidator's _repetition_cache. Without
+        # it, _has_knowledge_corroboration re-ran a full-document regex scan
+        # up to 3x per candidate: profiled (2026-09-24) at 12.8s of a 26.4s
+        # run on a 600KB file, and the dominant cause of super-linear
+        # slowdown on multi-MB files. Keyed to the document string itself
+        # (identity, not equality - holding the reference keeps id() from
+        # being reused) so it invalidates automatically when a new document
+        # arrives, with no reset call needed from any caller.
+        self._repetition_cache: dict[str, int] = {}
+        self._repetition_cache_document: str | None = None
+
+    def _repetition_count(self, text: str, document_text: str) -> int:
+        if document_text is not self._repetition_cache_document:
+            self._repetition_cache.clear()
+            self._repetition_cache_document = document_text
+        if text not in self._repetition_cache:
+            self._repetition_cache[text] = count_occurrences(text, document_text)
+        return self._repetition_cache[text]
+
     def decide(
         self, candidate: CandidateResult, document_text: str, knowledge_base: KnowledgeBase | None = None
     ) -> CandidateResult:
@@ -126,6 +147,14 @@ class DecisionEngine:
             if not state.rejection_reason:
                 state.rejection_reason = "Hard validator rejection"
             return candidate
+
+        # Re-entrant: name propagation (src/candidate/name_propagation.py)
+        # re-decides a candidate after adding evidence to it, so any ML
+        # evidence from a previous decide() is dropped before being re-added
+        # (never double-counted), and a stale non-hard rejection/review
+        # reason is cleared. On a first decide() both are no-ops.
+        state.evidence = [e for e in state.evidence if e.source != "ml_classifier"]
+        state.rejection_reason = None
 
         rule_based_score = state.total_evidence_score
         ml_prob = 0.0
@@ -219,12 +248,17 @@ class DecisionEngine:
             d.metadata.get("pattern") == "dictionary_single_token" for d in detections
         )
         has_title_evidence = any(d.metadata.get("pattern") == "titled" for d in detections)
+        # The first name of a multi-token person this same document already
+        # ACCEPTED - see src/candidate/name_propagation.py.
+        has_document_name_evidence = any(
+            d.metadata.get("pattern") == DOCUMENT_NAME_PATTERN for d in detections
+        )
         has_confident_ml = ml_prob >= ML_HIGH_CONFIDENCE_OVERRIDE
 
-        if has_window_dictionary_evidence or has_title_evidence:
+        if has_window_dictionary_evidence or has_title_evidence or has_document_name_evidence:
             return True
 
-        if has_confident_ml and not self._is_common_word_phrase(candidate, knowledge_base):
+        if has_confident_ml and not self._contains_common_word(candidate, knowledge_base):
             # High ML confidence alone (zero dictionary/title evidence)
             # additionally requires real document-wide repetition - see
             # MIN_REPETITION_FOR_ML_ONLY_CORROBORATION's docstring above
@@ -236,7 +270,7 @@ class DecisionEngine:
             # "Vice President" and "Convertible Debt" cleared this exact
             # path on ML score + repetition alone, with nothing checking
             # whether the words themselves meant "person" at all.
-            repeat_count = count_occurrences(candidate.candidate.normalized_text, document_text)
+            repeat_count = self._repetition_count(candidate.candidate.normalized_text, document_text)
             if repeat_count >= MIN_REPETITION_FOR_ML_ONLY_CORROBORATION:
                 return True
 
@@ -262,7 +296,7 @@ class DecisionEngine:
         # had repeat_count >= 4; the 2 that didn't (repeat_count 2) are
         # correctly left requiring a higher bar, unaffected by this path.
         if has_single_token_dictionary_evidence:
-            repeat_count = count_occurrences(candidate.candidate.normalized_text, document_text)
+            repeat_count = self._repetition_count(candidate.candidate.normalized_text, document_text)
             if repeat_count >= MIN_REPETITION_FOR_ML_ONLY_CORROBORATION:
                 return True
 
@@ -294,9 +328,9 @@ class DecisionEngine:
             candidate.state.feature_vector is not None
             and candidate.state.feature_vector.is_isolated_line
             and ml_prob >= ML_WEAK_DICTIONARY_VETO_FLOOR
-            and not self._is_common_word_phrase(candidate, knowledge_base)
+            and not self._contains_common_word(candidate, knowledge_base)
         ):
-            repeat_count = count_occurrences(candidate.candidate.normalized_text, document_text)
+            repeat_count = self._repetition_count(candidate.candidate.normalized_text, document_text)
             if repeat_count >= MIN_REPETITION_FOR_ML_ONLY_CORROBORATION:
                 return True
 
@@ -324,3 +358,26 @@ class DecisionEngine:
         if not tokens:
             return False
         return all(knowledge_base.is_common_word(t.rstrip(".'’")) for t in tokens)
+
+    @staticmethod
+    def _contains_common_word(candidate: CandidateResult, knowledge_base: KnowledgeBase | None) -> bool:
+        """True if ANY non-title token is ordinary English vocabulary. Used
+        (instead of the ALL-tokens _is_common_word_phrase) on the paths
+        where the ML score alone - no dictionary or title evidence at all -
+        decides ACCEPTED. Added 2026-09-24 after a real case scan: once the
+        classifier learned the text-only features, brand + ordinary-word
+        phrases scored like names ("Zomato Customer Service" 0.19 -> 0.99,
+        "Overlay KeyCharacterMapFile" 0.03 -> 0.98) and, repeating 4+
+        times, were ACCEPTED - the ALL-tokens guard let them through because
+        "Zomato"/"KeyCharacterMapFile" aren't common words. A name with no
+        dictionary support at all ("Doran Vestring", "Yurdana Kesslin")
+        rarely contains an ordinary English word; one that does ("Iron
+        Compass"-style code names) now needs other evidence or stays in
+        REVIEW. Titles are skipped ("Dr." is not evidence against a name)."""
+        if knowledge_base is None:
+            return False
+        tokens = [t.rstrip(".'’") for t in candidate.candidate.normalized_text.split()]
+        return any(
+            knowledge_base.is_common_word(t) for t in tokens
+            if t and not knowledge_base.is_title(t) and not knowledge_base.is_honorific(t)
+        )

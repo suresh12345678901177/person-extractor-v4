@@ -275,3 +275,40 @@ def test_system_log_validator_accepts_name_after_missing_space_domain_sentence()
     cand.candidate = replace(cand.candidate, start=start, end=start + len("Rehan"))
     result = SystemLogValidator().validate(cand, KB, doc)
     assert result.passed is True
+
+
+def test_structure_validator_accepts_accented_latin_names():
+    """Every accented name used to be hard-rejected here as a malformed
+    token, even though RegexDetector found it correctly."""
+    for name in ("José García", "François Dubois", "Björn Lindqvist", "Łukasz Kowalski",
+                 "Ștefan Popescu", "Šimun Babić", "Nguyễn Văn"):
+        assert _validate(StructureValidator(), name).passed, name
+
+
+def test_structure_validator_still_rejects_non_latin_and_lowercase_start():
+    assert not _validate(StructureValidator(), "élan Vital").passed
+    assert not _validate(StructureValidator(), "Иван Петров").passed
+
+
+def test_structure_validator_rejects_accented_acronyms_like_ascii_ones():
+    """'ÑËÙ' used to pass because the acronym check only knew A-Z."""
+    assert not _validate(StructureValidator(), "ÑËÙ").passed
+    assert not _validate(StructureValidator(), "ÉCOLE").passed
+
+
+def test_structure_validator_rejects_machine_identifiers_and_keeps_prefixed_names():
+    """From a real Android case scan: mixed-case identifier fragments and
+    CamelCase compounds were ACCEPTED as names."""
+    for garbage in ("ToMs", "KeR", "LUt", "DeX", "DisplayType", "KeyCharacterMapFile"):
+        assert not _validate(StructureValidator(), garbage).passed, garbage
+    for name in ("McDonald", "MacArthur", "DeShawn", "LaToya", "JoAnn", "O'Brien", "Smith-Jones"):
+        assert _validate(StructureValidator(), name).passed, name
+
+
+def test_structure_validator_rejects_utf8_read_as_latin1():
+    """'TomÃ¡s' is 'Tomás' misdecoded - the candidate 'TomÃ' is garbage."""
+    document = "Contacts: TomÃ¡s and others"
+    start = document.index("TomÃ")
+    detection = Detection("TomÃ", start, start + 4, 0, DetectorName.REGEX, 0.55, {"pattern": "bare"})
+    cand = CandidateResult(candidate=Candidate.new("TomÃ", "TomÃ", start, start + 4, 0, (detection,)))
+    assert not StructureValidator().validate(cand, KB, document).passed

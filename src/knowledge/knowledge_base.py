@@ -17,6 +17,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from src.preprocessing.latin import fold_accents
 from src.utils.logger import get_logger
 
 logger = get_logger("knowledge.knowledge_base")
@@ -55,6 +56,11 @@ class KnowledgeBase:
     ambiguous_first_names: frozenset[str] = field(default_factory=frozenset)
     common_words: frozenset[str] = field(default_factory=frozenset)
     calendar_words: frozenset[str] = field(default_factory=frozenset)
+    # Accent-folded copies of the name lists ("stefan", "nguyen"), used
+    # ONLY as a fallback for tokens containing non-ASCII letters - see
+    # is_known_first_name(). Built in load().
+    first_names_folded: frozenset[str] = field(default_factory=frozenset)
+    last_names_folded: frozenset[str] = field(default_factory=frozenset)
 
     @classmethod
     def load(cls, assets_dir: str | Path) -> "KnowledgeBase":
@@ -76,6 +82,8 @@ class KnowledgeBase:
             common_words=_load_set(assets_dir / "common_words" / "common_english_words.txt"),
             calendar_words=_load_set(assets_dir / "common_words" / "multilingual_calendar_words.txt"),
         )
+        kb.first_names_folded = frozenset(fold_accents(n) for n in kb.first_names)
+        kb.last_names_folded = frozenset(fold_accents(n) for n in kb.last_names)
         logger.info(
             "KnowledgeBase loaded: %d first names, %d last names, %d organizations, "
             "%d locations, %d campaigns, %d blacklist entries",
@@ -85,10 +93,24 @@ class KnowledgeBase:
         return kb
 
     def is_known_first_name(self, token: str) -> bool:
-        return token.lower() in self.first_names
+        key = token.lower()
+        if key in self.first_names:
+            return True
+        # Accent-variant fallback ("Ștefan" vs listed "ştefan"/"stefan",
+        # "Nguyễn" vs "nguyen") - ONLY for tokens that themselves contain
+        # non-ASCII letters, so plain-ASCII text is looked up exactly as
+        # before. The reverse (ASCII "Francois" matching listed
+        # "françois") was measured and deliberately NOT added: it would
+        # add 7,416 new ASCII keys, 43 of them ordinary English words
+        # ("back", "come", "lower", "magic", ...) - a direct false-
+        # positive source.
+        return not key.isascii() and fold_accents(key) in self.first_names_folded
 
     def is_known_last_name(self, token: str) -> bool:
-        return token.lower() in self.last_names
+        key = token.lower()
+        if key in self.last_names:
+            return True
+        return not key.isascii() and fold_accents(key) in self.last_names_folded
 
     def is_stopword(self, token: str) -> bool:
         return token.lower() in self.stopwords

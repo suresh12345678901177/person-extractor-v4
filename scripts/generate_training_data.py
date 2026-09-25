@@ -569,6 +569,76 @@ def _build_unseen_name_negative_examples(kb: KnowledgeBase, count: int) -> list[
     return examples
 
 
+def _build_partial_dictionary_examples(kb: KnowledgeBase, count: int) -> list[dict]:
+    """Two-token spans where exactly ONE token is a dictionary name - the
+    shape the pipeline produces for "Nadia Kovalenko" / "Devraj Bhatt"
+    since the 2026-09-24 boundary fix keeps such names whole (bare regex
+    span + a dictionary_single_token detection on the known token). No
+    synthetic example had this shape before, so the classifier scored
+    real ones near zero ("Femi Novak" 0.04) and they stalled in REVIEW.
+
+    Positives: an unambiguous, non-common-word known first (or last) name
+    beside a pseudo-name no list contains, in person contexts.
+    Negatives, same detections: a known first name beside an ordinary
+    English word ("Deep Tunnel", "Grace Period"-style), in non-person
+    contexts - so the model must learn from the second word itself (e.g.
+    common_word_ratio), not from the detection shape alone."""
+    def usable(word: str) -> bool:
+        return (word.isalpha() and word.isascii() and 3 <= len(word) <= 12
+                and not kb.is_common_word(word) and not kb.is_ambiguous_first_name(word)
+                and not kb.is_calendar_word(word) and not kb.is_stopword(word))
+
+    first_names = [n for n in sorted(kb.first_names) if usable(n)]
+    last_names = [n for n in sorted(kb.last_names) if usable(n)]
+    common = [w for w in sorted(kb.common_words)
+              if w.isalpha() and w.isascii() and 4 <= len(w) <= 10 and not kb.is_stopword(w)
+              and not kb.is_known_first_name(w) and not kb.is_known_last_name(w)]
+    used: set[str] = set()
+
+    def pseudo() -> str:
+        while True:
+            token = "".join(random.choice(_PSEUDO_NAME_CONSONANTS) + random.choice(_PSEUDO_NAME_VOWELS)
+                            for _ in range(random.randint(2, 3))).capitalize()
+            if token.lower() in used or kb.is_known_first_name(token) or kb.is_known_last_name(token) \
+                    or kb.is_common_word(token):
+                continue
+            used.add(token.lower())
+            return token
+
+    def example(tokens: list[str], known_index: int, templates: list[str], label: int, kind: str, spacy_p: float) -> dict:
+        name = " ".join(tokens)
+        sentence = random.choice(templates).format(name=name)
+        start = sentence.index(name)
+        end = start + len(name)
+        known_start = start + (0 if known_index == 0 else len(tokens[0]) + 1)
+        known = tokens[known_index]
+        detections = [
+            Detection(text=name, start=start, end=end, page_index=0, detector=DetectorName.REGEX,
+                      confidence=0.55, metadata={"pattern": "bare"}),
+            Detection(text=known, start=known_start, end=known_start + len(known), page_index=0,
+                      detector=DetectorName.DICTIONARY, confidence=0.40,
+                      metadata={"pattern": "dictionary_single_token"}),
+        ]
+        if random.random() < spacy_p:
+            detections.append(Detection(text=name, start=start, end=end, page_index=0, detector=DetectorName.SPACY,
+                                        confidence=0.50, metadata={"pattern": "spacy_ner"}))
+        return _to_example(sentence, name, start, end, detections, label=label, kind=kind)
+
+    positive_templates = POSITIVE_TEMPLATES + POSITIVE_CHAT_HEADER_TEMPLATES + CONTEXT_CUE_POSITIVE_TEMPLATES
+    negative_templates = NEGATIVE_TEMPLATES + HARD_NEGATIVE_TEMPLATES + NEGATIVE_CHAT_HEADER_TEMPLATES
+    examples = []
+    for i in range(count):
+        if i % 2 == 0:
+            examples.append(example([random.choice(first_names).capitalize(), pseudo()], 0,
+                                    positive_templates, 1, "positive_partial_dictionary", 0.4))
+        else:
+            examples.append(example([pseudo(), random.choice(last_names).capitalize()], 1,
+                                    positive_templates, 1, "positive_partial_dictionary", 0.4))
+        examples.append(example([random.choice(first_names).capitalize(), random.choice(common).capitalize()], 0,
+                                negative_templates, 0, "negative_partial_dictionary_common_word", 0.25))
+    return examples
+
+
 def _to_example(sentence: str, text: str, start: int, end: int, detections: list[Detection], label: int, kind: str) -> dict:
     candidate = Candidate.new(
         text=text, normalized_text=text, start=start, end=end,
@@ -596,6 +666,7 @@ def main() -> None:
     # more of the same targeted reinforcement (not a threshold change,
     # per that entry's explicit reasoning) was worth trying before
     # concluding the gap needs a different mechanism entirely.
+    n_partial_dictionary = 300  # each class - see _build_partial_dictionary_examples
 
     positives = _build_positive_examples(_KB_SINGLETON, n_positive)
     positives += _build_context_cue_positive_examples(_KB_SINGLETON, n_context_cue)
@@ -603,6 +674,11 @@ def main() -> None:
     negatives = _build_negative_examples(_KB_SINGLETON, n_negative)
     negatives += _build_context_cue_negative_examples(_KB_SINGLETON, n_context_cue)
     negatives += _build_unseen_name_negative_examples(_KB_SINGLETON, n_unseen_name)
+    # Built LAST so every example above is drawn from the same random
+    # stream as before this builder existed (only the shuffle order moves).
+    partial = _build_partial_dictionary_examples(_KB_SINGLETON, n_partial_dictionary)
+    positives += [e for e in partial if e["label"] == 1]
+    negatives += [e for e in partial if e["label"] == 0]
 
     all_examples = positives + negatives
     random.shuffle(all_examples)

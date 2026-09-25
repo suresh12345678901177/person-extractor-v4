@@ -97,13 +97,19 @@ class FeedbackStore:
         pending feedback log. Deduplicates against text already pending
         or already confirmed, so re-running on the same file doesn't
         pile up duplicate labeling work."""
-        already_seen = self._existing_texts()
+        return self.append_new(self.build_records(persons, source_file, document_text))
 
-        new_records: list[FeedbackRecord] = []
+    @staticmethod
+    def build_records(persons: list[AggregatedPerson], source_file: str, document_text: str) -> list[FeedbackRecord]:
+        """Build (but don't write or dedupe) one record per REVIEW person.
+        Split out from log_review_persons() so parallel scan workers can
+        build records next to the document text they need, then hand them
+        to the MAIN process for the single, deduplicated append_new() -
+        see scripts/scan_directory.py. Workers writing directly each held
+        their own dedupe cache, so the same name could be logged once per
+        worker and concurrent appends could interleave lines."""
+        records: list[FeedbackRecord] = []
         for person in persons:
-            key = person.normalized_text.lower()
-            if key in already_seen:
-                continue
             first_mention = person.mentions[0]
             if first_mention.state.feature_vector is None:
                 continue  # nothing to train on without features
@@ -119,6 +125,19 @@ class FeedbackStore:
                 logged_at_utc=datetime.now(timezone.utc).isoformat(),
                 context_text=line_containing(document_text, first_mention.candidate.start),
             )
+            records.append(record)
+        return records
+
+    def append_new(self, records: list[FeedbackRecord]) -> int:
+        """Append records whose text isn't already pending or confirmed
+        (or earlier in this same list). Returns how many were written."""
+        already_seen = self._existing_texts()
+
+        new_records: list[FeedbackRecord] = []
+        for record in records:
+            key = record.normalized_text.lower()
+            if key in already_seen:
+                continue
             new_records.append(record)
             already_seen.add(key)
 

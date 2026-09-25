@@ -34,6 +34,13 @@ class BaseClassifier(ABC):
         are captured in ClassifierResult.error."""
         raise NotImplementedError
 
+    def predict_proba_batch(self, feature_vectors: list[FeatureVector]) -> list[ClassifierResult]:
+        """Score many candidates at once, results in input order. Default
+        just loops predict_proba(); concrete models override this with a
+        single vectorized call when their backend supports one. Never
+        raises, same contract as predict_proba()."""
+        return [self.predict_proba(fv) for fv in feature_vectors]
+
     @abstractmethod
     def save(self, path: str | Path) -> None:
         raise NotImplementedError

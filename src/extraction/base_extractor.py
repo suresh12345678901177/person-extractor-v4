@@ -24,7 +24,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
 
-from src.core.models import ExtractionResult, PipelineStatistics
+from src.core.models import ExtractionResult, PipelineStatistics, SourceFormat
 from src.preprocessing.line_indexer import LineIndex
 
 
@@ -40,6 +40,7 @@ class Extractor(ABC):
         line_index: LineIndex,
         input_path: str,
         stats: PipelineStatistics,
+        source_format: SourceFormat | None = None,
     ) -> ExtractionResult:
         """Runs this extractor's own stage sequence over already-read,
         already-cleaned document text and returns a fully-populated

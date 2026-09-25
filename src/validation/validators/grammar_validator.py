@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import re
 
+from src.candidate.name_propagation import DOCUMENT_NAME_PATTERN
 from src.core.models import CandidateResult, ValidationResult
 from src.knowledge.knowledge_base import KnowledgeBase
 from src.validation.base_validator import BaseValidator
@@ -104,8 +105,13 @@ class GrammarValidator(BaseValidator):
             return ValidationResult(self.name, passed=True, score=0.0, message="Multi-token candidate, not applicable")
 
         detections = candidate.candidate.source_detections
+        # document_name = the first name of a full name this document already
+        # accepted (src/candidate/name_propagation.py) - dictionary-grade
+        # evidence for this purpose ("Katya said..." at sentence start).
         has_dictionary_evidence = any(
-            d.metadata.get("pattern", "").startswith("dictionary") for d in detections
+            d.metadata.get("pattern", "").startswith("dictionary")
+            or d.metadata.get("pattern") == DOCUMENT_NAME_PATTERN
+            for d in detections
         )
         has_title_evidence = any(d.metadata.get("pattern") == "titled" for d in detections)
 

@@ -152,12 +152,14 @@ from __future__ import annotations
 
 import re
 
+from src.candidate.name_propagation import DOCUMENT_NAME_PATTERN
 from src.core.models import CandidateResult, DetectorName, ValidationResult
 from src.knowledge.knowledge_base import KnowledgeBase
+from src.preprocessing.latin import LATIN_UPPER
 from src.preprocessing.segmenter import count_occurrences
 from src.validation.base_validator import BaseValidator
 
-_ACRONYM_SHAPE_RE = re.compile(r"^[A-Z]{2,}s?$")
+_ACRONYM_SHAPE_RE = re.compile(rf"^[{LATIN_UPPER}]{{2,}}s?$")  # accented capitals too - see structure_validator.py
 
 
 class CorroborationValidator(BaseValidator):
@@ -203,8 +205,15 @@ class CorroborationValidator(BaseValidator):
         )
         has_title_evidence = any(d.metadata.get("pattern") == "titled" for d in detections)
         has_spacy_evidence = any(d.detector == DetectorName.SPACY for d in detections)
+        # First name of a full name this document already accepted - see
+        # src/candidate/name_propagation.py (which never propagates
+        # ambiguous/common/calendar words, the classes this validator's
+        # refinements below exist for).
+        has_document_name_evidence = any(
+            d.metadata.get("pattern") == DOCUMENT_NAME_PATTERN for d in detections
+        )
 
-        if has_window_dictionary_evidence or has_title_evidence:
+        if has_window_dictionary_evidence or has_title_evidence or has_document_name_evidence:
             return ValidationResult(
                 self.name, passed=True, score=0.0, message="Has corroborating evidence beyond bare shape-match",
             )

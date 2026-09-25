@@ -57,3 +57,26 @@ def test_dictionary_detector_handles_possessive_suffix():
     matches = [d for d in detections if d.text == "Geetha"]
     assert matches, f"expected a 'Geetha' detection, got: {[d.text for d in detections]}"
     assert matches[0].end - matches[0].start == len("Geetha")
+
+
+def test_dictionary_detector_reads_whole_accented_words():
+    """The old ASCII-only token pattern matched only the ASCII prefix of
+    an accented word - 'François' produced a hit on the fragment 'Fran'."""
+    detections = DictionaryDetector(KB).detect("Yesterday François Dubois called.", page_index=0)
+    assert [d.text for d in detections] == ["François Dubois"]
+    assert not any(d.text == "Fran" for d in detections)
+
+
+def test_regex_detector_accepts_extended_latin_capitals():
+    """Ł/Š/Ș capitals were outside the old hand-typed first-letter class."""
+    texts = {d.text for d in RegexDetector().detect("we saw Łukasz Kowalski and Ștefan Popescu.", page_index=0)}
+    assert {"Łukasz Kowalski", "Ștefan Popescu"} <= texts
+
+
+def test_accent_variant_fallback_applies_only_to_non_ascii_tokens():
+    assert KB.is_known_first_name("Ștefan")      # listed under another accent form
+    assert KB.is_known_last_name("Nguyễn")       # listed as plain "nguyen"
+    # Plain-ASCII text is never matched against accented-only entries:
+    # "Francois" is listed only as "françois" among first names.
+    assert KB.is_known_first_name("François")
+    assert not KB.is_known_first_name("Francois")

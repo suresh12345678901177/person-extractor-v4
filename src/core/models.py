@@ -38,6 +38,22 @@ class SourceFormat(str, Enum):
     """Supported input formats."""
     TXT = "txt"
     PDF = "pdf"
+    # Converted to text by standard-library readers (2026-09-24) - see
+    # src/io/. Locations refer to the extracted text; for CSV a line is a
+    # record and for DOCX a line is a paragraph.
+    CSV = "csv"
+    JSON = "json"
+    HTML = "html"
+    XML = "xml"
+    DOCX = "docx"
+    EML = "eml"
+
+
+#: Tabular/key-value data rather than prose. The English-prose language
+#: gate (src/preprocessing/language_filter.py) is calibrated on prose
+#: stopword ratios and would wrongly skip, e.g., a contacts CSV that is
+#: nothing but names and numbers - so it is not applied to these.
+STRUCTURED_FORMATS = frozenset({SourceFormat.CSV, SourceFormat.JSON, SourceFormat.XML})
 
 
 class DetectorName(str, Enum):
@@ -113,11 +129,20 @@ class TextLocation:
     requirement legible without opening the file in a hex editor."""
     char_start: int
     char_end: int
-    line_number: int      # 1-indexed
+    line_number: int      # 1-indexed; within page_number's page when that is set
     column_number: int    # 1-indexed, column of char_start on its line
+    # 1-indexed PDF page (added 2026-09-24). None for single-stream text
+    # (TXT files, real-time text), where line_number is document-wide.
+    # Before this, a PDF's pages were processed as one joined text and
+    # reported as "line 1,204" of that join - a position that exists in
+    # no PDF viewer.
+    page_number: int | None = None
 
     def __str__(self) -> str:
-        return f"line {self.line_number}, col {self.column_number} (chars {self.char_start}-{self.char_end})"
+        # "(chars A-B)" must stay last and unchanged: feedback records store
+        # this string and scripts parse the char offsets back out of it.
+        page = f"page {self.page_number}, " if self.page_number is not None else ""
+        return f"{page}line {self.line_number}, col {self.column_number} (chars {self.char_start}-{self.char_end})"
 
 
 @dataclass(frozen=True, slots=True)
@@ -225,6 +250,19 @@ class FeatureVector:
     preceding_context_is_person_cue: int      # 0/1 - "said", "met", "contact"... within 3 words before
     following_context_is_nonperson_cue: int   # 0/1 - "Ltd", "Division", "Debt"... within 3 words after
     is_isolated_line: int                     # 0/1 - candidate is alone on its own line (chat-header shape)
+    # Text-only "does this read as ordinary words / a place / an org"
+    # features, added 2026-09-24. On benchmark candidates NOT fully in the
+    # name dictionary (the unseen_name recall gap), the model trained on
+    # the 19 features above ranked real names vs non-names at AUC 0.538 -
+    # barely better than chance - and 0.782 with these three added (same
+    # training data, same params; measured offline before adopting them).
+    # Computed from the candidate text alone (titles/honorifics excluded),
+    # so they could be back-filled exactly for every stored training row
+    # (scripts/migrate_training_data_add_text_features.py). Defaulted so
+    # older call sites constructing a FeatureVector still work.
+    common_word_ratio: float = 0.0            # share of tokens that are ordinary English words
+    first_token_is_ambiguous: int = 0         # 0/1 - first token is a first-name/common-noun collision word
+    place_or_org_token_count: int = 0         # tokens that are a known location or organization
 
     def as_list(self) -> list[float]:
         """Fixed-order numeric encoding for the classifier. Order MUST
@@ -249,6 +287,9 @@ class FeatureVector:
             float(self.preceding_context_is_person_cue),
             float(self.following_context_is_nonperson_cue),
             float(self.is_isolated_line),
+            float(self.common_word_ratio),
+            float(self.first_token_is_ambiguous),
+            float(self.place_or_org_token_count),
         ]
 
 
@@ -450,6 +491,11 @@ class ExtractionResult:
     # CSV/JSON exports, or the feedback-labeling queue - purely a manual
     # spot-check list for report.txt/terminal output.
     low_confidence_persons: tuple[AggregatedPerson, ...] = ()
+    # FeedbackRecords built but NOT yet written - only populated when
+    # config["feedback"]["defer_writes"] is set (parallel scan workers),
+    # so the main process can do the single deduplicated write. Typed Any
+    # to avoid a models <-> feedback_store import cycle.
+    feedback_records: tuple[Any, ...] = ()
     error: str | None = None
     statistics: PipelineStatistics = field(default_factory=PipelineStatistics)
     model_info: dict[str, Any] = field(default_factory=dict)

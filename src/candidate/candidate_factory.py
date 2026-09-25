@@ -18,6 +18,7 @@ import re
 
 from src.core.models import Candidate, CandidateResult, CandidateState, Detection, DetectorName
 from src.detection.dictionary_detector import _strip_possessive
+from src.knowledge.knowledge_base import KnowledgeBase
 from src.preprocessing.line_indexer import LineIndex
 
 _WHITESPACE_RE = re.compile(r"\s+")
@@ -69,7 +70,7 @@ def _boundary_priority(detection: Detection) -> int:
     return _PATTERN_BOUNDARY_PRIORITY.get(detection.metadata.get("pattern", ""), 3)
 
 
-def _select_canonical_span(group: list[Detection]) -> Detection:
+def _select_canonical_span(group: list[Detection], knowledge_base: KnowledgeBase | None = None) -> Detection:
     """Picks the most boundary-trustworthy detection's span (see
     _PATTERN_BOUNDARY_PRIORITY above) - EXCEPT one narrow, specifically
     verified rescue: when spaCy tagged exactly ONE token as the person,
@@ -96,13 +97,51 @@ def _select_canonical_span(group: list[Detection]) -> Detection:
     ranked = sorted(group, key=lambda d: (_boundary_priority(d), -(d.end - d.start)))
     best = ranked[0]
 
-    if best.metadata.get("pattern") == "spacy_ner" and len(best.text.split()) == 1:
+    best_pattern = best.metadata.get("pattern")
+    if best_pattern in ("spacy_ner", "dictionary_single_token") and len(best.text.split()) == 1:
         for d in group:
             if d.metadata.get("pattern") != "bare":
                 continue
-            if d.start <= best.start and d.end >= best.end and len(d.text.split()) == 2:
+            if not (d.start <= best.start and d.end >= best.end and len(d.text.split()) == 2):
+                continue
+            if best_pattern == "spacy_ner":
+                return d
+            # dictionary_single_token (added 2026-09-24): the same rescue,
+            # but only when the OTHER token itself reads as a name - a
+            # dictionary hit, unlike spaCy, has no sentence context, so
+            # without this check "Thanks Nadia" or "Nadia Report" would
+            # widen too. Measured: 10.5% of accepted benchmark mentions
+            # were truncated to one token, most of them exactly this shape
+            # ("Nadia" of "Nadia Kovalenko", "Doran" of "Doran Vestring",
+            # "Bhatt" of "Devraj Bhatt") - a known first/last name next to
+            # a surname/first name no list contains.
+            # Deliberately NOT also refusing when the dictionary word itself
+            # is ambiguous ("Wild", "Marcus"): measured 2026-09-24, that
+            # guard cost more than it saved - widening "Wild" to "Wild
+            # Gateway" (a "Ref:" ledger label) lets the validators reject
+            # the whole phrase, where "Wild" alone was accepted (+10 false
+            # positives with the guard, vs 2 "Marcus Nadka" mentions saved).
+            other = d.text.split()[1] if d.start == best.start else d.text.split()[0]
+            if knowledge_base is not None and _is_plausible_name_token(other, knowledge_base):
                 return d
     return best
+
+
+def _is_plausible_name_token(token: str, knowledge_base: KnowledgeBase) -> bool:
+    """True if a capitalized token beside a one-word dictionary name can
+    be the rest of that name: an unambiguous known first/last name, or a
+    word no list knows that isn't ordinary English, a stopword, a calendar
+    word, a place or an organization (i.e. an unseen surname/first name)."""
+    word = _strip_possessive(token)[0].rstrip(".,;:")
+    if len(word) < 2:
+        return False
+    if knowledge_base.is_ambiguous_first_name(word) or knowledge_base.is_calendar_word(word):
+        return False
+    if knowledge_base.is_stopword(word) or knowledge_base.is_location(word) or knowledge_base.is_organization(word):
+        return False
+    if knowledge_base.is_known_first_name(word) or knowledge_base.is_known_last_name(word):
+        return True
+    return not knowledge_base.is_common_word(word)
 
 
 def normalize_name(text: str) -> str:
@@ -148,8 +187,11 @@ class CandidateFactory:
     """Builds CandidateResult objects from raw detections, attaching a
     human-readable TextLocation to every candidate via the LineIndex."""
 
-    def __init__(self, line_index: LineIndex) -> None:
+    def __init__(self, line_index: LineIndex, knowledge_base: KnowledgeBase | None = None) -> None:
         self._line_index = line_index
+        # Optional: enables the dictionary-single-token boundary rescue in
+        # _select_canonical_span; without it that rescue is skipped.
+        self._knowledge_base = knowledge_base
 
     def build(self, detections: list[Detection]) -> list[CandidateResult]:
         groups = merge_detections(detections)
@@ -165,7 +207,7 @@ class CandidateFactory:
             # spaCy/titled boundary whenever they overlap but disagree
             # on the exact extent. See _select_canonical_span for the
             # one narrow, verified exception.
-            widest = _select_canonical_span(group)
+            widest = _select_canonical_span(group, self._knowledge_base)
             start = widest.start
             # Trim a trailing possessive regardless of which detector's
             # span won boundary priority - same fix as

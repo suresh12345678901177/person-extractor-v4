@@ -1,15 +1,20 @@
 # PERSON_EXTRACTOR_V4
 
-An offline, explainable, **TXT + PDF (text-layer only)** Person Name
-Extraction framework built around a 16-validator rules engine, with a real
+An offline, explainable Person Name Extraction framework - reading
+**TXT, PDF (text layer only), CSV/TSV, JSON/JSONL, HTML, XML, DOCX and
+EML** - built around a 16-validator rules engine, with a real
 trained ML classifier used strictly as a corroborating signal — never as a
 gate. Every accepted name tells you exactly why it was accepted, how many
 times it was found, where, and how long each stage took.
 
 **Real-world coverage caveat, stated up front, not buried in a scan log:**
-on an actual 47,353-file forensic case folder, this scope currently means
-the tool never even attempts to open **84.7%** of files (wrong extension -
-DOCX/XLSX/images/email containers), and of the `.txt`/`.pdf` files it does
+on an actual 47,353-file forensic case folder, the TXT + PDF scope this
+tool had until 2026-09-24 meant it never even attempted to open **84.7%**
+of files (wrong extension - DOCX/XLSX/images/email containers). CSV, JSON,
+HTML, XML, DOCX and EML are now read too (see "Supported input formats");
+XLSX, images/OCR and binary containers (.msg, .doc, databases) still
+aren't, and the share of that case now covered has not been re-measured.
+Of the `.txt`/`.pdf` files it did
 open, **8.1% of the total** are scanned/image-only PDFs with no text layer
 to read. Net result on that real case: only **~4.9% of all files in the
 folder** ever contributed an extracted name. See "Known limitations" for
@@ -87,6 +92,14 @@ forever, but because the evidence pointed at a cheaper, lower-risk fix
 actually solving the real problem first.
 
 ## Why these design choices (data-scientist reasoning, not defaults)
+
+**Scope update, 2026-09-24:** CSV/TSV, JSON/JSONL, HTML, XML, DOCX and
+EML readers were added - standard library only, so still no new
+dependencies and still fully offline (see "Supported input formats").
+Each converts its format to text while keeping structure as hard name
+boundaries (a table cell, CSV field or paragraph can never merge into the
+next). Excel, images/OCR and binary containers remain out. The history
+below describes the scope before that change.
 
 **Scope: TXT + PDF, text-layer only. DOCX/Excel/images/email containers
 and OCR are still deliberately out.** The original scope was TXT-only for
@@ -333,7 +346,16 @@ timestamped CSVs (never overwrites a previous run):
 python scripts/scan_directory.py --input-dir "C:\path\to\case_folder"
 python scripts/scan_directory.py --input-dir "C:\path\to\case_folder" --output "C:\path\to\results" --include-review
 python scripts/scan_directory.py --input-dir "C:\path\to\case_folder" --workers 8   # parallel (default: CPU count)
+python scripts/scan_directory.py --input-dir "C:\path\to\case_folder" --exclude report.xml --exclude "*/cache/*"
 ```
+
+`--exclude` (repeatable) skips files whose name or path relative to
+`--input-dir` matches a glob, case-insensitively. Excluded files still get
+a row in the per-file CSV (`skipped: excluded by --exclude <pattern>`) and a
+`files_excluded` count in the summary. Typical use: a forensic tool's own
+aggregate report (e.g. ProDiscover's 68 MB `report.xml`, a copy of evidence
+already scanned file by file - it took 29 of 44 minutes on a real case and
+added only duplicate or noisy names).
 
 Runs across `--workers` processes by default (one per CPU core), each
 with its own loaded spaCy model + classifier - not one shared Pipeline,
@@ -360,18 +382,256 @@ never sent to the model. A run summary (files found, names found,
 total time taken) prints to the console and mirrors what a header
 glance at the files CSV would show.
 
+### Supported input formats
+
+| Extensions | What is read | "line N" in a result |
+|---|---|---|
+| `.txt` | the file | line N of the file |
+| `.pdf` | embedded text layer (no OCR) | line N of that page (`page P, line N`) |
+| `.csv` `.tsv` | every record, cells joined by ` \| ` | CSV record N (header = 1) |
+| `.json` `.jsonl` `.ndjson` | every string value as `key: value` | line of the extracted text |
+| `.html` `.htm` `.xhtml` | visible text (no scripts/styles), cells separated | line of the extracted text |
+| `.xml` | element text + attribute values; malformed XML read leniently | line of the extracted text |
+| `.docx` | body paragraphs and tables, footnotes, comments (+ comment authors), document author / last editor | body paragraph N |
+| `.eml` | From/To/Cc/Bcc/Reply-To/Sender/Subject/Date + plain-text or HTML body | line of the extracted text |
+
+Structured data (CSV, JSON, XML) skips the English-prose language gate,
+which is calibrated on prose and would otherwise skip a contact list that
+is nothing but names and numbers; every per-candidate validator still
+applies. Known limits: a first and last name in separate columns/cells
+are reported as two single-token mentions (cells are hard boundaries by
+design); `.xlsx`, `.doc`, `.msg`, images and attachments are not read.
+`scan_directory.py` picks up every listed extension automatically.
+
+### PDF locations
+
+Mentions in a PDF are located by page: `page 3, line 4, col 1 (chars
+154-170)`, with the line counted within that page (text files keep
+`line N, col C (...)`). Extraction still treats the whole PDF as one
+document, so repetition and first-name propagation work across pages;
+only the reported position is per page. Before 2026-09-24 every PDF was
+reported as lines of its pages' joined text.
+
+### Large single files
+
+For one very large file (over ~400KB), spaCy can use several CPU
+processes inside that file - results are identical, measured 2.4x
+faster at 4 processes on a 2MB file:
+
+```bash
+python cli.py --input big_dump.txt --spacy-processes 4
+```
+
+Leave it at the default (1) for `scan_directory.py`, which already
+uses every core across files.
+
+### Real-time mode (local HTTP service)
+
+`cli.py` reloads spaCy, the classifier and the knowledge base on every
+run (~11-13s). `server.py` loads them once and then answers each request
+in milliseconds (measured median 11-23ms per chat message):
+
+```bash
+python server.py                    # http://127.0.0.1:8765, this machine only
+python server.py --port 9000 --no-feedback-log
+```
+
+- `POST /extract` `{"text": "..."}` — one standalone piece of text.
+- `POST /sessions/<id>/messages` `{"text": "..."}` — the next message of
+  a conversation. Each message is judged with the recent conversation
+  (default last 200,000 chars) as context, so a name repeated across
+  messages builds up evidence exactly as it would inside an exported
+  chat file; earlier mentions of that name are re-judged when a new
+  message adds evidence (`newly_accepted` in the reply).
+- `GET /sessions/<id>` — running name list for the conversation;
+  `DELETE /sessions/<id>` forgets it.
+- `GET /health`.
+
+Fed one line at a time and scored against the gold labels (re-measured
+2026-09-24): `benchmark_real_660.txt` precision 0.9701 vs 0.9717 for a
+whole-file run, gold coverage 0.9601 vs 0.9772 (a stream judges a name's
+first mentions before its later repetitions exist); `benchmark_real_675.txt`
+identical to the whole-file run. Median 13-27ms per message.
+
+```powershell
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8765/sessions/chat1/messages `
+    -ContentType 'application/json' -Body '{"text": "Femi Novak called again."}'
+```
+
+Binds to 127.0.0.1 by default. The text sent to it is case material -
+don't expose it on a network interface without authentication in front.
+
 ## Real measured results (not projected)
 
 Run `python cli.py --evaluate` to reproduce these against
-`datasets/benchmark/` (last run 2026-09-22, 7 benchmark files including
+`datasets/benchmark/` (last run 2026-09-24, 7 benchmark files including
 two large real-world documents, `benchmark_real_660.txt` and
 `benchmark_real_675.txt`, plus a synthetic all-negative structured-dump
 file - see below):
 
 | Bucket | Precision | Recall | F1 |
 |---|---|---|---|
-| ACCEPTED only (auto-shipped) | 0.8611 | 0.8677 | 0.8644 |
-| ACCEPTED + REVIEW (what a human sees) | 0.8250 | 0.9678 | 0.8907 |
+| ACCEPTED only (auto-shipped) | 0.9598 | 0.9131 | 0.9359 |
+| ACCEPTED + REVIEW (what a human sees) | 0.9325 | 0.9625 | 0.9473 |
+
+**2026-09-24 - validated on the real "real case" folder, and
+what it caught that the benchmark couldn't.** A scan with the new readers
+(19,090 files vs 7,246) exposed, compared against the 2026-09-23 scan via
+each run's case-wide names CSV:
+- Android binary XML/compiled manifests and image files with `.html`
+  extensions (840 files) decoded into garbage "names" - now skipped as
+  binary content (`src/io/binary_check.py`, counted in the scan summary).
+- The text-feature retrain made brand + ordinary-word phrases score like
+  names ("Zomato Customer Service" 0.19 -> 0.99), ACCEPTED on the ML score
+  alone when repeated - the ML-only paths now require that no token be an
+  ordinary English word (`DecisionEngine._contains_common_word`).
+- Accented-letter support let machine-text through: mixed-case fragments
+  ("ToMs", "LUt"), CamelCase identifiers ("KeyCharacterMapFile") and
+  UTF-8-read-as-Latin-1 ("TomÃ¡s") - now rejected by StructureValidator.
+- Single-word values in Android settings XML/JSON ("Edit", "Read",
+  "Block") - single tokens in CSV/JSON/XML now go to REVIEW unless a title
+  or same-file full name supports them.
+- Support-line and font names ("Jio Customercare", "Helvetica Neue") -
+  org keywords and a font section in the blacklist.
+After these, accepted names from the same `.txt`/`.pdf` files went 218 ->
+214 with full names instead of fragments (a lone first name -> the full name) and
+old false positives removed ("Samsung Smart", "DeX"), and the new formats
+added ~15 real people (e.g. "Roshni Nadar", "Frank Abagnale"). Known
+remaining false positives: "Suicidal Tendency" (both words missing from
+the ~10k-word common-words list), "Kyrie Eleison", "Grandmaster Master",
+"Crna Gora". Benchmark unchanged throughout (P 0.9606 / R 0.9131).
+
+**2026-09-24 - retrain for one-known-word names.** After the boundary fix
+below kept "Femi Novak" whole, the classifier scored such names near zero
+(0.04) - no synthetic example had that shape (two tokens, only ONE a
+dictionary name). `generate_training_data.py` now adds 300 positives
+(known first/last name + a pseudo-name no list contains) and 300
+negatives with identical detections (known first name + an ordinary
+English word). Controlled comparison, same code, trained exactly like
+`retrain_from_feedback.py`: regenerated data alone P 0.9486 / F1 0.9297
+(66 FP); with the new examples P 0.9598 / R 0.9131 / F1 0.9359 (51 FP);
+live model before P 0.9605 / R 0.9101 / F1 0.9346 (50 FP). Promoted via
+the guardrail (no shape regressed). "Femi Novak"/"Femi Okafor" 0.04 ->
+0.61 and "Adebayo Baptiste" 0.08 -> 0.63, now ACCEPTED; `benchmark_unseen/`
+unchanged at P 1.000 / R 0.966. (Regenerating also picks up today's
+feature-code changes - accent-variant dictionary hits, the placeholder
+blacklist - so the synthetic set now matches live inference.)
+
+**2026-09-24 - name boundaries.** The benchmark's overlap scoring counts
+"Nadia" as a hit for gold "Nadia Kovalenko", so truncation was invisible
+to it; measured directly, 10.5% of accepted mentions were cut to one
+token. When a one-word dictionary name sits inside a two-word capitalized
+span whose other word reads as a name (an unambiguous known name, or an
+unknown word that isn't ordinary English, a stopword, a place or an org),
+the two-word span now wins (`candidate_factory._select_canonical_span`).
+Exact boundaries 89.4% -> 94.9%; accepted precision 0.9525 -> 0.9605
+(widening also exposes phrases like "Wild Gateway" to validators that
+reject them), recall 0.9161 -> 0.9101: some widened names the classifier
+scores very low ("Femi Novak" 0.04) now sit in REVIEW as full names
+instead of being accepted as one token. Tried and reverted: also refusing
+to widen ambiguous dictionary words - it cost +10 false positives to save
+2 mentions. Remaining truncations are mostly code-name aliases ("Amber" of
+"Amber Circuit"), deliberately not widened.
+
+**2026-09-24 - document-level first-name propagation**
+(`src/candidate/name_propagation.py`). Once a document ACCEPTS a
+multi-token person ("Dr. Kenji Ito"), a standalone "Kenji" in the same
+document counts as corroborated: REVIEW candidates with that text are
+re-decided, and occurrences no detector found are created and run through
+the FULL validation pipeline (hard rejections are never overridden).
+First names that are ordinary English words, known first-name/common-noun
+collisions ("Chase", "Grace", "Major") or calendar words are never
+propagated. A first name directly followed by an existing candidate
+("Ranjodh" in "Ranjodh Aulakh" where only "Aulakh" was detected) is not
+split off as its own mention. Accepted-only: single-token recall
+0.8177 -> 0.9655, unseen_name 0.5575 -> 0.6620, overall recall 0.8914 ->
+0.9161, precision 0.9497 -> 0.9510 (no new false positives in any
+benchmark file; `benchmark_unseen/` precision stays 1.000). Remaining
+single-token misses are mostly "Ola" (Ola Bakare), hard-rejected because
+"Ola" is on the organizations list. Real-time sessions pass the
+conversation's accepted names in, so a full name from message 3 vouches
+for a first name in message 20.
+
+**2026-09-24 - one gold-label convention across all benchmark files.**
+The files disagreed on first-name-only mentions ("Wendy already logged
+it", "Hi Rohan,"): `benchmark_001/002` counted them, the rest didn't, so
+121 of 182 accepted "false positives" were the pipeline correctly finding
+a gold person by first name. All files now count them (the standard NER
+convention, and the one `benchmark_001` already used) via
+`scripts/extend_gold_first_name_mentions.py`: +156 mentions (003 +1,
+004 +2, real_660 +140, and real_675 +13 for "Marcus Delaney", a call-log
+party the 675 roster had omitted). Every addition was reviewed in context;
+the one exclusion ("Kavya" in the TV-show title "The Kavya Diaries") is
+listed in the script. Originals are in `datasets/benchmark/backups/`.
+Same code and model, before -> after relabeling (accepted-only):
+precision 0.8547 -> 0.9497, recall 0.9084 -> 0.8914, F1 0.8807 -> 0.9196.
+Recall dipped because first-name mentions the pipeline misses are now
+visible: single-token recall is 0.8177 (166/203) - 22 of the misses sit
+in REVIEW (e.g. "Katya", "Jaylen"), 8 are never detected, and 6 are
+"Ola" (Ola Bakare) rejected because "Ola" is on the organizations list.
+
+**2026-09-24 - evaluator fix: overall numbers before this date are
+slightly off.** `run_benchmark` pooled every file's spans as bare
+character offsets for the OVERALL and per-domain metrics, so a prediction
+at chars 316-324 in one file could "match" a gold mention at the same
+offsets in a different file (greedy one-to-one matching, so cross-file
+pairs also consumed each other). Per-file rows and per-shape recall were
+always correct; overall/per-domain P/R/F1 (including the historical
+figures further down, and `retrain_from_feedback.py`'s overall-F1
+guardrail) were not. Fixed by giving each file its own offset range -
+overall TP/FP/FN now equal the per-file sums exactly (regression test in
+`tests/test_features_and_evaluation.py`). The table above uses the
+corrected computation.
+
+**2026-09-24 - placeholder names.** "John Doe", "Jane Doe", "Joe
+Bloggs", "Test User" and similar are now blacklisted (see the dated
+section in `assets/blacklist/blacklist.txt`). `benchmark_004.txt` (email)
+was accepting "John Doe" twice from a forwarded test form submission;
+email precision 0.667 -> 0.769 with recall unchanged at 1.0. None of
+these names is a gold person anywhere in the benchmarks.
+
+
+**2026-09-24 - accented names.** Every accented Latin name ("José
+García", "François Dubois", "Łukasz Kowalski") was being hard-rejected
+by StructureValidator's ASCII-only token check - never reaching even
+REVIEW - and DictionaryDetector matched only the ASCII prefix of an
+accented word ("François" -> a dictionary hit on "Fran"). ~9,100 accented
+name-list entries were unreachable. All name-shape checks now share one
+Latin letter set (`src/preprocessing/latin.py`), and accent variants
+("Ștefan", "Nguyễn") fall back to an accent-folded lookup - for
+non-ASCII tokens only (folding plain ASCII text too was measured and
+rejected: it would make 43 ordinary English words, e.g. "back", "come",
+"lower", known names). Benchmark effect: the one accented gold name,
+"François Dubois" in `benchmark_004.txt`, previously missed even with
+review, is now accepted; nothing else moved. Curly double quotes (“ ”)
+now count for the `occurs_in_quotes` feature too.
+
+**2026-09-24 - three text-only classifier features.** On benchmark
+candidates NOT fully in the name dictionary, the previous classifier
+ranked real names vs non-names at AUC 0.40-0.54 - no better than chance -
+so the ML-gated acceptance paths were blocking unseen real names. Added
+`common_word_ratio`, `first_token_is_ambiguous` and
+`place_or_org_token_count` (see `FeatureVector`), measured offline first
+(same data and params: AUC 0.538 -> 0.782 on that population), back-filled
+exactly into every stored training row
+(`scripts/migrate_training_data_add_text_features.py`), then retrained via
+`retrain_from_feedback.py` (guardrail passed, no shape regressed).
+Previous vs retrained model, both on the same current code, overall
+figures re-measured with the corrected evaluator (see above):
+
+| Accepted-only | Previous model | Retrained model |
+|---|---|---|
+| unseen_name recall | 0.3855 | **0.6145** |
+| multi_token recall | 0.8534 | 0.9044 |
+| dictionary_known / single_token recall | 0.9882 / 1.0000 | unchanged |
+| Overall precision / recall / F1 | 0.8521 / 0.8601 / 0.8561 | 0.8547 / 0.9084 / **0.8807** |
+| `datasets/benchmark_unseen/` (held out) P / R | 1.000 / 0.759 | 1.000 / **0.966** |
+
+Precision held (slightly up). Cost: 6 more accepted false positives on
+`benchmark_real_660.txt` (123 -> 129) alongside 8 more true positives
+there; `benchmark_real_675.txt` precision rose 0.8428 -> 0.8705. Older
+saved models keep working - the classifier reads only the leading columns
+a model was trained on.
 
 (Accepted-only recall jumped 0.7846 -> 0.8677 and F1 0.8186 -> 0.8644 in
 a single targeted session - see "Real measured results, 2026-09-22 -

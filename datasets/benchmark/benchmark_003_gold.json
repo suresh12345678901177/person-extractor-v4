@@ -1,6 +1,6 @@
 {
   "source_markup_file": "datasets\\benchmark\\benchmark_003_source.md",
-  "mention_count": 32,
+  "mention_count": 33,
   "mentions": [
     {
       "start": 13,
@@ -138,6 +138,11 @@
       "text": "Mrs. Kavya Nair"
     },
     {
+      "start": 1399,
+      "end": 1405,
+      "text": "Devraj"
+    },
+    {
       "start": 1432,
       "end": 1444,
       "text": "Ishaan Mehra"
@@ -162,5 +167,6 @@
       "end": 2291,
       "text": "Meera Iyengar"
     }
-  ]
+  ],
+  "first_name_convention_note": "2026-09-24: extended by scripts/extend_gold_first_name_mentions.py - every standalone first-name mention of a gold person is a gold mention (the convention benchmark_001 already used). See that script for the reviewed exclusions/roster additions."
 }

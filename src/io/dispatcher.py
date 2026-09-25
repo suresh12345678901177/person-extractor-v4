@@ -14,8 +14,14 @@ from pathlib import Path
 
 from src.core.models import DocumentResult
 from src.io.base_reader import BaseReader
+from src.io.csv_reader import CsvReader
+from src.io.docx_reader import DocxReader
+from src.io.email_reader import EmailReader
+from src.io.html_reader import HtmlReader
+from src.io.json_reader import JsonReader
 from src.io.pdf_reader import PdfReader
 from src.io.text_reader import TextReader
+from src.io.xml_reader import XmlReader
 from src.utils.logger import get_logger
 
 logger = get_logger("io.dispatcher")
@@ -28,10 +34,23 @@ class ReaderDispatcher:
         self._readers: list[BaseReader] = [
             TextReader(),
             PdfReader(),
+            # Standard-library converters (2026-09-24) - no new dependencies.
+            CsvReader(),
+            JsonReader(),
+            HtmlReader(),
+            XmlReader(),
+            DocxReader(),
+            EmailReader(),
             # Future formats register here, e.g.:
-            #   DocxReader(), ExcelReader(), ImageReader()
+            #   ExcelReader(), ImageReader()
             # No other file needs to change when a new reader is added.
         ]
+
+    def supported_extensions(self) -> tuple[str, ...]:
+        """Every extension some reader handles, lowercase with a leading
+        dot (".txt", ".csv", ...) - the single list scan_directory.py and
+        error messages use, so a new reader is picked up everywhere."""
+        return tuple(f".{ext}" for reader in self._readers for ext in reader.supported_extensions)
 
     def get_reader(self, path: str | Path) -> BaseReader | None:
         for reader in self._readers:

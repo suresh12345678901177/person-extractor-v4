@@ -52,6 +52,10 @@ logger = get_logger("evaluation.evaluator")
 # A benchmark file not listed here falls into "uncategorized" rather
 # than silently being dropped from the breakdown or crashing - a
 # deliberate reminder to tag new benchmark files, not a hard requirement.
+# Per-file offset range for pooled span metrics (see run_benchmark) - far
+# larger than any document, so spans from different files never overlap.
+_FILE_SPAN_STRIDE = 10**12
+
 FILE_DOMAINS: dict[str, str] = {
     "benchmark_001.txt": "prose",
     "benchmark_002.txt": "prose",
@@ -174,14 +178,28 @@ def run_benchmark(pipeline: Pipeline, benchmark_dir: str | Path = "datasets/benc
             missed_mentions=missed, false_positive_texts=fps,
         ))
 
-        all_accepted.extend(accepted_spans)
-        all_candidates.extend(candidate_spans)
-        all_gold.extend(gold_spans)
+        # Pooled (overall / per-domain) metrics need spans from different
+        # files kept apart: spans are bare char offsets, so without this a
+        # prediction at chars 316-324 in one file could "match" a gold
+        # mention at the same offsets in ANOTHER file, and
+        # compute_span_metrics' greedy one-to-one matching let such cross-
+        # file pairs consume each other (found 2026-09-24: overall recall
+        # moved while every per-file row stayed identical). Shifting each
+        # file into its own offset range makes the pooled numbers exactly
+        # the sum of the per-file matches.
+        base = len(file_results) * _FILE_SPAN_STRIDE
+        accepted_pooled = [(s + base, e + base) for s, e in accepted_spans]
+        candidate_pooled = [(s + base, e + base) for s, e in candidate_spans]
+        gold_pooled = [(s + base, e + base) for s, e in gold_spans]
+
+        all_accepted.extend(accepted_pooled)
+        all_candidates.extend(candidate_pooled)
+        all_gold.extend(gold_pooled)
 
         domain = FILE_DOMAINS.get(txt_path.name, "uncategorized")
-        domain_accepted_spans.setdefault(domain, []).extend(accepted_spans)
-        domain_candidate_spans.setdefault(domain, []).extend(candidate_spans)
-        domain_gold_spans.setdefault(domain, []).extend(gold_spans)
+        domain_accepted_spans.setdefault(domain, []).extend(accepted_pooled)
+        domain_candidate_spans.setdefault(domain, []).extend(candidate_pooled)
+        domain_gold_spans.setdefault(domain, []).extend(gold_pooled)
 
         for mention in gold_data["mentions"]:
             ms, me = mention["start"], mention["end"]

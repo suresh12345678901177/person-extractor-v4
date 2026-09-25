@@ -43,6 +43,16 @@ ORG_KEYWORDS = frozenset({
     # already covered above, so this generalizes to any other
     # "<Product/Brand> Licensing/Marketplace/Warranty/Software" pattern
     # in similar EULA/license-style documents, not just these 5 cases.
+    "consultancy", "consulting", "consultants", "holdings", "ventures",
+    "technologies", "logistics",  # added 2026-09-24: a contacts-CSV
+    # company column ("Tata Consultancy") was ACCEPTED as a person - "Tata"
+    # is a real surname and nothing here marked "Consultancy" as a business
+    # word. Same generic company-suffix class as "services"/"solutions";
+    # checked against every benchmark gold name first (no collisions).
+    "customercare", "helpline", "helpdesk", "support",  # added 2026-09-24:
+    # a real case scan ACCEPTED "Bsnl Customercare", "Jio Customercare",
+    # "Airtel Customercare", "Sony Customercare" (phone contact labels) -
+    # support-line names, the same class as "services". No gold collisions.
 })
 
 

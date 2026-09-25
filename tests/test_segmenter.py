@@ -65,3 +65,23 @@ def test_max_chars_default_is_generous_for_realistic_lines():
 def test_line_exactly_at_max_chars_boundary_is_untouched():
     text = "x" * 2000
     assert line_containing(text, 0, max_chars=2000) == text
+
+
+def test_is_inside_quotes_handles_curly_double_quotes():
+    from src.preprocessing.segmenter import is_inside_quotes
+
+    text = "She wrote “ask Marcus Webb first” and left."
+    start = text.index("Marcus")
+    assert is_inside_quotes(text, start, start + 11)
+
+    after = "She wrote “ask him first” and Marcus Webb left."
+    start = after.index("Marcus")
+    assert not is_inside_quotes(after, start, start + 11)
+
+
+def test_is_inside_quotes_ignores_apostrophes():
+    from src.preprocessing.segmenter import is_inside_quotes
+
+    text = "Don’t tell O’Brien that Marcus Webb called."
+    start = text.index("Marcus")
+    assert not is_inside_quotes(text, start, start + 11)

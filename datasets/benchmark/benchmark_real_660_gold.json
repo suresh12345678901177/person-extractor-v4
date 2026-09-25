@@ -1,7 +1,7 @@
 {
   "source_case": "930204660",
   "note": "Offsets rebuilt against the current text on 2026-08-20T07:21:40.901254+00:00 - the previous gold file's offsets had drifted ~94% out of alignment with the current benchmark_real_660.txt content (the underlying case export grew/changed after the original gold labels were written). Rebuilt mechanically by re-finding every occurrence of each name already in the old roster, same principle as scripts/extend_benchmark_gold_labels.py. A name introduced ONLY by whatever content changed since the original labeling would not be caught by this method.",
-  "mention_count": 738,
+  "mention_count": 878,
   "mentions": [
     {
       "start": 21,
@@ -52,6 +52,11 @@
       "start": 272,
       "end": 286,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 314,
+      "end": 320,
+      "text": "Jaylen"
     },
     {
       "start": 365,
@@ -149,6 +154,11 @@
       "text": "Priya Ramanathan"
     },
     {
+      "start": 984,
+      "end": 989,
+      "text": "Priya"
+    },
+    {
       "start": 1087,
       "end": 1102,
       "text": "Nadia Kovalenko"
@@ -182,6 +192,11 @@
       "start": 1384,
       "end": 1398,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 1459,
+      "end": 1464,
+      "text": "Andre"
     },
     {
       "start": 1529,
@@ -219,6 +234,11 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 1906,
+      "end": 1911,
+      "text": "Katya"
+    },
+    {
       "start": 1939,
       "end": 1953,
       "text": "Marcus Delaney"
@@ -227,6 +247,16 @@
       "start": 1967,
       "end": 1981,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 1994,
+      "end": 1999,
+      "text": "Katya"
+    },
+    {
+      "start": 2112,
+      "end": 2117,
+      "text": "Kenji"
     },
     {
       "start": 2161,
@@ -239,6 +269,11 @@
       "text": "Bruno Alves"
     },
     {
+      "start": 2383,
+      "end": 2388,
+      "text": "Wendy"
+    },
+    {
       "start": 2411,
       "end": 2425,
       "text": "Marcus Delaney"
@@ -247,6 +282,16 @@
       "start": 2474,
       "end": 2488,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 2540,
+      "end": 2547,
+      "text": "Ibrahim"
+    },
+    {
+      "start": 2587,
+      "end": 2592,
+      "text": "Priya"
     },
     {
       "start": 2623,
@@ -262,6 +307,11 @@
       "start": 2709,
       "end": 2723,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 2874,
+      "end": 2879,
+      "text": "Renee"
     },
     {
       "start": 2995,
@@ -289,9 +339,29 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 3273,
+      "end": 3276,
+      "text": "Ola"
+    },
+    {
+      "start": 3337,
+      "end": 3342,
+      "text": "Wendy"
+    },
+    {
+      "start": 3405,
+      "end": 3410,
+      "text": "Katya"
+    },
+    {
       "start": 3459,
       "end": 3473,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 3592,
+      "end": 3601,
+      "text": "Cassandra"
     },
     {
       "start": 3637,
@@ -299,14 +369,39 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 3729,
+      "end": 3734,
+      "text": "Wendy"
+    },
+    {
       "start": 3762,
       "end": 3776,
       "text": "Marcus Delaney"
     },
     {
+      "start": 3935,
+      "end": 3940,
+      "text": "Bruno"
+    },
+    {
+      "start": 3948,
+      "end": 3955,
+      "text": "Ibrahim"
+    },
+    {
       "start": 3956,
       "end": 3970,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 4010,
+      "end": 4016,
+      "text": "Jaylen"
+    },
+    {
+      "start": 4033,
+      "end": 4038,
+      "text": "Renee"
     },
     {
       "start": 4039,
@@ -374,6 +469,11 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 4570,
+      "end": 4575,
+      "text": "Andre"
+    },
+    {
       "start": 4616,
       "end": 4625,
       "text": "Kenji Ito"
@@ -382,6 +482,16 @@
       "start": 4646,
       "end": 4657,
       "text": "Andre Silva"
+    },
+    {
+      "start": 4709,
+      "end": 4714,
+      "text": "Wendy"
+    },
+    {
+      "start": 4718,
+      "end": 4722,
+      "text": "Milo"
     },
     {
       "start": 4723,
@@ -454,14 +564,29 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 5239,
+      "end": 5244,
+      "text": "Andre"
+    },
+    {
       "start": 5290,
       "end": 5301,
       "text": "Andre Silva"
     },
     {
+      "start": 5329,
+      "end": 5334,
+      "text": "Katya"
+    },
+    {
       "start": 5366,
       "end": 5380,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 5447,
+      "end": 5452,
+      "text": "Kenji"
     },
     {
       "start": 5458,
@@ -479,6 +604,11 @@
       "text": "Andre Silva"
     },
     {
+      "start": 5600,
+      "end": 5605,
+      "text": "Priya"
+    },
+    {
       "start": 5626,
       "end": 5637,
       "text": "Andre Silva"
@@ -492,6 +622,11 @@
       "start": 5726,
       "end": 5740,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 5790,
+      "end": 5795,
+      "text": "Wendy"
     },
     {
       "start": 5813,
@@ -514,6 +649,16 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 6072,
+      "end": 6078,
+      "text": "Jaylen"
+    },
+    {
+      "start": 6126,
+      "end": 6131,
+      "text": "Wendy"
+    },
+    {
       "start": 6156,
       "end": 6167,
       "text": "Andre Silva"
@@ -522,6 +667,11 @@
       "start": 6181,
       "end": 6192,
       "text": "Andre Silva"
+    },
+    {
+      "start": 6273,
+      "end": 6278,
+      "text": "Katya"
     },
     {
       "start": 6279,
@@ -549,6 +699,11 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 6457,
+      "end": 6462,
+      "text": "Bruno"
+    },
+    {
       "start": 6463,
       "end": 6474,
       "text": "Andre Silva"
@@ -559,9 +714,24 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 6516,
+      "end": 6520,
+      "text": "Milo"
+    },
+    {
+      "start": 6535,
+      "end": 6540,
+      "text": "Wendy"
+    },
+    {
       "start": 6560,
       "end": 6571,
       "text": "Andre Silva"
+    },
+    {
+      "start": 6617,
+      "end": 6623,
+      "text": "Jaylen"
     },
     {
       "start": 6628,
@@ -574,9 +744,19 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 6745,
+      "end": 6750,
+      "text": "Kenji"
+    },
+    {
       "start": 6767,
       "end": 6778,
       "text": "Andre Silva"
+    },
+    {
+      "start": 6813,
+      "end": 6818,
+      "text": "Bruno"
     },
     {
       "start": 6819,
@@ -584,9 +764,19 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 6853,
+      "end": 6858,
+      "text": "Andre"
+    },
+    {
       "start": 6981,
       "end": 6995,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 7047,
+      "end": 7050,
+      "text": "Ola"
     },
     {
       "start": 7063,
@@ -604,6 +794,16 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 7153,
+      "end": 7158,
+      "text": "Katya"
+    },
+    {
+      "start": 7213,
+      "end": 7218,
+      "text": "Shawn"
+    },
+    {
       "start": 7228,
       "end": 7242,
       "text": "Marcus Delaney"
@@ -612,6 +812,11 @@
       "start": 7256,
       "end": 7267,
       "text": "Andre Silva"
+    },
+    {
+      "start": 7331,
+      "end": 7336,
+      "text": "Priya"
     },
     {
       "start": 7356,
@@ -674,6 +879,11 @@
       "text": "Jaylen Brooks"
     },
     {
+      "start": 7819,
+      "end": 7825,
+      "text": "Jaylen"
+    },
+    {
       "start": 7826,
       "end": 7839,
       "text": "Jaylen Brooks"
@@ -704,6 +914,16 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 8142,
+      "end": 8147,
+      "text": "Wendy"
+    },
+    {
+      "start": 8152,
+      "end": 8157,
+      "text": "Katya"
+    },
+    {
       "start": 8162,
       "end": 8175,
       "text": "Jaylen Brooks"
@@ -719,14 +939,29 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 8311,
+      "end": 8315,
+      "text": "Milo"
+    },
+    {
       "start": 8326,
       "end": 8340,
       "text": "Marcus Delaney"
     },
     {
+      "start": 8386,
+      "end": 8391,
+      "text": "Renee"
+    },
+    {
       "start": 8392,
       "end": 8406,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 8437,
+      "end": 8442,
+      "text": "Renee"
     },
     {
       "start": 8467,
@@ -749,6 +984,11 @@
       "text": "Jaylen Brooks"
     },
     {
+      "start": 8678,
+      "end": 8687,
+      "text": "Cassandra"
+    },
+    {
       "start": 8701,
       "end": 8714,
       "text": "Jaylen Brooks"
@@ -762,6 +1002,11 @@
       "start": 8769,
       "end": 8783,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 8815,
+      "end": 8820,
+      "text": "Wendy"
     },
     {
       "start": 8850,
@@ -809,6 +1054,11 @@
       "text": "Milo Reyes"
     },
     {
+      "start": 9372,
+      "end": 9378,
+      "text": "Marcus"
+    },
+    {
       "start": 9404,
       "end": 9418,
       "text": "Marcus Delaney"
@@ -817,6 +1067,11 @@
       "start": 9422,
       "end": 9436,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 9451,
+      "end": 9456,
+      "text": "Wendy"
     },
     {
       "start": 9468,
@@ -854,6 +1109,11 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 9665,
+      "end": 9670,
+      "text": "Katya"
+    },
+    {
       "start": 9690,
       "end": 9704,
       "text": "Marcus Delaney"
@@ -879,9 +1139,19 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 9839,
+      "end": 9844,
+      "text": "Andre"
+    },
+    {
       "start": 9852,
       "end": 9866,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 9898,
+      "end": 9904,
+      "text": "Jaylen"
     },
     {
       "start": 9912,
@@ -989,6 +1259,16 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 11115,
+      "end": 11120,
+      "text": "Wendy"
+    },
+    {
+      "start": 11125,
+      "end": 11128,
+      "text": "Ola"
+    },
+    {
       "start": 11146,
       "end": 11160,
       "text": "Marcus Delaney"
@@ -997,6 +1277,11 @@
       "start": 11225,
       "end": 11239,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 11270,
+      "end": 11275,
+      "text": "Andre"
     },
     {
       "start": 11304,
@@ -1039,6 +1324,11 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 11870,
+      "end": 11875,
+      "text": "Renee"
+    },
+    {
       "start": 11893,
       "end": 11907,
       "text": "Marcus Delaney"
@@ -1079,9 +1369,19 @@
       "text": "Andre Silva"
     },
     {
+      "start": 12402,
+      "end": 12407,
+      "text": "Andre"
+    },
+    {
       "start": 12427,
       "end": 12438,
       "text": "Andre Silva"
+    },
+    {
+      "start": 12520,
+      "end": 12526,
+      "text": "Jaylen"
     },
     {
       "start": 12528,
@@ -1104,6 +1404,16 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 12729,
+      "end": 12734,
+      "text": "Emeka"
+    },
+    {
+      "start": 12739,
+      "end": 12744,
+      "text": "Bruno"
+    },
+    {
       "start": 12752,
       "end": 12763,
       "text": "Andre Silva"
@@ -1117,6 +1427,11 @@
       "start": 12806,
       "end": 12817,
       "text": "Andre Silva"
+    },
+    {
+      "start": 12880,
+      "end": 12884,
+      "text": "Milo"
     },
     {
       "start": 12901,
@@ -1184,6 +1499,11 @@
       "text": "Farah Nasser"
     },
     {
+      "start": 13301,
+      "end": 13306,
+      "text": "Farah"
+    },
+    {
       "start": 13313,
       "end": 13327,
       "text": "Marcus Delaney"
@@ -1192,6 +1512,11 @@
       "start": 13330,
       "end": 13343,
       "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13346,
+      "end": 13353,
+      "text": "Paulina"
     },
     {
       "start": 13377,
@@ -1214,6 +1539,11 @@
       "text": "Jaylen Brooks"
     },
     {
+      "start": 13493,
+      "end": 13498,
+      "text": "Katya"
+    },
+    {
       "start": 13505,
       "end": 13518,
       "text": "Jaylen Brooks"
@@ -1227,6 +1557,11 @@
       "start": 13562,
       "end": 13575,
       "text": "Jaylen Brooks"
+    },
+    {
+      "start": 13612,
+      "end": 13617,
+      "text": "Bruno"
     },
     {
       "start": 13626,
@@ -1249,6 +1584,11 @@
       "text": "Jaylen Brooks"
     },
     {
+      "start": 13744,
+      "end": 13749,
+      "text": "Renee"
+    },
+    {
       "start": 13770,
       "end": 13783,
       "text": "Jaylen Brooks"
@@ -1267,6 +1607,11 @@
       "start": 13821,
       "end": 13835,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 13861,
+      "end": 13870,
+      "text": "Cassandra"
     },
     {
       "start": 13890,
@@ -1834,6 +2179,11 @@
       "text": "Andre Silva"
     },
     {
+      "start": 23734,
+      "end": 23739,
+      "text": "Andre"
+    },
+    {
       "start": 23757,
       "end": 23768,
       "text": "Andre Silva"
@@ -1879,6 +2229,11 @@
       "text": "Andre Silva"
     },
     {
+      "start": 24159,
+      "end": 24165,
+      "text": "Marcus"
+    },
+    {
       "start": 24169,
       "end": 24180,
       "text": "Andre Silva"
@@ -1897,6 +2252,11 @@
       "start": 24877,
       "end": 24891,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 24952,
+      "end": 24957,
+      "text": "Andre"
     },
     {
       "start": 25022,
@@ -1934,6 +2294,11 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 25399,
+      "end": 25404,
+      "text": "Katya"
+    },
+    {
       "start": 25432,
       "end": 25446,
       "text": "Marcus Delaney"
@@ -1942,6 +2307,16 @@
       "start": 25460,
       "end": 25474,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 25487,
+      "end": 25492,
+      "text": "Katya"
+    },
+    {
+      "start": 25605,
+      "end": 25610,
+      "text": "Kenji"
     },
     {
       "start": 25654,
@@ -1954,6 +2329,11 @@
       "text": "Bruno Alves"
     },
     {
+      "start": 25876,
+      "end": 25881,
+      "text": "Wendy"
+    },
+    {
       "start": 25904,
       "end": 25918,
       "text": "Marcus Delaney"
@@ -1962,6 +2342,16 @@
       "start": 25967,
       "end": 25981,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 26033,
+      "end": 26040,
+      "text": "Ibrahim"
+    },
+    {
+      "start": 26080,
+      "end": 26085,
+      "text": "Priya"
     },
     {
       "start": 26116,
@@ -1977,6 +2367,11 @@
       "start": 26202,
       "end": 26216,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 26367,
+      "end": 26372,
+      "text": "Renee"
     },
     {
       "start": 26488,
@@ -2004,9 +2399,29 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 26766,
+      "end": 26769,
+      "text": "Ola"
+    },
+    {
+      "start": 26830,
+      "end": 26835,
+      "text": "Wendy"
+    },
+    {
+      "start": 26898,
+      "end": 26903,
+      "text": "Katya"
+    },
+    {
       "start": 26952,
       "end": 26966,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 27085,
+      "end": 27094,
+      "text": "Cassandra"
     },
     {
       "start": 27130,
@@ -2014,14 +2429,39 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 27222,
+      "end": 27227,
+      "text": "Wendy"
+    },
+    {
       "start": 27255,
       "end": 27269,
       "text": "Marcus Delaney"
     },
     {
+      "start": 27428,
+      "end": 27433,
+      "text": "Bruno"
+    },
+    {
+      "start": 27441,
+      "end": 27448,
+      "text": "Ibrahim"
+    },
+    {
       "start": 27449,
       "end": 27463,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 27503,
+      "end": 27509,
+      "text": "Jaylen"
+    },
+    {
+      "start": 27526,
+      "end": 27531,
+      "text": "Renee"
     },
     {
       "start": 27532,
@@ -2089,6 +2529,11 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 28063,
+      "end": 28068,
+      "text": "Andre"
+    },
+    {
       "start": 28109,
       "end": 28118,
       "text": "Kenji Ito"
@@ -2097,6 +2542,16 @@
       "start": 28139,
       "end": 28150,
       "text": "Andre Silva"
+    },
+    {
+      "start": 28202,
+      "end": 28207,
+      "text": "Wendy"
+    },
+    {
+      "start": 28211,
+      "end": 28215,
+      "text": "Milo"
     },
     {
       "start": 28216,
@@ -2169,14 +2624,29 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 28732,
+      "end": 28737,
+      "text": "Andre"
+    },
+    {
       "start": 28783,
       "end": 28794,
       "text": "Andre Silva"
     },
     {
+      "start": 28822,
+      "end": 28827,
+      "text": "Katya"
+    },
+    {
       "start": 28859,
       "end": 28873,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 28940,
+      "end": 28945,
+      "text": "Kenji"
     },
     {
       "start": 28951,
@@ -2194,6 +2664,11 @@
       "text": "Andre Silva"
     },
     {
+      "start": 29093,
+      "end": 29098,
+      "text": "Priya"
+    },
+    {
       "start": 29119,
       "end": 29130,
       "text": "Andre Silva"
@@ -2207,6 +2682,11 @@
       "start": 29219,
       "end": 29233,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 29283,
+      "end": 29288,
+      "text": "Wendy"
     },
     {
       "start": 29306,
@@ -2229,6 +2709,16 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 29565,
+      "end": 29571,
+      "text": "Jaylen"
+    },
+    {
+      "start": 29619,
+      "end": 29624,
+      "text": "Wendy"
+    },
+    {
       "start": 29649,
       "end": 29660,
       "text": "Andre Silva"
@@ -2237,6 +2727,11 @@
       "start": 29674,
       "end": 29685,
       "text": "Andre Silva"
+    },
+    {
+      "start": 29766,
+      "end": 29771,
+      "text": "Katya"
     },
     {
       "start": 29772,
@@ -2264,6 +2759,11 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 29950,
+      "end": 29955,
+      "text": "Bruno"
+    },
+    {
       "start": 29956,
       "end": 29967,
       "text": "Andre Silva"
@@ -2274,9 +2774,24 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 30009,
+      "end": 30013,
+      "text": "Milo"
+    },
+    {
+      "start": 30028,
+      "end": 30033,
+      "text": "Wendy"
+    },
+    {
       "start": 30053,
       "end": 30064,
       "text": "Andre Silva"
+    },
+    {
+      "start": 30110,
+      "end": 30116,
+      "text": "Jaylen"
     },
     {
       "start": 30121,
@@ -2289,9 +2804,19 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 30238,
+      "end": 30243,
+      "text": "Kenji"
+    },
+    {
       "start": 30260,
       "end": 30271,
       "text": "Andre Silva"
+    },
+    {
+      "start": 30306,
+      "end": 30311,
+      "text": "Bruno"
     },
     {
       "start": 30312,
@@ -2299,9 +2824,19 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 30346,
+      "end": 30351,
+      "text": "Andre"
+    },
+    {
       "start": 30474,
       "end": 30488,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 30540,
+      "end": 30543,
+      "text": "Ola"
     },
     {
       "start": 30556,
@@ -2319,6 +2854,16 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 30646,
+      "end": 30651,
+      "text": "Katya"
+    },
+    {
+      "start": 30706,
+      "end": 30711,
+      "text": "Shawn"
+    },
+    {
       "start": 30721,
       "end": 30735,
       "text": "Marcus Delaney"
@@ -2327,6 +2872,11 @@
       "start": 30749,
       "end": 30760,
       "text": "Andre Silva"
+    },
+    {
+      "start": 30824,
+      "end": 30829,
+      "text": "Priya"
     },
     {
       "start": 30849,
@@ -2389,6 +2939,11 @@
       "text": "Jaylen Brooks"
     },
     {
+      "start": 31312,
+      "end": 31318,
+      "text": "Jaylen"
+    },
+    {
       "start": 31319,
       "end": 31332,
       "text": "Jaylen Brooks"
@@ -2419,6 +2974,16 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 31635,
+      "end": 31640,
+      "text": "Wendy"
+    },
+    {
+      "start": 31645,
+      "end": 31650,
+      "text": "Katya"
+    },
+    {
       "start": 31655,
       "end": 31668,
       "text": "Jaylen Brooks"
@@ -2434,14 +2999,29 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 31804,
+      "end": 31808,
+      "text": "Milo"
+    },
+    {
       "start": 31819,
       "end": 31833,
       "text": "Marcus Delaney"
     },
     {
+      "start": 31879,
+      "end": 31884,
+      "text": "Renee"
+    },
+    {
       "start": 31885,
       "end": 31899,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 31930,
+      "end": 31935,
+      "text": "Renee"
     },
     {
       "start": 31960,
@@ -2464,6 +3044,11 @@
       "text": "Jaylen Brooks"
     },
     {
+      "start": 32171,
+      "end": 32180,
+      "text": "Cassandra"
+    },
+    {
       "start": 32194,
       "end": 32207,
       "text": "Jaylen Brooks"
@@ -2477,6 +3062,11 @@
       "start": 32262,
       "end": 32276,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 32308,
+      "end": 32313,
+      "text": "Wendy"
     },
     {
       "start": 32343,
@@ -2524,6 +3114,11 @@
       "text": "Milo Reyes"
     },
     {
+      "start": 32865,
+      "end": 32871,
+      "text": "Marcus"
+    },
+    {
       "start": 32897,
       "end": 32911,
       "text": "Marcus Delaney"
@@ -2532,6 +3127,11 @@
       "start": 32915,
       "end": 32929,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 32944,
+      "end": 32949,
+      "text": "Wendy"
     },
     {
       "start": 32961,
@@ -2569,6 +3169,11 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 33158,
+      "end": 33163,
+      "text": "Katya"
+    },
+    {
       "start": 33183,
       "end": 33197,
       "text": "Marcus Delaney"
@@ -2594,9 +3199,19 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 33332,
+      "end": 33337,
+      "text": "Andre"
+    },
+    {
       "start": 33345,
       "end": 33359,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 33391,
+      "end": 33397,
+      "text": "Jaylen"
     },
     {
       "start": 33405,
@@ -2704,6 +3319,16 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 34608,
+      "end": 34613,
+      "text": "Wendy"
+    },
+    {
+      "start": 34618,
+      "end": 34621,
+      "text": "Ola"
+    },
+    {
       "start": 34639,
       "end": 34653,
       "text": "Marcus Delaney"
@@ -2712,6 +3337,11 @@
       "start": 34718,
       "end": 34732,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 34763,
+      "end": 34768,
+      "text": "Andre"
     },
     {
       "start": 34797,
@@ -2754,6 +3384,11 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 35363,
+      "end": 35368,
+      "text": "Renee"
+    },
+    {
       "start": 35386,
       "end": 35400,
       "text": "Marcus Delaney"
@@ -2794,9 +3429,19 @@
       "text": "Andre Silva"
     },
     {
+      "start": 35895,
+      "end": 35900,
+      "text": "Andre"
+    },
+    {
       "start": 35920,
       "end": 35931,
       "text": "Andre Silva"
+    },
+    {
+      "start": 36013,
+      "end": 36019,
+      "text": "Jaylen"
     },
     {
       "start": 36021,
@@ -2819,6 +3464,16 @@
       "text": "Marcus Delaney"
     },
     {
+      "start": 36222,
+      "end": 36227,
+      "text": "Emeka"
+    },
+    {
+      "start": 36232,
+      "end": 36237,
+      "text": "Bruno"
+    },
+    {
       "start": 36245,
       "end": 36256,
       "text": "Andre Silva"
@@ -2832,6 +3487,11 @@
       "start": 36299,
       "end": 36310,
       "text": "Andre Silva"
+    },
+    {
+      "start": 36373,
+      "end": 36377,
+      "text": "Milo"
     },
     {
       "start": 36394,
@@ -2899,6 +3559,11 @@
       "text": "Farah Nasser"
     },
     {
+      "start": 36794,
+      "end": 36799,
+      "text": "Farah"
+    },
+    {
       "start": 36806,
       "end": 36820,
       "text": "Marcus Delaney"
@@ -2907,6 +3572,11 @@
       "start": 36823,
       "end": 36836,
       "text": "Jaylen Brooks"
+    },
+    {
+      "start": 36839,
+      "end": 36846,
+      "text": "Paulina"
     },
     {
       "start": 36870,
@@ -2929,6 +3599,11 @@
       "text": "Jaylen Brooks"
     },
     {
+      "start": 36986,
+      "end": 36991,
+      "text": "Katya"
+    },
+    {
       "start": 36998,
       "end": 37011,
       "text": "Jaylen Brooks"
@@ -2942,6 +3617,11 @@
       "start": 37055,
       "end": 37068,
       "text": "Jaylen Brooks"
+    },
+    {
+      "start": 37105,
+      "end": 37110,
+      "text": "Bruno"
     },
     {
       "start": 37119,
@@ -2964,6 +3644,11 @@
       "text": "Jaylen Brooks"
     },
     {
+      "start": 37237,
+      "end": 37242,
+      "text": "Renee"
+    },
+    {
       "start": 37263,
       "end": 37276,
       "text": "Jaylen Brooks"
@@ -2982,6 +3667,11 @@
       "start": 37314,
       "end": 37328,
       "text": "Marcus Delaney"
+    },
+    {
+      "start": 37354,
+      "end": 37363,
+      "text": "Cassandra"
     },
     {
       "start": 37383,
@@ -3549,6 +4239,11 @@
       "text": "Andre Silva"
     },
     {
+      "start": 47227,
+      "end": 47232,
+      "text": "Andre"
+    },
+    {
       "start": 47250,
       "end": 47261,
       "text": "Andre Silva"
@@ -3592,6 +4287,11 @@
       "start": 47590,
       "end": 47601,
       "text": "Andre Silva"
+    },
+    {
+      "start": 47652,
+      "end": 47658,
+      "text": "Marcus"
     },
     {
       "start": 47662,
@@ -3693,5 +4393,6 @@
       "end": 57250,
       "text": "Shawn Delaney"
     }
-  ]
+  ],
+  "first_name_convention_note": "2026-09-24: extended by scripts/extend_gold_first_name_mentions.py - every standalone first-name mention of a gold person is a gold mention (the convention benchmark_001 already used). See that script for the reviewed exclusions/roster additions."
 }

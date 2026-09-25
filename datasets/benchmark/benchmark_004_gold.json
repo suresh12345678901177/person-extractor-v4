@@ -1,6 +1,6 @@
 {
   "source_markup_file": "datasets\\benchmark\\benchmark_004_source.md",
-  "mention_count": 10,
+  "mention_count": 12,
   "mentions": [
     {
       "start": 6,
@@ -11,6 +11,11 @@
       "start": 53,
       "end": 65,
       "text": "Rohan Vaidya"
+    },
+    {
+      "start": 200,
+      "end": 205,
+      "text": "Rohan"
     },
     {
       "start": 560,
@@ -51,6 +56,12 @@
       "start": 1604,
       "end": 1615,
       "text": "Amit Ranade"
+    },
+    {
+      "start": 1617,
+      "end": 1623,
+      "text": "Ashwin"
     }
-  ]
+  ],
+  "first_name_convention_note": "2026-09-24: extended by scripts/extend_gold_first_name_mentions.py - every standalone first-name mention of a gold person is a gold mention (the convention benchmark_001 already used). See that script for the reviewed exclusions/roster additions."
 }

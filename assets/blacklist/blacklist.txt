@@ -212,3 +212,60 @@ Geronimo
 Rails
 Loan
 Bona
+
+# Placeholder / dummy names (added 2026-09-24). Web-form test submissions,
+# templates, sample records and legal pleadings use these for "no real
+# person here" or "unidentified party" - not an identifiable individual.
+# Found via benchmark_004.txt ("Name: John Doe" in a forwarded test form
+# submission), accepted twice at ML 0.99 with full dictionary support
+# (John + Doe are both real list entries). Checked before adding: none
+# of these appears as a gold person in any datasets/benchmark* file.
+# Tradeoff, deliberate: a real person actually named John Doe would be
+# rejected too - rare, versus placeholders being routine in exports.
+John Doe
+Jane Doe
+Baby Doe
+Richard Roe
+Jane Roe
+Joe Bloggs
+Joe Public
+John Q. Public
+Test Test
+Test User
+Firstname Lastname
+First Last
+Lorem Ipsum
+
+# Font families (added 2026-09-24). HTML/XML/CSS exports and Office
+# documents name fonts constantly; a real case scan ACCEPTED "Helvetica
+# Neue", "Lucida Grande", "Droid Sans", "Vera Sans" and "Estrangelo Edessa"
+# as people once HTML/XML files were read. Checked as sub-phrases, so
+# "Helvetica" also catches "Helvetica Neue". None is a gold person in any
+# benchmark. Deliberately NOT listed: fonts that are also common real
+# names or places (Georgia, Garamond as a surname, etc.).
+Helvetica
+Lucida Grande
+Lucida Sans
+Lucida Console
+Droid Sans
+Droid Serif
+Vera Sans
+Bitstream Vera
+DejaVu Sans
+DejaVu Serif
+Estrangelo Edessa
+Segoe UI
+Open Sans
+Noto Sans
+Noto Serif
+Roboto
+Arial
+Calibri
+Cambria
+Consolas
+Verdana
+Tahoma
+Courier New
+Times New Roman
+Trebuchet MS
+Comic Sans

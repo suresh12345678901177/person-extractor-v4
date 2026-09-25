@@ -89,7 +89,8 @@ def test_feedback_store_confirm_workflow(tmp_path):
     confirmed = store.load_confirmed()
     assert len(confirmed) == 1
     assert confirmed[0].status == "confirmed_person"
-    assert len(confirmed[0].features) == 19  # FeatureVector field count (2026-09-17: +3 context features)
+    from src.features.feature_vector import FEATURE_NAMES
+    assert len(confirmed[0].features) == len(FEATURE_NAMES)
 
 
 def test_feedback_record_round_trips_through_json():
@@ -116,3 +117,24 @@ def test_feedback_record_from_dict_defaults_context_text_for_legacy_rows():
     }
     restored = FeedbackRecord.from_dict(legacy_dict)
     assert restored.context_text == ""
+
+
+def test_deferred_records_from_several_workers_are_written_once(tmp_path):
+    """Parallel scan workers only build_records(); the main process calls
+    append_new() for each worker's batch. The same name surfacing in two
+    workers' files must be written exactly once, not once per worker."""
+    worker_a = FeedbackStore.build_records(
+        [_fake_review_person("Roger Walsh"), _fake_review_person("Nadia Kovalenko")], "a.txt", "text a")
+    worker_b = FeedbackStore.build_records(
+        [_fake_review_person("Roger Walsh")], "b.txt", "text b")
+
+    # Building must not touch disk at all
+    assert not (tmp_path / "feedback" / "pending_review.jsonl").exists()
+
+    store = FeedbackStore(tmp_path / "feedback")
+    assert store.append_new(worker_a) == 2
+    assert store.append_new(worker_b) == 0
+
+    pending = store.load_pending()
+    assert sorted(r.text for r in pending) == ["Nadia Kovalenko", "Roger Walsh"]
+    assert next(r for r in pending if r.text == "Roger Walsh").source_file == "a.txt"

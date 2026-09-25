@@ -39,7 +39,9 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import copy
 import csv
+import fnmatch
 import multiprocessing as mp
 import os
 import sys
@@ -53,6 +55,8 @@ sys.path.insert(0, str(BASE_DIR))
 from config import DEFAULT_CONFIG
 from src.candidate.boundary_refiner import refine_combined_counts
 from src.core.models import IDENTITY_RESOLUTION_CAVEAT, ExtractionResult
+from src.feedback.feedback_store import FeedbackStore
+from src.io.dispatcher import ReaderDispatcher
 from src.io.pdf_reader import PdfReader
 from src.pipeline.orchestrator import Pipeline
 from src.utils.logger import configure_logging, get_logger
@@ -60,7 +64,9 @@ from src.utils.provenance import build_run_provenance, provenance_summary_line
 
 logger = get_logger("scripts.scan_directory")
 
-SUPPORTED_EXTENSIONS = (".txt", ".pdf")
+# Every format a reader handles (src/io/dispatcher.py) - one list, so a new
+# reader is scanned automatically.
+SUPPORTED_EXTENSIONS = ReaderDispatcher().supported_extensions()
 
 # --- Parallel file processing (2026-09-18) ---
 # Each worker process gets its OWN Pipeline instance, loaded once per
@@ -111,6 +117,18 @@ def _build_config(args: argparse.Namespace) -> dict:
     if args.no_language_filter:
         config["language_filter"]["enabled"] = False
     return config
+
+
+def _matching_exclude(rel_path: Path, patterns: list[str]) -> str | None:
+    """The first --exclude glob matching this file's name or its path
+    relative to --input-dir (forward slashes, case-insensitive), else None."""
+    rel = rel_path.as_posix().lower()
+    name = rel_path.name.lower()
+    for pattern in patterns:
+        pat = pattern.replace("\\", "/").lower()
+        if fnmatch.fnmatch(name, pat) or fnmatch.fnmatch(rel, pat):
+            return pattern
+    return None
 
 
 def _discover_input_files(root: Path) -> tuple[list[Path], int]:
@@ -170,17 +188,29 @@ def run_scan(input_dir: Path, output_dir: Path, args: argparse.Namespace) -> int
     provenance = build_run_provenance(BASE_DIR, model_path)
     print(f"  Provenance: {provenance_summary_line(provenance)}")
 
-    print(f"Scanning '{input_dir}' recursively for .txt/.pdf files ...")
+    print(f"Scanning '{input_dir}' recursively for supported files ({', '.join(SUPPORTED_EXTENSIONS)}) ...")
     discover_start = time.perf_counter()
     input_files, other_count = _discover_input_files(input_dir)
     discover_seconds = time.perf_counter() - discover_start
+    excluded: list[tuple[Path, str]] = []
+    if args.exclude:
+        kept = []
+        for path in input_files:
+            pattern = _matching_exclude(path.relative_to(input_dir), args.exclude)
+            if pattern:
+                excluded.append((path, pattern))
+            else:
+                kept.append(path)
+        input_files = kept
+        print(f"  Excluded by --exclude: {len(excluded)} file(s)"
+              + (f", e.g. {', '.join(str(p.relative_to(input_dir)) for p, _ in excluded[:5])}" if excluded else ""))
 
-    print(f"  Found {len(input_files)} .txt/.pdf file(s) "
+    print(f"  Found {len(input_files)} supported file(s) "
           f"({other_count} other file(s) skipped, unsupported type) "
           f"in {discover_seconds:.2f}s")
 
     if not input_files:
-        print("No .txt/.pdf files found under that path - nothing to do.")
+        print("No supported files found under that path - nothing to do.")
         return 1
 
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -199,6 +229,10 @@ def run_scan(input_dir: Path, output_dir: Path, args: argparse.Namespace) -> int
 
     combined: dict[str, dict] = {}
 
+    # Only receives records from parallel workers (feedback.defer_writes);
+    # the sequential path still logs inside its own Pipeline as before.
+    feedback_store = FeedbackStore(BASE_DIR / "datasets" / "feedback")
+
     def _merge(person, decision: str, source_filename: str) -> None:
         key = person.normalized_text
         entry = combined.setdefault(key, {
@@ -214,6 +248,7 @@ def run_scan(input_dir: Path, output_dir: Path, args: argparse.Namespace) -> int
     file_rows: list[dict] = []
     failures = 0
     skipped_non_english = 0
+    skipped_binary = 0
     skipped_no_text = 0
     total_names_found = 0
     scan_start = time.perf_counter()
@@ -237,11 +272,17 @@ def run_scan(input_dir: Path, output_dir: Path, args: argparse.Namespace) -> int
                     yield input_path, None, time.perf_counter() - file_start, str(exc)
             return
 
+        # Workers build feedback records but never write them - the main
+        # process does the one deduplicated write below (see
+        # FeedbackStore.build_records for the race this avoids).
+        worker_config = copy.deepcopy(config)
+        worker_config["feedback"]["defer_writes"] = True
+
         ctx = mp.get_context("spawn")
         with ctx.Pool(
             processes=args.workers,
             initializer=_init_worker,
-            initargs=(config, str(BASE_DIR)),
+            initargs=(worker_config, str(BASE_DIR)),
         ) as pool:
             path_strs = [str(p) for p in input_files]
             for path_str, result, seconds, exc in pool.imap(_run_one_in_worker, path_strs):
@@ -252,6 +293,8 @@ def run_scan(input_dir: Path, output_dir: Path, args: argparse.Namespace) -> int
     with files_csv_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["file_path", "status", "num_names", "names_found", "seconds_taken"])
+        for path, pattern in excluded:
+            writer.writerow([str(path.relative_to(input_dir)), f"skipped: excluded by --exclude {pattern}", 0, "", "0.0000"])
 
         for i, (input_path, result, seconds, exc) in enumerate(_iter_results(), start=1):
             rel_path = input_path.relative_to(input_dir)
@@ -265,10 +308,19 @@ def run_scan(input_dir: Path, output_dir: Path, args: argparse.Namespace) -> int
                 failures += 1
                 continue
 
+            if result.feedback_records:
+                feedback_store.append_new(list(result.feedback_records))
+
             if result.model_info.get("skipped_reason") == "non_english":
                 ratio = result.model_info.get("english_word_ratio")
                 writer.writerow([str(rel_path), f"skipped: non-English (ratio={ratio})", 0, "", f"{seconds:.4f}"])
                 skipped_non_english += 1
+                continue
+
+            if result.model_info.get("skipped_reason") == "binary_content":
+                kind = result.model_info.get("binary_format", "")
+                writer.writerow([str(rel_path), f"skipped: binary content ({kind}) - not text", 0, "", f"{seconds:.4f}"])
+                skipped_binary += 1
                 continue
 
             persons = list(result.persons)
@@ -308,8 +360,8 @@ def run_scan(input_dir: Path, output_dir: Path, args: argparse.Namespace) -> int
 
     accepted_count = sum(1 for e in ordered if e["decision"] == "accepted")
     review_count = sum(1 for e in ordered if e["decision"] == "review")
-    files_processed_ok = len(input_files) - failures - skipped_non_english - skipped_no_text
-    total_files_in_folder = len(input_files) + other_count
+    files_processed_ok = len(input_files) - failures - skipped_non_english - skipped_no_text - skipped_binary
+    total_files_in_folder = len(input_files) + len(excluded) + other_count
     # Independent-audit finding #1 (2026-09-23): the coverage gap between
     # "files in the folder" and "files that actually contributed a name"
     # was previously only reconstructable by hand from the other rows
@@ -325,11 +377,13 @@ def run_scan(input_dir: Path, output_dir: Path, args: argparse.Namespace) -> int
         writer.writerow(["root_folder", str(input_dir)])
         writer.writerow(["run_timestamp", timestamp])
         writer.writerow(["total_files_in_folder", total_files_in_folder])
-        writer.writerow(["input_files_found", len(input_files)])
+        writer.writerow(["input_files_found", len(input_files) + len(excluded)])
+        writer.writerow(["files_excluded", len(excluded)])
         writer.writerow(["unsupported_files_skipped", other_count])
         writer.writerow(["files_processed_ok", files_processed_ok])
         writer.writerow(["files_skipped_non_english", skipped_non_english])
         writer.writerow(["files_skipped_no_extractable_text", skipped_no_text])
+        writer.writerow(["files_skipped_binary_content", skipped_binary])
         writer.writerow(["files_failed", failures])
         writer.writerow(["coverage_pct_of_all_files", f"{coverage_pct_of_all_files:.2f}"])
         for key, value in provenance.items():
@@ -351,11 +405,14 @@ def run_scan(input_dir: Path, output_dir: Path, args: argparse.Namespace) -> int
     print("=" * 78)
     print(f"  Root folder             : {input_dir}")
     print(f"  Total files in folder   : {total_files_in_folder}")
-    print(f"  .txt/.pdf files found   : {len(input_files)}")
+    print(f"  Supported files found   : {len(input_files) + len(excluded)}")
+    if excluded:
+        print(f"  Excluded by --exclude   : {len(excluded)}")
     print(f"  Unsupported files skipped : {other_count}")
     print(f"  Files processed OK      : {files_processed_ok}")
     print(f"  Files skipped (non-English/boilerplate) : {skipped_non_english}")
     print(f"  Files skipped (no extractable text - scanned/image PDF) : {skipped_no_text}")
+    print(f"  Files skipped (binary content, e.g. Android binary XML) : {skipped_binary}")
     print(f"  Files failed            : {failures}")
     print(f"  COVERAGE: names were extracted from {coverage_pct_of_all_files:.1f}% of all "
           f"{total_files_in_folder} files in this folder (see README 'Scope' section for why)")
@@ -376,9 +433,9 @@ def run_scan(input_dir: Path, output_dir: Path, args: argparse.Namespace) -> int
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Recursively scan a folder for .txt/.pdf files and run PERSON_EXTRACTOR_V4 on each one."
+        description="Recursively scan a folder for supported files (.txt, .pdf, .csv, .json, .html, .xml, .docx, .eml, ...) and run PERSON_EXTRACTOR_V4 on each one."
     )
-    parser.add_argument("--input-dir", required=True, help="Folder to scan recursively for .txt/.pdf files.")
+    parser.add_argument("--input-dir", required=True, help="Folder to scan recursively for supported files.")
     parser.add_argument("--output", default=None,
                          help="Output folder for the two result CSVs (default: ./output/scans)")
     parser.add_argument("--include-review", action="store_true",
@@ -393,6 +450,11 @@ def main() -> int:
                          help="Disable the English-language gate (on by default) that skips "
                               "files which aren't natural-language English prose - see "
                               "cli.py --no-language-filter")
+    parser.add_argument("--exclude", action="append", default=[], metavar="PATTERN",
+                         help="Skip files whose name or path (relative to --input-dir) matches this "
+                              "glob, case-insensitive. Repeatable, e.g. --exclude report.xml "
+                              "--exclude \"*/cache/*\". Excluded files are still listed in the per-file "
+                              "CSV and counted in the summary.")
     parser.add_argument("--workers", type=int, default=os.cpu_count() or 1,
                          help="Number of worker processes for parallel file processing "
                               "(default: CPU count). Each worker loads its own spaCy model + "

@@ -249,3 +249,20 @@ def test_common_word_phrase_with_real_dictionary_corroboration_is_not_force_reje
         "A common-word phrase with a real single-token dictionary hit must not be "
         "force-rejected by the common-word-phrase guard"
     )
+
+
+def test_ml_score_alone_never_accepts_a_phrase_containing_ordinary_words():
+    """From a real case scan: after a retrain, 'Zomato Customer Service'
+    scored 0.99 and, repeating 8 times, was ACCEPTED on the ML score alone
+    (no dictionary/title evidence). A phrase with any ordinary English
+    word now needs other evidence for that path."""
+    from src.core.models import CandidateState
+    text = "Zomato Customer Service\n" * 8
+    det = Detection("Zomato Customer Service", 0, 23, 0, DetectorName.REGEX, 0.55, {"pattern": "bare"})
+    cr = CandidateResult(candidate=Candidate.new("Zomato Customer Service", "Zomato Customer Service", 0, 23, 0, (det,)),
+                         state=CandidateState())
+    cr.state.add_evidence("regex", "bare", 0.55)
+    cr.state.add_evidence("structure", "ok", 0.10)
+    cr.state.classifier_result = ClassifierResult(label=1, probability=0.99, model_name="m", model_version="1")
+    DecisionEngine().decide(cr, text, KB)
+    assert cr.state.decision != Decision.ACCEPTED

@@ -68,13 +68,20 @@ def is_inside_quotes(text: str, start: int, end: int, window: int = 200) -> bool
     preceding `start` (within the same line). An odd count means the
     span opens inside an already-open quoted string - used both as a
     feature and by the context validator (quoted slogans/speech are
-    weaker evidence of a "named" person than plain narration)."""
+    weaker evidence of a "named" person than plain narration).
+
+    Curly double quotes (“ ”), which phones and word processors produce,
+    are directional, so they're counted as opens minus closes rather
+    than by parity. Before 2026-09-24 only the straight " was counted,
+    so text quoted with “...” never set this feature. Single quotes
+    (' ‘ ’) stay excluded: ’ is also the apostrophe in "don’t"/"O’Brien"."""
     line_start = text.rfind("\n", 0, start)
     line_start = 0 if line_start == -1 else line_start + 1
     search_start = max(line_start, start - window)
     preceding = text[search_start:start]
-    quote_count = sum(preceding.count(q) for q in ('"',))
-    return quote_count % 2 == 1
+    if preceding.count('"') % 2 == 1:
+        return True
+    return preceding.count("“") > preceding.count("”")
 
 
 _PRECEDING_WORD_RE = re.compile(r"([A-Za-z']+)\s*$")

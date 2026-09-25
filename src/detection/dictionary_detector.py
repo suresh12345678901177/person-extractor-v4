@@ -28,8 +28,12 @@ import re
 from src.core.models import Detection, DetectorName
 from src.detection.base_detector import BaseDetector
 from src.knowledge.knowledge_base import KnowledgeBase
+from src.preprocessing.latin import LATIN_LETTERS, LATIN_UPPER
 
-_TOKEN_RE = re.compile(r"[A-Z][a-zA-Z'\-]*")
+# Shared Latin letter classes (src/preprocessing/latin.py). The old
+# ASCII-only [A-Z][a-zA-Z]* matched just the ASCII PREFIX of an accented
+# word, so "François" produced a dictionary hit on the fragment "Fran".
+_TOKEN_RE = re.compile(rf"[{LATIN_UPPER}][{LATIN_LETTERS}'\-]*")
 _POSSESSIVE_SUFFIX_RE = re.compile(r"['\u2019]s$")
 
 
