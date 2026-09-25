@@ -486,6 +486,24 @@ containing an exempted hostname (of 19,089): no ACCEPTED change, no name
 gained or lost in REVIEW; "Edit" (already in REVIEW) +4 mentions in one
 preferences XML.
 
+**2026-09-25 - bare common-word surnames held for review (exp02, owner-
+approved trade).** Tracing the real case scan's accepted single words found
+"Read", "English", "Block", "Pilot", "Day", "Price" ACCEPTED from web/UI
+text on one piece of evidence: a surname-list hit, trusted via repetition
+or an ML score the classifier gives most capitalized words there - spaCy
+never tagged them. Now, after decisions, an ACCEPTED single word that is an
+ordinary English word known ONLY as a surname, with nothing but that
+dictionary hit (no spaCy tag, title, full dictionary name or propagation),
+and no accepted full name in the document starting or ending with it, goes
+to REVIEW (`person_extractor._cap_bare_common_surnames`). First names are
+untouched ("Marcus", "Amber" in chat are people). Benchmark (N=7):
+accepted-only P 0.9606 -> 0.9710, R 0.9131 -> 0.9026 (the loss is one
+synthetic code-name alias, "Winter"), F1 flat, ACCEPTED+REVIEW unchanged.
+Real case: 8 names ACCEPTED -> REVIEW (Read, English, Hopkins, Price, Block,
+Binder, Day, Pilot), nothing else changed; "Hopkins" (academic citations)
+may be a real author and now needs a human glance. A precision-for-recall
+trade under the noise floor, promoted on the owner's decision.
+
 **2026-09-25 - larger NER models and the GPU: measured, not adopted.**
 Observer-only probe (`experiments/gpu_detector_probe.py`; no pipeline code
 changed): each model tagged persons in the same text, compared with the gold

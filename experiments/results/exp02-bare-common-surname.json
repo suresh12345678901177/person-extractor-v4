@@ -1,7 +1,7 @@
 {
   "id": "exp02-bare-common-surname",
   "description": "Candidate (branch exp02-bare-common-surname @ 27f0ced): an ACCEPTED single word that is an ordinary English word known only as a surname, with a dictionary hit as its only evidence and no accepted full name in the document starting/ending with it, moves to REVIEW. Gate: tests pass, dump005 0 FP, unseen P 1.000, no shape recall drop >0.02, speed flat. TRADE: benchmark accepted-only P 0.9606->0.9710 (+1.04pp), R 0.9131->0.9026 (-1.05pp, all one synthetic code-name alias), F1 flat; accepted+review unchanged. Real case: 8 names ACCEPTED->REVIEW (7 ordinary-word noise, 1 citation surname), nothing newly accepted or lost.",
-  "verdict": "needs owner decision",
+  "verdict": "promoted (owner approved)",
   "measured_utc": "2026-09-25T07:11:21Z",
   "provenance": {
     "scan_timestamp_utc": "2026-09-25T07:11:21Z",
