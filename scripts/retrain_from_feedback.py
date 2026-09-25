@@ -63,6 +63,29 @@ _EVALUATION_DIRS = ("benchmark", "benchmark_unseen")
 _EVALUATION_FILE_NAMES = frozenset(
     p.name.lower() for d in _EVALUATION_DIRS for p in (BASE_DIR / "datasets" / d).glob("*.txt")
 )
+_HOLDOUT_MANIFEST = BASE_DIR / "datasets" / "evaluation_holdout" / "holdout_manifest.jsonl"
+
+
+def _holdout_source_paths() -> frozenset[str]:
+    """Return normalized paths reserved by create_pdf_txt_holdout.py.
+
+    The manifest contains local evidence paths and is intentionally
+    gitignored. If it is absent or contains a damaged row, retraining keeps
+    working; valid rows are still enough to block accidental holdout leakage.
+    """
+    if not _HOLDOUT_MANIFEST.exists():
+        return frozenset()
+    paths: set[str] = set()
+    for line in _HOLDOUT_MANIFEST.read_text(encoding="utf-8").split("\n"):
+        if not line.strip():
+            continue
+        try:
+            source = json.loads(line).get("source_file", "")
+        except json.JSONDecodeError:
+            continue
+        if source:
+            paths.add(str(PurePosixPath(source.replace("\\", "/")).as_posix()).lower())
+    return frozenset(paths)
 
 
 def _is_benchmark_source(source_file: str) -> bool:
@@ -79,7 +102,12 @@ def _is_benchmark_source(source_file: str) -> bool:
     # PurePosixPath on "/"-normalized text: records store Windows paths,
     # which a POSIX Path (e.g. in CI) would not split on "\".
     path = PurePosixPath(source_file.replace("\\", "/"))
-    return path.parent.name.lower() in _EVALUATION_DIRS or path.name.lower() in _EVALUATION_FILE_NAMES
+    normalized = str(path.as_posix()).lower()
+    return (
+        path.parent.name.lower() in _EVALUATION_DIRS
+        or path.name.lower() in _EVALUATION_FILE_NAMES
+        or normalized in _holdout_source_paths()
+    )
 
 
 def main() -> None:
@@ -87,6 +115,9 @@ def main() -> None:
     parser.add_argument("--force", action="store_true",
                          help="Promote the retrained model even if the regression guardrail "
                               "finds a shape-recall drop with no offsetting overall improvement")
+    parser.add_argument("--allow-imbalanced-feedback", action="store_true",
+                        help="Allow retraining when confirmed real labels exceed a 3:1 class ratio "
+                             "or one class has fewer than 10 examples")
     args = parser.parse_args()
 
     synthetic_path = BASE_DIR / "datasets" / "training" / "synthetic_training_data.jsonl"
@@ -117,6 +148,18 @@ def main() -> None:
               f"_is_benchmark_source) - these files are what the evaluations score against.")
     if not confirmed:
         print("No non-benchmark confirmed feedback left after exclusion.")
+        raise SystemExit(1)
+
+    confirmed_positive = sum(record.status == "confirmed_person" for record in confirmed)
+    confirmed_negative = sum(record.status == "confirmed_not_person" for record in confirmed)
+    smaller_class = min(confirmed_positive, confirmed_negative)
+    larger_class = max(confirmed_positive, confirmed_negative)
+    imbalanced = smaller_class < 10 or (smaller_class and larger_class / smaller_class > 3)
+    if imbalanced and not args.allow_imbalanced_feedback:
+        print("Refusing to retrain on an imbalanced real-feedback batch: "
+              f"{confirmed_positive} person / {confirmed_negative} not-person.")
+        print("Label at least 10 examples of each class and keep the larger class within 3x, "
+              "then rerun. Use --allow-imbalanced-feedback only for a deliberate exception.")
         raise SystemExit(1)
 
     X: list[list[float]] = []

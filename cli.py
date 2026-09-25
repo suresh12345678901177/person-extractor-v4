@@ -200,12 +200,20 @@ def run_evaluate(args: argparse.Namespace) -> int:
     _print_header("PERSON_EXTRACTOR_V4 - END-TO-END BENCHMARK EVALUATION")
     if args.loose_gate:
         print("*** --loose-gate: COMPARISON MODE (accepts spaCy/context-only evidence) ***")
-    print("Running the full pipeline against every labeled file in datasets/benchmark/ ...")
+    classifier_metrics = getattr(getattr(pipeline.extractor, "classifier", None), "training_metrics", {})
+    if classifier_metrics:
+        print("LightGBM internal validation (synthetic/weak-supervision data; not end-to-end accuracy):")
+        print(f"  accuracy {classifier_metrics.get('validation_accuracy', 'n/a')} | "
+              f"precision {classifier_metrics.get('validation_precision', 'n/a')} | "
+              f"recall {classifier_metrics.get('validation_recall', 'n/a')} | "
+              f"F1 {classifier_metrics.get('validation_f1', 'n/a')}")
+    benchmark_dir = Path(args.benchmark_dir) if args.benchmark_dir else BASE_DIR / "datasets" / "benchmark"
+    print(f"Running the full pipeline against every labeled file in {benchmark_dir} ...")
 
-    report = run_benchmark(pipeline, BASE_DIR / "datasets" / "benchmark")
+    report = run_benchmark(pipeline, benchmark_dir)
 
     if not report.file_results:
-        print("No benchmark files found in datasets/benchmark/.")
+        print(f"No labeled TXT/gold pairs found in {benchmark_dir}.")
         return 1
 
     for fr in report.file_results:
@@ -557,6 +565,9 @@ def main() -> int:
                          help="Print full evidence/explanation for each person")
     parser.add_argument("--evaluate", action="store_true",
                          help="Run the labeled benchmark suite and report precision/recall/F1")
+    parser.add_argument("--benchmark-dir", default=None,
+                        help="Directory of labeled TXT + *_gold.json pairs for --evaluate "
+                             "(default: datasets/benchmark)")
     parser.add_argument("--no-feedback-log", action="store_true",
                          help="Don't log REVIEW-bucket candidates for active learning this run")
     parser.add_argument("--names-only", action="store_true",

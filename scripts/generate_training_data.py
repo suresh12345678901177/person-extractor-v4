@@ -15,12 +15,14 @@ model actually learned). It is NOT a hand-labeled gold corpus.
 
 Usage:
     python scripts/generate_training_data.py
+    python scripts/generate_training_data.py --scale 5
 Produces:
     datasets/training/synthetic_training_data.jsonl
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import random
 import sys
@@ -651,14 +653,27 @@ def _to_example(sentence: str, text: str, start: int, end: int, detections: list
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Generate balanced synthetic training data")
+    parser.add_argument("--scale", type=int, default=1,
+                        help="Multiply every balanced example family by this amount (default: 1)")
+    parser.add_argument("--seed", type=int, default=42,
+                        help="Random seed for a reproducible corpus (default: 42)")
+    parser.add_argument("--output", type=Path,
+                        default=BASE_DIR / "datasets" / "training" / "synthetic_training_data.jsonl",
+                        help="JSONL destination for the generated training data")
+    args = parser.parse_args()
+    if args.scale < 1:
+        parser.error("--scale must be at least 1")
+
+    random.seed(args.seed)
     global _KB_SINGLETON
     assets_dir = BASE_DIR / "assets"
     _KB_SINGLETON = KnowledgeBase.load(assets_dir)
 
-    n_positive = 1200
-    n_negative = 1200
-    n_context_cue = 150  # each class, see CONTEXT_CUE_*_TEMPLATES' docstring
-    n_unseen_name = 600  # see _PSEUDO_NAME_CONSONANTS' docstring. Raised
+    n_positive = 1200 * args.scale
+    n_negative = 1200 * args.scale
+    n_context_cue = 150 * args.scale  # each class, see CONTEXT_CUE_*_TEMPLATES' docstring
+    n_unseen_name = 600 * args.scale  # see _PSEUDO_NAME_CONSONANTS' docstring. Raised
     # from 200 to 600 on 2026-09-18: the prior round (README's
     # "unseen_name ML confidence ceiling" entry) moved max confidence on
     # real unseen gold mentions 0.786 -> 0.838, still short of
@@ -666,7 +681,7 @@ def main() -> None:
     # more of the same targeted reinforcement (not a threshold change,
     # per that entry's explicit reasoning) was worth trying before
     # concluding the gap needs a different mechanism entirely.
-    n_partial_dictionary = 300  # each class - see _build_partial_dictionary_examples
+    n_partial_dictionary = 300 * args.scale  # each class - see _build_partial_dictionary_examples
 
     positives = _build_positive_examples(_KB_SINGLETON, n_positive)
     positives += _build_context_cue_positive_examples(_KB_SINGLETON, n_context_cue)
@@ -683,15 +698,16 @@ def main() -> None:
     all_examples = positives + negatives
     random.shuffle(all_examples)
 
-    out_dir = BASE_DIR / "datasets" / "training"
+    out_path = args.output
+    out_dir = out_path.parent
     out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / "synthetic_training_data.jsonl"
 
     with out_path.open("w", encoding="utf-8") as fh:
         for ex in all_examples:
             fh.write(json.dumps(ex) + "\n")
 
-    print(f"Wrote {len(all_examples)} synthetic examples to {out_path}")
+    print(f"Wrote {len(all_examples)} synthetic examples to {out_path} "
+          f"(scale={args.scale}, seed={args.seed})")
     print(f"  positive (person):     {len(positives)}")
     print(f"  negative (non-person): {len(negatives)}")                                                   
 

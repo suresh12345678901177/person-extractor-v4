@@ -23,7 +23,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
-from src.core.models import AggregatedPerson
+from src.core.models import AggregatedPerson, CandidateResult
 from src.preprocessing.segmenter import line_containing
 from src.utils.logger import get_logger
 
@@ -63,6 +63,12 @@ class FeedbackRecord:
     # scripts/migrate_feedback_add_context_text.py, never silently guessed.
     status: str = "pending"  # pending | confirmed_person | confirmed_not_person | skipped
     labeled_at_utc: str | None = None
+    # The pipeline decision when this row entered the labeling queue. Normal
+    # active learning queues only REVIEW rows; a balanced audit also samples
+    # ACCEPTED and classifier-ready REJECTED rows. Keeping the original
+    # bucket makes the training data auditable and lets a reviewer check that
+    # each labeling batch has useful positive and negative coverage.
+    original_decision: str = "review"
 
     def as_dict(self) -> dict:
         return {
@@ -77,6 +83,7 @@ class FeedbackRecord:
             "context_text": self.context_text,
             "status": self.status,
             "labeled_at_utc": self.labeled_at_utc,
+            "original_decision": self.original_decision,
         }
 
     @classmethod
@@ -124,6 +131,39 @@ class FeedbackStore:
                 features=first_mention.state.feature_vector.as_list(),
                 logged_at_utc=datetime.now(timezone.utc).isoformat(),
                 context_text=line_containing(document_text, first_mention.candidate.start),
+            )
+            records.append(record)
+        return records
+
+    @staticmethod
+    def build_candidate_records(
+        candidates: list[CandidateResult], source_file: str, document_text: str
+    ) -> list[FeedbackRecord]:
+        """Build label-ready records from individual pipeline candidates.
+
+        This is used by the stratified real-data sampler. Unlike the normal
+        REVIEW queue it can include accepted and rejected candidates, but it
+        deliberately skips hard-rejected rows with no feature vector: those
+        never reach LightGBM during live inference and cannot improve that
+        model's training data.
+        """
+        records: list[FeedbackRecord] = []
+        for candidate in candidates:
+            feature_vector = candidate.state.feature_vector
+            if feature_vector is None:
+                continue
+            decision = candidate.state.decision
+            record = FeedbackRecord(
+                feedback_id=str(uuid.uuid4()),
+                source_file=source_file,
+                text=candidate.candidate.text,
+                normalized_text=candidate.candidate.normalized_text,
+                location=str(candidate.candidate.location) if candidate.candidate.location else "",
+                confidence=candidate.state.final_confidence,
+                features=feature_vector.as_list(),
+                logged_at_utc=datetime.now(timezone.utc).isoformat(),
+                context_text=line_containing(document_text, candidate.candidate.start),
+                original_decision=decision.value if decision is not None else "unknown",
             )
             records.append(record)
         return records

@@ -12,6 +12,7 @@ benchmarks end up with silently wrong gold labels.
 
 Usage:
     python scripts/build_benchmark_from_markup.py <marked_source.md> <output_name>
+    python scripts/build_benchmark_from_markup.py <marked_source.md> <output_name> --output-dir datasets/evaluation_holdout/snapshots
 
 Produces:
     datasets/benchmark/<output_name>.txt
@@ -20,6 +21,7 @@ Produces:
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -51,17 +53,20 @@ def strip_markup(raw: str) -> tuple[str, list[dict]]:
 
 
 def main() -> None:
-    if len(sys.argv) != 3:
-        print(__doc__)
-        raise SystemExit(1)
+    parser = argparse.ArgumentParser(description="Build TXT + gold spans from **marked** source text")
+    parser.add_argument("marked_source", type=Path)
+    parser.add_argument("output_name")
+    parser.add_argument("--output-dir", type=Path, default=BASE_DIR / "datasets" / "benchmark",
+                        help="Directory for the generated TXT and *_gold.json files")
+    args = parser.parse_args()
 
-    source_path = Path(sys.argv[1])
-    output_name = sys.argv[2]
+    source_path = args.marked_source
+    output_name = args.output_name
 
     raw = source_path.read_text(encoding="utf-8")
     plain_text, gold_spans = strip_markup(raw)
 
-    out_dir = BASE_DIR / "datasets" / "benchmark"
+    out_dir = args.output_dir
     out_dir.mkdir(parents=True, exist_ok=True)
 
     txt_path = out_dir / f"{output_name}.txt"

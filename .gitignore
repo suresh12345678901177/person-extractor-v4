@@ -18,6 +18,11 @@ datasets/training/*.jsonl
 # nothing about the pipeline changes, only git no longer tracks it.
 datasets/feedback/*.jsonl
 datasets/feedback/backups/
+# Local evaluation manifests point at case material and must never be
+# committed. The repository may retain only an empty .gitkeep folder.
+datasets/evaluation_holdout/*.jsonl
+datasets/evaluation_holdout/snapshots/*
+!datasets/evaluation_holdout/snapshots/.gitkeep
 .idea/
 .vscode/
 .claude/

@@ -1,0 +1,17 @@
+{
+  "model_name": "lightgbm_person_classifier",
+  "model_version": "1.0.0",
+  "validation_accuracy": 0.9419,
+  "validation_precision": 0.982,
+  "validation_recall": 0.9251,
+  "validation_f1": 0.9527,
+  "train_examples": 4621,
+  "validation_examples": 1118,
+  "positive_examples_total": 3237,
+  "negative_examples_total": 2502,
+  "best_iteration": 106,
+  "real_confirmed_examples": 413,
+  "real_positive": 329,
+  "real_negative": 84,
+  "synthetic_examples": 4500
+}
