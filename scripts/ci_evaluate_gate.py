@@ -9,8 +9,7 @@ afterward - the same failure mode `retrain_from_feedback.py`'s own
 promotion guardrail (MAX_ACCEPTABLE_SHAPE_RECALL_DROP) already exists to
 close for a single retrain. This applies the identical idea at the CI
 level so it doesn't depend on a human remembering: fails the build if
-accepted-only F1 on datasets/benchmark/ drops more than
-MAX_ACCEPTABLE_F1_DROP below MIN_ACCEPTED_ONLY_F1.
+accepted-only F1 on datasets/benchmark/ drops below MIN_ACCEPTED_ONLY_F1.
 
 MIN_ACCEPTED_ONLY_F1 is a floor, not a moving baseline read from a state
 file - deliberately, so CI doesn't need a committed "last known F1"
@@ -21,6 +20,7 @@ never lower it to make a failing build pass.
 """
 from __future__ import annotations
 
+import copy
 import sys
 from pathlib import Path
 
@@ -31,17 +31,23 @@ from config import DEFAULT_CONFIG
 from src.evaluation.evaluator import run_benchmark
 from src.pipeline.orchestrator import Pipeline
 
-# Current live accepted-only F1 (2026-09-23 closing rescan): 0.8633.
-# Floor set 0.02 below that - the same tolerance
+# Current live accepted-only F1 (2026-09-25): 0.9362 (was 0.8633 on
+# 2026-09-23, when this floor was 0.84 - the 2026-09-24 gold relabel and
+# retrain raised F1 but not the floor, leaving ~10pp of undetected slack).
+# Floor set ~0.02 below that - the same tolerance
 # retrain_from_feedback.py's MAX_ACCEPTABLE_SHAPE_RECALL_DROP uses -
 # so normal sample-size noise (see the --evaluate sample-size caveat)
 # doesn't fail CI, but a real regression of the size already seen twice
 # in this project's history does.
-MIN_ACCEPTED_ONLY_F1 = 0.84
+MIN_ACCEPTED_ONLY_F1 = 0.91
 
 
 def main() -> int:
-    pipeline = Pipeline(config=DEFAULT_CONFIG, base_dir=BASE_DIR)
+    # Feedback logging off: an evaluation must not add benchmark names to
+    # the labeling queue (datasets/feedback/pending_review.jsonl).
+    config = copy.deepcopy(DEFAULT_CONFIG)
+    config["feedback"]["enabled"] = False
+    pipeline = Pipeline(config=config, base_dir=BASE_DIR)
     report = run_benchmark(pipeline, BASE_DIR / "datasets" / "benchmark")
 
     if not report.file_results:

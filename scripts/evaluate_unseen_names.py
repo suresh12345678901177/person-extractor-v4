@@ -15,6 +15,7 @@ Usage:
 
 from __future__ import annotations
 
+import copy
 import sys
 from pathlib import Path
 
@@ -29,7 +30,12 @@ from src.utils.logger import configure_logging
 
 def main() -> int:
     configure_logging(BASE_DIR / "logs")
-    pipeline = Pipeline(config=DEFAULT_CONFIG, base_dir=BASE_DIR)
+    # No feedback logging: this is the held-out set, and every REVIEW name it
+    # logged became a labeling candidate - a direct path for held-out names
+    # into training data.
+    config = copy.deepcopy(DEFAULT_CONFIG)
+    config["feedback"]["enabled"] = False
+    pipeline = Pipeline(config=config, base_dir=BASE_DIR)
 
     bench_dir = BASE_DIR / "datasets" / "benchmark_unseen"
     print("=" * 78)

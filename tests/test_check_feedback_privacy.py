@@ -115,3 +115,25 @@ def test_staged_diff_handles_utf8_without_crashing(tmp_path, monkeypatch):
 
     assert len(lines) == 1
     assert "end-to-end encrypted" in lines[0]
+
+
+def test_tracked_feedback_jsonl_is_reported(tmp_path, monkeypatch):
+    """The feedback files are gitignored, so in CI there is no content to
+    scan - the check that still works there is that none is tracked. A
+    force-added (staged) file must be reported; .gitkeep must not."""
+    import subprocess
+
+    repo = tmp_path / "repo"
+    feedback = repo / "datasets" / "feedback"
+    feedback.mkdir(parents=True)
+    subprocess.run(["git", "init", "-q"], cwd=repo, check=True)
+    (feedback / ".gitkeep").write_text("", encoding="utf-8")
+    subprocess.run(["git", "add", "datasets/feedback/.gitkeep"], cwd=repo, check=True)
+    monkeypatch.setattr(check_feedback_privacy, "BASE_DIR", repo)
+
+    assert check_feedback_privacy._tracked_feedback_files() == []
+
+    (feedback / "confirmed_labels.jsonl").write_text('{"text": "X"}\n', encoding="utf-8")
+    subprocess.run(["git", "add", "-f", "datasets/feedback/confirmed_labels.jsonl"], cwd=repo, check=True)
+
+    assert check_feedback_privacy._tracked_feedback_files() == ["datasets/feedback/confirmed_labels.jsonl"]

@@ -25,7 +25,7 @@ import argparse
 import copy
 import json
 import sys
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR))
@@ -53,6 +53,17 @@ REAL_EXAMPLE_UPWEIGHT = 3
 # overall improvement.
 MAX_ACCEPTABLE_SHAPE_RECALL_DROP = 0.02
 
+# Every file --evaluate and scripts/evaluate_unseen_names.py score against,
+# matched by folder OR file name (2026-09-25): the folder-only check missed
+# datasets/benchmark_unseen/ - the held-out set, one of whose names was
+# already sitting in pending_review.jsonl - and any copy of a benchmark file
+# run from another folder (the by-file-name rule auto_label_from_gold.py
+# already uses).
+_EVALUATION_DIRS = ("benchmark", "benchmark_unseen")
+_EVALUATION_FILE_NAMES = frozenset(
+    p.name.lower() for d in _EVALUATION_DIRS for p in (BASE_DIR / "datasets" / d).glob("*.txt")
+)
+
 
 def _is_benchmark_source(source_file: str) -> bool:
     """True if this feedback record was logged from a file under
@@ -65,10 +76,10 @@ def _is_benchmark_source(source_file: str) -> bool:
     39 from the four small hand-authored benchmark_0*.txt files) came
     from exactly this leak. Excluded here so --evaluate measures
     genuine generalization, not partial memorization."""
-    try:
-        return Path(source_file).parent.name.lower() == "benchmark"
-    except Exception:
-        return False
+    # PurePosixPath on "/"-normalized text: records store Windows paths,
+    # which a POSIX Path (e.g. in CI) would not split on "\".
+    path = PurePosixPath(source_file.replace("\\", "/"))
+    return path.parent.name.lower() in _EVALUATION_DIRS or path.name.lower() in _EVALUATION_FILE_NAMES
 
 
 def main() -> None:
@@ -102,8 +113,8 @@ def main() -> None:
 
     if excluded_benchmark:
         print(f"Excluding {len(excluded_benchmark)} confirmed label(s) sourced from "
-              f"datasets/benchmark/ (see _is_benchmark_source docstring) - these files "
-              f"are also what --evaluate scores against.")
+              f"benchmark files (datasets/benchmark/, datasets/benchmark_unseen/ - see "
+              f"_is_benchmark_source) - these files are what the evaluations score against.")
     if not confirmed:
         print("No non-benchmark confirmed feedback left after exclusion.")
         raise SystemExit(1)

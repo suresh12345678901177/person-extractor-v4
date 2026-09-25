@@ -1,33 +1,31 @@
 """
 scripts/check_feedback_privacy.py
 =====================================
-Guardrail against a future accident, not a fix to anything currently
-wrong (independent-audit finding #8): datasets/feedback/*.jsonl is
-git-tracked (unlike output/, which .gitignore excludes entirely) and
-stores `context_text` - a real snippet of the source line surrounding
-every logged candidate (see FeedbackRecord.context_text). A manual audit
-(2026-09-23) confirmed it's currently clean - sourced from
-datasets/benchmark/ and public-domain book/paper text only, matching
-README's "Known limitations" claim - but nothing previously stopped a
-future session from accidentally committing a real case snippet into
-version control the way this exact class of content has already been
-kept OUT of confirmed_labels.jsonl by manual discipline alone (see
-README: "634 items were real corporate-fraud case content and were
-deliberately left to the case's own reviewer").
+Guardrail against real case content reaching version control
+(independent-audit finding #8): datasets/feedback/*.jsonl stores
+`context_text` - a real snippet of the source line surrounding every
+logged candidate (see FeedbackRecord.context_text). Since the 2026-09-23
+privacy incident (see README's "Independent-audit findings") these files
+are gitignored and untracked, which makes this check two things:
 
-Checks every added record's `text`/`context_text` fields against
-case-identifier patterns in
-assets/privacy_guard/case_identifier_patterns.txt (a plain-text asset,
-not a hardcoded list - same convention as every other assets/*.txt file,
-so starting a new case just means adding a line there).
+1. Tracked-file check (always): fails if git tracks or has staged ANY
+   datasets/feedback/*.jsonl (a `git add -f` would bypass .gitignore).
+   This is the part that means something in CI, where the gitignored
+   files don't exist and there is no content to scan (added 2026-09-25 -
+   until then the CI step scanned absent files and always passed).
+2. Content check: every record's `text`/`context_text` fields against
+   case-identifier patterns in
+   assets/privacy_guard/case_identifier_patterns.txt (a plain-text asset,
+   not a hardcoded list - same convention as every other assets/*.txt
+   file, so starting a new case just means adding a line there).
 
 Usage:
     python scripts/check_feedback_privacy.py            # check newly staged additions (for a pre-commit hook)
     python scripts/check_feedback_privacy.py --all       # check the ENTIRE current file(s) - one-off verification / CI
     python scripts/check_feedback_privacy.py --all --files path/to/other.jsonl
 
-Exit code 0 = clean. Exit code 1 = a likely real-case identifier was
-found - the commit is blocked (when run as the pre-commit hook in
+Exit code 0 = clean. Exit code 1 = feedback data is tracked, or a likely
+real-case identifier was found - the commit is blocked (when run as the pre-commit hook in
 .git/hooks/pre-commit) until a human reviews it.
 """
 from __future__ import annotations
@@ -88,6 +86,22 @@ def _staged_added_lines(target_file: Path) -> list[str]:
     return added
 
 
+def _tracked_feedback_files() -> list[str]:
+    """Every datasets/feedback/**.jsonl git tracks or has staged - see the
+    module docstring's check 1. Returns [] (with a warning) if git isn't
+    available, like _staged_added_lines."""
+    try:
+        result = subprocess.run(
+            ["git", "ls-files", "--", "datasets/feedback"],
+            cwd=BASE_DIR, capture_output=True, timeout=15, check=True,
+            encoding="utf-8", errors="replace",
+        )
+    except Exception as exc:  # noqa: BLE001 - never let the checker itself crash a commit
+        print(f"WARNING: could not list git-tracked feedback files: {exc}", file=sys.stderr)
+        return []
+    return [line for line in result.stdout.splitlines() if line.endswith(".jsonl")]
+
+
 def _all_lines(target_file: Path) -> list[str]:
     if not target_file.exists():
         return []
@@ -137,7 +151,11 @@ def main() -> int:
 
     target_files = args.files if args.files else DEFAULT_TARGET_FILES
 
-    all_findings: list[str] = []
+    all_findings: list[str] = [
+        f"{path}: feedback data is tracked by git - it must stay untracked (gitignored since the "
+        f"2026-09-23 privacy incident). Untrack it with: git rm --cached \"{path}\""
+        for path in _tracked_feedback_files()
+    ]
     for target_file in target_files:
         lines = _all_lines(target_file) if args.all else _staged_added_lines(target_file)
         all_findings.extend(find_risks(lines, patterns, target_file.name))

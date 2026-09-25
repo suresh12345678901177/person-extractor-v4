@@ -486,6 +486,17 @@ containing an exempted hostname (of 19,089): no ACCEPTED change, no name
 gained or lost in REVIEW; "Edit" (already in REVIEW) +4 mentions in one
 preferences XML.
 
+**2026-09-25 - evaluation hygiene.** `retrain_from_feedback.py` now also
+excludes labels from the held-out `datasets/benchmark_unseen/` and from
+copies of any benchmark file elsewhere (matched by file name) - before,
+only `datasets/benchmark/` was excluded, and `evaluate_unseen_names.py`
+logged held-out names into the labeling queue (it no longer logs; neither
+does `ci_evaluate_gate.py`). No existing confirmed label was affected. The
+CI F1 floor was still 0.84 from before the 2026-09-24 relabel (live F1
+0.936); it is now 0.91. The CI privacy step also fails if any
+`datasets/feedback/*.jsonl` is tracked by git - with those files
+gitignored, its content scan had nothing to check in CI.
+
 **2026-09-24 - validated on the real "real case" folder, and
 what it caught that the benchmark couldn't.** A scan with the new readers
 (19,090 files vs 7,246) exposed, compared against the 2026-09-23 scan via
