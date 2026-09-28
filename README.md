@@ -525,6 +525,21 @@ containing an exempted hostname (of 19,089): no ACCEPTED change, no name
 gained or lost in REVIEW; "Edit" (already in REVIEW) +4 mentions in one
 preferences XML.
 
+**2026-09-28 - lone words in tiny non-prose files (exp08).** A file under
+30 words is treated as English by the prose gate (too short to judge), so
+garbled OCR scraps of images and image PDFs, one-word files and terse
+records got single dictionary words ACCEPTED as people - with no sentence
+context to tell a name from noise. In such a file, when its stopword share
+is also below the prose gate's own 0.15 threshold, a lone single word now
+goes to REVIEW unless a title or a full name backs it - the rule that
+already applied to structured data (`_cap_lone_single_tokens`). A short
+genuine note ("Call Suresh tomorrow about the payment.") is unaffected.
+v1 also applied it to live text (`Pipeline.run_text`, realtime sessions);
+fed line by line, the benchmark chat then lost one real accept and gained
+nothing - live messages are short by nature - so v2 applies to files only.
+Benchmark and live path identical. Real case: 13 accepted words -> REVIEW,
+all noise; nothing added or lost. A strict improvement, promoted.
+
 **2026-09-28 - language and region names (exp07).** Language menus
 ("Español (Latinoamérica) – México", "Deutsch – Schweiz") and a "Telugu
 News" site header got "Español" (26 mentions), "Telugu" (11) and "Schweiz"

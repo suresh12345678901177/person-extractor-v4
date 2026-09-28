@@ -1,0 +1,351 @@
+{
+  "id": "exp08b-short-non-prose-files-only",
+  "description": "v2 (commit 65be9f9): _cap_lone_single_tokens (structured data only until now) also holds a lone single word for REVIEW in a FILE under 30 Latin-letter words whose stopword share is below the existing 0.15 English-prose threshold (OCR scraps of images, lone words, terse records); a short genuine note is unaffected, and live text (Pipeline.run_text, realtime sessions - no source format) keeps its previous decisions. Fed line by line through the live path, benchmark_real_660/675 are identical to exp07. Benchmark, shapes, unseen and dump005 identical to exp07. Real case vs exp07: 13 accepted names -> REVIEW, all noise (words from garbled OCR scraps of images and image PDFs, lone words in one-word files, a locality fragment, an AI model name in a screenshot); nothing added or lost; identical to the v1 scan. Speed back to normal (1.78 s, 32 ms, scan 970 s).",
+  "measured_utc": "2026-09-28T09:38:04Z",
+  "provenance": {
+    "scan_timestamp_utc": "2026-09-28T09:38:04Z",
+    "git_commit": "65be9f902bedd930e546ab6ce857f7a647eacb87",
+    "git_dirty": true,
+    "git_dirty_file_count": 7,
+    "model_file": "person_classifier.txt",
+    "model_mtime_utc": "2026-09-25T11:41:47Z",
+    "model_sha256_short": "cf3ee50e5759"
+  },
+  "hardware": {
+    "cpu_logical_cores": 12,
+    "device_used": "cpu",
+    "gpu": "NVIDIA GeForce RTX 2050, 4096 MiB, 3962 MiB, 610.78",
+    "spacy_gpu_available": false
+  },
+  "tests": {
+    "ok": true,
+    "summary": "211 passed in 27.70s",
+    "seconds": 31.1
+  },
+  "benchmark": {
+    "files": 7,
+    "accepted": {
+      "P": 0.9789,
+      "R": 0.9026,
+      "F1": 0.9392,
+      "TP": 1205,
+      "FP": 26,
+      "FN": 130,
+      "gold": 1335
+    },
+    "accepted_plus_review": {
+      "P": 0.94,
+      "R": 0.9625,
+      "F1": 0.9511,
+      "TP": 1285,
+      "FP": 82,
+      "FN": 50,
+      "gold": 1335
+    },
+    "domains_accepted": {
+      "prose": {
+        "P": 0.88,
+        "R": 1.0,
+        "F1": 0.9362,
+        "TP": 66,
+        "FP": 9,
+        "FN": 0,
+        "gold": 66
+      },
+      "chat_or_call_log": {
+        "P": 0.986,
+        "R": 0.8966,
+        "F1": 0.9392,
+        "TP": 1127,
+        "FP": 16,
+        "FN": 130,
+        "gold": 1257
+      },
+      "email": {
+        "P": 0.9231,
+        "R": 1.0,
+        "F1": 0.96,
+        "TP": 12,
+        "FP": 1,
+        "FN": 0,
+        "gold": 12
+      },
+      "system_log": {
+        "P": 0.0,
+        "R": 0.0,
+        "F1": 0.0,
+        "TP": 0,
+        "FP": 0,
+        "FN": 0,
+        "gold": 0
+      }
+    },
+    "domains_accepted_plus_review": {
+      "prose": {
+        "P": 0.88,
+        "R": 1.0,
+        "F1": 0.9362,
+        "TP": 66,
+        "FP": 9,
+        "FN": 0,
+        "gold": 66
+      },
+      "chat_or_call_log": {
+        "P": 0.9444,
+        "R": 0.9602,
+        "F1": 0.9522,
+        "TP": 1207,
+        "FP": 71,
+        "FN": 50,
+        "gold": 1257
+      },
+      "email": {
+        "P": 0.8571,
+        "R": 1.0,
+        "F1": 0.9231,
+        "TP": 12,
+        "FP": 2,
+        "FN": 0,
+        "gold": 12
+      },
+      "system_log": {
+        "P": 0.0,
+        "R": 0.0,
+        "F1": 0.0,
+        "TP": 0,
+        "FP": 0,
+        "FN": 0,
+        "gold": 0
+      }
+    },
+    "shape_recall_accepted": {
+      "single_token": {
+        "hits": 195,
+        "total": 203,
+        "recall": 0.9606
+      },
+      "dictionary_known": {
+        "hits": 1015,
+        "total": 1048,
+        "recall": 0.9685
+      },
+      "multi_token": {
+        "hits": 1011,
+        "total": 1132,
+        "recall": 0.8931
+      },
+      "unseen_name": {
+        "hits": 191,
+        "total": 287,
+        "recall": 0.6655
+      }
+    },
+    "shape_recall_accepted_plus_review": {
+      "single_token": {
+        "hits": 195,
+        "total": 203,
+        "recall": 0.9606
+      },
+      "dictionary_known": {
+        "hits": 1036,
+        "total": 1048,
+        "recall": 0.9885
+      },
+      "multi_token": {
+        "hits": 1091,
+        "total": 1132,
+        "recall": 0.9638
+      },
+      "unseen_name": {
+        "hits": 250,
+        "total": 287,
+        "recall": 0.8711
+      }
+    },
+    "per_file_accepted": {
+      "benchmark_001.txt": {
+        "P": 0.8871,
+        "R": 1.0,
+        "F1": 0.9402,
+        "TP": 55,
+        "FP": 7,
+        "FN": 0,
+        "gold": 55
+      },
+      "benchmark_002.txt": {
+        "P": 0.8462,
+        "R": 1.0,
+        "F1": 0.9167,
+        "TP": 11,
+        "FP": 2,
+        "FN": 0,
+        "gold": 11
+      },
+      "benchmark_003.txt": {
+        "P": 0.9412,
+        "R": 0.9697,
+        "F1": 0.9552,
+        "TP": 32,
+        "FP": 2,
+        "FN": 1,
+        "gold": 33
+      },
+      "benchmark_004.txt": {
+        "P": 0.9231,
+        "R": 1.0,
+        "F1": 0.96,
+        "TP": 12,
+        "FP": 1,
+        "FN": 0,
+        "gold": 12
+      },
+      "benchmark_real_660.txt": {
+        "P": 0.9839,
+        "R": 0.9727,
+        "F1": 0.9783,
+        "TP": 854,
+        "FP": 14,
+        "FN": 24,
+        "gold": 878
+      },
+      "benchmark_real_675.txt": {
+        "P": 1.0,
+        "R": 0.6965,
+        "F1": 0.8211,
+        "TP": 241,
+        "FP": 0,
+        "FN": 105,
+        "gold": 346
+      },
+      "benchmark_structured_dump_005.txt": {
+        "P": 0.0,
+        "R": 0.0,
+        "F1": 0.0,
+        "TP": 0,
+        "FP": 0,
+        "FN": 0,
+        "gold": 0
+      }
+    }
+  },
+  "unseen": {
+    "files": 1,
+    "accepted": {
+      "P": 1.0,
+      "R": 0.9655,
+      "F1": 0.9824,
+      "TP": 28,
+      "FP": 0,
+      "FN": 1,
+      "gold": 29
+    },
+    "accepted_plus_review": {
+      "P": 1.0,
+      "R": 1.0,
+      "F1": 1.0,
+      "TP": 29,
+      "FP": 0,
+      "FN": 0,
+      "gold": 29
+    },
+    "domains_accepted": {
+      "uncategorized": {
+        "P": 1.0,
+        "R": 0.9655,
+        "F1": 0.9824,
+        "TP": 28,
+        "FP": 0,
+        "FN": 1,
+        "gold": 29
+      }
+    },
+    "domains_accepted_plus_review": {
+      "uncategorized": {
+        "P": 1.0,
+        "R": 1.0,
+        "F1": 1.0,
+        "TP": 29,
+        "FP": 0,
+        "FN": 0,
+        "gold": 29
+      }
+    },
+    "shape_recall_accepted": {
+      "multi_token": {
+        "hits": 28,
+        "total": 29,
+        "recall": 0.9655
+      },
+      "unseen_name": {
+        "hits": 5,
+        "total": 6,
+        "recall": 0.8333
+      },
+      "dictionary_known": {
+        "hits": 23,
+        "total": 23,
+        "recall": 1.0
+      }
+    },
+    "shape_recall_accepted_plus_review": {
+      "multi_token": {
+        "hits": 29,
+        "total": 29,
+        "recall": 1.0
+      },
+      "unseen_name": {
+        "hits": 6,
+        "total": 6,
+        "recall": 1.0
+      },
+      "dictionary_known": {
+        "hits": 23,
+        "total": 23,
+        "recall": 1.0
+      }
+    },
+    "per_file_accepted": {
+      "benchmark_unseen_names.txt": {
+        "P": 1.0,
+        "R": 0.9655,
+        "F1": 0.9824,
+        "TP": 28,
+        "FP": 0,
+        "FN": 1,
+        "gold": 29
+      }
+    }
+  },
+  "stage_timing": {
+    "TOTAL": 1.7792,
+    "aggregation": 0.0014,
+    "boundary_refinement": 0.005,
+    "candidate_factory": 0.0197,
+    "decision_engine": 0.0678,
+    "detection": 1.2653,
+    "feature_engineering": 0.0443,
+    "io_read_document": 0.0104,
+    "language_filter": 0.0045,
+    "ml_classification": 0.01,
+    "name_propagation": 0.0124,
+    "preprocessing": 0.0071,
+    "validation": 0.2714
+  },
+  "server_latency": {
+    "messages": 1549,
+    "median_ms": 31.89,
+    "p95_ms": 88.1,
+    "max_ms": 125.49
+  },
+  "scan": {
+    "total_files_in_folder": 47353.0,
+    "files_processed_ok": 13307.0,
+    "files_failed": 9.0,
+    "files_excluded": 1.0,
+    "unique_names_accepted": 210.0,
+    "unique_names_review": 317.0,
+    "discovery_seconds": 0.7853,
+    "extraction_seconds": 969.0519
+  },
+  "verdict": "promoted (strict improvement)"
+}
