@@ -159,3 +159,38 @@ def test_missing_spacy_model_names_the_download_command():
 
     with pytest.raises(RuntimeError, match="spacy download en_core_web_nonexistent"):
         SpacyDetector(model_name="en_core_web_nonexistent")
+
+
+def test_name_segments_split_at_line_breaks_and_digit_tokens_only():
+    from src.detection.spacy_detector import SpacyDetector
+
+    def segs(text):
+        return [text[s:e] for s, e in SpacyDetector._name_segments(text)]
+
+    assert segs("Marcus  Webb") == ["Marcus  Webb"]                       # unchanged, spacing kept
+    assert segs("Marco Silvestri\nDragan Kovac") == ["Marco Silvestri", "Dragan Kovac"]
+    assert segs("Farhan Vora 919812345671 Meera Iyengar Hi") == ["Farhan Vora", "Meera Iyengar Hi"]
+    assert segs("+91-98123 Rohan") == ["Rohan"]
+    assert segs("A2B 42") == []
+
+
+def test_one_line_call_log_keeps_both_names_as_candidates(tmp_path):
+    """Regression (2026-09-28, benchmark_003): spaCy tagged 'Farhan Vora
+    919812345671 Meera Iyengar Hi' as one person, and candidate merging then
+    kept only 'Meera Iyengar' - 'Farhan Vora' at that spot was lost."""
+    import copy
+    from config import BASE_DIR, DEFAULT_CONFIG
+    from src.pipeline.orchestrator import Pipeline
+
+    text = ("919812345670 Farhan Vora 919812345671 Meera Iyengar Hi 919812345670 "
+            "Where's the vendor list Farhan Vora 919812345671 Sterling Finch Logistics sent it already\n")
+    sample = tmp_path / "call_log.txt"
+    sample.write_text(text, encoding="utf-8")
+    config = copy.deepcopy(DEFAULT_CONFIG)
+    config["feedback"]["enabled"] = False
+    result = Pipeline(config=config, base_dir=BASE_DIR).run(sample)
+
+    mentions = [m for p in [*result.persons, *result.review_persons] for m in p.mentions]
+    first = text.index("Farhan Vora")
+    assert any(m.candidate.start == first and m.candidate.text == "Farhan Vora" for m in mentions), \
+        [(m.candidate.start, m.candidate.text) for m in mentions]

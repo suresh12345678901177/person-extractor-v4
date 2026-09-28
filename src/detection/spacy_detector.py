@@ -17,6 +17,7 @@ the gate, ML corroborates" design principle behind V4's no-FP goal.
 
 from __future__ import annotations
 
+import re
 from typing import Iterator
 
 from src.core.models import Detection, DetectorName
@@ -24,6 +25,8 @@ from src.detection.base_detector import BaseDetector
 from src.utils.logger import get_logger
 
 logger = get_logger("detection.spacy_detector")
+
+_WHITESPACE_TOKEN_RE = re.compile(r"\S+")
 
 
 def iter_line_bounded_chunks(text: str, max_chars: int) -> Iterator[tuple[int, str]]:
@@ -198,20 +201,6 @@ class SpacyDetector(BaseDetector):
             if ent.label_ != "PERSON":
                 continue
 
-            if "\n" not in ent.text:
-                detections.append(
-                    Detection(
-                        text=ent.text,
-                        start=chunk_offset + ent.start_char,
-                        end=chunk_offset + ent.end_char,
-                        page_index=page_index,
-                        detector=cls.name,
-                        confidence=cls.CONFIDENCE,
-                        metadata={"pattern": "spacy_ner", "spacy_label": ent.label_},
-                    )
-                )
-                continue
-
             # spaCy's NER has no hard constraint against an entity
             # crossing a line break, unlike the regex/dictionary
             # detectors which both explicitly forbid it (see
@@ -233,20 +222,22 @@ class SpacyDetector(BaseDetector):
             # decision gate on its own since it has no dictionary/title
             # support - it stays low-confidence, not missing evidence
             # for a different real person.
-            cursor = ent.start_char
-            for line in ent.text.split("\n"):
-                line_start = cursor
-                cursor += len(line) + 1  # +1 for the '\n' consumed by split
-                stripped = line.strip()
-                if not stripped:
-                    continue
-                seg_start = line_start + (len(line) - len(line.lstrip()))
-                seg_end = seg_start + len(stripped)
+            #
+            # The same holds for an entity running across a phone number
+            # or any other digit-bearing token (2026-09-28): on one-line
+            # call-log/chat dumps ("919812345670 Farhan Vora 919812345671
+            # Meera Iyengar Hi") spaCy tagged "Farhan Vora 919812345671
+            # Meera Iyengar Hi" as ONE person. CandidateFactory then merged
+            # every detection it overlapped into one cluster that kept only
+            # "Meera Iyengar" - "Farhan Vora" vanished from that spot. No
+            # person's name contains a digit, so such tokens split the
+            # entity (and are dropped) exactly like a line break does.
+            for seg_start, seg_end in cls._name_segments(ent.text):
                 detections.append(
                     Detection(
-                        text=stripped,
-                        start=chunk_offset + seg_start,
-                        end=chunk_offset + seg_end,
+                        text=ent.text[seg_start:seg_end],
+                        start=chunk_offset + ent.start_char + seg_start,
+                        end=chunk_offset + ent.start_char + seg_end,
                         page_index=page_index,
                         detector=cls.name,
                         confidence=cls.CONFIDENCE,
@@ -254,3 +245,27 @@ class SpacyDetector(BaseDetector):
                     )
                 )
         return detections
+
+    @staticmethod
+    def _name_segments(text: str) -> list[tuple[int, int]]:
+        """(start, end) offsets within `text` of each run of consecutive
+        whitespace-separated tokens that crosses no line break and contains
+        no token with a digit in it. An entity with neither comes back as
+        one segment, identical to the entity text."""
+        segments: list[tuple[int, int]] = []
+        run_start = run_end = None
+        for m in _WHITESPACE_TOKEN_RE.finditer(text):
+            if any(ch.isdigit() for ch in m.group()):
+                if run_start is not None:
+                    segments.append((run_start, run_end))
+                run_start = run_end = None
+                continue
+            if run_start is not None and "\n" in text[run_end:m.start()]:
+                segments.append((run_start, run_end))
+                run_start = None
+            if run_start is None:
+                run_start = m.start()
+            run_end = m.end()
+        if run_start is not None:
+            segments.append((run_start, run_end))
+        return segments
