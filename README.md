@@ -525,6 +525,32 @@ containing an exempted hostname (of 19,089): no ACCEPTED change, no name
 gained or lost in REVIEW; "Edit" (already in REVIEW) +4 mentions in one
 preferences XML.
 
+**2026-09-28 - middle-initial names (exp06).** "Craig J. Mundie" and
+"Lisa E. Brummel" were rejected because their first names are on the
+collision list (`common_english_words.txt` contains craig/lisa, so the
+collision audit listed them), and "Kurt D. DelBene" was cut to a rejected
+"Kurt" (the one-word dictionary hit only ever widened to 2-token spans).
+A "First I. Last" candidate backed by spaCy or a dictionary hit now passes
+CorroborationValidator regardless of the first name, and the widening also
+covers the middle-initial shape. Benchmark unchanged (no such names in
+it). Real case: 7 names newly ACCEPTED, all real people named in a public
+SEC 10-K officer table and director signature block; nothing lost. Open:
+"A. Road"-style spans (an initial plus a surname-list word) can still be
+accepted - pre-existing, not caused by this change.
+
+**2026-09-28 - spaCy spans split at phone numbers (exp05, owner-approved
+trade).** On one-line call-log/chat dumps spaCy tagged "Farhan Vora
+919812345671 Meera Iyengar Hi" as one person; CandidateFactory merged
+everything it overlapped into one cluster that kept only "Meera Iyengar",
+so "Farhan Vora" vanished from that spot (recovered only partly, as
+"Farhan", by first-name propagation). SpacyDetector now splits an entity
+at digit-bearing tokens as it already did at line breaks. Benchmark:
+overlap metrics unchanged, exact boundaries 1,154 -> 1,156 of 1,205
+accepted gold hits. Real case: +1 accepted ("Rahul Doe", swallowed the
+same way next to an ID number) and +7 REVIEW entries, all noise that a
+digit-bearing spaCy span used to drag into rejection (+2.3% REVIEW) -
+accepted precision unaffected.
+
 **2026-09-28 - short day/month names and ordinary-word first names
 (exp04).** Two asset gaps behind the last ordinary-word names still ACCEPTED
 in the real case scan: `multilingual_calendar_words.txt` had full day/month
