@@ -161,3 +161,46 @@ Okt
 Nov
 Dec
 Dez
+
+# Short day/month forms, added 2026-09-28. The full names above didn't cover
+# the abbreviated arrays web date pickers ship (jQuery UI "dayNamesShort" /
+# "monthNamesShort"): a real case scan ACCEPTED "Dom" 4 times, all from
+# ["Dom","Lun","Mar",...] in Spanish/Portuguese/Italian locale data - the
+# same noise class as "Ott" from that locale file earlier. Of these, only
+# dom, mie, mån, ott and tor are also dictionary names, so only they change
+# behavior (a lone mention now needs a title or a full name).
+# Spanish
+dom
+lun
+mié
+mie
+jue
+vie
+sáb
+sab
+# Portuguese
+seg
+ter
+qua
+qui
+sex
+# Italian
+mer
+gio
+ven
+gen
+mag
+giu
+lug
+ago
+set
+ott
+dic
+# Swedish
+mån
+tis
+ons
+tor
+fre
+lör
+sön

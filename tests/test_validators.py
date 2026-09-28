@@ -9,6 +9,7 @@ from src.knowledge.knowledge_base import KnowledgeBase
 from src.validation.validators.blacklist_validator import BlacklistValidator
 from src.validation.validators.campaign_validator import CampaignValidator
 from src.validation.validators.context_validator import ContextValidator
+from src.validation.validators.corroboration_validator import CorroborationValidator
 from src.validation.validators.grammar_validator import GrammarValidator
 from src.validation.validators.initial_validator import InitialValidator
 from src.validation.validators.language_validator import LanguageValidator
@@ -338,3 +339,22 @@ def test_structure_validator_rejects_utf8_read_as_latin1():
     detection = Detection("TomÃ", start, start + 4, 0, DetectorName.REGEX, 0.55, {"pattern": "bare"})
     cand = CandidateResult(candidate=Candidate.new("TomÃ", "TomÃ", start, start + 4, 0, (detection,)))
     assert not StructureValidator().validate(cand, KB, document).passed
+
+
+def test_corroboration_rejects_short_day_name_even_when_repeated():
+    # Regression (2026-09-28, real case scan): "Dom" - Sunday in Spanish/
+    # Portuguese/Italian datepicker arrays, also a dictionary first name - was
+    # ACCEPTED on a single-token dictionary hit repeated 4x. Short day/month
+    # forms are calendar words now, so repetition doesn't corroborate them.
+    doc = 'dayNamesShort:["Dom","Lun","Mar"] ' * 5
+    result = _validate(CorroborationValidator(), "Dom", doc, pattern="dictionary_single_token")
+    assert result.passed is False and "calendar" in result.message
+
+
+def test_corroboration_needs_more_than_a_lone_dictionary_hit_for_ordinary_word_first_names():
+    # Regression (2026-09-28): "Night" (a first name, but an ordinary word
+    # first) was ACCEPTED once from an OCR fragment on the dictionary hit alone.
+    result = _validate(CorroborationValidator(), "Night", "some text Night", pattern="dictionary_single_token")
+    assert result.passed is False
+    # Control: an unambiguous first name is still corroborated by the same evidence.
+    assert _validate(CorroborationValidator(), "Suresh", "some text Suresh", pattern="dictionary_single_token").passed

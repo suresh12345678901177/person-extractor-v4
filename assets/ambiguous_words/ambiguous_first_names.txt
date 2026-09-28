@@ -1253,3 +1253,20 @@ zaragoza
 # first/last-name collisions.
 ola
 bangalore
+# 2026-09-28: first names that are ordinary English words first and foremost
+# but weren't on this list (scripts/audit_collisions.py still reports 59
+# such words; these are the ones whose everyday meaning clearly dominates -
+# real given names and common Indian names/nicknames in that report, e.g.
+# jennifer, susan, sunny, honey, ram, were deliberately left off). Found
+# via a real case scan that ACCEPTED "Night" from an 11-character OCR
+# fragment on a bare first-name dictionary hit.
+night
+baby
+beauty
+fish
+dip
+era
+mini
+pan
+karma
+asin
