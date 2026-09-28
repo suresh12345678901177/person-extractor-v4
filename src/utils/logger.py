@@ -8,10 +8,41 @@ every module obtains a logger via get_logger(__name__).
 from __future__ import annotations
 
 import logging
+import multiprocessing
+import os
 import sys
 from pathlib import Path
 
 _CONFIGURED = False
+
+# pipeline.log is rotated at startup once it passes MAX_LOG_BYTES, keeping
+# LOG_BACKUPS older files (pipeline.log.1 newest). Added 2026-09-28: it had
+# grown to 1 GB unbounded - one full real-case scan writes ~59 MB.
+MAX_LOG_BYTES = 50 * 1024 * 1024
+LOG_BACKUPS = 3
+
+
+def _rotate_at_startup(path: Path, max_bytes: int = MAX_LOG_BYTES, backups: int = LOG_BACKUPS) -> None:
+    """Shift path -> path.1 -> ... -> path.<backups> (dropping the oldest)
+    if path is at least max_bytes. Done once at startup, not with
+    RotatingFileHandler: scan_directory.py's worker processes append to the
+    same file, and a mid-run rename of a file other processes hold open
+    fails on Windows. If another process (a running server or scan) has the
+    log open, the rename fails the same way and rotation waits for the next
+    start."""
+    try:
+        if path.stat().st_size < max_bytes:
+            return
+    except FileNotFoundError:
+        return
+    try:
+        for i in range(backups - 1, 0, -1):
+            older = path.with_name(f"{path.name}.{i}")
+            if older.exists():
+                os.replace(older, path.with_name(f"{path.name}.{i + 1}"))
+        os.replace(path, path.with_name(f"{path.name}.1"))
+    except OSError:
+        pass
 
 
 def configure_logging(log_dir: str | Path = "logs", level: int = logging.INFO) -> None:
@@ -35,6 +66,10 @@ def configure_logging(log_dir: str | Path = "logs", level: int = logging.INFO) -
         stream_handler.setFormatter(formatter)
         root.addHandler(stream_handler)
 
+        # Workers (scan_directory.py, spaCy n_process) start after the main
+        # process and must not rotate the file it is already writing to.
+        if multiprocessing.current_process().name == "MainProcess":
+            _rotate_at_startup(log_dir / "pipeline.log")
         file_handler = logging.FileHandler(log_dir / "pipeline.log", encoding="utf-8")
         file_handler.setFormatter(formatter)
         root.addHandler(file_handler)

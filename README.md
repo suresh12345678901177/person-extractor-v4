@@ -525,6 +525,14 @@ containing an exempted hostname (of 19,089): no ACCEPTED change, no name
 gained or lost in REVIEW; "Edit" (already in REVIEW) +4 mentions in one
 preferences XML.
 
+**2026-09-28 - log rotation.** `logs/pipeline.log` had grown to 1 GB (one
+full real-case scan writes ~59 MB). At startup, once it passes 50 MB, it
+is renamed to `pipeline.log.1` (older backups shift up to `.3`; the oldest
+is dropped). Only the main process rotates, and only at startup: scan
+workers append to the same file, and Windows can't rename a file another
+process has open - if a server or scan is still running, rotation simply
+waits for the next start.
+
 **2026-09-28 - middle-initial names (exp06).** "Craig J. Mundie" and
 "Lisa E. Brummel" were rejected because their first names are on the
 collision list (`common_english_words.txt` contains craig/lisa, so the
@@ -1966,7 +1974,7 @@ PERSON_EXTRACTOR_V4/
                               (one-time backfill for FeedbackRecord.context_text)
   tests/                     97 tests
   output/                    Extraction results land here
-  logs/                      pipeline.log
+  logs/                      pipeline.log (+ .1-.3 backups, rotated at 50 MB)
   models/lightgbm/backups/   Auto-saved model snapshot from before every
                               retrain (see lightgbm_classifier.py's save())
 ```
