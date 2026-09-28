@@ -29,6 +29,10 @@
 # the CUDA 12 runtime libraries it loads - nvidia-cuda-nvrtc-cu12,
 # nvidia-cuda-runtime-cu12, nvidia-cublas-cu12, nvidia-curand-cu12 - on
 # LD_LIBRARY_PATH. Environment size: ~7.5 GB.
+#
+# Both environments (..\gpu-experiment and the WSL Ubuntu distro) and
+# en_core_web_lg in the main .venv were removed 2026-09-28 to free ~15 GB;
+# rebuild them with the steps above before rerunning the probe.
 -r requirements.txt
 torch==2.11.0+cu128
 gliner==0.2.22
