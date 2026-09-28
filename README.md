@@ -546,7 +546,7 @@ so "Farhan Vora" vanished from that spot (recovered only partly, as
 "Farhan", by first-name propagation). SpacyDetector now splits an entity
 at digit-bearing tokens as it already did at line breaks. Benchmark:
 overlap metrics unchanged, exact boundaries 1,154 -> 1,156 of 1,205
-accepted gold hits. Real case: +1 accepted ("Rahul Doe", swallowed the
+accepted gold hits. Real case: +1 accepted (a full name swallowed the
 same way next to an ID number) and +7 REVIEW entries, all noise that a
 digit-bearing spaCy span used to drag into rejection (+2.3% REVIEW) -
 accepted precision unaffected.
@@ -577,8 +577,8 @@ blocked it and the rescan lost a real cited author written "1Berger, A.".
 Benchmark (N=7) vs the exp02 state: accepted-only P 0.9710 -> 0.9781, recall
 and every shape unchanged. Real case: nothing newly accepted; "Handler" 146
 accepted -> 4 standalone mentions in REVIEW; 4 accepted fragments gone
-(`Bijoy_Keyboard`, `..._Max`, `Olaf2Bg`, a `comDana` fragment - "Dana
-Doe" stays accepted); 45 REVIEW entries gone, 43 of which only ever
+(an app filename, a `..._Max` setting, a log tag, and a surname glued to a
+domain while the full name stays accepted); 45 REVIEW entries gone, 43 of which only ever
 occurred glued inside longer tokens. A strict improvement, promoted.
 
 **2026-09-25 - bare common-word surnames held for review (exp02, owner-

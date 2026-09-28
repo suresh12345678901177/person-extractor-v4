@@ -337,5 +337,15 @@
     "median_ms": 31.15,
     "p95_ms": 83.83,
     "max_ms": 125.15
+  },
+  "scan": {
+    "total_files_in_folder": 47353.0,
+    "files_processed_ok": 13307.0,
+    "files_failed": 9.0,
+    "files_excluded": 1.0,
+    "unique_names_accepted": 226.0,
+    "unique_names_review": 306.0,
+    "discovery_seconds": 0.8413,
+    "extraction_seconds": 840.6275
   }
 }

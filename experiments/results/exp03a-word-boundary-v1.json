@@ -1,6 +1,6 @@
 {
   "id": "exp03a-word-boundary-v1",
-  "description": "v1 (commit 18d5690): DictionaryDetector tokens must have no letter/digit/underscore before or after. Benchmark P 0.9710->0.9781, R unchanged. Real-case rescan vs exp02: 'Handler' 146 accepted -> 4 in review, 5 accepted names removed - 4 were fragments (Max from '..._Max', Bijoy_Keyboard app, Olaf2Bg log token, a 'comDana' fragment while 'Dana Doe' stayed accepted) but 1 was a real cited author ('1Berger, A.'), lost because a digit before the name was blocked. Revised to v2.",
+  "description": "v1 (commit 18d5690): DictionaryDetector tokens must have no letter/digit/underscore before or after. Benchmark P 0.9710->0.9781, R unchanged. Real-case rescan vs exp02: 'Handler' 146 accepted -> 4 in review, 5 accepted names removed - 4 were fragments (Max from '..._Max', an app filename, a log tag, a surname glued to a domain while the full name stayed accepted) but 1 was a real cited author ('1Berger, A.'), lost because a digit before the name was blocked. Revised to v2.",
   "verdict": "revised",
   "measured_utc": "2026-09-25T09:37:54Z",
   "provenance": {
