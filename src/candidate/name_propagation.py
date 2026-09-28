@@ -57,7 +57,7 @@ def propagatable_first_names(full_names: Iterable[str], knowledge_base: Knowledg
         if len(first) < 2 or first.endswith(".") or not first[:1].isupper():
             continue
         if (knowledge_base.is_common_word(first) or knowledge_base.is_ambiguous_first_name(first)
-                or knowledge_base.is_calendar_word(first)):
+                or knowledge_base.is_calendar_word(first) or knowledge_base.is_language_or_region_name(first)):
             continue
         names.setdefault(first, " ".join(tokens))
     return names

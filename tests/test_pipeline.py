@@ -216,3 +216,22 @@ def test_pipeline_accepts_middle_initial_names_from_an_officer_table(tmp_path):
     sample.write_text(text, encoding="utf-8")
     accepted = {p.display_text for p in Pipeline(config=_test_config(), base_dir=BASE_DIR).run(sample).persons}
     assert {"Craig J. Mundie", "Lisa E. Brummel", "Kurt D. DelBene"} <= accepted, accepted
+
+
+def test_pipeline_rejects_language_menu_and_news_header_words(tmp_path):
+    # Regression (2026-09-28, exp07): a language/region menu and a "Telugu
+    # News" site header got "Español" and "Telugu" ACCEPTED as people.
+    # (Surrounded by English prose, as on the real pages - a menu alone is
+    # skipped by the non-English language filter.)
+    text = ("Welcome to the help centre. Choose the language you would like to read this page in, "
+            "and the page will reload.\n"
+            "Language: English | Español (Latinoamérica) | Français | Português\n"
+            "You can change the language at any time from the menu at the bottom of every page.\n"
+            "Language: English | Español (Latinoamérica) | Français | Português\n"
+            "Online Telugu News Today - Telugu Breaking News and the latest headlines from the state.\n"
+            "Ramesh Kumar reads Telugu News every morning before he leaves for the office.\n")
+    sample = tmp_path / "menu.txt"
+    sample.write_text(text, encoding="utf-8")
+    accepted = {p.display_text for p in Pipeline(config=_test_config(), base_dir=BASE_DIR).run(sample).persons}
+    assert "Español" not in accepted and "Telugu" not in accepted, accepted
+    assert "Ramesh Kumar" in accepted, accepted

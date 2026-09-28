@@ -150,11 +150,12 @@ def _is_plausible_name_token(token: str, knowledge_base: KnowledgeBase) -> bool:
     """True if a capitalized token beside a one-word dictionary name can
     be the rest of that name: an unambiguous known first/last name, or a
     word no list knows that isn't ordinary English, a stopword, a calendar
-    word, a place or an organization (i.e. an unseen surname/first name)."""
+    word, a language/region name, a place or an organization (i.e. an unseen surname/first name)."""
     word = _strip_possessive(token)[0].rstrip(".,;:")
     if len(word) < 2:
         return False
-    if knowledge_base.is_ambiguous_first_name(word) or knowledge_base.is_calendar_word(word):
+    if (knowledge_base.is_ambiguous_first_name(word) or knowledge_base.is_calendar_word(word)
+            or knowledge_base.is_language_or_region_name(word)):
         return False
     if knowledge_base.is_stopword(word) or knowledge_base.is_location(word) or knowledge_base.is_organization(word):
         return False

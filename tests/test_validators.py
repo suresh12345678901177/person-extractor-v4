@@ -371,3 +371,18 @@ def test_corroboration_trusts_a_middle_initial_name_despite_a_collision_first_na
     # no spaCy/dictionary evidence, are still not trusted.
     assert not _validate(CorroborationValidator(), "Craig", "Craig said", pattern="dictionary_single_token").passed
     assert not _validate(CorroborationValidator(), "Appendix B. Methods", pattern="bare").passed
+
+
+def test_corroboration_rejects_language_and_region_names_even_when_repeated():
+    # Regression (2026-09-28, exp07, real case scan): "Español" (a language/
+    # region menu, 26 mentions) and "Telugu" (a "Telugu News" site header)
+    # were ACCEPTED on a single-token dictionary hit - both are on the
+    # Wikidata-derived name lists, and menus/headers repeat.
+    doc = "Idioma: English | Español (Latinoamérica) | Français\n" * 5
+    result = _validate(CorroborationValidator(), "Español", doc, pattern="dictionary_single_token")
+    assert result.passed is False and "language or region" in result.message
+    assert not _validate(CorroborationValidator(), "Telugu", "Telugu News " * 5, pattern="dictionary_single_token").passed
+    # Controls: words that are also real given names/surnames are kept off the
+    # list, and an ordinary name with the same evidence still passes.
+    assert not any(KB.is_language_or_region_name(w) for w in ("Danish", "English", "Tamil", "Maithili"))
+    assert _validate(CorroborationValidator(), "Suresh", "some text Suresh", pattern="dictionary_single_token").passed

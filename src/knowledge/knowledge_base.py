@@ -56,6 +56,7 @@ class KnowledgeBase:
     ambiguous_first_names: frozenset[str] = field(default_factory=frozenset)
     common_words: frozenset[str] = field(default_factory=frozenset)
     calendar_words: frozenset[str] = field(default_factory=frozenset)
+    language_region_names: frozenset[str] = field(default_factory=frozenset)
     # Accent-folded copies of the name lists ("stefan", "nguyen"), used
     # ONLY as a fallback for tokens containing non-ASCII letters - see
     # is_known_first_name(). Built in load().
@@ -81,6 +82,7 @@ class KnowledgeBase:
             ambiguous_first_names=_load_set(assets_dir / "ambiguous_words" / "ambiguous_first_names.txt"),
             common_words=_load_set(assets_dir / "common_words" / "common_english_words.txt"),
             calendar_words=_load_set(assets_dir / "common_words" / "multilingual_calendar_words.txt"),
+            language_region_names=_load_set(assets_dir / "languages" / "language_and_region_names.txt"),
         )
         kb.first_names_folded = frozenset(fold_accents(n) for n in kb.first_names)
         kb.last_names_folded = frozenset(fold_accents(n) for n in kb.last_names)
@@ -141,3 +143,8 @@ class KnowledgeBase:
 
     def is_calendar_word(self, token: str) -> bool:
         return token.lower() in self.calendar_words
+
+    def is_language_or_region_name(self, token: str) -> bool:
+        """'Español', 'Telugu', 'Schweiz' - see
+        assets/languages/language_and_region_names.txt."""
+        return token.lower() in self.language_region_names

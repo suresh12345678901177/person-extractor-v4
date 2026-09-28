@@ -1,0 +1,185 @@
+# Language names (in English and in their own language) and country names
+# in other languages, as they appear in language/region menus ("Español
+# (Latinoamérica) – México", "Deutsch (Schweiz)") and in site headers
+# ("Telugu News Headlines"). Added 2026-09-28 (exp07): in a real case scan
+# "Español" (26 mentions), "Telugu" (11) and "Schweiz" were ACCEPTED as
+# people - some of these words are on the Wikidata-derived name lists, and
+# a menu repeats them heavily. Handled like multilingual_calendar_words.txt
+# by CorroborationValidator: a bare single token from this list needs a
+# title or a full first+last name match, and repetition doesn't count.
+#
+# Collision audit (2026-09-28): left OFF this list because each is also a
+# real given name or surname, so a bare mention may be a person - english,
+# french, german, deutsch, welsh, danish, malay, maithili, bodo, georgian,
+# magyar, romana/română, nepali, kashmiri, tatar, tamil, zulu. They behave
+# exactly as before.
+#
+# Public-domain factual vocabulary (language and country names).
+
+# Languages, in English
+afrikaans
+albanian
+amharic
+arabic
+armenian
+assamese
+azerbaijani
+basque
+belarusian
+bengali
+bangla
+bosnian
+bulgarian
+burmese
+catalan
+cebuano
+chinese
+croatian
+czech
+dogri
+dutch
+estonian
+farsi
+filipino
+finnish
+galician
+greek
+gujarati
+haitian
+hausa
+hebrew
+hindi
+hmong
+hungarian
+icelandic
+igbo
+indonesian
+irish
+italian
+japanese
+javanese
+kannada
+kazakh
+khmer
+konkani
+korean
+kurdish
+kyrgyz
+lao
+latin
+latvian
+lithuanian
+luxembourgish
+macedonian
+malagasy
+malayalam
+maltese
+manipuri
+maori
+marathi
+mongolian
+norwegian
+odia
+oriya
+pashto
+persian
+polish
+portuguese
+punjabi
+romanian
+russian
+samoan
+santali
+serbian
+sindhi
+sinhala
+slovak
+slovenian
+somali
+spanish
+sundanese
+swahili
+swedish
+tagalog
+tajik
+telugu
+thai
+tulu
+turkish
+turkmen
+ukrainian
+urdu
+uyghur
+uzbek
+vietnamese
+xhosa
+yiddish
+yoruba
+
+# Languages, in their own language
+español
+français
+francais
+italiano
+português
+portugues
+nederlands
+svenska
+norsk
+dansk
+suomi
+polski
+čeština
+cestina
+slovenčina
+hrvatski
+srpski
+slovenščina
+türkçe
+turkce
+bahasa
+melayu
+kiswahili
+català
+galego
+euskara
+eesti
+latviešu
+lietuvių
+íslenska
+gaeilge
+cymraeg
+shqip
+bosanski
+isizulu
+
+# Countries and regions, in their own language
+schweiz
+suisse
+svizzera
+deutschland
+österreich
+osterreich
+españa
+espana
+italia
+nederland
+belgië
+belgique
+sverige
+norge
+danmark
+polska
+česko
+magyarország
+românia
+türkiye
+turkiye
+brasil
+méxico
+perú
+latinoamérica
+éire
+hrvatska
+srbija
+slovensko

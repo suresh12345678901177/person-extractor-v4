@@ -146,6 +146,15 @@ name (a real "LAW" used as someone's surname, standing alone) is still
 reachable via a title ("Mr. LAW") - this only removes the repetition/
 weak-single-token-dictionary shortcut for this specific, narrow,
 structurally-risky class.
+
+A seventh refinement, added 2026-09-28 (exp07): language names and
+country names in other languages (assets/languages/
+language_and_region_names.txt) get the calendar-word treatment. In a real
+case scan "Español" (a language/region menu, 26 mentions), "Telugu" (a
+news site's "Telugu News" header) and "Schweiz" were ACCEPTED - on the
+Wikidata name lists or tagged by spaCy, and repeated because menus and
+headers repeat. Words that are also real given names or surnames
+("English", "Danish", "Tamil") are kept off that list.
 """
 
 from __future__ import annotations
@@ -239,10 +248,11 @@ class CorroborationValidator(BaseValidator):
         # and both fall through to the same repetition-or-reject path.
         is_ambiguous_collision = self._starts_with_ambiguous_word(text, knowledge_base)
         is_calendar_word = len(text.split()) == 1 and knowledge_base.is_calendar_word(text)
+        is_language_or_region = len(text.split()) == 1 and knowledge_base.is_language_or_region_name(text)
         is_allcaps_last_name_collision = self._is_allcaps_last_name_collision(text, knowledge_base)
         has_non_ambiguous_corroboration = (
             has_single_token_dictionary_evidence or has_spacy_evidence
-        ) and not is_ambiguous_collision and not is_calendar_word and not is_allcaps_last_name_collision
+        ) and not is_ambiguous_collision and not is_calendar_word and not is_language_or_region             and not is_allcaps_last_name_collision
         if has_non_ambiguous_corroboration:
             return ValidationResult(
                 self.name, passed=True, score=0.0, message="Has corroborating evidence beyond bare shape-match",
@@ -262,6 +272,18 @@ class CorroborationValidator(BaseValidator):
                         f"count as corroboration for this word class (a locale resource file's fixed "
                         f"vocabulary is expected to repeat regardless of personhood); needs a title or "
                         f"full first+last dictionary window match instead",
+            )
+
+        # Language and region names - same reasoning as calendar words: a
+        # language/region menu or a "<Language> News" header repeats them
+        # regardless of personhood (seventh refinement, module docstring).
+        if is_language_or_region:
+            return ValidationResult(
+                self.name, passed=False, severity="hard",
+                message=f"'{text}' is a language or region name (as in a language/region menu) with "
+                        f"only a single-token dictionary hit or spaCy tag as evidence - repetition does "
+                        f"not count as corroboration for this word class; needs a title or full "
+                        f"first+last dictionary window match instead",
             )
 
         # ALL-CAPS acronym-shaped single tokens that only passed
