@@ -51,6 +51,19 @@ MIN_WORDS_FOR_LANGUAGE_CHECK = 30
 ENGLISH_WORD_RATIO_THRESHOLD = 0.15
 
 
+def is_short_non_prose(text: str, knowledge_base: KnowledgeBase) -> bool:
+    """True for a document under MIN_WORDS_FOR_LANGUAGE_CHECK Latin-letter
+    words whose stopword share is also below ENGLISH_WORD_RATIO_THRESHOLD:
+    too short for check_english() to skip, and not reading as an English
+    sentence either - an OCR scrap of an image, a lone word, a terse data
+    record. A short genuine note ("Call Rajesh tomorrow about the payment",
+    ratio 0.67) is not. See person_extractor._cap_lone_single_tokens."""
+    words = _WORD_RE.findall(text)
+    if len(words) >= MIN_WORDS_FOR_LANGUAGE_CHECK:
+        return False
+    return not words or sum(1 for w in words if knowledge_base.is_stopword(w)) / len(words) < ENGLISH_WORD_RATIO_THRESHOLD
+
+
 @dataclass(frozen=True, slots=True)
 class LanguageCheck:
     is_english: bool

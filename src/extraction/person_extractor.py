@@ -51,7 +51,7 @@ from src.extraction.base_extractor import Extractor
 from src.features.feature_extractor import extract_features
 from src.feedback.feedback_store import FeedbackStore
 from src.knowledge.knowledge_base import KnowledgeBase
-from src.preprocessing.language_filter import check_english
+from src.preprocessing.language_filter import check_english, is_short_non_prose
 from src.preprocessing.line_indexer import LineIndex
 from src.utils.logger import get_logger
 from src.utils.provenance import build_run_provenance
@@ -214,6 +214,8 @@ class PersonExtractor(Extractor):
         _cap_bare_common_surnames(all_candidates, self.knowledge_base, known_person_names)
         if source_format in STRUCTURED_FORMATS:
             _cap_lone_single_tokens(all_candidates)
+        elif is_short_non_prose(cleaned_text, self.knowledge_base):
+            _cap_lone_single_tokens(all_candidates, short_document=True)
 
         with timed_stage("aggregation", stats.stage_timings):
             accepted_candidates = [c for c in all_candidates if c.state.decision == Decision.ACCEPTED]
@@ -378,7 +380,7 @@ def _cap_bare_common_surnames(
         c.state.add_evidence("person_extractor", "Capped at review: bare common-word surname", 0.0)
 
 
-def _cap_lone_single_tokens(candidates: list[CandidateResult]) -> None:
+def _cap_lone_single_tokens(candidates: list[CandidateResult], short_document: bool = False) -> None:
     """In structured data (CSV/JSON/XML - see STRUCTURED_FORMATS), a
     single-token candidate is moved from ACCEPTED to REVIEW unless a title
     or document-name propagation vouches for it. A lone value in a data
@@ -388,7 +390,15 @@ def _cap_lone_single_tokens(candidates: list[CandidateResult]) -> None:
     "Block", "Handler", "English", "List" were ACCEPTED across dozens of
     preference XML files; 223 of the 263 names only the new formats
     produced were single tokens. Multi-token names are unaffected, and
-    REVIEW keeps these visible to a human."""
+    REVIEW keeps these visible to a human.
+
+    short_document (2026-09-28, exp08): the same for a very short document
+    that doesn't read as English prose (language_filter.is_short_non_prose) -
+    it has no sentence context either. On a real case scan, every one-word
+    name found only in documents under 30 words was noise: words picked out
+    of garbled OCR scraps of images, a lone word in a 4-byte file, and the
+    first word of a locality name in a terse record. The prose check keeps
+    a short genuine note's names ACCEPTED as before."""
     for c in candidates:
         if c.state.decision != Decision.ACCEPTED or len(c.candidate.normalized_text.split()) != 1:
             continue
@@ -396,6 +406,13 @@ def _cap_lone_single_tokens(candidates: list[CandidateResult]) -> None:
         if patterns & {"titled", DOCUMENT_NAME_PATTERN}:
             continue
         c.state.decision = Decision.REVIEW
+        if short_document:
+            c.state.rejection_reason = (
+                "Single word in a very short document (under 30 words) that doesn't read as English "
+                "prose, with no title or full-name support - no sentence context; held for review"
+            )
+            c.state.add_evidence("person_extractor", "Capped at review: single word, very short document", 0.0)
+            continue
         c.state.rejection_reason = (
             "Single word in structured data (CSV/JSON/XML) with no title or full-name support - "
             "a lone field value has no sentence context; held for review"

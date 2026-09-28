@@ -235,3 +235,18 @@ def test_pipeline_rejects_language_menu_and_news_header_words(tmp_path):
     accepted = {p.display_text for p in Pipeline(config=_test_config(), base_dir=BASE_DIR).run(sample).persons}
     assert "Español" not in accepted and "Telugu" not in accepted, accepted
     assert "Ramesh Kumar" in accepted, accepted
+
+
+def test_pipeline_holds_a_lone_word_from_a_tiny_ocr_scrap_for_review(tmp_path):
+    # Regression (2026-09-28, exp08): tiny garbled OCR scraps of images got
+    # single dictionary words ACCEPTED as people - no sentence context to
+    # tell a name from noise. (Made-up scrap with the same shape.)
+    scrap = tmp_path / "scrap.txt"
+    scrap.write_text("0g ~~ | Suresh 8 ~ ఇ అ ## 4)\n", encoding="utf-8")
+    result = Pipeline(config=_test_config(), base_dir=BASE_DIR).run(scrap)
+    assert "Suresh" not in {p.display_text for p in result.persons}
+    assert "Suresh" in {p.display_text for p in result.review_persons}
+    # Control: the same name in a short genuine note is still ACCEPTED.
+    note = tmp_path / "note.txt"
+    note.write_text("Call Suresh tomorrow about the payment.\n", encoding="utf-8")
+    assert "Suresh" in {p.display_text for p in Pipeline(config=_test_config(), base_dir=BASE_DIR).run(note).persons}
