@@ -525,6 +525,22 @@ containing an exempted hostname (of 19,089): no ACCEPTED change, no name
 gained or lost in REVIEW; "Edit" (already in REVIEW) +4 mentions in one
 preferences XML.
 
+**2026-09-28 - short day/month names and ordinary-word first names
+(exp04).** Two asset gaps behind the last ordinary-word names still ACCEPTED
+in the real case scan: `multilingual_calendar_words.txt` had full day/month
+names but not the short forms web date pickers ship ("Dom", "Ott" from
+jQuery UI locale arrays), and `ambiguous_first_names.txt` lacked first names
+that are ordinary words first ("Night"). Added the es/pt/it/sv short forms
+(only dom, mie, mån, ott, tor are also dictionary names, so only they change
+behavior) and 10 collision words (night, baby, beauty, fish, dip, era,
+mini, pan, karma, asin - real given names and common Indian names/nicknames
+from the same audit report were deliberately left off). Benchmark
+unchanged. Real case: exactly 5 accepted names removed, all noise - Dom and
+Ott (date pickers), Tor (the anonymity network in a VPN menu), Night and
+Mie (3-to-42-character OCR fragments); nothing else changed. Open gap this
+exposed: tiny OCR outputs (a handful of characters) still reach the
+detectors and can produce single-word accepts.
+
 **2026-09-25 - dictionary names matched as whole words only (exp03).**
 `DictionaryDetector` had no word-boundary check, so it matched listed names
 INSIDE code identifiers: "Handler" out of `clickHandler`/`errorHandler` was
