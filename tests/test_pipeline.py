@@ -202,3 +202,17 @@ def test_pipeline_output_is_exportable(tmp_path):
     assert "TIME TAKEN" in report_text
     assert "OCCURRENCES" in report_text
     assert "LOCATIONS" in report_text
+
+
+def test_pipeline_accepts_middle_initial_names_from_an_officer_table(tmp_path):
+    # Regression (2026-09-28, a real SEC 10-K officer table): "Craig J.
+    # Mundie" and "Lisa E. Brummel" were rejected (collision first names)
+    # and "Kurt D. DelBene" was cut to a rejected "Kurt".
+    text = ("Name Age Position\n"
+            "Craig J. Mundie 62 Chief Research and Strategy Officer\n"
+            "Lisa E. Brummel 52 Senior Vice President, Human Resources\n"
+            "Kurt D. DelBene 51 President, Office Division\n")
+    sample = tmp_path / "officers.txt"
+    sample.write_text(text, encoding="utf-8")
+    accepted = {p.display_text for p in Pipeline(config=_test_config(), base_dir=BASE_DIR).run(sample).persons}
+    assert {"Craig J. Mundie", "Lisa E. Brummel", "Kurt D. DelBene"} <= accepted, accepted

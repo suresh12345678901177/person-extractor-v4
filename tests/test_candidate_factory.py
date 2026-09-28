@@ -37,3 +37,19 @@ def test_no_widening_onto_ordinary_words():
 
 def test_without_a_knowledge_base_previous_behavior_is_kept():
     assert _select_canonical_span(_group("Nadia Kovalenko", "Nadia")).text == "Nadia"
+
+
+def test_one_word_dictionary_name_widens_to_a_middle_initial_name():
+    """Regression (2026-09-28): 'Kurt' won over 'Kurt D. DelBene' because the
+    widening only ever considered two-token spans - the surname was lost."""
+    assert _select_canonical_span(_group("Kurt D. DelBene", "Kurt"), KB).text == "Kurt D. DelBene"
+    # Control: the token after the initial must itself read as a name.
+    assert _select_canonical_span(_group("Kurt D. Report", "Kurt"), KB).text == "Kurt"
+
+
+def test_middle_initial_shape():
+    from src.candidate.candidate_factory import is_middle_initial_name
+    assert is_middle_initial_name("Craig J. Mundie") and is_middle_initial_name("Mary A. B. Jones")
+    assert not is_middle_initial_name("Craig Mundie")      # no initial
+    assert not is_middle_initial_name("J. R. Smith")        # starts with an initial
+    assert not is_middle_initial_name("Craig J Mundie")     # initial without its period

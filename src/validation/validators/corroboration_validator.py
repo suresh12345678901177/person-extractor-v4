@@ -152,6 +152,7 @@ from __future__ import annotations
 
 import re
 
+from src.candidate.candidate_factory import is_middle_initial_name
 from src.candidate.name_propagation import DOCUMENT_NAME_PATTERN
 from src.core.models import CandidateResult, DetectorName, ValidationResult
 from src.knowledge.knowledge_base import KnowledgeBase
@@ -216,6 +217,18 @@ class CorroborationValidator(BaseValidator):
         if has_window_dictionary_evidence or has_title_evidence or has_document_name_evidence:
             return ValidationResult(
                 self.name, passed=True, score=0.0, message="Has corroborating evidence beyond bare shape-match",
+            )
+
+        # A middle-initial name ("Craig J. Mundie") backed by spaCy or a
+        # dictionary hit (2026-09-28): the initial is a person-name convention,
+        # so the ambiguous-first-word rule below doesn't apply - a real case
+        # (an SEC 10-K officer table) had "Craig J. Mundie" and "Lisa E.
+        # Brummel" rejected only because common_english_words.txt contains
+        # "craig"/"lisa", which put them on the collision list.
+        if (has_single_token_dictionary_evidence or has_spacy_evidence) and is_middle_initial_name(text):
+            return ValidationResult(
+                self.name, passed=True, score=0.0,
+                message="Name with a middle initial, backed by spaCy or a dictionary hit",
             )
 
         # A single-token dictionary hit or spaCy tag is normally enough on

@@ -358,3 +358,16 @@ def test_corroboration_needs_more_than_a_lone_dictionary_hit_for_ordinary_word_f
     assert result.passed is False
     # Control: an unambiguous first name is still corroborated by the same evidence.
     assert _validate(CorroborationValidator(), "Suresh", "some text Suresh", pattern="dictionary_single_token").passed
+
+
+def test_corroboration_trusts_a_middle_initial_name_despite_a_collision_first_name():
+    # Regression (2026-09-28): "Craig J. Mundie" was rejected because "craig"
+    # is on the collision list (common_english_words.txt contains it).
+    assert KB.is_ambiguous_first_name("Craig")
+    # (_validate builds REGEX detections, so the evidence here is the
+    # pattern-checked single-token dictionary hit on "Craig".)
+    assert _validate(CorroborationValidator(), "Craig J. Mundie", pattern="dictionary_single_token").passed
+    # Controls: the bare collision word alone, and a middle-initial SHAPE with
+    # no spaCy/dictionary evidence, are still not trusted.
+    assert not _validate(CorroborationValidator(), "Craig", "Craig said", pattern="dictionary_single_token").passed
+    assert not _validate(CorroborationValidator(), "Appendix B. Methods", pattern="bare").passed

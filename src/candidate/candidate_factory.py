@@ -19,6 +19,7 @@ import re
 from src.core.models import Candidate, CandidateResult, CandidateState, Detection, DetectorName
 from src.detection.dictionary_detector import _strip_possessive
 from src.knowledge.knowledge_base import KnowledgeBase
+from src.preprocessing.latin import LATIN_LETTERS, LATIN_UPPER
 from src.preprocessing.line_indexer import LineIndex
 
 _WHITESPACE_RE = re.compile(r"\s+")
@@ -102,7 +103,11 @@ def _select_canonical_span(group: list[Detection], knowledge_base: KnowledgeBase
         for d in group:
             if d.metadata.get("pattern") != "bare":
                 continue
-            if not (d.start <= best.start and d.end >= best.end and len(d.text.split()) == 2):
+            # Two tokens, or a middle-initial name ("Kurt D. DelBene",
+            # 2026-09-28): the 3-token shape was never widened, so the lone
+            # dictionary hit "Kurt" won and the surname was lost.
+            if not (d.start <= best.start and d.end >= best.end
+                    and (len(d.text.split()) == 2 or is_middle_initial_name(d.text))):
                 continue
             if best_pattern == "spacy_ner":
                 return d
@@ -121,10 +126,24 @@ def _select_canonical_span(group: list[Detection], knowledge_base: KnowledgeBase
             # Gateway" (a "Ref:" ledger label) lets the validators reject
             # the whole phrase, where "Wild" alone was accepted (+10 false
             # positives with the guard, vs 2 "Marcus Nadka" mentions saved).
-            other = d.text.split()[1] if d.start == best.start else d.text.split()[0]
+            other = d.text.split()[-1] if d.start == best.start else d.text.split()[0]
             if knowledge_base is not None and _is_plausible_name_token(other, knowledge_base):
                 return d
     return best
+
+
+_NAME_WORD_RE = re.compile(rf"^[{LATIN_UPPER}][{LATIN_LETTERS}'\-]+$")
+_INITIAL_RE = re.compile(rf"^[{LATIN_UPPER}]\.$")
+
+
+def is_middle_initial_name(text: str) -> bool:
+    """True for 'Craig J. Mundie' / 'Mary A. B. Jones': a capitalized word,
+    one or more single-letter initials each with a period, and a capitalized
+    word of 2+ letters. A naming convention used for people, which is why
+    CorroborationValidator trusts it and _select_canonical_span widens to it."""
+    tokens = text.split()
+    return (len(tokens) >= 3 and bool(_NAME_WORD_RE.match(tokens[0])) and bool(_NAME_WORD_RE.match(tokens[-1]))
+            and all(_INITIAL_RE.match(t) for t in tokens[1:-1]))
 
 
 def _is_plausible_name_token(token: str, knowledge_base: KnowledgeBase) -> bool:
