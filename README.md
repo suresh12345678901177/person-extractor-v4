@@ -525,6 +525,21 @@ containing an exempted hostname (of 19,089): no ACCEPTED change, no name
 gained or lost in REVIEW; "Edit" (already in REVIEW) +4 mentions in one
 preferences XML.
 
+**2026-09-28 - language and region names (exp07).** Language menus
+("Español (Latinoamérica) – México", "Deutsch – Schweiz") and a "Telugu
+News" site header got "Español" (26 mentions), "Telugu" (11) and "Schweiz"
+ACCEPTED as people: some are on the Wikidata-derived name lists, others
+were tagged by spaCy, and menus repeat. `assets/languages/language_and_region_names.txt`
+(language names in English and in their own language, and country names
+in other languages) now gets the calendar-word rule: a bare single token
+needs a title or a full first+last name, and repetition doesn't count.
+Words that are also real given names or surnames - English, French,
+German, Deutsch, Danish, Tamil, Maithili and others (listed in the file) -
+stay off it. Benchmark: one false positive fewer (27 -> 26), recall and
+every shape unchanged. Real case: exactly those 3 accepted names and 2
+REVIEW entries ("España", "Gujarati") gone; nothing newly accepted, nothing
+real lost. A strict improvement, promoted.
+
 **2026-09-28 - case content kept out of git.** Before the first push since
 2026-09-01, every committed file was checked against the case's identifiers
 and the names the tool found in it. Case file IDs, the case name, and the
@@ -555,9 +570,12 @@ A "First I. Last" candidate backed by spaCy or a dictionary hit now passes
 CorroborationValidator regardless of the first name, and the widening also
 covers the middle-initial shape. Benchmark unchanged (no such names in
 it). Real case: 7 names newly ACCEPTED, all real people named in a public
-SEC 10-K officer table and director signature block; nothing lost. Open:
-"A. Road"-style spans (an initial plus a surname-list word) can still be
-accepted - pre-existing, not caused by this change.
+SEC 10-K officer table and director signature block; nothing lost. (Noted
+here at first as open: "initial + surname-list word" spans such as a
+locality "S. R. Nagar" can be accepted. Measured later the same day: no
+such accept in the real case or the benchmark - the benchmark's "P. Rao"/
+"L. Devi" are deliberately unlabeled ambiguous initials, not places - so
+it was not pursued; Nagar is also a real surname.)
 
 **2026-09-28 - spaCy spans split at phone numbers (exp05, owner-approved
 trade).** On one-line call-log/chat dumps spaCy tagged "Farhan Vora
