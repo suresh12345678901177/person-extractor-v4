@@ -15,6 +15,13 @@ from pathlib import Path
 
 _CONFIGURED = False
 
+# The project's logs/ folder, whatever the working directory. The default
+# used to be the relative "logs": modules call get_logger() at import time,
+# which configures logging before cli.py/scan_directory.py/server.py reach
+# their own configure_logging(BASE_DIR / "logs") - a no-op by then - so a
+# run started from another folder logged into a logs/ folder there.
+PROJECT_LOG_DIR = Path(__file__).resolve().parents[2] / "logs"
+
 # pipeline.log is rotated at startup once it passes MAX_LOG_BYTES, keeping
 # LOG_BACKUPS older files (pipeline.log.1 newest). Added 2026-09-28: it had
 # grown to 1 GB unbounded - one full real-case scan writes ~59 MB.
@@ -45,7 +52,7 @@ def _rotate_at_startup(path: Path, max_bytes: int = MAX_LOG_BYTES, backups: int 
         pass
 
 
-def configure_logging(log_dir: str | Path = "logs", level: int = logging.INFO) -> None:
+def configure_logging(log_dir: str | Path = PROJECT_LOG_DIR, level: int = logging.INFO) -> None:
     """Configure root logging once. Safe to call multiple times."""
     global _CONFIGURED
     if _CONFIGURED:

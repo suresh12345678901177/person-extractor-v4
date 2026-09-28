@@ -531,7 +531,9 @@ is renamed to `pipeline.log.1` (older backups shift up to `.3`; the oldest
 is dropped). Only the main process rotates, and only at startup: scan
 workers append to the same file, and Windows can't rename a file another
 process has open - if a server or scan is still running, rotation simply
-waits for the next start.
+waits for the next start. The log also always goes to the project's
+`logs/` now: the default was the relative `"logs"`, and since modules set
+up logging at import time, a run started from another folder logged there.
 
 **2026-09-28 - middle-initial names (exp06).** "Craig J. Mundie" and
 "Lisa E. Brummel" were rejected because their first names are on the

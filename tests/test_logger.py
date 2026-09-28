@@ -55,3 +55,12 @@ def test_log_held_open_elsewhere_is_left_for_the_next_start(tmp_path, monkeypatc
     monkeypatch.setattr(logger_module.os, "replace", locked)
     _rotate_at_startup(log, max_bytes=10, backups=3)
     assert log.read_text(encoding="utf-8") == "x" * 20
+
+
+def test_default_log_dir_is_the_projects_whatever_the_working_directory(tmp_path, monkeypatch):
+    # Regression (2026-09-28): the default was the relative "logs", so a run
+    # started from another folder wrote its log there.
+    from config import BASE_DIR
+    monkeypatch.chdir(tmp_path)
+    assert logger_module.PROJECT_LOG_DIR == BASE_DIR / "logs"
+    assert logger_module.configure_logging.__defaults__[0] == BASE_DIR / "logs"
