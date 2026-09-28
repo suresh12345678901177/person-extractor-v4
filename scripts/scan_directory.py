@@ -61,6 +61,7 @@ from src.io.pdf_reader import PdfReader
 from src.pipeline.orchestrator import Pipeline
 from src.utils.logger import configure_logging, get_logger
 from src.utils.provenance import build_run_provenance, provenance_summary_line
+from src.review.llm_reviewer import resolve_status
 
 logger = get_logger("scripts.scan_directory")
 
@@ -187,7 +188,17 @@ def run_scan(input_dir: Path, output_dir: Path, args: argparse.Namespace) -> int
         )
     provenance = build_run_provenance(BASE_DIR, model_path)
     provenance["spacy_model"] = config["detection"].get("spacy_model") if config["detection"].get("use_spacy", True) else None
+    # The optional LLM reviewer (src/review/llm_reviewer.py) is resolved once
+    # here, not by every worker (each would load and check the model), and
+    # the verdict is passed to them in the config.
+    llm_settings = config.get("llm_reviewer", {})
+    if llm_settings:
+        status = resolve_status(llm_settings)
+        llm_settings["resolved"] = {"active": status.active, "reason": status.reason}
+        provenance["llm_reviewer"] = status.reason
     print(f"  Provenance: {provenance_summary_line(provenance)}")
+    if llm_settings:
+        print(f"  LLM reviewer: {provenance['llm_reviewer']}")
 
     print(f"Scanning '{input_dir}' recursively for supported files ({', '.join(SUPPORTED_EXTENSIONS)}) ...")
     discover_start = time.perf_counter()

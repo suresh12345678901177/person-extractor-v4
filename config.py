@@ -49,6 +49,18 @@ DEFAULT_CONFIG = {
     "decision": {
         "strict_corroboration": True,  # False = comparison mode, see cli.py --loose-gate
     },
+    "llm_reviewer": {
+        # Optional final check of each file's names by a local LLM (Ollama) -
+        # see src/review/llm_reviewer.py. "auto": used when Ollama runs the
+        # pinned model on a GPU, skipped otherwise (recorded in provenance).
+        # One-time setup on a GPU machine: scripts/setup_llm_reviewer.ps1.
+        "enabled": "auto",
+        "url": "http://127.0.0.1:11434",
+        "model": "llama3.1:latest",
+        "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+        "demote_below": 0.3,          # ACCEPTED -> REVIEW below this P(person)
+        "promote_at_or_above": None,  # REVIEW -> ACCEPTED at/above this; None = off (owner decision)
+    },
     "language_filter": {
         # Skips detection entirely on documents that aren't natural-
         # language English prose (non-English text, legal/EULA

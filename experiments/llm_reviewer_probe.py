@@ -41,26 +41,10 @@ from config import BASE_DIR, DEFAULT_CONFIG  # noqa: E402
 from src.evaluation.evaluator import _FILE_SPAN_STRIDE, _find_benchmark_pairs  # noqa: E402
 from src.evaluation.metrics import compute_span_metrics  # noqa: E402
 from src.pipeline.orchestrator import Pipeline  # noqa: E402
+from src.review.llm_reviewer import PROMPT_VERSION, SYSTEM_PROMPT, excerpt as _excerpt  # noqa: E402
 
-PROMPT_VERSION = "v1"
-SYSTEM_PROMPT = (
-    "You check the output of a person-name extractor that runs on forensic evidence: chats, emails, "
-    "documents, web pages, app data and OCR text. For the candidate, decide whether the excerpts use it "
-    "as the name of a specific human being - a first name, a surname, a full name, or a name with a "
-    "title or initials. Answer only 'yes' or 'no'. Answer 'no' for organizations, companies, brands, "
-    "products, apps, software and code identifiers; places, streets, localities, countries, languages "
-    "and nationalities; job titles; days and months; journal and publication titles; ordinary words; "
-    "interface labels; and garbled text."
-)
+# The prompt and excerpt format are the pipeline's own (src/review/llm_reviewer.py).
 THRESHOLDS = (0.5, 0.7, 0.9)
-
-
-def _excerpt(text: str, start: int, end: int, width: int = 120) -> str:
-    line_start = text.rfind("\n", 0, start) + 1
-    line_end = text.find("\n", end)
-    line_end = len(text) if line_end == -1 else line_end
-    a, b = max(line_start, start - width), min(line_end, end + width)
-    return f"{text[a:start]}[[{text[start:end]}]]{text[end:b]}".strip()
 
 
 def _p_yes(model: str, name: str, excerpts: list[str], url: str) -> float:

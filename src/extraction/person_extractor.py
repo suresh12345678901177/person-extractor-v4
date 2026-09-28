@@ -53,6 +53,7 @@ from src.feedback.feedback_store import FeedbackStore
 from src.knowledge.knowledge_base import KnowledgeBase
 from src.preprocessing.language_filter import check_english, is_short_non_prose
 from src.preprocessing.line_indexer import LineIndex
+from src.review.llm_reviewer import LlmReviewer, ReviewerStatus, resolve_status
 from src.utils.logger import get_logger
 from src.utils.provenance import build_run_provenance
 from src.utils.timing import timed_stage
@@ -102,6 +103,27 @@ class PersonExtractor(Extractor):
         self.feedback_store = FeedbackStore(self.base_dir / "datasets" / "feedback")
 
         self.language_filter_enabled = config.get("language_filter", {}).get("enabled", True)
+
+        # Optional local-LLM reviewer (src/review/llm_reviewer.py). Resolved
+        # on the first FILE, so live text (server.py) never loads a model; a
+        # parallel scan resolves it once and passes the result in "resolved".
+        self._llm_settings = config.get("llm_reviewer", {})
+        self._llm_status: ReviewerStatus | None = None
+        self._llm_reviewer: LlmReviewer | None = None
+
+    def _get_llm_reviewer(self) -> LlmReviewer | None:
+        if self._llm_status is None:
+            settings = self._llm_settings
+            if "resolved" in settings:
+                self._llm_status = ReviewerStatus(**settings["resolved"])
+            elif settings:
+                self._llm_status = resolve_status(settings)
+            else:
+                self._llm_status = ReviewerStatus(False, "off (not configured)")
+            self.provenance["llm_reviewer"] = self._llm_status.reason
+            if self._llm_status.active:
+                self._llm_reviewer = LlmReviewer(settings, self.base_dir / "assets")
+        return self._llm_reviewer
 
     def extract(
         self,
@@ -220,6 +242,12 @@ class PersonExtractor(Extractor):
             # benchmark chat fed line by line, this cap removed no false
             # positive there and moved one real name to REVIEW.
             _cap_lone_single_tokens(all_candidates, short_document=True)
+
+        # Files only, like the cap above: live text is never reviewed.
+        reviewer = self._get_llm_reviewer() if source_format is not None else None
+        if reviewer is not None:
+            with timed_stage("llm_review", stats.stage_timings):
+                reviewer.review(all_candidates, cleaned_text)
 
         with timed_stage("aggregation", stats.stage_timings):
             accepted_candidates = [c for c in all_candidates if c.state.decision == Decision.ACCEPTED]

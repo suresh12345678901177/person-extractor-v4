@@ -1,0 +1,9 @@
+# Names the owner has confirmed are to be reported as names. The optional
+# LLM reviewer (src/review/llm_reviewer.py) never moves these out of
+# ACCEPTED, and they must not be added to the collision list, the
+# blacklist or organizations (tests/test_validators.py guards Alexa/Siri).
+#
+# 2026-09-28: Alexa and Siri are real first names as well as voice
+# assistants - reported as names.
+alexa
+siri
