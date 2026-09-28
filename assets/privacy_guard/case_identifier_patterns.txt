@@ -13,8 +13,8 @@
 # snippet. This file is deliberately NOT a hardcoded list in
 # check_feedback_privacy.py - same "plain-text asset, no list in code"
 # principle as every other assets/*.txt file - so starting a NEW case
-# later just means adding that case's own export-naming fingerprint here,
-# not editing Python.
+# later just means adding that case's own export-naming fingerprint to
+# case_identifier_patterns.local.txt (see below), not editing Python.
 #
 # Deliberately specific, not generic: a generic pattern (e.g. "Bank:",
 # "Card:") would false-positive on this project's own legitimate
@@ -23,23 +23,13 @@
 # unseen-name stress tests) - see the "false_positive_regression" note
 # below for the fixture this is regression-tested against.
 
-# "real case" (2026-09 casework) - ProDiscover's export tool
-# stamps this near-constant substring into essentially every real
-# artifact filename from this case (verified: 91.3% of the 7,246
-# real .txt/.pdf files in this case folder contain it).
-CASEFILE
+# Case-specific patterns - a case's export-filename fingerprint, batch ID
+# or folder name - go in case_identifier_patterns.local.txt beside this
+# file, which is gitignored (moved there 2026-09-28): listing them here
+# would put the case's identifiers into git themselves. Start a new case
+# by adding its lines there.
 
-# "real case" - the case's own numeric export-batch ID prefix,
-# seen in filenames like "CASEID_chat.txt", "CASEID_email.txt".
-# Deliberately NOT \bCASEID\b - a trailing underscore (as in every
-# real filename this is meant to catch) is a WORD character in regex,
-# so a right-side \b never matches there; found via this pattern's own
-# test suite (tests/test_check_feedback_privacy.py) failing on exactly
-# this shape before this fix.
-(?<!\d)CASEID
-
-# The forensic tool name and case folder name itself - would only appear
-# in real context_text pulled from this case's own files/paths, never in
-# public-book or synthetic benchmark text.
+# A forensic export tool's name - only appears in context_text pulled
+# from real case files/paths, never in public-book or synthetic
+# benchmark text.
 ProDiscover
-real case

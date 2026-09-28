@@ -28,7 +28,7 @@ ORG_KEYWORDS = frozenset({
     # exactly the same class of generic institutional word already
     # covered here (society/union/association/foundation/trust).
     "division",  # found via real casework (2026-09-16, real case
-    # case scan): "Windows Division" cleared into REVIEW with no keyword
+    # scan): "Windows Division" cleared into REVIEW with no keyword
     # here to catch it (only the decision engine's separate common-word-
     # phrase guard stopped it from reaching ACCEPTED) - "division" is the
     # same class of generic business-unit word as "department"/"board"

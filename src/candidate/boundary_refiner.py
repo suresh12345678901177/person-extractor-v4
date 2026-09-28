@@ -6,16 +6,16 @@ token is boundary noise rather than part of the name - detected purely
 from within-document repetition, not any word list.
 
 Why this exists: on chat/email exports that concatenate a sender label
-directly against message text with no delimiter ("Testing Severus
-Morris", "Kk Severus Morris", "Severus Morris Kakao"), the same real
+directly against message text with no delimiter ("Testing Corvin
+Hale", "Kk Corvin Hale", "Corvin Hale Kakao"), the same real
 name recurs dozens of times cleanly, but occasionally picks up one
 extra glued-on word. Enumerating every possible glue-word in
 stopwords.txt is a losing, data-specific game - it only ever covers
 words already seen. This instead asks a document-relative question that
 works on ANY real-world text, known vocabulary or not: does trimming
 one edge token reveal a form that is overwhelmingly more common
-elsewhere in this same document? If "Severus Morris" independently
-recurs 80+ times and "Testing Severus Morris" appears once, the
+elsewhere in this same document? If "Corvin Hale" independently
+recurs 80+ times and "Testing Corvin Hale" appears once, the
 extra word is almost certainly noise, regardless of whether "Testing"
 is a word this tool has ever heard of.
 
@@ -168,7 +168,7 @@ def _pick_dominant_core(key: str, own_count: int, counts: dict[str, int]) -> str
     by their full name is a completely normal, common chat-log pattern -
     the high standalone frequency of the bare first name is NOT evidence
     that the surname in the full-name mentions is glued-on noise, unlike
-    "Testing Severus Morris" -> "Severus Morris" (still 2 tokens after
+    "Testing Corvin Hale" -> "Corvin Hale" (still 2 tokens after
     trimming - a fully plausible name on its own), which this heuristic
     was actually built for.
     """

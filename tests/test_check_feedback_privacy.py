@@ -8,6 +8,7 @@ matched the "ProDiscover" pattern - genuine casework content (a real
 WhatsApp export with real phone numbers and a real name) that had not yet
 reached git history. These tests use only synthetic content."""
 import importlib.util
+import re
 import sys
 from pathlib import Path
 
@@ -22,12 +23,16 @@ _SPEC.loader.exec_module(check_feedback_privacy)
 find_risks = check_feedback_privacy.find_risks
 load_patterns = check_feedback_privacy.load_patterns
 
-PATTERNS = load_patterns(check_feedback_privacy.PATTERNS_PATH)
+# The tracked, generic patterns plus made-up stand-ins for a case's own
+# (the real ones live in the gitignored .local.txt, absent in CI).
+_FAKE_CASE_PATTERNS = ["Zq7FAKEcaseID", r"(?<!\d)5550001234"]
+PATTERNS = load_patterns(check_feedback_privacy.PATTERNS_PATH) + [
+    re.compile(p, re.IGNORECASE) for p in _FAKE_CASE_PATTERNS]
 
 
 def test_real_case_fingerprint_is_flagged():
     lines = [
-        '{"text": "Alex Rao", "context_text": "Cardholder: Alex Rao | file: CASEFILE.txt"}',
+        '{"text": "Alex Rao", "context_text": "Cardholder: Alex Rao | file: aBcDZq7FAKEcaseIDxYzW.txt"}',
     ]
     findings = find_risks(lines, PATTERNS, "test.jsonl")
     assert findings
@@ -84,9 +89,18 @@ def test_non_string_fields_are_skipped_not_crashed():
 
 
 def test_case_id_prefix_pattern_is_flagged():
-    lines = ['{"text": "X", "context_text": "source file CASEID_chat.txt"}']
+    lines = ['{"text": "X", "context_text": "source file 5550001234_chat.txt"}']
     findings = find_risks(lines, PATTERNS, "test.jsonl")
     assert findings
+
+
+def test_local_patterns_file_is_loaded_alongside_the_tracked_one(tmp_path):
+    (tmp_path / "case_identifier_patterns.local.txt").write_text(
+        "# a case's own identifiers\nZq7FAKEcaseID\n", encoding="utf-8")
+    local = load_patterns(tmp_path / "case_identifier_patterns.local.txt")
+    assert [p.pattern for p in local] == ["Zq7FAKEcaseID"]
+    assert check_feedback_privacy.LOCAL_PATTERNS_PATH.parent == check_feedback_privacy.PATTERNS_PATH.parent
+    assert load_patterns(tmp_path / "missing.local.txt") == []
 
 
 def test_staged_diff_handles_utf8_without_crashing(tmp_path, monkeypatch):

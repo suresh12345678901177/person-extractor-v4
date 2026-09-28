@@ -27,3 +27,5 @@ datasets/evaluation_holdout/snapshots/*
 .idea/
 .vscode/
 .claude/
+prompt.txt
+assets/privacy_guard/*.local.txt

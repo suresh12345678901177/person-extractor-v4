@@ -275,7 +275,7 @@ pathological single-overlong-line case, and an end-to-end offset-
 correctness check).
 
 A fifth real bug, found 2026-09-18 via manual verification against real
-case files (`CASEID_*.txt` - forensic call/chat/email/social-media
+case files (the phone extraction's call/chat/email/social-media
 exports): REVIEW was being flooded with plain business/legal noun phrases -
 "Performance Review," "Retention Bonus," "Corporate Controller,"
 "Coordinated Universal Time," "Deferred Compensation" - that scored into
@@ -525,6 +525,17 @@ containing an exempted hostname (of 19,089): no ACCEPTED change, no name
 gained or lost in REVIEW; "Edit" (already in REVIEW) +4 mentions in one
 preferences XML.
 
+**2026-09-28 - case content kept out of git.** Before the first push since
+2026-09-01, every committed file was checked against the case's identifiers
+and the names the tool found in it. Case file IDs, the case name, and the
+names and messages of private people from it are now described instead of
+quoted (tests use made-up names with the same shape); `prompt.txt`, a
+working note full of raw scan output, is no longer tracked. The privacy
+guard's case-specific patterns moved to the gitignored
+`assets/privacy_guard/case_identifier_patterns.local.txt` - the tracked
+pattern file had been putting those identifiers into git itself.
+`scripts/check_feedback_privacy.py` loads both files.
+
 **2026-09-28 - log rotation.** `logs/pipeline.log` had grown to 1 GB (one
 full real-case scan writes ~59 MB). At startup, once it passes 50 MB, it
 is renamed to `pipeline.log.1` (older backups shift up to `.3`; the oldest
@@ -671,7 +682,7 @@ CI F1 floor was still 0.84 from before the 2026-09-24 relabel (live F1
 `datasets/feedback/*.jsonl` is tracked by git - with those files
 gitignored, its content scan had nothing to check in CI.
 
-**2026-09-24 - validated on the real "real case" folder, and
+**2026-09-24 - validated on the real case folder, and
 what it caught that the benchmark couldn't.** A scan with the new readers
 (19,090 files vs 7,246) exposed, compared against the 2026-09-23 scan via
 each run's case-wide names CSV:
@@ -910,8 +921,8 @@ corroboration path - not a threshold tweak - to close safely.
 **Multilingual calendar-word / missing-country false positives
 (2026-09-17):** a real full case rescan (post unseen-name-reinforcement
 retrain) surfaced a NEW noise class the benchmark suite doesn't contain:
-one file, an Android locale/calendar-picker resource dump
-(`CASEFILE.txt`), contributed 32 of 276 accepted names in
+one file, an Android locale/calendar-picker resource dump,
+contributed 32 of 276 accepted names in
 that scan - day/month names in German/French/Spanish/Italian/Polish/
 Swedish/Portuguese/Dutch ("Jan" x10, "Sep" x8, "Domingo", "Julio", "Maj"...)
 plus 5 missing country names (Costa Rica, Montenegro, Palau, Sierra
@@ -1090,8 +1101,9 @@ plants, general biology vocabulary, everyday objects) to
 (all cross-checked against `first_names.txt`/`last_names.txt` for
 collisions first - 4 candidates, Ericsson/Zara/Ferrari/Roche, were
 deliberately excluded for exactly this reason). Then, from manually reading
-real case files end-to-end (`CASEID_call/chat/cookie/email/
-installedapplication/socialmediaactivity/useraccount/wirelessnetwork.txt`)
+real case files end-to-end (the phone extraction's call, chat, cookie,
+email, installed-application, social-media, user-account and
+wireless-network exports)
 and comparing every single name against the tool's own output by hand: found
 3 more real false positives reaching ACCEPTED ("Monica" - a fragment of
 "Santa Monica" in a corporate address; "Nagar" - a fragment of "Chanda
@@ -1558,7 +1570,7 @@ was 2 items: "Doran" (benchmark-sourced, `benchmark_real_675.txt`,
 contact-list-shaped context alongside the already-gold "Marcus Delaney" -
 labeled `confirmed_person`; excluded from training regardless by
 `_is_benchmark_source`) and "Gora" (real casework, the same
-`CASEFILE.txt` jQuery-UI locale-data file whose siblings Ott/
+jQuery-UI locale-data file whose siblings Ott/
 Barth/Miquelon/Anexo were already known non-person noise - labeled
 `confirmed_not_person`). `confirmed_labels.jsonl` went 1,309 -> 1,311.
 97/97 tests passing before and after.
@@ -1578,9 +1590,9 @@ run isn't sufficient sign-off on its own. Given the tiny change surface
 disproportionate and was skipped in favor of a targeted before/after
 diff on the two real files that could possibly be affected: old model
 (pre-retrain backup) vs. new (live) model on `benchmark_real_675.txt`
-and on `CASEFILE.txt` directly. `benchmark_real_675.txt`:
+and on that locale-data file directly. `benchmark_real_675.txt`:
 zero diff, as expected since "Doran" never entered training data.
-`CASEFILE.txt`: **"ott" and "wallis" - both previously
+The locale-data file: **"ott" and "wallis" - both previously
 wrongly ACCEPTED - were demoted to REVIEW**, some (not all) mentions of
 "handler" were likewise demoted, and "Gora" itself stayed correctly out
 of ACCEPTED in both runs (it was never in the accepted bucket to begin
@@ -1600,7 +1612,7 @@ manually read two real files end-to-end (not just skimmed the CSV) and
 verified every accepted/rejected candidate against its real sentence
 context, rather than trusting the pipeline's own output about itself.
 
-*File 1, `CASEFILE.txt`* turned out to be Microsoft's actual
+*File 1* turned out to be Microsoft's actual
 2011 SEC Form 10-K filing. Of 31 accepted names, 15 were real people
 (Steven A. Ballmer, Peter S. Klein, Satya Nadella, etc. - all correctly
 caught, including via their "Mr./Ms. [Surname]" honorific forms) but
@@ -1621,17 +1633,16 @@ candidate at all (camelCase surname). Real-world impact is softened
 because each person's honorific short form is still correctly accepted
 elsewhere in the same document - left as a known gap, not fixed here.
 
-*File 2, `CASEID_chat.txt`* (a real WhatsApp export) was mostly
-correct - Corvin Hale, [other contacts], and even
-a surname (pulled from a self-identified rank-and-name signature embedded in a
-message body, distinct from the contact's own display name) were all
+*File 2* (a real WhatsApp export) was mostly correct - every contact
+name, and even a surname pulled from a rank-and-name signature embedded
+in a message body (distinct from the contact's own display name), was
 correctly caught, with junk ("Bsnl Customercare", "Can't", "Idk")
-correctly kept out of accepted. But "Rehan" (a spammer's self-identified
-name) was hard-rejected by `SystemLogValidator` with the message "sits on
+correctly kept out of accepted. But a spammer's self-identified first
+name was hard-rejected by `SystemLogValidator` with the message "sits on
 a line containing an Android/Java reverse-DNS package or class
 identifier" - clearly wrong for a WhatsApp chat line. Root-caused via the
 validator's own regex: a missing space after a sentence-ending period in
-the source text ("...founder of Giftly.co.in.At GFT...") let
+the source text ("...founder of Giftly.co.in.At GFT..." - names changed) let
 `_PACKAGE_IDENTIFIER_RE` restart its match mid-domain at "co.in.At" -
 structurally identical to a genuine "android.os.Handler" identifier
 shape purely by coincidence. Fixed with a `(?<!\.)` negative lookbehind
@@ -1650,9 +1661,9 @@ tests pass; benchmark accepted-only F1 went 0.8626 -> 0.8633 (+0.07pp,
 no regression - the blacklist fix moved this slightly, the validator fix
 is benchmark-invisible since the benchmark doesn't contain this exact
 missing-space-after-domain shape); real-corpus confirmed directly -
-`CASEFILE.txt`'s accepted list went from 31 (16 FP + 15 TP)
-to exactly 15 (0 FP, 15 TP), and "Rehan" now correctly appears in
-`CASEID_chat.txt`'s accepted output. Both are genuine, verified wins
+File 1's accepted list went from 31 (16 FP + 15 TP)
+to exactly 15 (0 FP, 15 TP), and the spammer's name now correctly appears in
+File 2's accepted output. Both are genuine, verified wins
 found by actually reading real source text end-to-end instead of relying
 solely on the tool's own aggregated output about itself.
 
@@ -1664,18 +1675,18 @@ Diffed both full accepted/review sets between the two runs directly
 (not estimated): **every single change is already explained by a
 documented fix above, nothing unexpected** - the 18 removed from
 accepted are exactly the 16 newly-blacklisted 10-K vocabulary words plus
-"Ott"/"Wallis" (the retrain-demoted jQuery-locale noise from
-`CASEFILE.txt`), and those same 2 account for the entire
-review-count increase. Zero names were newly added to accepted. "Rehan"
+"Ott"/"Wallis" (the retrain-demoted jQuery-locale noise from the
+locale-data file), and those same 2 account for the entire
+review-count increase. Zero names were newly added to accepted. That name
 was already accepted before this session's fix (via 2 other real
 occurrences in `chat-13.txt`/`chat-14.txt`) - the fix's effect there is
 real but invisible in the accepted/review set diff: occurrence count
 2 -> 4, source files 2 -> 3, the previously-silently-dropped
-`CASEID_chat.txt` mention now correctly included. A genuinely clean
+File 2 mention now correctly included. A genuinely clean
 result: three independent changes, one full-corpus rescan, zero
 surprises. The rescan's own REVIEW logging added exactly 2 new
 `pending_review.jsonl` items - "Handler" and "Wallis," both from the
-same already-identified `CASEFILE.txt` noise file, left
+same already-identified locale-data noise file, left
 for a future labeling round rather than acted on immediately here.
 
 ## Retraining / extending the knowledge base

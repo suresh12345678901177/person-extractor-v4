@@ -1,6 +1,6 @@
 # Day-of-week and month names in European languages, added 2026-09-17
 # after real casework: an Android locale/calendar-picker resource-dump
-# file (one file, "CASEFILE.txt") contributed 32 of 276
+# file (one file) contributed 32 of 276
 # accepted names in a real case scan, nearly all calendar words in
 # German/French/Spanish/Italian/Polish/Swedish/Portuguese/Dutch (Jan,
 # Sep, Juni, Maj, Lundi, Januar, Juli, Freitag, Ene, Sobota...) that

@@ -115,9 +115,9 @@ _LINE_PREFIX_WINDOW = 100
 #     final-segment dotted identifier is exactly as safe against the
 #     URL/domain false-trigger risk as (1) - real prose/chat/email
 #     content never writes a dotted phrase this way.
-#  5. Added 2026-09-23 after a real production false-NEGATIVE (this
-#     case's CASEID_chat.txt): a missing space after a sentence-
-#     ending period ("...founder of Giftly.co.in.At GFT...") let the
+#  5. Added 2026-09-23 after a real production false-NEGATIVE (a
+#     real WhatsApp chat export): a missing space after a sentence-
+#     ending period ("...founder of Giftly.co.in.At GFT...", names changed) let the
 #     regex restart its match mid-domain, at "co.in.At" - structurally
 #     identical to (4)'s "android.os.Handler" shape (lowercase start,
 #     dotted middle segment, PascalCase final segment) purely because

@@ -15,9 +15,11 @@ are gitignored and untracked, which makes this check two things:
    until then the CI step scanned absent files and always passed).
 2. Content check: every record's `text`/`context_text` fields against
    case-identifier patterns in
-   assets/privacy_guard/case_identifier_patterns.txt (a plain-text asset,
-   not a hardcoded list - same convention as every other assets/*.txt
-   file, so starting a new case just means adding a line there).
+   assets/privacy_guard/case_identifier_patterns.txt plus, for a case's own
+   identifiers, the gitignored case_identifier_patterns.local.txt beside it
+   (plain-text assets, not a hardcoded list - same convention as every
+   other assets/*.txt file, so starting a new case just means adding a
+   line to the local file).
 
 Usage:
     python scripts/check_feedback_privacy.py            # check newly staged additions (for a pre-commit hook)
@@ -39,6 +41,10 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PATTERNS_PATH = BASE_DIR / "assets" / "privacy_guard" / "case_identifier_patterns.txt"
+# A case's own identifiers live in this gitignored file instead (2026-09-28),
+# so the guard never puts them into git itself. Missing in CI - fine: there
+# is no feedback content to scan there either.
+LOCAL_PATTERNS_PATH = PATTERNS_PATH.with_name("case_identifier_patterns.local.txt")
 DEFAULT_TARGET_FILES = [
     BASE_DIR / "datasets" / "feedback" / "confirmed_labels.jsonl",
     BASE_DIR / "datasets" / "feedback" / "pending_review.jsonl",
@@ -145,9 +151,10 @@ def main() -> int:
                          help="Override the target file(s) (default: datasets/feedback/*.jsonl)")
     args = parser.parse_args()
 
-    patterns = load_patterns(PATTERNS_PATH)
+    patterns = load_patterns(PATTERNS_PATH) + load_patterns(LOCAL_PATTERNS_PATH)
     if not patterns:
-        print(f"WARNING: no patterns loaded from {PATTERNS_PATH} - checker is a no-op.", file=sys.stderr)
+        print(f"WARNING: no patterns loaded from {PATTERNS_PATH} or {LOCAL_PATTERNS_PATH.name} - "
+              "checker is a no-op.", file=sys.stderr)
 
     target_files = args.files if args.files else DEFAULT_TARGET_FILES
 
@@ -169,7 +176,7 @@ def main() -> int:
         print()
         print("If this is a false positive (e.g. new legitimate benchmark/synthetic data")
         print("that happens to match a pattern), either adjust the pattern in")
-        print(f"  {PATTERNS_PATH.relative_to(BASE_DIR)}")
+        print(f"  {PATTERNS_PATH.relative_to(BASE_DIR)} (or its .local.txt)")
         print("or, if you've manually confirmed the content is safe, bypass with")
         print("  git commit --no-verify   (only after a human has actually looked)")
         return 1

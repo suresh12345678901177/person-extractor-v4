@@ -259,7 +259,7 @@ def test_system_log_validator_accepts_url_on_same_line_as_real_name():
 
 def test_system_log_validator_accepts_name_after_missing_space_domain_sentence():
     # Regression test for a real production false NEGATIVE (2026-09-23,
-    # manual audit of real case's CASEID_chat.txt): a
+    # manual audit of a real WhatsApp chat export; names changed): a
     # WhatsApp message reading "...founder of Giftly.co.in. At GFT, we
     # create..." lost the space after the sentence-ending period during
     # export, producing "Giftly.co.in.At". The package-identifier regex
