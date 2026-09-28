@@ -1,0 +1,21 @@
+{
+  "hardware": {
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "logical_cpus": 12,
+    "gpu": "NVIDIA GeForce RTX 2050, 4096 MiB"
+  },
+  "model": "llama3.1:latest 46e0c10c039e",
+  "llm_seconds_per_name": {
+    "gpu_plus_cpu": 0.367,
+    "cpu_only": 3.068
+  },
+  "llm_gpu_memory_gb": {
+    "gpu_plus_cpu": 2.19,
+    "cpu_only": 0.0
+  },
+  "pipeline_benchmark_seconds": {
+    "rules_only_cpu": 1.77,
+    "with_llm_gpu_plus_cpu": 67.86,
+    "with_llm_cpu_only": 569.16
+  }
+}
