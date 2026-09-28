@@ -214,7 +214,11 @@ class PersonExtractor(Extractor):
         _cap_bare_common_surnames(all_candidates, self.knowledge_base, known_person_names)
         if source_format in STRUCTURED_FORMATS:
             _cap_lone_single_tokens(all_candidates)
-        elif is_short_non_prose(cleaned_text, self.knowledge_base):
+        elif source_format is not None and is_short_non_prose(cleaned_text, self.knowledge_base):
+            # Files only: live text (Pipeline.run_text, realtime sessions)
+            # arrives without a format and is short by nature - on the
+            # benchmark chat fed line by line, this cap removed no false
+            # positive there and moved one real name to REVIEW.
             _cap_lone_single_tokens(all_candidates, short_document=True)
 
         with timed_stage("aggregation", stats.stage_timings):
@@ -392,7 +396,7 @@ def _cap_lone_single_tokens(candidates: list[CandidateResult], short_document: b
     produced were single tokens. Multi-token names are unaffected, and
     REVIEW keeps these visible to a human.
 
-    short_document (2026-09-28, exp08): the same for a very short document
+    short_document (2026-09-28, exp08): the same for a very short FILE
     that doesn't read as English prose (language_filter.is_short_non_prose) -
     it has no sentence context either. On a real case scan, every one-word
     name found only in documents under 30 words was noise: words picked out

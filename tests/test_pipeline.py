@@ -250,3 +250,7 @@ def test_pipeline_holds_a_lone_word_from_a_tiny_ocr_scrap_for_review(tmp_path):
     note = tmp_path / "note.txt"
     note.write_text("Call Suresh tomorrow about the payment.\n", encoding="utf-8")
     assert "Suresh" in {p.display_text for p in Pipeline(config=_test_config(), base_dir=BASE_DIR).run(note).persons}
+    # Live text (the realtime service's path) is short by nature and is not
+    # capped - the same scrap sent as text keeps its previous decision.
+    live = Pipeline(config=_test_config(), base_dir=BASE_DIR).run_text("0g ~~ | Suresh 8 ~ ఇ అ ## 4)\n")
+    assert "Suresh" in {p.display_text for p in live.persons}
