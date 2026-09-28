@@ -386,3 +386,15 @@ def test_corroboration_rejects_language_and_region_names_even_when_repeated():
     # list, and an ordinary name with the same evidence still passes.
     assert not any(KB.is_language_or_region_name(w) for w in ("Danish", "English", "Tamil", "Maithili"))
     assert _validate(CorroborationValidator(), "Suresh", "some text Suresh", pattern="dictionary_single_token").passed
+
+
+def test_alexa_and_siri_stay_names():
+    # Owner decision (2026-09-28): "Alexa" and "Siri" are real first names and
+    # stay names, even though they are also voice assistants (a real case scan
+    # accepted them from assistant help pages and voice-command strings). Do
+    # not put them on the collision list, the blacklist or organizations.
+    for name in ("Alexa", "Siri"):
+        assert KB.is_known_first_name(name)
+        assert not KB.is_ambiguous_first_name(name)
+        assert name.lower() not in KB.blacklist and not KB.is_organization(name)
+        assert _validate(CorroborationValidator(), name, f"some text {name}", pattern="dictionary_single_token").passed

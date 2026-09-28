@@ -540,6 +540,12 @@ nothing - live messages are short by nature - so v2 applies to files only.
 Benchmark and live path identical. Real case: 13 accepted words -> REVIEW,
 all noise; nothing added or lost. A strict improvement, promoted.
 
+**2026-09-28 - owner decision: "Alexa" and "Siri" stay names.** Both are
+real first names as well as voice assistants; a real case scan accepted
+them from assistant help pages and voice-command strings. They are to be
+reported as names - not added to the collision list, the blacklist or
+organizations (`test_alexa_and_siri_stay_names` guards this).
+
 **2026-09-28 - language and region names (exp07).** Language menus
 ("Español (Latinoamérica) – México", "Deutsch – Schweiz") and a "Telugu
 News" site header got "Español" (26 mentions), "Telugu" (11) and "Schweiz"
