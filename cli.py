@@ -188,6 +188,8 @@ def _build_config(args: argparse.Namespace) -> dict:
         config["decision"]["strict_corroboration"] = False
     if getattr(args, "no_language_filter", False):
         config["language_filter"]["enabled"] = False
+    if getattr(args, "no_llm_review", False):
+        config["llm_reviewer"]["enabled"] = False
     config["detection"]["spacy_processes"] = getattr(args, "spacy_processes", 1)
     return config
 
@@ -600,6 +602,8 @@ def main() -> int:
                               "non-English text, translated legal/EULA boilerplate, etc. - "
                               "instead of running detection on them and producing false "
                               "positives from cross-language word collisions.")
+    parser.add_argument("--no-llm-review", action="store_true",
+                         help="Skip the optional local-LLM reviewer (src/review/llm_reviewer.py) this run, even on a GPU machine where it would be used. It moves accepted names a local model doubts to REVIEW; on the 2026-09-28 real-case scan it removed 14 wrong names and made the scan 2.5x longer (40.0 vs 16.2 min).")
     parser.add_argument("--spacy-processes", type=int, default=1,
                          help="Run spaCy on up to N CPU processes within each document "
                               "(default 1). Only helps files over ~400KB; results are identical "

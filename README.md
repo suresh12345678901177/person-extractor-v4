@@ -525,6 +525,32 @@ containing an exempted hostname (of 19,089): no ACCEPTED change, no name
 gained or lost in REVIEW; "Edit" (already in REVIEW) +4 mentions in one
 preferences XML.
 
+**2026-09-28 - optional local-LLM reviewer (exp09, owner-approved trade).**
+On a machine with a GPU, each file's ACCEPTED names are checked by a local
+model (Llama 3.1 8B through Ollama; nothing leaves the machine): from up to
+three of a name's mentions it gives P(person), and below 0.3 the name moves
+to REVIEW - never rejected. Names in `assets/owner_decisions/confirmed_names.txt`
+(Alexa, Siri) are never moved. Every verdict is in the evidence trail with
+the model, its digest and the prompt version (`src/review/llm_reviewer.py`).
+- **When it runs:** only if Ollama answers (an installed but stopped Ollama
+  is started), the pinned model digest is installed, and the model loads on
+  a GPU. Otherwise the scan runs exactly as before, and its summary records
+  why (`provenance_llm_reviewer`). Live text (`server.py`) is never
+  reviewed. `--no-llm-review` turns it off for one run.
+- **Setup:** the tool never downloads anything. Once, with internet, run
+  `powershell -ExecutionPolicy Bypass -File scripts\setup_llm_reviewer.ps1`:
+  with a GPU it installs Ollama (winget) and pulls the model; without one
+  it installs nothing.
+- **Measured:** benchmark one false positive fewer (26 -> 25), nothing else
+  changed; real case 14 accepted names -> REVIEW, all non-people (companies,
+  places, interface style names, a gun calibre, a code identifier...),
+  nothing real lost. The cost is time: full scan 16.2 -> 40.0 min. The model
+  takes 0.37 s per name on the GPU and 3.07 s on the CPU only, which is why
+  it stays off without one (`experiments/device_timing.py`). Promoting
+  REVIEW names the model is sure of is built but off: on the real case it
+  would add about 49 real people (mostly cited authors) and about 5 wrong
+  names, on the benchmark 12 true and 18 false mentions - an owner decision.
+
 **2026-09-28 - lone words in tiny non-prose files (exp08).** A file under
 30 words is treated as English by the prose gate (too short to judge), so
 garbled OCR scraps of images and image PDFs, one-word files and terse

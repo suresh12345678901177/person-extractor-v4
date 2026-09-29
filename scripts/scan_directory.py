@@ -117,6 +117,8 @@ def _build_config(args: argparse.Namespace) -> dict:
         config["decision"]["strict_corroboration"] = False
     if args.no_language_filter:
         config["language_filter"]["enabled"] = False
+    if args.no_llm_review:
+        config["llm_reviewer"]["enabled"] = False
     return config
 
 
@@ -462,6 +464,8 @@ def main() -> int:
                          help="Disable the English-language gate (on by default) that skips "
                               "files which aren't natural-language English prose - see "
                               "cli.py --no-language-filter")
+    parser.add_argument("--no-llm-review", action="store_true",
+                         help="Skip the optional local-LLM reviewer (src/review/llm_reviewer.py) this run, even on a GPU machine where it would be used. It moves accepted names a local model doubts to REVIEW; on the 2026-09-28 real-case scan it removed 14 wrong names and made the scan 2.5x longer (40.0 vs 16.2 min).")
     parser.add_argument("--exclude", action="append", default=[], metavar="PATTERN",
                          help="Skip files whose name or path (relative to --input-dir) matches this "
                               "glob, case-insensitive. Repeatable, e.g. --exclude report.xml "
